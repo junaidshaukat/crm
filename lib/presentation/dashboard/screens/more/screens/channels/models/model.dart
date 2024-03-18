@@ -1,0 +1,4 @@
+var menu = [
+  "handheld",
+  "manual"
+];
