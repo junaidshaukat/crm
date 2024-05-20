@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
@@ -18,7 +16,7 @@ class CreateMediaScreen extends StatelessWidget {
         fullScreen: controller.fullScreen.value,
         status: controller.status.value,
         isMuted: controller.isMuted.value,
-        mediaFile: controller.mediaFile.value.file,
+        mediaFile: null, //controller.mediaFile.value.file,
       );
       await controller.create(request.toJson(), event);
     }
@@ -172,48 +170,59 @@ class CreateMediaScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           Pickers.file().then((result) async {
+                            MediaFile media = MediaFile();
                             if (result != null) {
-                              MediaFile mediaFile = MediaFile();
                               PlatformFile file = result.files.first;
-                              mediaFile.size = file.size.bytesToMB;
-
-                              if (ValidatorMedia.isImage(file.extension)) {
-                                mediaFile.type = "image";
-                                mediaFile.file = File(file.xFile.path);
-                                mediaFile.name = file.name;
-                                controller.durationController.text =
-                                    mediaFile.duration.toString();
-                              }
-
-                              if (ValidatorMedia.isVideo(file.extension)) {
-                                mediaFile.type = "video";
-                                mediaFile.file = File(file.xFile.path);
-                                mediaFile.name = file.name;
-                                VideoPlayerValue? videoPlayerValue =
-                                    await VideoDetails.getInfo(
-                                        File(file.xFile.path));
-                                mediaFile.duration =
-                                    videoPlayerValue?.duration.inSeconds;
-                                mediaFile.resolution =
-                                    videoPlayerValue?.size ?? Size.zero;
-                                controller.durationController.text =
-                                    mediaFile.duration.toString();
-                              }
-
-                              controller.mediaFileController.text =
-                                  mediaFile.name;
-
-                              if (mediaFile.size > 20) {
-                                mediaFile.file = null;
-                                controller.mediaFileController.clear();
-                              }
-
-                              controller.mediaFile.value = mediaFile;
-                            } else {
-                              MediaFile mediaFile = MediaFile();
-                              controller.mediaFile.value = mediaFile;
-                              controller.mediaFileController.clear();
+                              media.name = file.name;
+                              media.size = file.size.bytesToMB;
+                              media.extn = file.extension ?? '';
+                              media.path = file.path ?? '';
+                              console.log(media.toJson());
                             }
+                            // if (result != null) {
+                            //   MediaFile mediaFile = MediaFile();
+                            //   PlatformFile file = result.files.first;
+                            // mediaFile.size = file.size.bytesToMB;
+
+                            //   if (ValidatorMedia.isImage(file.extension)) {
+                            //     mediaFile.type = "image";
+                            //     mediaFile.file = File(file.xFile.path);
+                            //     mediaFile.name = file.name;
+                            //     controller.durationController.text =
+                            //         mediaFile.duration.toString();
+                            //   }
+
+                            //   console.log(mediaFile.toJson());
+
+                            //   if (ValidatorMedia.isVideo(file.extension)) {
+                            //     mediaFile.type = "video";
+                            //     mediaFile.file = File(file.xFile.path);
+                            //     mediaFile.name = file.name;
+                            //     VideoPlayerValue? videoPlayerValue =
+                            //         await VideoDetails.getInfo(
+                            //             File(file.xFile.path));
+                            //     mediaFile.duration =
+                            //         videoPlayerValue?.duration.inSeconds;
+                            //     mediaFile.resolution =
+                            //         videoPlayerValue?.size ?? Size.zero;
+                            //     controller.durationController.text =
+                            //         mediaFile.duration.toString();
+                            //   }
+
+                            //   controller.mediaFileController.text =
+                            //       mediaFile.name;
+
+                            //   if (mediaFile.size > 20) {
+                            //     mediaFile.file = null;
+                            //     controller.mediaFileController.clear();
+                            //   }
+
+                            //   controller.mediaFile.value = mediaFile;
+                            // } else {
+                            //   MediaFile mediaFile = MediaFile();
+                            //   controller.mediaFile.value = mediaFile;
+                            //   controller.mediaFileController.clear();
+                            // }
                           });
                         },
                         child: Container(
@@ -250,38 +259,38 @@ class CreateMediaScreen extends StatelessWidget {
                                         EdgeInsets.symmetric(horizontal: 16.h),
                                   ),
                                   validator: (input) {
-                                    MediaFile mediaFile =
-                                        controller.mediaFile.value;
+                                    // MediaFile mediaFile =
+                                    //     controller.mediaFile.value;
 
-                                    if (mediaFile.size > 20) {
-                                      return "file_size_exceed".tr;
-                                    }
+                                    // if (mediaFile.size > 20) {
+                                    //   return "file_size_exceed".tr;
+                                    // }
 
-                                    if (mediaFile.size <= 0) {
-                                      return "media_file_required".tr;
-                                    }
+                                    // if (mediaFile.size <= 0) {
+                                    //   return "media_file_required".tr;
+                                    // }
 
-                                    if (mediaFile.type == "video") {
-                                      Size resolution = mediaFile.resolution;
-                                      double width = resolution.width;
-                                      double height = resolution.height;
+                                    // if (mediaFile.type == "video") {
+                                    //   Size resolution = mediaFile.resolution;
+                                    //   double width = resolution.width;
+                                    //   double height = resolution.height;
 
-                                      if (width <= 15 || width >= 1921) {
-                                        return "video_resolution_required".tr;
-                                      }
+                                    //   if (width <= 15 || width >= 1921) {
+                                    //     return "video_resolution_required".tr;
+                                    //   }
 
-                                      if (height <= 15 || height >= 1081) {
-                                        return "video_resolution_required".tr;
-                                      }
-                                    }
+                                    //   if (height <= 15 || height >= 1081) {
+                                    //     return "video_resolution_required".tr;
+                                    //   }
+                                    // }
 
-                                    if (input == null) {
-                                      return "media_file_required".tr;
-                                    }
+                                    // if (input == null) {
+                                    //   return "media_file_required".tr;
+                                    // }
 
-                                    if (input.isEmpty) {
-                                      return "media_file_extension_required".tr;
-                                    }
+                                    // if (input.isEmpty) {
+                                    //   return "media_file_extension_required".tr;
+                                    // }
 
                                     return null;
                                   },

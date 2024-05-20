@@ -1,27 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
-
-class MediaFile {
-  String? path;
-  double size;
-  String? type;
-  File? file;
-  String name;
-  int? duration;
-  Size resolution;
-
-  MediaFile({
-    this.path,
-    this.size = 0,
-    this.type,
-    this.file,
-    this.name = '',
-    this.duration = 1,
-    this.resolution = Size.zero,
-  });
-}
 
 class CreateMediaController extends GetxController {
   Props props = Props();

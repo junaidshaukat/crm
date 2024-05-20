@@ -16,7 +16,6 @@ export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:package_info_plus/package_info_plus.dart';
 export 'package:shared_preferences/shared_preferences.dart';
-export 'package:image_gallery_saver/image_gallery_saver.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:document_file_save_plus/document_file_save_plus.dart';
 export 'package:flutter_volume_controller/flutter_volume_controller.dart';

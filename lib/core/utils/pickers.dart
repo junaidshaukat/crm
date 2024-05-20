@@ -16,6 +16,24 @@ class Pickers {
     });
   }
 
+  static Future<File?> multiMedia({
+    bool video = false,
+    bool gallery = true,
+  }) {
+    ImagePicker picker = ImagePicker();
+    ImageSource source = gallery ? ImageSource.gallery : ImageSource.camera;
+
+    if (video) {
+      return picker.pickVideo(source: source).then((file) {
+        return file != null ? File(file.path) : null;
+      });
+    } else {
+      return picker.pickImage(source: source).then((file) {
+        return file != null ? File(file.path) : null;
+      });
+    }
+  }
+
   static Future<FilePickerResult?> file({
     String? dialogTitle,
     String? initialDirectory,

@@ -9,6 +9,7 @@ export 'exceptions.dart';
 export 'extensions.dart';
 export 'initial_bindings.dart';
 export 'logger.dart';
+export 'media.dart';
 export 'open_box.dart';
 export 'pickers.dart';
 export 'pref_utils.dart';
