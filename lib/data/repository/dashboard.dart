@@ -5,7 +5,7 @@ class DashboardApis extends Client {
     Map<String, String> headers = const {
       'Content-type': 'application/json',
     },
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -32,7 +32,7 @@ class DashboardApis extends Client {
     Map<String, String> headers = const {
       'Content-type': 'application/json',
     },
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -59,7 +59,7 @@ class DashboardApis extends Client {
     Map<String, String> headers = const {
       'Content-type': 'application/json',
     },
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -87,7 +87,7 @@ class DashboardApis extends Client {
     Map<String, String> headers = const {
       'Content-type': 'application/json',
     },
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -115,7 +115,7 @@ class DashboardApis extends Client {
     Map<String, String> headers = const {
       'Content-type': 'application/json',
     },
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -143,7 +143,7 @@ class DashboardApis extends Client {
     Map<String, String> headers = const {
       'Content-type': 'application/json',
     },
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -172,7 +172,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -202,7 +202,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -232,7 +232,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -262,7 +262,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -292,7 +292,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -323,7 +323,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -353,7 +353,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -383,7 +383,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -413,7 +413,7 @@ class DashboardApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();

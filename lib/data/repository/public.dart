@@ -6,7 +6,7 @@ class PublicApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, String> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -41,7 +41,7 @@ class PublicApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, String> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -76,7 +76,7 @@ class PublicApis extends Client {
       'Content-type': 'application/json',
     },
     Map requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -110,7 +110,7 @@ class PublicApis extends Client {
       'Content-type': 'application/json',
     },
     Map requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -139,7 +139,7 @@ class PublicApis extends Client {
       'Content-type': 'application/json',
     },
     Map requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();

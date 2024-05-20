@@ -8,7 +8,7 @@ class MediaApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -38,7 +38,7 @@ class MediaApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -69,7 +69,7 @@ class MediaApis extends Client {
     },
     num? tagNumber,
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -99,7 +99,7 @@ class MediaApis extends Client {
       'Content-type': 'multipart/form-data',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -129,7 +129,7 @@ class MediaApis extends Client {
     },
     int? tagNumber,
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -159,7 +159,7 @@ class MediaApis extends Client {
     },
     num? tagNumber,
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();

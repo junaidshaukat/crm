@@ -8,7 +8,7 @@ class ReportApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -38,7 +38,7 @@ class ReportApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
     num? tagNumber,
   }) async {
     try {
@@ -69,7 +69,7 @@ class ReportApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
     num? tagNumber,
   }) async {
     try {

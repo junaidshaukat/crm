@@ -8,7 +8,7 @@ class DonorApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -38,7 +38,7 @@ class DonorApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -68,7 +68,7 @@ class DonorApis extends Client {
     },
     Map<String, dynamic> requestData = const {},
     String? tagNumber,
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -98,7 +98,7 @@ class DonorApis extends Client {
     },
     Map<String, dynamic> requestData = const {},
     String? id,
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();

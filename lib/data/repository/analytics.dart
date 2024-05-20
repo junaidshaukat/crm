@@ -8,7 +8,7 @@ class AnalyticsApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -39,7 +39,7 @@ class AnalyticsApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -68,7 +68,7 @@ class AnalyticsApis extends Client {
       'Content-type': 'application/json',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();
@@ -99,7 +99,7 @@ class AnalyticsApis extends Client {
       'Authorization': 'Bearer {{adminToken}}',
     },
     Map<String, dynamic> requestData = const {},
-    bool debug = false,
+    bool debug = true,
   }) async {
     try {
       isNetworkConnected();

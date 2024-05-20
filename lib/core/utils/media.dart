@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:ui';
+
 enum ContentType { image, video, other }
 
 class MediaFile {
@@ -5,8 +8,19 @@ class MediaFile {
   String name;
   String extn;
   double size;
+  int duration;
+  Size resolution;
 
-  MediaFile({this.path = '', this.name = '', this.extn = '', this.size = -1});
+  MediaFile({
+    this.path = '',
+    this.name = '',
+    this.extn = '',
+    this.size = -1,
+    this.duration = 0,
+    this.resolution = Size.zero,
+  });
+
+  File get file => File(path);
 
   ContentType get content {
     List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
@@ -34,20 +48,17 @@ class MediaFile {
     }
   }
 
-  isVideo() {
-    return true;
-  }
-
   toJson() {
     return {
+      'file': file,
       'name': name,
       'extn': extn,
       'size': size,
       'path': path,
       'type': type,
       'content': content,
-      // 'duration': duration,
-      // 'resolution': resolution,
+      'duration': duration,
+      'resolution': resolution,
     };
   }
 }

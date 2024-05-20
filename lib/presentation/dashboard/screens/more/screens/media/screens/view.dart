@@ -22,6 +22,8 @@ class ViewScreenState extends State<ViewScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       media = Get.arguments;
+      console.log(media.toJson());
+
       if (media.mediaType == "video") {
         isMuted = media.isMuted;
         Uri uri = Uri.parse(media.path);
@@ -43,6 +45,7 @@ class ViewScreenState extends State<ViewScreen> {
             isPlaying = true;
           });
         }, onError: (error) {
+          console.log(error);
           setState(() {
             initialize = false;
             supported = "video_not_supported".tr;
