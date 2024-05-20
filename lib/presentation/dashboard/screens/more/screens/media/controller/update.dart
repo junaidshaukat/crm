@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
@@ -17,7 +15,7 @@ class UpdateMediaController extends GetxController {
   RxBool fullScreen = RxBool(false);
   RxBool status = RxBool(false);
   RxBool isMuted = RxBool(false);
-  Rx<File?> mediaFile = Rx(null);
+  Rx<MediaFile?> mediaFile = Rx(null);
 
   void setTextEditingController(MediaData media) {
     nameController.text = media.name;

@@ -180,8 +180,6 @@ class CreateMediaScreen extends StatelessWidget {
                               media.extn = file.extension ?? '';
                               media.path = file.path ?? '';
 
-                              controller.mediaFileController.text = media.name;
-
                               if (media.content == ContentType.image) {}
 
                               if (media.content == ContentType.video) {
@@ -202,9 +200,8 @@ class CreateMediaScreen extends StatelessWidget {
                                 controller.mediaFileController.clear();
                               }
 
+                              controller.mediaFileController.text = media.name;
                               controller.mediaFile.value = media;
-
-                              console.log(media.toJson());
                             } else {
                               MediaFile media = MediaFile();
                               controller.mediaFile.value = media;

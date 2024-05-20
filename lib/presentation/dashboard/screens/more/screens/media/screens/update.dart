@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
@@ -20,7 +22,7 @@ class UpdateMediaScreen extends StatelessWidget {
         fullScreen: controller.fullScreen.value,
         status: controller.status.value,
         isMuted: controller.isMuted.value,
-        mediaFile: controller.mediaFile.value,
+        mediaFile: controller.mediaFile.value?.file,
       );
       await controller.create(media.tagNumber, request.toJson(), event);
     }
@@ -178,11 +180,40 @@ class UpdateMediaScreen extends StatelessWidget {
                       SizedBox(height: 5.v),
                       InkWell(
                         onTap: () {
-                          Pickers.media().then((file) {
-                            if (file != null) {
-                              controller.mediaFile.value = file;
-                              controller.mediaFileController.text =
-                                  Formdata.filename(file);
+                          Pickers.file().then((result) async {
+                            MediaFile media = MediaFile();
+                            if (result != null) {
+                              PlatformFile file = result.files.first;
+                              media.name = file.name;
+                              media.size = file.size.bytesToMB;
+                              media.extn = file.extension ?? '';
+                              media.path = file.path ?? '';
+
+                              if (media.content == ContentType.image) {}
+
+                              if (media.content == ContentType.video) {
+                                VideoPlayerValue? videoPlayerValue =
+                                    await VideoDetails.getInfo(
+                                        File(file.xFile.path));
+
+                                media.duration =
+                                    videoPlayerValue?.duration.inSeconds ?? 0;
+                                media.resolution =
+                                    videoPlayerValue?.size ?? Size.zero;
+                                controller.durationController.text =
+                                    media.duration.toString();
+                              }
+
+                              if (media.size > 20) {
+                                media = MediaFile();
+                                controller.mediaFileController.clear();
+                              }
+
+                              controller.mediaFileController.text = media.name;
+                              controller.mediaFile.value = media;
+                            } else {
+                              controller.mediaFile.value = null;
+                              controller.mediaFileController.clear();
                             }
                           });
                         },
@@ -217,6 +248,46 @@ class UpdateMediaScreen extends StatelessWidget {
                                     hintText: "select_file".tr,
                                     border: InputBorder.none,
                                   ),
+                                  validator: (input) {
+                                    MediaFile? media =
+                                        controller.mediaFile.value;
+
+                                    if (media != null) {
+                                      if (media.size > 20) {
+                                        return "file_size_exceed".tr;
+                                      }
+
+                                      if (media.size <= 0) {
+                                        return "media_file_required".tr;
+                                      }
+
+                                      if (media.type == "video") {
+                                        Size resolution = media.resolution;
+                                        double width = resolution.width;
+                                        double height = resolution.height;
+
+                                        if (width <= 15 || width >= 1921) {
+                                          return "video_resolution_required".tr;
+                                        }
+
+                                        if (height <= 15 || height >= 1081) {
+                                          return "video_resolution_required".tr;
+                                        }
+                                      }
+
+                                      if (input == null) {
+                                        return "media_file_required".tr;
+                                      }
+
+                                      if (input.isEmpty) {
+                                        return "media_file_extension_required"
+                                            .tr;
+                                      }
+                                      return null;
+                                    }
+
+                                    return null;
+                                  },
                                 ),
                               ),
                             ],

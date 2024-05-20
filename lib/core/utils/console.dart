@@ -29,31 +29,7 @@ class Console {
         stackTrace: stackTrace,
       );
     }
-    if (mode == ConsoleMode.live) {
-      developer.log(
-        "$message",
-        time: time,
-        sequenceNumber: sequenceNumber,
-        level: level,
-        name: name,
-        zone: zone,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-    if (mode == ConsoleMode.both) {
-      developer.log(
-        "$message",
-        time: time,
-        sequenceNumber: sequenceNumber,
-        level: level,
-        name: name,
-        zone: zone,
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
   }
 }
 
-Console console = Console(ConsoleMode.debug);
+Console console = Console(ConsoleMode.live);
