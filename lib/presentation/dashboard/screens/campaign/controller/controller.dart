@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -211,8 +212,17 @@ class CompaignController extends GetxController {
   }
 
   Future<void> save(Uint8List data, String fileName, String mimeType) async {
-    await DocumentFileSavePlus().saveFile(data, fileName, mimeType);
-    Toasts.success(message: "qrcode_saved".tr);
+    try {
+      await DocumentFileSavePlus()
+          .saveFile(data, fileName, mimeType)
+          .then((res) {
+        if (Platform.isAndroid) {
+          Toasts.success(message: "qrcode_saved".tr);
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   Future<bool> qrCode(String? qrCode, String? name) async {

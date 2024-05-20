@@ -53,7 +53,7 @@ class ThemeHelper {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.background,
+          foregroundColor: colorScheme.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.h),
           ),
@@ -82,28 +82,28 @@ class ThemeHelper {
         ),
       ),
       checkboxTheme: CheckboxThemeData(
-        overlayColor: MaterialStateColor.resolveWith((states) {
-          if (states.contains(MaterialState.focused)) {
+        overlayColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.focused)) {
             return PrimaryColors().whiteA700;
           }
           return PrimaryColors().gray100;
         }),
-        fillColor: MaterialStateColor.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return PrimaryColors().green800;
           }
           return PrimaryColors().gray100;
         }),
-        checkColor: MaterialStateColor.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        checkColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return PrimaryColors().whiteA700;
           }
           return PrimaryColors().gray100;
         }),
       ),
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateColor.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return colorScheme.primary;
           }
           return colorScheme.onSurface;
@@ -114,17 +114,17 @@ class ThemeHelper {
         ),
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        thumbColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               return Colors.grey;
             }
             return Colors.blue;
           },
         ),
-        trackColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        trackColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               return Colors.grey.withOpacity(0.5);
             }
             return Colors.blue.withOpacity(0.5);

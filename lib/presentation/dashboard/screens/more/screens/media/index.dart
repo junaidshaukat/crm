@@ -235,7 +235,7 @@ class MediaCentreScreen extends StatelessWidget {
                       width: 100.h,
                       text: "update".tr,
                       buttonStyle: CustomButtonStyles.fillRedA.copyWith(
-                        backgroundColor: MaterialStateProperty.resolveWith(
+                        backgroundColor: WidgetStateProperty.resolveWith(
                           (states) => appTheme.primary,
                         ),
                       ),

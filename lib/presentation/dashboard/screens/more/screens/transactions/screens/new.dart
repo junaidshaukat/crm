@@ -237,10 +237,9 @@ class NewTransactionScreen extends StatelessWidget {
                                   }
                                 },
                                 fillColor:
-                                    MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states
-                                        .contains(MaterialState.selected)) {
+                                    WidgetStateProperty.resolveWith<Color>(
+                                  (Set<WidgetState> states) {
+                                    if (states.contains(WidgetState.selected)) {
                                       return appTheme.primary;
                                     }
                                     return appTheme.gray500;
@@ -298,10 +297,9 @@ class NewTransactionScreen extends StatelessWidget {
                                   }
                                 },
                                 fillColor:
-                                    MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states
-                                        .contains(MaterialState.selected)) {
+                                    WidgetStateProperty.resolveWith<Color>(
+                                  (Set<WidgetState> states) {
+                                    if (states.contains(WidgetState.selected)) {
                                       return appTheme.primary;
                                     }
                                     return appTheme.gray500;
