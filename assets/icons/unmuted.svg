@@ -1,0 +1,12 @@
+<svg fill="currentColor" height="24" width="24" viewBox="0 0 64 64" style="display: inline-block; vertical-align: middle;">
+    <g>
+        <polygon stroke-width="2" stroke-miterlimit="10" points="8,32 8,20 20,20 38,2 38,32 38,62 20,44 
+		8,44 	" fill="none" stroke="#007C16">
+            <polygon stroke-width="2" stroke-miterlimit="10" points="8,32 8,20 20,20 38,2 38,32 38,62 20,44 
+		8,44 	" fill="none" stroke="#007C16"></polygon>
+        </polygon>
+        <path stroke-width="2" stroke-miterlimit="10" d="M46,42c5.522,0,10-4.478,10-10s-4.478-10-10-10" fill="none" stroke="#007C16">
+            <path stroke-width="2" stroke-miterlimit="10" d="M46,42c5.522,0,10-4.478,10-10s-4.478-10-10-10" fill="none" stroke="#007C16"></path>
+        </path>
+    </g>
+</svg>
