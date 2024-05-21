@@ -560,7 +560,7 @@ class CompaignScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       SizedBox(
-                        width: 70.adaptSize,
+                        width: 80.adaptSize,
                         height: 30.adaptSize,
                         child: Obx(
                           () => SimpleDropDown(

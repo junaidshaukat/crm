@@ -530,37 +530,42 @@ class DonorsScreen extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomImageView(
-                        imagePath: "plus_circle".icon.svg,
-                      ),
                       InkWell(
                         onTap: onPressedAdd,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 7.h,
-                            top: 2.v,
-                            bottom: 3.v,
-                          ),
-                          child: Text(
-                            "add_donors".tr,
-                            style: TextStyle(
-                              color: theme.colorScheme.primary,
-                              fontSize: 12.fSize,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomImageView(
+                              imagePath: "plus_circle".icon.svg,
                             ),
-                          ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 7.h,
+                                top: 2.v,
+                                bottom: 3.v,
+                              ),
+                              child: Text(
+                                "add_donors".tr,
+                                style: TextStyle(
+                                  color: theme.colorScheme.primary,
+                                  fontSize: 12.fSize,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       const Spacer(),
                       SizedBox(
-                        width: 60.h,
-                        height: 30.v,
+                        width: 80.adaptSize,
+                        height: 30.adaptSize,
                         child: Obx(
                           () => SimpleDropDown(
                             containerPadding: EdgeInsets.zero,
                             dropdownButtonPadding: EdgeInsets.zero,
-                            hintPadding: EdgeInsets.only(left: 10.h),
+                            hintPadding: EdgeInsets.only(left: 10.adaptSize),
                             circularRadius: 33,
                             hintText: controller.pageSize.value.toString(),
                             items: pageSizeList

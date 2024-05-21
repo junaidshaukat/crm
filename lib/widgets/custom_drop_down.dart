@@ -79,6 +79,7 @@ class SimpleDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonTheme(
       alignedDropdown: true,
+      padding: EdgeInsets.only(top: 24.v, left: 24.h, right: 24.h),
       child: Container(
         width: double.maxFinite,
         height: height,
@@ -94,6 +95,7 @@ class SimpleDropDown extends StatelessWidget {
           ),
         ),
         child: DropdownButton<DropDown>(
+          elevation: 12,
           isExpanded: true,
           padding: dropdownButtonPadding ?? EdgeInsets.only(left: 2.h),
           focusNode: focusNode ?? FocusNode(),
