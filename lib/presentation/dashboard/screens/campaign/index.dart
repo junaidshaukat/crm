@@ -1021,9 +1021,9 @@ class DownloadQrCode extends StatelessWidget {
                     ? null
                     : appTheme.whiteA700,
                 colorAnimation: appTheme.whiteA700,
-                // valueColor: AlwaysStoppedAnimation<Color>(
-                //   appTheme.whiteA700,
-                // ),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  appTheme.whiteA700,
+                ),
               ),
             ),
           ),
