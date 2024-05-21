@@ -169,45 +169,44 @@ class CompaignScreen extends StatelessWidget {
                   onSelected: controller.selectFields,
                 ),
               ),
-              Obx(() {
-                List<Fields> fields = controller.fields;
-                return SizedBox(
-                  height: 60.v,
-                  child: ListView.separated(
-                    itemCount: fields.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      Fields field = fields[index];
-                      if (field.selected!.isTrue) {
-                        return InputChip(
-                          label: Text(
-                            field.label ?? '',
-                            style: TextStyle(
-                              color: appTheme.gray80001,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          onDeleted: () {},
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: BorderSide(color: appTheme.gray100),
-                          ),
-                          backgroundColor: appTheme.gray100.withOpacity(0.2),
-                        );
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(width: 4.h);
-                    },
-                  ),
-                );
-              }),
+
+              // SizedBox(
+              //   height: 60.v,
+              //   child: Obx(() {
+              //     return ListView.separated(
+              //       itemCount: controller.options.value.length,
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (BuildContext context, int index) {
+              //         String? label = controller.options.value[index];
+              //         return InputChip(
+              //           label: Text(
+              //             label ?? '',
+              //             style: TextStyle(
+              //               color: appTheme.gray80001,
+              //               fontFamily: 'Poppins',
+              //               fontWeight: FontWeight.w500,
+              //             ),
+              //           ),
+              //           onDeleted: () {
+              //             // controller.removeField(field);
+              //           },
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(12),
+              //             side: BorderSide(color: appTheme.gray100),
+              //           ),
+              //           backgroundColor: appTheme.gray100.withOpacity(0.2),
+              //         );
+              //       },
+              //       separatorBuilder: (BuildContext context, int index) {
+              //         return SizedBox(width: 4.h);
+              //       },
+              //     );
+              //   }),
+              // ),
+
               Obx(
                 () => Column(
-                  children: controller.fields.map((field) {
+                  children: controller.fields.value.map((field) {
                     return visibility(
                       visible: field.selected!.value,
                       label: field.label.toString(),
@@ -265,7 +264,7 @@ class CompaignScreen extends StatelessWidget {
                 () => SimpleDropDown(
                   width: 352.h,
                   hintText: controller.by.value?.label ?? "sort_by".tr,
-                  items: controller.fields.map((field) {
+                  items: controller.fields.value.map((field) {
                     return DropDown(
                       id: field.value,
                       title: field.label.toString(),

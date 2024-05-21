@@ -14,7 +14,7 @@ class CompaignController extends GetxController {
   Props propsListOfValues = Props();
 
   Rx<CampaignLink?> links = Rx(CampaignLink());
-  RxList<Fields> fields = RxList([]);
+  Rx<List<Fields>> fields = Rx([]);
 
   Rx<int> page = Rx(1);
   Rx<int> totalPage = Rx(1);
@@ -49,7 +49,7 @@ class CompaignController extends GetxController {
           );
       if (response.result == true) {
         for (var element in response.data!) {
-          fields.add(Fields(
+          fields.value.add(Fields(
             value: element.value,
             label: element.label,
             control: element.control,
@@ -87,7 +87,7 @@ class CompaignController extends GetxController {
         by: by.value?.value,
       );
 
-      for (var field in fields) {
+      for (var field in fields.value) {
         if (field.selected!.isTrue) {
           if (field.data != null) filter[field.value!] = field.data.toString();
         }
@@ -173,7 +173,7 @@ class CompaignController extends GetxController {
     by.value = null;
     order.value = "ascending";
     filter.clear();
-    for (Fields field in fields) {
+    for (Fields field in fields.value) {
       if (field.selected!.isTrue) {
         field.selected!(false);
         field.data = null;
@@ -267,7 +267,7 @@ class CompaignController extends GetxController {
 
   List<String> get getDropDownHint {
     List<String> temp = [];
-    for (Fields field in fields) {
+    for (Fields field in fields.value) {
       if (field.selected!.isTrue) {
         temp.add(field.label!);
       }
@@ -277,7 +277,7 @@ class CompaignController extends GetxController {
 
   List<Fields> get getFields {
     List<Fields> temp = [];
-    for (Fields field in fields) {
+    for (Fields field in fields.value) {
       if (field.selected!.isFalse) {
         temp.add(field);
       }
@@ -286,15 +286,15 @@ class CompaignController extends GetxController {
   }
 
   void selectFields(DropDown? option) {
-    for (Fields field in fields) {
+    for (Fields field in fields.value) {
       if (field.value == option?.value) {
-        field.selected!(true);
+        field.selected?.value = true;
       }
     }
   }
 
   void onChangedField(dynamic val, Fields opt) {
-    for (Fields field in fields) {
+    for (Fields field in fields.value) {
       if (field.value == opt.value) {
         field.data = val;
       }
@@ -302,9 +302,9 @@ class CompaignController extends GetxController {
   }
 
   void removeField(Fields option) {
-    for (Fields field in fields) {
+    for (Fields field in fields.value) {
       if (field.value == option.value) {
-        field.selected!(false);
+        field.selected?.value = false;
       }
     }
   }
