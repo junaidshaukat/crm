@@ -65,7 +65,7 @@ class FilterByRangeDialog extends StatelessWidget {
           SizedBox(height: 5.v),
           SimpleDropDown(
             width: 148.h,
-            fixedSize: Size.fromHeight(250.v),
+            height: 250,
             hintText: month.isEmpty == true ? "select_month".tr : month,
             items: monthList.map((val) {
               return DropDown(
@@ -95,7 +95,7 @@ class FilterByRangeDialog extends StatelessWidget {
           SizedBox(height: 5.v),
           SimpleDropDown(
             width: 148.h,
-            fixedSize: Size.fromHeight(240.v),
+            height: 240,
             hintText: year.isEmpty == true ? "select_year".tr : year,
             items: yearList.map((val) {
               return DropDown(

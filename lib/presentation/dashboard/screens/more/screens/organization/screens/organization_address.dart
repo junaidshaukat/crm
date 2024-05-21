@@ -35,6 +35,7 @@ class OrganizationAddressScreen extends StatelessWidget {
 
   Widget input({
     String? label,
+    int? height,
     String? hintText,
     TextEditingController? conn,
     bool dropDown = false,
@@ -64,6 +65,10 @@ class OrganizationAddressScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -72,13 +77,9 @@ class OrganizationAddressScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: height,
+            width: 342.h,
             hintText: hintText,
-            icon: CustomImageView(
-              imagePath: "dropdown".icon.svg,
-              height: 23.v,
-              width: 34.h,
-            ),
             items: items,
             onSelected: onChanged,
           ),
@@ -161,6 +162,7 @@ class OrganizationAddressScreen extends StatelessWidget {
                         ),
                         Obx(
                           () => input(
+                            height: 260,
                             dropDown: true,
                             label: 'country'.tr,
                             hintText: controller.country.value?.name ??
@@ -181,6 +183,7 @@ class OrganizationAddressScreen extends StatelessWidget {
                         Obx(() {
                           if (controller.provinces.isNotEmpty) {
                             return input(
+                              height: 260,
                               dropDown: true,
                               label: controller.country.value!.code
                                           ?.toLowerCase() ==

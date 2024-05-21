@@ -65,7 +65,7 @@ class CreateMediaScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: 40,
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,

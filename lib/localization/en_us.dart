@@ -224,6 +224,7 @@ final Map<String, String> enUs = {
   "filter": "Filter",
   "filter_by_date": "Filter By Date",
   "filter_by_years": "Filter By Years",
+  "filter_by_year": "Filter By Year",
   "home": "Home",
   "icon": "Icon",
   "inactive": "Inactive",

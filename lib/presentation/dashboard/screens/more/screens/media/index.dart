@@ -506,21 +506,22 @@ class MediaCentreScreen extends StatelessWidget {
           if (control == 'textbox' && value == "media_type")
             Obx(
               () => SimpleDropDown(
-                icon: Row(
-                  children: [
-                    CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                      height: 23.v,
-                      width: 28.h,
-                    ),
-                    IconButton(
-                      onPressed: onRemove,
-                      icon: Icon(
-                        Icons.close,
-                        color: appTheme.gray400,
-                      ),
-                    )
-                  ],
+                icon: SizedBox(
+                  width: 80.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.arrow_drop_down),
+                      IconButton(
+                        onPressed: onRemove,
+                        icon: Icon(
+                          Icons.close,
+                          color: appTheme.gray400,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 hintText: dropdown.value ?? hintText,
                 items: ["image", "video"]
@@ -606,13 +607,6 @@ class MediaCentreScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  overflow: TextOverflow.clip,
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,
@@ -659,12 +653,6 @@ class MediaCentreScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.pageSize.value.toString(),
                   items: pageSizeList3.map((e) {
                     return DropDown(
@@ -691,12 +679,6 @@ class MediaCentreScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.by.value?.label ?? "sort_by".tr,
                   items: controller.fields.map((field) {
                     return DropDown(
@@ -723,12 +705,6 @@ class MediaCentreScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.order.value.tr,
                   items: [
                     DropDown(

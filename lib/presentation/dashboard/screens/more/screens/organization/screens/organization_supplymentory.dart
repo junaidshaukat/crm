@@ -65,6 +65,10 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
             fillColor: appTheme.gray10001,
             suffix: suffix,
             suffixConstraints: suffixConstraints,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -73,7 +77,7 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: 40,
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
@@ -284,15 +288,15 @@ class QrCodeDownload extends StatelessWidget {
     return Obx(() {
       if (downloading.isFalse) {
         return CustomElevatedButton(
-          height: 38,
+          height: 50,
           text: "qr_code".tr,
           isDisabled: controller!.env.gatewayNodeTag > 0 ? false : true,
           leftIcon: Container(
             margin: EdgeInsets.only(right: 6.h),
             child: CustomImageView(
               imagePath: "download".icon.svg,
-              height: 16.adaptSize,
-              width: 16.adaptSize,
+              height: 18.adaptSize,
+              width: 18.adaptSize,
             ),
           ),
           buttonStyle: CustomButtonStyles.fillGrayTL4,
@@ -304,15 +308,15 @@ class QrCodeDownload extends StatelessWidget {
         );
       } else {
         return CustomElevatedButton(
-          height: 38,
+          height: 50,
           text: "".tr,
           isDisabled: qrCode != null ? false : true,
           leftIcon: Container(
             padding: EdgeInsets.all(6.adaptSize),
             child: Center(
               child: CircularProgress(
-                width: 12,
-                height: 12,
+                width: 18,
+                height: 18,
                 colorAnimation: appTheme.whiteA700,
               ),
             ),

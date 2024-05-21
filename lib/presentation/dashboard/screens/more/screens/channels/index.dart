@@ -230,13 +230,6 @@ class ChannelsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  overflow: TextOverflow.clip,
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,
@@ -306,12 +299,6 @@ class ChannelsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.pageSize.value.toString(),
                   items: pageSizeList.map((e) {
                     return DropDown(
@@ -338,12 +325,6 @@ class ChannelsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.by2.value?.label ?? "sort_by".tr,
                   items: controller.fields.map((field) {
                     return DropDown(
@@ -371,12 +352,6 @@ class ChannelsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
                   hintText: controller.order.value.tr,
                   items: [
                     DropDown(

@@ -71,6 +71,10 @@ class UpdateDonorScreen extends StatelessWidget {
             validator: validator,
             readOnly: readOnly,
             fillColor: appTheme.gray10001,
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 16.v,
+              horizontal: 12.h,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -79,13 +83,7 @@ class UpdateDonorScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            // height: 40.adaptSize,
             hintText: hintText,
-            icon: CustomImageView(
-              imagePath: "dropdown".icon.svg,
-              height: 23.v,
-              width: 34.h,
-            ),
             items: items,
             onSelected: onChanged,
           ),

@@ -63,6 +63,10 @@ class OrganizationCharityProfileScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -71,7 +75,7 @@ class OrganizationCharityProfileScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: 40,
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,

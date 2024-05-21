@@ -157,16 +157,7 @@ class AnalyticsScreen extends StatelessWidget {
                                               ),
                                               Obx(
                                                 () => SimpleDropDown(
-                                                  icon: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                      horizontal: 8.h,
-                                                    ),
-                                                    child: CustomImageView(
-                                                      imagePath:
-                                                          "dropdown".icon.svg,
-                                                    ),
-                                                  ),
+                                                  width: 228.h,
                                                   hintText: controller
                                                       .numberOfYears.value
                                                       .toString()
@@ -494,21 +485,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                       ),
                                                       Obx(
                                                         () => SimpleDropDown(
-                                                          icon: Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                              horizontal: 8.h,
-                                                            ),
-                                                            child:
-                                                                CustomImageView(
-                                                              imagePath:
-                                                                  "dropdown"
-                                                                      .icon
-                                                                      .svg,
-                                                              height: 23.v,
-                                                              width: 28.h,
-                                                            ),
-                                                          ),
+                                                          width: 228.h,
                                                           hintText: controller
                                                               .year.value,
                                                           items: DateTime.now()
@@ -727,21 +704,8 @@ class AnalyticsScreen extends StatelessWidget {
                                                       ),
                                                       Obx(
                                                         () => SimpleDropDown(
-                                                          icon: Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                              horizontal: 8.h,
-                                                            ),
-                                                            child:
-                                                                CustomImageView(
-                                                              imagePath:
-                                                                  "dropdown"
-                                                                      .icon
-                                                                      .svg,
-                                                              height: 23.v,
-                                                              width: 28.h,
-                                                            ),
-                                                          ),
+                                                          width: 228.h,
+                                                          height: 300,
                                                           hintText: controller
                                                                   .month
                                                                   .value
@@ -794,21 +758,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                       ),
                                                       Obx(
                                                         () => SimpleDropDown(
-                                                          icon: Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                              horizontal: 8.h,
-                                                            ),
-                                                            child:
-                                                                CustomImageView(
-                                                              imagePath:
-                                                                  "dropdown"
-                                                                      .icon
-                                                                      .svg,
-                                                              height: 23.v,
-                                                              width: 28.h,
-                                                            ),
-                                                          ),
+                                                          width: 228.h,
                                                           hintText: controller
                                                               .year.value,
                                                           items: DateTime.now()
@@ -1026,21 +976,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                       ),
                                                       Obx(
                                                         () => SimpleDropDown(
-                                                          icon: Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                              horizontal: 8.h,
-                                                            ),
-                                                            child:
-                                                                CustomImageView(
-                                                              imagePath:
-                                                                  "dropdown"
-                                                                      .icon
-                                                                      .svg,
-                                                              height: 23.v,
-                                                              width: 28.h,
-                                                            ),
-                                                          ),
+                                                          width: 228.h,
                                                           hintText: controller
                                                               .year.value,
                                                           items: DateTime.now()

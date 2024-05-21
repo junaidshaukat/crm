@@ -35,6 +35,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
 
   Widget input({
     String? label,
+    int? height,
     String? hintText,
     TextEditingController? conn,
     bool dropDown = false,
@@ -64,6 +65,10 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -72,13 +77,9 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            width: 342.h,
+            height: height,
             hintText: hintText,
-            icon: CustomImageView(
-              imagePath: "dropdown".icon.svg,
-              height: 23.v,
-              width: 34.h,
-            ),
             items: items,
             onSelected: onChanged,
           ),
@@ -182,6 +183,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
                           if (controller.provinces.isNotEmpty) {
                             return input(
                               dropDown: true,
+                              height: 220,
                               label: controller.country.value!.code
                                           ?.toLowerCase() ==
                                       'us'

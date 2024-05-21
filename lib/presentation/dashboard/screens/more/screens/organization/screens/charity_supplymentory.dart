@@ -66,6 +66,10 @@ class OrganizationCharitySupplementaryDataScreen extends StatelessWidget {
             suffix: suffix,
             suffixConstraints: suffixConstraints,
             onTap: onTap,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -74,7 +78,7 @@ class OrganizationCharitySupplementaryDataScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: 40,
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,

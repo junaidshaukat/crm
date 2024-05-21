@@ -144,13 +144,7 @@ class DonorsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  overflow: TextOverflow.clip,
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 352.h,
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,
@@ -196,12 +190,7 @@ class DonorsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 352.h,
                   hintText: controller.pageSize.value.toString(),
                   items: pageSizeList.map((e) {
                     return DropDown(
@@ -228,12 +217,7 @@ class DonorsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 352.h,
                   hintText: controller.by.value?.label ?? "sort_by".tr,
                   items: controller.fields.map((field) {
                     return DropDown(
@@ -260,12 +244,7 @@ class DonorsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 352.h,
                   hintText: controller.order.value.tr,
                   items: [
                     DropDown(
@@ -562,10 +541,7 @@ class DonorsScreen extends StatelessWidget {
                         width: 80.adaptSize,
                         height: 30.adaptSize,
                         child: Obx(
-                          () => SimpleDropDown(
-                            // containerPadding: EdgeInsets.zero,
-                            // dropdownButtonPadding: EdgeInsets.zero,
-                            // hintPadding: EdgeInsets.only(left: 10.adaptSize),
+                          () => PageSizeDropDown(
                             circularRadius: 33,
                             hintText: controller.pageSize.value.toString(),
                             items: pageSizeList
