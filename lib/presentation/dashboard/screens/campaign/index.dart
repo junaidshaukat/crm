@@ -157,7 +157,7 @@ class CompaignScreen extends StatelessWidget {
                 () => SimpleDropDown(
                   width: 352.h,
                   hintText: controller.getDropDownHint.isNotEmpty
-                      ? controller.getDropDownHint.join(', ')
+                      ? controller.getDropDownHint.last
                       : "select_fields".tr,
                   items: controller.getFields.map((e) {
                     return DropDown(
@@ -169,7 +169,42 @@ class CompaignScreen extends StatelessWidget {
                   onSelected: controller.selectFields,
                 ),
               ),
-              SizedBox(height: 8.v),
+              Obx(() {
+                List<Fields> fields = controller.fields;
+                return SizedBox(
+                  height: 60.v,
+                  child: ListView.separated(
+                    itemCount: fields.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      Fields field = fields[index];
+                      if (field.selected!.isTrue) {
+                        return InputChip(
+                          label: Text(
+                            field.label ?? '',
+                            style: TextStyle(
+                              color: appTheme.gray80001,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          onDeleted: () {},
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: BorderSide(color: appTheme.gray100),
+                          ),
+                          backgroundColor: appTheme.gray100.withOpacity(0.2),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(width: 4.h);
+                    },
+                  ),
+                );
+              }),
               Obx(
                 () => Column(
                   children: controller.fields.map((field) {

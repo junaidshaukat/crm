@@ -187,6 +187,11 @@ class SimpleDropDown extends StatelessWidget {
       onSelected: onSelected,
       trailingIcon: icon,
       selectedTrailingIcon: icon,
+      textStyle: TextStyle(
+        color: appTheme.gray80001,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w300,
+      ),
       dropdownMenuEntries: items!.map((DropDown item) {
         return DropdownMenuEntry(
           value: item,
@@ -194,7 +199,13 @@ class SimpleDropDown extends StatelessWidget {
         );
       }).toList(),
       inputDecorationTheme: InputDecorationTheme(
+        helperMaxLines: 4,
         border: InputBorder.none,
+        helperStyle: TextStyle(
+          color: appTheme.gray80001,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w500,
+        ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: appTheme.gray400,
