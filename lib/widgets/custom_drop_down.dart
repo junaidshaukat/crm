@@ -152,7 +152,7 @@ class SimpleDropDown extends StatelessWidget {
     this.width,
     this.items,
     this.icon,
-    this.padding,
+    this.padding = EdgeInsets.zero,
     this.hintText,
     this.fixedSize,
     this.onSelected,

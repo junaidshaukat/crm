@@ -95,7 +95,7 @@ class FilterByRangeDialog extends StatelessWidget {
           SizedBox(height: 5.v),
           SimpleDropDown(
             width: 150.h,
-            fixedSize: Size.fromHeight(250.v),
+            fixedSize: Size.fromHeight(240.v),
             hintText: year.isEmpty == true ? "select_year".tr : year,
             items: yearList.map((val) {
               return DropDown(

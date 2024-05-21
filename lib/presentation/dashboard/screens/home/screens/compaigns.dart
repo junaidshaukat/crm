@@ -234,13 +234,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                         SizedBox(height: 2.v),
                         Obx(
                           () => SimpleDropDown(
-                            icon: Padding(
-                              padding: EdgeInsets.only(right: 4.h),
-                              child: CustomImageView(
-                                imagePath: "dropdown".icon.svg,
-                                // width: 24.h,
-                              ),
-                            ),
+                            width: 335.h,
                             hintText: controller.year.value ?? "select_year".tr,
                             items: DateTime.now().yearList().map((year) {
                               return DropDown(
@@ -307,13 +301,6 @@ class HomeCompaignsScreen extends StatelessWidget {
                                   SizedBox(height: 2.v),
                                   Obx(
                                     () => SimpleDropDown(
-                                      icon: Padding(
-                                        padding: EdgeInsets.only(right: 8.h),
-                                        child: CustomImageView(
-                                          imagePath: "dropdown".icon.svg,
-                                          width: 24.h,
-                                        ),
-                                      ),
                                       hintText: controller.year.value ??
                                           "select_year".tr,
                                       items:
@@ -350,13 +337,6 @@ class HomeCompaignsScreen extends StatelessWidget {
                                   SizedBox(height: 2.v),
                                   Obx(
                                     () => SimpleDropDown(
-                                      icon: Padding(
-                                        padding: EdgeInsets.only(right: 8.h),
-                                        child: CustomImageView(
-                                          imagePath: "dropdown".icon.svg,
-                                          width: 24.h,
-                                        ),
-                                      ),
                                       hintText: controller.month.value ??
                                           "select_month".tr,
                                       items: DateTime.now()
