@@ -153,6 +153,7 @@ class SimpleDropDown extends StatelessWidget {
     this.height,
     this.items,
     this.icon,
+    this.enabled = true,
     this.padding = EdgeInsets.zero,
     this.hintText,
     this.onSelected,
@@ -161,6 +162,7 @@ class SimpleDropDown extends StatelessWidget {
     this.overflow,
   });
 
+  final bool enabled;
   final Widget? icon;
   final double? width;
   final int? height;
@@ -176,6 +178,7 @@ class SimpleDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu<DropDown>(
+      enabled: enabled,
       hintText: hintText,
       enableSearch: false,
       expandedInsets: padding,

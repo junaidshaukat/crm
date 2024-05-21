@@ -202,7 +202,6 @@ final Map<String, String> enUs = {
   "amount": "Amount",
   "analytics": "Analytics",
   "ascending": "Ascending",
-  "back": "back",
   "browse": "Browse",
   "campaign": "Campaign",
   "cancel": "Cancel",

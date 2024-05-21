@@ -25,6 +25,7 @@ class CreateUsersScreen extends StatelessWidget {
     String? hintText,
     TextEditingController? conn,
     bool dropDown = false,
+    bool enabled = true,
     List<DropDown>? items,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
@@ -51,6 +52,10 @@ class CreateUsersScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -59,13 +64,10 @@ class CreateUsersScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: 360,
+            width: 340.h,
+            enabled: enabled,
             hintText: hintText,
-            icon: CustomImageView(
-              imagePath: "dropdown".icon.svg,
-              height: 23.v,
-              width: 34.h,
-            ),
             items: items,
             onSelected: onChanged,
           ),
@@ -171,6 +173,7 @@ class CreateUsersScreen extends StatelessWidget {
                       ),
                       input(
                         dropDown: true,
+                        enabled: false,
                         label: 'language'.tr,
                         hintText: 'english'.tr,
                         items: [Languages(name: 'english'.tr, code: 'en')]

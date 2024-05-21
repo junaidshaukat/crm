@@ -38,6 +38,7 @@ class UpdateUsersScreen extends StatelessWidget {
     bool readOnly = false,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
+    bool enabled = true,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -62,6 +63,10 @@ class UpdateUsersScreen extends StatelessWidget {
             validator: validator,
             fillColor: appTheme.gray10001,
             readOnly: readOnly,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -70,13 +75,10 @@ class UpdateUsersScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            //height: 40.adaptSize,
+            height: 360,
+            width: 340.h,
+            enabled: enabled,
             hintText: hintText,
-            icon: CustomImageView(
-              imagePath: "dropdown".icon.svg,
-              height: 23.v,
-              width: 34.h,
-            ),
             items: items,
             onSelected: onChanged,
           ),
@@ -188,6 +190,7 @@ class UpdateUsersScreen extends StatelessWidget {
                         },
                       ),
                       input(
+                        enabled: false,
                         dropDown: true,
                         label: 'language'.tr,
                         hintText: 'english'.tr,
