@@ -32,4 +32,4 @@ class Console {
   }
 }
 
-Console console = Console(ConsoleMode.live);
+Console console = Console(ConsoleMode.debug);
