@@ -234,7 +234,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                         SizedBox(height: 2.v),
                         Obx(
                           () => SimpleDropDown(
-                            width: 335.h,
+                            width: 334.h,
                             hintText: controller.year.value ?? "select_year".tr,
                             items: DateTime.now().yearList().map((year) {
                               return DropDown(

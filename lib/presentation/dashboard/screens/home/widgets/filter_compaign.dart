@@ -16,13 +16,6 @@ class YearWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDropDown(
-      icon: Padding(
-        padding: EdgeInsets.only(right: 8.h),
-        child: CustomImageView(
-          imagePath: "dropdown".icon.svg,
-          width: 24.h,
-        ),
-      ),
       hintText: controller.year.value.isEmpty
           ? "select_year".tr
           : controller.year.value,
@@ -48,13 +41,6 @@ class MonthWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDropDown(
-      icon: Padding(
-        padding: EdgeInsets.only(right: 8.h),
-        child: CustomImageView(
-          imagePath: "dropdown".icon.svg,
-          width: 24.h,
-        ),
-      ),
       hintText: controller.month.isEmpty ? "select_month".tr : controller.month,
       items: items.map((month) {
         return DropDown(

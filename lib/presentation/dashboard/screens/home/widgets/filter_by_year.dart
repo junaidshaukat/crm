@@ -60,7 +60,7 @@ class FilterByYearsDialog extends StatelessWidget {
           ),
           SizedBox(height: 4.v),
           SimpleDropDown(
-            width: 144.h,
+            width: 148.h,
             hintText: year,
             items: yearList.map((val) {
               return DropDown(
