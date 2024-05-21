@@ -195,10 +195,9 @@ class CreateMediaScreen extends StatelessWidget {
                                     media.duration.toString();
                               }
 
-                              console.log(media.toJson());
-
                               controller.mediaFileController.text = media.name;
                               controller.mediaFile.value = media;
+                              console.log(media.toJson());
                             } else {
                               MediaFile media = MediaFile();
                               controller.mediaFile.value = media;

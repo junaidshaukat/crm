@@ -204,13 +204,9 @@ class UpdateMediaScreen extends StatelessWidget {
                                     media.duration.toString();
                               }
 
-                              if (media.size > 20) {
-                                media = MediaFile();
-                                controller.mediaFileController.clear();
-                              }
-
                               controller.mediaFileController.text = media.name;
                               controller.mediaFile.value = media;
+                              console.log(media.toJson());
                             } else {
                               controller.mediaFile.value = null;
                               controller.mediaFileController.clear();
