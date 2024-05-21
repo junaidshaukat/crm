@@ -1017,7 +1017,7 @@ class DownloadQrCode extends StatelessWidget {
               child: CircularProgress(
                 width: 12,
                 height: 12,
-                // backgroundColor: appTheme.whiteA700,
+                backgroundColor: appTheme.whiteA700,
                 colorAnimation: appTheme.whiteA700,
                 // valueColor: AlwaysStoppedAnimation<Color>(
                 //   appTheme.whiteA700,

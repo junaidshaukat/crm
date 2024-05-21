@@ -24,7 +24,7 @@ typedef ResponsiveBuild = Widget Function(
 
 PlatformType get getPlaform {
   if (Platform.isAndroid) {
-    return PlatformType.ios;
+    return PlatformType.android;
   } else if (Platform.isIOS) {
     return PlatformType.ios;
   } else if (Platform.isFuchsia) {
