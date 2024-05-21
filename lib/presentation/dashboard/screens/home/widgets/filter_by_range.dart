@@ -64,12 +64,8 @@ class FilterByRangeDialog extends StatelessWidget {
           ),
           SizedBox(height: 5.v),
           SimpleDropDown(
-            icon: Padding(
-              padding: EdgeInsets.only(right: 16.h),
-              child: CustomImageView(
-                imagePath: "dropdown".icon.svg,
-              ),
-            ),
+            width: 150.h,
+            fixedSize: Size.fromHeight(250.v),
             hintText: month.isEmpty == true ? "select_month".tr : month,
             items: monthList.map((val) {
               return DropDown(
@@ -98,12 +94,8 @@ class FilterByRangeDialog extends StatelessWidget {
           ),
           SizedBox(height: 5.v),
           SimpleDropDown(
-            icon: Padding(
-              padding: EdgeInsets.only(right: 16.h),
-              child: CustomImageView(
-                imagePath: "dropdown".icon.svg,
-              ),
-            ),
+            width: 150.h,
+            fixedSize: Size.fromHeight(250.v),
             hintText: year.isEmpty == true ? "select_year".tr : year,
             items: yearList.map((val) {
               return DropDown(
