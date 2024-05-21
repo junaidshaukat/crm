@@ -247,7 +247,7 @@ class ChannelsScreen extends StatelessWidget {
                       value: e.value,
                     );
                   }).toList(),
-                  onChanged: controller.selectFields,
+                  onSelected: controller.selectFields,
                 ),
               ),
               SizedBox(height: 8.v),
@@ -320,7 +320,7 @@ class ChannelsScreen extends StatelessWidget {
                       value: e,
                     );
                   }).toList(),
-                  onChanged: (option) {
+                  onSelected: (option) {
                     controller.pageSize.value = option?.value;
                   },
                 ),
@@ -352,7 +352,7 @@ class ChannelsScreen extends StatelessWidget {
                       value: field,
                     );
                   }).toList(),
-                  onChanged: (option) {
+                  onSelected: (option) {
                     controller.request.by = option?.value.value.toString();
                     controller.by2.value = option?.value;
                   },
@@ -390,7 +390,7 @@ class ChannelsScreen extends StatelessWidget {
                       value: 'descending',
                     ),
                   ],
-                  onChanged: (option) {
+                  onSelected: (option) {
                     controller.request.order = option?.value.toString().orderBy;
                     controller.order.value = option?.value;
                   },

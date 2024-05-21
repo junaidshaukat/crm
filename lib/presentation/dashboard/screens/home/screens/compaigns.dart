@@ -248,7 +248,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                                   title: year.toString(),
                                   value: year);
                             }).toList(),
-                            onChanged: (option) {
+                            onSelected: (option) {
                               controller.year(option?.value);
                             },
                           ),
@@ -323,7 +323,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                                             title: year.toString(),
                                             value: year);
                                       }).toList(),
-                                      onChanged: (option) {
+                                      onSelected: (option) {
                                         controller.year(option?.value);
                                       },
                                     ),
@@ -367,7 +367,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                                             title: month.toString(),
                                             value: month);
                                       }).toList(),
-                                      onChanged: (option) {
+                                      onSelected: (option) {
                                         controller.month(option?.value);
                                       },
                                     ),

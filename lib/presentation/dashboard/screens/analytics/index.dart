@@ -182,7 +182,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                         ),
                                                       )
                                                       .toList(),
-                                                  onChanged: (option) {
+                                                  onSelected: (option) {
                                                     controller.numberOfYears(
                                                         option?.value);
                                                   },
@@ -521,7 +521,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                                 ),
                                                               )
                                                               .toList(),
-                                                          onChanged: (option) {
+                                                          onSelected: (option) {
                                                             controller.year(
                                                                 option?.value);
                                                           },
@@ -761,7 +761,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                                 ),
                                                               )
                                                               .toList(),
-                                                          onChanged: (option) {
+                                                          onSelected: (option) {
                                                             if (option?.value ==
                                                                 '') {
                                                               controller.month
@@ -821,7 +821,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                                 ),
                                                               )
                                                               .toList(),
-                                                          onChanged: (option) {
+                                                          onSelected: (option) {
                                                             controller.year(
                                                                 option?.value);
                                                           },
@@ -1053,7 +1053,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                                 ),
                                                               )
                                                               .toList(),
-                                                          onChanged: (option) {
+                                                          onSelected: (option) {
                                                             controller.year(
                                                                 option?.value);
                                                           },

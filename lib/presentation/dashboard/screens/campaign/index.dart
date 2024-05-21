@@ -172,7 +172,7 @@ class CompaignScreen extends StatelessWidget {
                       value: e.value,
                     );
                   }).toList(),
-                  onChanged: controller.selectFields,
+                  onSelected: controller.selectFields,
                 ),
               ),
               SizedBox(height: 8.v),
@@ -221,7 +221,7 @@ class CompaignScreen extends StatelessWidget {
                       value: e,
                     );
                   }).toList(),
-                  onChanged: (option) {
+                  onSelected: (option) {
                     controller.pageSize.value = option?.value;
                   },
                 ),
@@ -253,7 +253,7 @@ class CompaignScreen extends StatelessWidget {
                       value: field,
                     );
                   }).toList(),
-                  onChanged: (option) {
+                  onSelected: (option) {
                     controller.by.value = option?.value;
                   },
                 ),
@@ -284,7 +284,7 @@ class CompaignScreen extends StatelessWidget {
                     DropDown(
                         id: '2', title: 'descending'.tr, value: 'Descending'),
                   ],
-                  onChanged: (option) {
+                  onSelected: (option) {
                     controller.order.value = option?.value;
                   },
                 ),
@@ -564,9 +564,9 @@ class CompaignScreen extends StatelessWidget {
                         height: 30.adaptSize,
                         child: Obx(
                           () => SimpleDropDown(
-                            containerPadding: EdgeInsets.zero,
-                            dropdownButtonPadding: EdgeInsets.zero,
-                            hintPadding: EdgeInsets.only(left: 10.adaptSize),
+                            // containerPadding: EdgeInsets.zero,
+                            // dropdownButtonPadding: EdgeInsets.zero,
+                            // hintPadding: EdgeInsets.only(left: 10.adaptSize),
                             circularRadius: 33,
                             hintText: controller.pageSize.value.toString(),
                             items: pageSizeList
@@ -576,7 +576,7 @@ class CompaignScreen extends StatelessWidget {
                                       title: page.toString(),
                                     ))
                                 .toList(),
-                            onChanged: controller.onChangedPageSize,
+                            onSelected: controller.onChangedPageSize,
                           ),
                         ),
                       ),

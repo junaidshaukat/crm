@@ -84,7 +84,7 @@ class NewTransactionScreen extends StatelessWidget {
                   ),
                 ),
                 items: items,
-                onChanged: onChanged,
+                onSelected: onChanged,
               ),
             SizedBox(height: 13.v),
           ],

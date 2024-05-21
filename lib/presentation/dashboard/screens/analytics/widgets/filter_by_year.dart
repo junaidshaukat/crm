@@ -60,7 +60,7 @@ class AnalysisFilterByYearsDialog extends StatelessWidget {
             ),
             hintText: "2023".tr,
             items: const [],
-            onChanged: (value) {},
+            onSelected: (value) {},
           ),
           SizedBox(height: 7.v),
           CustomElevatedButton(

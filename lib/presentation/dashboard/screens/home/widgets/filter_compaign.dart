@@ -29,7 +29,7 @@ class YearWidget extends StatelessWidget {
       items: items.map((year) {
         return DropDown(id: year, title: year.toString(), value: year);
       }).toList(),
-      onChanged: onChanged,
+      onSelected: onChanged,
     );
   }
 }
@@ -63,7 +63,7 @@ class MonthWidget extends StatelessWidget {
           value: month,
         );
       }).toList(),
-      onChanged: onChanged,
+      onSelected: onChanged,
     );
   }
 }

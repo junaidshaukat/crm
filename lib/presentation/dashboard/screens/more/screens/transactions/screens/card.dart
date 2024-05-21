@@ -120,7 +120,7 @@ class CardScreen extends StatelessWidget {
                   ),
                 ),
                 items: items,
-                onChanged: onChanged,
+                onSelected: onChanged,
               ),
             if (control == 'switch')
               CustomSwitch(
@@ -454,7 +454,7 @@ class CreditCarForm extends StatelessWidget {
                   ),
                 ),
                 items: items,
-                onChanged: onChanged,
+                onSelected: onChanged,
               ),
             if (control == 'switch')
               CustomSwitch(

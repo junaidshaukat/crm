@@ -62,7 +62,7 @@ class ReportsScreen extends StatelessWidget {
                             return DropDown(
                                 id: e.tagNumber, title: e.name!, value: e);
                           }).toList(),
-                          onChanged: controller.onChangedForm,
+                          onSelected: controller.onChangedForm,
                         ),
                       ),
                     ),
@@ -282,7 +282,7 @@ class ReportsCard extends StatelessWidget {
                   value: e.value,
                 );
               }).toList(),
-              onChanged: (option) {
+              onSelected: (option) {
                 dropDown.value = option;
                 Map<String, dynamic> map = {};
                 map[field.name!] = option?.value;

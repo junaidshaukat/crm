@@ -68,7 +68,7 @@ class AnalysisFilterByNumberOfYearsDialog extends StatelessWidget {
                 value: year,
               );
             }).toList(),
-            onChanged: (value) {},
+            onSelected: (value) {},
           ),
           SizedBox(height: 7.v),
           CustomElevatedButton(

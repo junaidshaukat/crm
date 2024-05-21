@@ -78,7 +78,7 @@ class FilterByRangeDialog extends StatelessWidget {
                 value: val.toString(),
               );
             }).toList(),
-            onChanged: onChangeMonth,
+            onSelected: onChangeMonth,
           ),
           SizedBox(height: 3.v),
           Align(
@@ -112,7 +112,7 @@ class FilterByRangeDialog extends StatelessWidget {
                 value: val.toString(),
               );
             }).toList(),
-            onChanged: onChangeYear,
+            onSelected: onChangeYear,
           ),
           SizedBox(height: 16.v),
           CustomElevatedButton(

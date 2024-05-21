@@ -72,13 +72,13 @@ class ConfirmScreen extends StatelessWidget {
           ),
         if (control == "dropdown")
           SimpleDropDown(
-            height: 40.adaptSize,
+            //height: 40.adaptSize,
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
             ),
             items: items,
-            onChanged: onChanged,
+            onSelected: onChanged,
           ),
         if (control == 'switch')
           CustomSwitch(

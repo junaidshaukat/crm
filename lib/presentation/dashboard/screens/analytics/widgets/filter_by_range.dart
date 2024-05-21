@@ -59,7 +59,7 @@ class AnalysisFilterByRangeDialog extends StatelessWidget {
             ),
             hintText: "select".tr,
             items: const [],
-            onChanged: (value) {},
+            onSelected: (value) {},
           ),
           SizedBox(height: 3.v),
           Align(
@@ -89,7 +89,7 @@ class AnalysisFilterByRangeDialog extends StatelessWidget {
             ),
             hintText: "2023".tr,
             items: const [],
-            onChanged: (value) {},
+            onSelected: (value) {},
           ),
           SizedBox(height: 16.v),
           CustomElevatedButton(

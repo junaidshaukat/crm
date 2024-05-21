@@ -25,26 +25,11 @@ class HomeScreen extends StatelessWidget {
           List<Organizations> organizations = controller.organizations.value;
           if (props.useState.value == UseState.none ||
               props.useState.value == UseState.loading) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.h),
-              child: SimpleDropDown(
-                icon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.h),
-                  child: CustomImageView(
-                    imagePath: "arrow_down".icon.svg,
-                  ),
-                ),
-                hintText: 'organizations'.tr,
-                items: [
-                  DropDown(
-                    id: 'title',
-                    title: 'title',
-                    value: 'title',
-                  ),
-                ],
-                onSelect: (value) {},
-                onChanged: (option) {},
-              ),
+            return SimpleDropDown(
+              width: 343.h,
+              hintText: 'processing'.tr,
+              items: const [],
+              onSelected: (option) {},
             );
           } else {
             if (props.error.value.message != null) {
@@ -53,28 +38,20 @@ class HomeScreen extends StatelessWidget {
                 onRefresh: () async {},
               );
             } else {
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.h),
-                child: SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.h),
-                    child: CustomImageView(
-                      imagePath: "arrow_down".icon.svg,
-                    ),
-                  ),
-                  hintText: controller.getOrganization.name?.organizationTitle(
-                          controller.getOrganization.location) ??
-                      'select_an_organization'.tr,
-                  items: organizations.map((organization) {
-                    return DropDown(
-                      id: organization.tagNumber,
-                      title: organization.name
-                          ?.organizationTitle(organization.location),
-                      value: organization,
-                    );
-                  }).toList(),
-                  onChanged: controller.setOrganization,
-                ),
+              return SimpleDropDown(
+                width: 343.h,
+                hintText: controller.getOrganization.name?.organizationTitle(
+                        controller.getOrganization.location) ??
+                    'select_an_organization'.tr,
+                items: organizations.map((organization) {
+                  return DropDown(
+                    id: organization.tagNumber,
+                    title: organization.name
+                        ?.organizationTitle(organization.location),
+                    value: organization,
+                  );
+                }).toList(),
+                onSelected: controller.setOrganization,
               );
             }
           }

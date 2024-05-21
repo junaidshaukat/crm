@@ -60,14 +60,7 @@ class FilterByYearsDialog extends StatelessWidget {
           ),
           SizedBox(height: 4.v),
           SimpleDropDown(
-            icon: Container(
-              margin: EdgeInsets.fromLTRB(30.h, 8.v, 8.h, 9.v),
-              child: CustomImageView(
-                imagePath: "dropdown".icon.svg,
-                height: 23.v,
-                width: 28.h,
-              ),
-            ),
+            width: 144.h,
             hintText: year,
             items: yearList.map((val) {
               return DropDown(
@@ -77,7 +70,7 @@ class FilterByYearsDialog extends StatelessWidget {
                 isSelected: year == val.toString() ? true : false,
               );
             }).toList(),
-            onChanged: onChanged,
+            onSelected: onChanged,
           ),
           SizedBox(height: 7.v),
           CustomElevatedButton(
