@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
               hintText: 'processing'.tr,
               items: const [],
               onSelected: (option) {},
+              padding: EdgeInsets.symmetric(horizontal: 10.h),
             );
           } else {
             if (props.error.value.message != null) {
@@ -40,6 +41,8 @@ class HomeScreen extends StatelessWidget {
             } else {
               return SimpleDropDown(
                 width: 343.h,
+                onSelected: controller.setOrganization,
+                padding: EdgeInsets.symmetric(horizontal: 10.h),
                 hintText: controller.getOrganization.name?.organizationTitle(
                         controller.getOrganization.location) ??
                     'select_an_organization'.tr,
@@ -51,7 +54,6 @@ class HomeScreen extends StatelessWidget {
                     value: organization,
                   );
                 }).toList(),
-                onSelected: controller.setOrganization,
               );
             }
           }
