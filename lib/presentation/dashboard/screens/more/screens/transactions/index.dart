@@ -253,13 +253,8 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  overflow: TextOverflow.clip,
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 353.h,
+                  height: 260,
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,
@@ -329,12 +324,8 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 353.h,
+                  height: 280,
                   hintText: controller.pageSize.value.toString(),
                   items: pageSizeList2.map((e) {
                     return DropDown(
@@ -361,12 +352,8 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 353.h,
+                  height: 280,
                   hintText: controller.by.value?.label ?? "sort_by".tr,
                   items: controller.fields.map((field) {
                     return DropDown(
@@ -393,12 +380,8 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 12.adaptSize),
-                    child: CustomImageView(
-                      imagePath: "dropdown".icon.svg,
-                    ),
-                  ),
+                  width: 353.h,
+                  height: 280,
                   hintText: controller.order.value.tr,
                   items: [
                     DropDown(

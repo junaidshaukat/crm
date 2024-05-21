@@ -75,6 +75,10 @@ class TransactionDetailsScreen extends StatelessWidget {
                   child: CustomTextFormField(
                     hintText: "email_address".tr,
                     keyboardType: TextInputType.emailAddress,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 10.h,
+                      vertical: 16.v,
+                    ),
                     validator: (input) {
                       return Validator.email(input, isRequired: false);
                     },

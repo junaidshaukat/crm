@@ -47,23 +47,15 @@ class ReportsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 3.v),
                     Obx(
-                      () => SizedBox(
-                        height: 50.v,
-                        child: SimpleDropDown(
-                          icon: Padding(
-                            padding: EdgeInsets.only(right: 12.adaptSize),
-                            child: CustomImageView(
-                              imagePath: "dropdown".icon.svg,
-                            ),
-                          ),
-                          hintText: controller.reportDataSelect.value?.name ??
-                              'select'.tr,
-                          items: controller.reportData.map((e) {
-                            return DropDown(
-                                id: e.tagNumber, title: e.name!, value: e);
-                          }).toList(),
-                          onSelected: controller.onChangedForm,
-                        ),
+                      () => SimpleDropDown(
+                        width: 342.h,
+                        hintText: controller.reportDataSelect.value?.name ??
+                            'select'.tr,
+                        items: controller.reportData.map((e) {
+                          return DropDown(
+                              id: e.tagNumber, title: e.name!, value: e);
+                        }).toList(),
+                        onSelected: controller.onChangedForm,
                       ),
                     ),
                     SizedBox(height: 3.v),
@@ -274,6 +266,7 @@ class ReportsCard extends StatelessWidget {
             }
 
             return SimpleDropDown(
+              width: 342.h,
               hintText: hintText,
               items: field.values?.map((e) {
                 return DropDown(

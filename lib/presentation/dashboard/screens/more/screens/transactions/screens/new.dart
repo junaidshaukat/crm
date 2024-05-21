@@ -63,6 +63,10 @@ class NewTransactionScreen extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: onChange,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.h,
+                  vertical: 16.v,
+                ),
               ),
             if (control == "textarea")
               CustomTextFormField(
@@ -73,16 +77,16 @@ class NewTransactionScreen extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: onChange,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.h,
+                  vertical: 16.v,
+                ),
               ),
             if (control == "dropdown")
               SimpleDropDown(
+                width: 340.h,
+                height: 300,
                 hintText: hintText,
-                icon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.h),
-                  child: CustomImageView(
-                    imagePath: "dropdown".icon.svg,
-                  ),
-                ),
                 items: items,
                 onSelected: onChanged,
               ),

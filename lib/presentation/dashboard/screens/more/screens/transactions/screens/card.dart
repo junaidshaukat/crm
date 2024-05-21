@@ -100,6 +100,10 @@ class CardScreen extends StatelessWidget {
                 keyboardType: keyboardType,
                 textInputAction: textInputAction,
                 controller: textEditingController,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.h,
+                  vertical: 16.v,
+                ),
               ),
             if (control == "textarea")
               CustomTextFormField(
@@ -109,16 +113,16 @@ class CardScreen extends StatelessWidget {
                 keyboardType: keyboardType,
                 textInputAction: textInputAction,
                 controller: textEditingController,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.h,
+                  vertical: 16.v,
+                ),
               ),
             if (control == "dropdown")
               SimpleDropDown(
+                height: 260,
+                width: 164.h,
                 hintText: hintText,
-                icon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.h),
-                  child: CustomImageView(
-                    imagePath: "dropdown".icon.svg,
-                  ),
-                ),
                 items: items,
                 onSelected: onChanged,
               ),
@@ -160,7 +164,7 @@ class CardScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: 14.v),
                   const CustomDivider(),
-                  SizedBox(height: 19.v),
+                  SizedBox(height: 14.v),
                   Obx(() {
                     bool addCard = controller.addCard.value;
                     if (wallets.isNotEmpty && addCard == false) {
@@ -195,7 +199,7 @@ class CardScreen extends StatelessWidget {
                       return const SizedBox();
                     }
                   }),
-                  SizedBox(height: 19.v),
+                  SizedBox(height: 14.v),
                   Expanded(
                     child: SizedBox(
                       width: double.maxFinite,
@@ -433,6 +437,10 @@ class CreditCarForm extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: change,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.h,
+                  vertical: 16.v,
+                ),
               ),
             if (control == "textarea")
               CustomTextFormField(
@@ -443,16 +451,16 @@ class CreditCarForm extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: change,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.h,
+                  vertical: 16.v,
+                ),
               ),
             if (control == "dropdown")
               SimpleDropDown(
+                height: 260,
+                width: 164.h,
                 hintText: hintText,
-                icon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.h),
-                  child: CustomImageView(
-                    imagePath: "dropdown".icon.svg,
-                  ),
-                ),
                 items: items,
                 onSelected: onChanged,
               ),

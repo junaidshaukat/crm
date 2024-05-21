@@ -64,6 +64,10 @@ class ConfirmScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 16.v,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

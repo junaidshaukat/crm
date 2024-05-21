@@ -236,6 +236,7 @@ final Map<String, String> enUs = {
   "more": "More",
   "next": "Next",
   "no": "No",
+  "back": "Back",
   "no_records_found": "No Records Found",
   "note": "Note",
   "order_by": "Order by",
