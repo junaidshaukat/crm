@@ -538,7 +538,7 @@ class DonorsScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       SizedBox(
-                        width: 80.adaptSize,
+                        width: 90.adaptSize,
                         height: 30.adaptSize,
                         child: Obx(
                           () => PageSizeDropDown(

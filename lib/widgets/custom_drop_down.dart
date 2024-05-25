@@ -30,7 +30,7 @@ class DropDown {
 }
 
 class PageSizeDropDown extends StatelessWidget {
-  PageSizeDropDown({
+  const PageSizeDropDown({
     super.key,
     this.value,
     this.onSelected,
@@ -72,8 +72,6 @@ class PageSizeDropDown extends StatelessWidget {
       containerPadding,
       dropdownButtonPadding,
       hintPadding;
-
-  final Rx<String?> hint = Rx(null);
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +144,7 @@ class PageSizeDropDown extends StatelessWidget {
   }
 }
 
-class SimpleDropDown extends StatelessWidget {
+class SimpleDropDown extends StatefulWidget {
   const SimpleDropDown({
     super.key,
     this.width,
@@ -176,23 +174,37 @@ class SimpleDropDown extends StatelessWidget {
   final TextOverflow? overflow;
 
   @override
+  SimpleDropDownState createState() => SimpleDropDownState();
+}
+
+class SimpleDropDownState extends State<SimpleDropDown> {
+  DropDown? selectedItem;
+
+  @override
   Widget build(BuildContext context) {
     return DropdownMenu<DropDown>(
-      enabled: enabled,
-      hintText: hintText,
+      enabled: widget.enabled,
+      hintText: widget.hintText,
       enableSearch: false,
-      expandedInsets: padding,
+      expandedInsets: widget.padding,
       requestFocusOnTap: false,
-      width: width ?? double.maxFinite,
-      onSelected: onSelected,
-      trailingIcon: icon,
-      selectedTrailingIcon: icon,
+      width: widget.width ?? double.maxFinite,
+      onSelected: (item) {
+        setState(() {
+          selectedItem = item;
+        });
+        if (widget.onSelected != null) {
+          widget.onSelected!(item);
+        }
+      },
+      trailingIcon: widget.icon,
+      selectedTrailingIcon: widget.icon,
       textStyle: TextStyle(
         color: appTheme.gray80001,
         fontFamily: 'Poppins',
         fontWeight: FontWeight.w300,
       ),
-      dropdownMenuEntries: items!.map((DropDown item) {
+      dropdownMenuEntries: widget.items!.map((DropDown item) {
         return DropdownMenuEntry(
           value: item,
           label: item.title,
@@ -201,6 +213,7 @@ class SimpleDropDown extends StatelessWidget {
       inputDecorationTheme: InputDecorationTheme(
         helperMaxLines: 4,
         border: InputBorder.none,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
         helperStyle: TextStyle(
           color: appTheme.gray80001,
           fontFamily: 'Poppins',
@@ -211,31 +224,36 @@ class SimpleDropDown extends StatelessWidget {
             color: appTheme.gray400,
             width: 1.0,
           ),
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(circularRadius.adaptSize),
+          borderRadius: widget.borderRadius ??
+              BorderRadius.circular(widget.circularRadius.adaptSize),
         ),
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: appTheme.gray400,
             width: 1.0,
           ),
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(circularRadius.adaptSize),
+          borderRadius: widget.borderRadius ??
+              BorderRadius.circular(widget.circularRadius.adaptSize),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: appTheme.gray400,
             width: 1.0,
           ),
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(circularRadius.adaptSize),
+          borderRadius: widget.borderRadius ??
+              BorderRadius.circular(widget.circularRadius.adaptSize),
         ),
       ),
       menuStyle: MenuStyle(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.zero,
+        ),
+        elevation: const WidgetStatePropertyAll(3),
         alignment: Alignment.bottomLeft,
-        maximumSize: height != null
+        maximumSize: widget.height != null
             ? WidgetStatePropertyAll(
-                Size.fromHeight(height!.v),
+                Size.fromHeight(widget.height!.toDouble()),
               )
             : null,
       ),

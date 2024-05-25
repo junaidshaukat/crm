@@ -155,9 +155,9 @@ class CompaignScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               Obx(
                 () => SimpleDropDown(
-                  width: 352.h,
+                  width: 353.h,
                   hintText: controller.getDropDownHint.isNotEmpty
-                      ? controller.getDropDownHint.last
+                      ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,
                   items: controller.getFields.map((e) {
                     return DropDown(
@@ -573,7 +573,7 @@ class CompaignScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       SizedBox(
-                        width: 80.adaptSize,
+                        width: 90.adaptSize,
                         height: 30.adaptSize,
                         child: Obx(
                           () => PageSizeDropDown(

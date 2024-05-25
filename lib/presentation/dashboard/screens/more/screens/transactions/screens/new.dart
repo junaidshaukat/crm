@@ -351,7 +351,9 @@ class NewTransactionScreen extends StatelessWidget {
                           hintText: "0.00",
                           textInputAction: TextInputAction.done,
                           textEditingController: controller.amountController,
-                          keyboardType: TextInputType.number,
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
+                          ),
                           validator: (input) {
                             num minimum =
                                 controller.campaign.value.minimumAmount ?? 0;

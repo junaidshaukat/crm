@@ -272,6 +272,7 @@ class CompaignController extends GetxController {
         temp.add(field.label!);
       }
     }
+    update();
     return temp;
   }
 
@@ -282,6 +283,7 @@ class CompaignController extends GetxController {
         temp.add(field);
       }
     }
+    update();
     return temp;
   }
 
@@ -291,6 +293,7 @@ class CompaignController extends GetxController {
         field.selected?.value = true;
       }
     }
+    update();
   }
 
   void onChangedField(dynamic val, Fields opt) {
@@ -299,6 +302,7 @@ class CompaignController extends GetxController {
         field.data = val;
       }
     }
+    update();
   }
 
   void removeField(Fields option) {
@@ -307,5 +311,6 @@ class CompaignController extends GetxController {
         field.selected?.value = false;
       }
     }
+    update();
   }
 }
