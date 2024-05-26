@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
@@ -124,6 +122,44 @@ class UpdateMediaScreen extends StatelessWidget {
     );
   }
 
+  void onTap() async {
+    await picker(imagePicker: true);
+  }
+
+  Future<void> picker({
+    bool imagePicker = false,
+  }) async {
+    if (imagePicker) {
+      Pickers.media().then((result) async {
+        if (result != null) {
+          MediaFile media = MediaFile(imagePicker, ipResult: result);
+          await media.init();
+          controller.durationController.text = media.duration.toString();
+          controller.mediaFileController.text = media.name;
+          controller.mediaFile.value = media;
+          console.log(media.toJson());
+        } else {
+          controller.mediaFile.value = null;
+          controller.mediaFileController.clear();
+        }
+      });
+    } else {
+      Pickers.file().then((result) async {
+        if (result != null) {
+          MediaFile media = MediaFile(imagePicker, fpResult: result);
+          await media.init();
+          controller.durationController.text = media.duration.toString();
+          controller.mediaFileController.text = media.name;
+          controller.mediaFile.value = media;
+          console.log(media.toJson());
+        } else {
+          controller.mediaFile.value = null;
+          controller.mediaFileController.clear();
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,40 +215,7 @@ class UpdateMediaScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 5.v),
                       InkWell(
-                        onTap: () {
-                          Pickers.file().then((result) async {
-                            MediaFile media = MediaFile();
-                            if (result != null) {
-                              PlatformFile file = result.files.first;
-                              media.name = file.name;
-                              media.size = file.size.bytesToMB;
-                              media.extn = file.extension ?? '';
-                              media.path = file.path ?? '';
-
-                              if (media.content == ContentType.image) {}
-
-                              if (media.content == ContentType.video) {
-                                VideoPlayerValue? videoPlayerValue =
-                                    await VideoDetails.getInfo(
-                                        File(file.xFile.path));
-
-                                media.duration =
-                                    videoPlayerValue?.duration.inSeconds ?? 0;
-                                media.resolution =
-                                    videoPlayerValue?.size ?? Size.zero;
-                                controller.durationController.text =
-                                    media.duration.toString();
-                              }
-
-                              controller.mediaFileController.text = media.name;
-                              controller.mediaFile.value = media;
-                              console.log(media.toJson());
-                            } else {
-                              controller.mediaFile.value = null;
-                              controller.mediaFileController.clear();
-                            }
-                          });
-                        },
+                        onTap: onTap,
                         child: Container(
                           width: double.maxFinite,
                           padding: EdgeInsets.symmetric(

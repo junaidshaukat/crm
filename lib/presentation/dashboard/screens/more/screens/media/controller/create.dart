@@ -15,7 +15,7 @@ class CreateMediaController extends GetxController {
   RxBool fullScreen = RxBool(false);
   RxBool status = RxBool(false);
   RxBool isMuted = RxBool(false);
-  Rx<MediaFile> mediaFile = Rx(MediaFile());
+  Rx<MediaFile?> mediaFile = Rx(null);
   Rx<String?> mediaFileErr = Rx(null);
 
   Future create(

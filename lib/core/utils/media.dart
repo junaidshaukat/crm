@@ -1,26 +1,52 @@
 import 'dart:io';
 import 'dart:ui';
 
+import '/core/app_export.dart';
+
 enum ContentType { image, video, other }
 
 class MediaFile {
-  String path;
-  String name;
-  String extn;
-  double size;
-  int duration;
-  Size resolution;
+  final bool imagePicker;
+  final File? ipResult;
+  final FilePickerResult? fpResult;
+  VideoPlayerValue? video;
 
-  MediaFile({
-    this.path = '',
-    this.name = '',
-    this.extn = '',
-    this.size = -1,
-    this.duration = 0,
-    this.resolution = Size.zero,
+  MediaFile(
+    this.imagePicker, {
+    this.ipResult,
+    this.fpResult,
   });
 
-  File get file => File(path);
+  File get file {
+    if (imagePicker) {
+      return File(ipResult!.path);
+    } else {
+      return File(fpResult!.xFiles.first.path);
+    }
+  }
+
+  Future<void> init() async {
+    if (type == 'video') {
+      video = await VideoDetails.getInfo(file);
+    }
+  }
+
+  String get path {
+    return file.path;
+  }
+
+  String get name {
+    return path.split('/').last;
+  }
+
+  String get extn {
+    return path.split('/').last.split('.').last;
+  }
+
+  double get size {
+    int bytes = file.lengthSync();
+    return bytes / (1024 * 1024);
+  }
 
   ContentType get content {
     List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
@@ -48,8 +74,25 @@ class MediaFile {
     }
   }
 
+  int get duration {
+    if (type == 'video') {
+      return video?.duration.inSeconds ?? 0;
+    } else {
+      return 0;
+    }
+  }
+
+  Size get resolution {
+    if (type == 'video') {
+      return video?.size ?? Size.zero;
+    } else {
+      return Size.zero;
+    }
+  }
+
   toJson() {
     return {
+      'picker': imagePicker ? 'image_picker' : 'file_picker',
       'file': file,
       'name': name,
       'extn': extn,
