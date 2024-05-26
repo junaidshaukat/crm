@@ -26,7 +26,6 @@ class HomeScreen extends StatelessWidget {
           if (props.useState.value == UseState.none ||
               props.useState.value == UseState.loading) {
             return SimpleDropDown(
-              width: 355.h,
               hintText: 'processing'.tr,
               items: const [],
               onSelected: (option) {},
@@ -40,7 +39,6 @@ class HomeScreen extends StatelessWidget {
               );
             } else {
               return SimpleDropDown(
-                width: 355.h,
                 onSelected: controller.setOrganization,
                 padding: EdgeInsets.symmetric(horizontal: 10.h),
                 hintText: controller.getOrganization.name?.organizationTitle(
