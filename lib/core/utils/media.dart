@@ -78,7 +78,7 @@ class MediaFile {
     if (type == 'video') {
       return video?.duration.inSeconds ?? 0;
     } else {
-      return 0;
+      return 1;
     }
   }
 
