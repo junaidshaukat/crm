@@ -6,11 +6,6 @@ class HomeCompaignsScreen extends StatelessWidget {
   HomeCompaignsScreen({super.key});
 
   void onTapFilter() {
-    final List<String> genderItems = [
-      'Male',
-      'Female',
-    ];
-
     PageController pageController =
         PageController(initialPage: controller.initialPage.value);
 
@@ -227,60 +222,6 @@ class HomeCompaignsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        DropdownButtonFormField2<String>(
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 16),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(1),
-                            ),
-                            // Add more decoration..
-                          ),
-                          hint: const Text(
-                            'Select Your Gender',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          items: genderItems
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Please select gender.';
-                            }
-                            return null;
-                          },
-                          onChanged: (value) {
-                            //Do something when selected item is changed.
-                          },
-                          onSaved: (value) {},
-                          buttonStyleData: const ButtonStyleData(
-                            padding: EdgeInsets.only(right: 8),
-                          ),
-                          iconStyleData: const IconStyleData(
-                            icon: Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.black45,
-                            ),
-                            iconSize: 24,
-                          ),
-                          dropdownStyleData: DropdownStyleData(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1),
-                            ),
-                          ),
-                          menuItemStyleData: const MenuItemStyleData(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                          ),
-                        ),
                         Text(
                           "year".tr,
                           style: TextStyle(

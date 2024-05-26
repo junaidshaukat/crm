@@ -144,7 +144,128 @@ class PageSizeDropDown extends StatelessWidget {
   }
 }
 
-class SimpleDropDown extends StatefulWidget {
+// class SimpleDropDown extends StatefulWidget {
+//   const SimpleDropDown({
+//     super.key,
+//     this.icon,
+//     this.items,
+//     this.height,
+//     this.hintText,
+//     this.overflow,
+//     this.onSelected,
+//     this.borderRadius,
+//     this.enabled = true,
+//     this.circularRadius = 4,
+//     this.width = double.maxFinite,
+//     this.padding = EdgeInsets.zero,
+//   });
+
+//   final bool enabled;
+//   final Widget? icon;
+//   final double width;
+//   final int? height;
+//   final String? hintText;
+//   final EdgeInsets? padding;
+//   final List<DropDown>? items;
+//   final void Function(DropDown?)? onSelected;
+
+//   final BorderRadius? borderRadius;
+//   final int circularRadius;
+//   final TextOverflow? overflow;
+
+//   @override
+//   SimpleDropDownState createState() => SimpleDropDownState();
+// }
+
+// class SimpleDropDownState extends State<SimpleDropDown> {
+//   DropDown? selectedItem;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: widget.width,
+//       margin: EdgeInsets.zero,
+//       child: DropdownMenu<DropDown>(
+//         enabled: widget.enabled,
+//         hintText: widget.hintText,
+//         enableSearch: false,
+//         requestFocusOnTap: false,
+//         width: widget.width + 2,
+//         expandedInsets: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+//         onSelected: (item) {
+//           setState(() {
+//             selectedItem = item;
+//           });
+//           if (widget.onSelected != null) {
+//             widget.onSelected!(item);
+//           }
+//         },
+//         trailingIcon: widget.icon,
+//         selectedTrailingIcon: widget.icon,
+//         textStyle: TextStyle(
+//           color: appTheme.gray80001,
+//           fontFamily: 'Poppins',
+//           fontWeight: FontWeight.w300,
+//         ),
+//         dropdownMenuEntries: widget.items!.map((DropDown item) {
+//           return DropdownMenuEntry(
+//             value: item,
+//             label: item.title,
+//           );
+//         }).toList(),
+//         inputDecorationTheme: InputDecorationTheme(
+//           helperMaxLines: 4,
+//           border: InputBorder.none,
+//           floatingLabelBehavior: FloatingLabelBehavior.never,
+//           helperStyle: TextStyle(
+//             color: appTheme.gray80001,
+//             fontFamily: 'Poppins',
+//             fontWeight: FontWeight.w500,
+//           ),
+//           focusedBorder: OutlineInputBorder(
+//             borderSide: BorderSide(
+//               color: appTheme.gray400,
+//               width: 1.0,
+//             ),
+//             borderRadius: widget.borderRadius ??
+//                 BorderRadius.circular(widget.circularRadius.adaptSize),
+//           ),
+//           disabledBorder: OutlineInputBorder(
+//             borderSide: BorderSide(
+//               color: appTheme.gray400,
+//               width: 1.0,
+//             ),
+//             borderRadius: widget.borderRadius ??
+//                 BorderRadius.circular(widget.circularRadius.adaptSize),
+//           ),
+//           enabledBorder: OutlineInputBorder(
+//             borderSide: BorderSide(
+//               color: appTheme.gray400,
+//               width: 1.0,
+//             ),
+//             borderRadius: widget.borderRadius ??
+//                 BorderRadius.circular(widget.circularRadius.adaptSize),
+//           ),
+//         ),
+//         menuStyle: MenuStyle(
+//           visualDensity: VisualDensity.adaptivePlatformDensity,
+//           padding: const WidgetStatePropertyAll(
+//             EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
+//           ),
+//           elevation: const WidgetStatePropertyAll(5),
+//           alignment: Alignment.bottomLeft,
+//           maximumSize: widget.height != null
+//               ? WidgetStatePropertyAll(
+//                   Size.fromHeight(widget.height!.toDouble()),
+//                 )
+//               : null,
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class SimpleDropDown extends StatelessWidget {
   const SimpleDropDown({
     super.key,
     this.icon,
@@ -158,6 +279,8 @@ class SimpleDropDown extends StatefulWidget {
     this.circularRadius = 4,
     this.width = double.maxFinite,
     this.padding = EdgeInsets.zero,
+    this.validator,
+    this.onSaved,
   });
 
   final bool enabled;
@@ -168,98 +291,93 @@ class SimpleDropDown extends StatefulWidget {
   final EdgeInsets? padding;
   final List<DropDown>? items;
   final void Function(DropDown?)? onSelected;
+  final void Function(DropDown?)? onSaved;
 
   final BorderRadius? borderRadius;
   final int circularRadius;
   final TextOverflow? overflow;
-
-  @override
-  SimpleDropDownState createState() => SimpleDropDownState();
-}
-
-class SimpleDropDownState extends State<SimpleDropDown> {
-  DropDown? selectedItem;
+  final String? Function(DropDown?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width,
-      margin: EdgeInsets.zero,
-      child: DropdownMenu<DropDown>(
-        enabled: widget.enabled,
-        hintText: widget.hintText,
-        enableSearch: false,
-        requestFocusOnTap: false,
-        width: widget.width + 2,
-        expandedInsets: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        onSelected: (item) {
-          setState(() {
-            selectedItem = item;
-          });
-          if (widget.onSelected != null) {
-            widget.onSelected!(item);
-          }
-        },
-        trailingIcon: widget.icon,
-        selectedTrailingIcon: widget.icon,
-        textStyle: TextStyle(
+    console.log(items);
+    return DropdownButtonFormField2<DropDown>(
+      isExpanded: true,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: appTheme.gray400,
+            width: 1.0,
+          ),
+          borderRadius:
+              borderRadius ?? BorderRadius.circular(circularRadius.adaptSize),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: appTheme.gray400,
+            width: 1.0,
+          ),
+          borderRadius: borderRadius ??
+              BorderRadius.circular(
+                circularRadius.adaptSize,
+              ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: appTheme.gray400,
+            width: 1.0,
+          ),
+          borderRadius: borderRadius ??
+              BorderRadius.circular(
+                circularRadius.adaptSize,
+              ),
+        ),
+      ),
+      hint: Text(
+        hintText ?? '',
+        style: TextStyle(
           color: appTheme.gray80001,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w300,
         ),
-        dropdownMenuEntries: widget.items!.map((DropDown item) {
-          return DropdownMenuEntry(
-            value: item,
-            label: item.title,
-          );
-        }).toList(),
-        inputDecorationTheme: InputDecorationTheme(
-          helperMaxLines: 4,
-          border: InputBorder.none,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-          helperStyle: TextStyle(
-            color: appTheme.gray80001,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: appTheme.gray400,
-              width: 1.0,
-            ),
-            borderRadius: widget.borderRadius ??
-                BorderRadius.circular(widget.circularRadius.adaptSize),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: appTheme.gray400,
-              width: 1.0,
-            ),
-            borderRadius: widget.borderRadius ??
-                BorderRadius.circular(widget.circularRadius.adaptSize),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: appTheme.gray400,
-              width: 1.0,
-            ),
-            borderRadius: widget.borderRadius ??
-                BorderRadius.circular(widget.circularRadius.adaptSize),
-          ),
+      ),
+      items: items
+          ?.map((item) => DropdownMenuItem<DropDown>(
+                value: item,
+                child: Text(
+                  item.title,
+                  style: TextStyle(
+                    color: appTheme.gray80001,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ))
+          .toList(),
+      validator: validator,
+      onChanged: onSelected,
+      onSaved: onSaved,
+      buttonStyleData: const ButtonStyleData(
+        padding: EdgeInsets.only(right: 8),
+      ),
+      iconStyleData: const IconStyleData(
+        icon: Icon(
+          Icons.arrow_drop_down,
+          color: Colors.black45,
         ),
-        menuStyle: MenuStyle(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
-          ),
-          elevation: const WidgetStatePropertyAll(5),
-          alignment: Alignment.bottomLeft,
-          maximumSize: widget.height != null
-              ? WidgetStatePropertyAll(
-                  Size.fromHeight(widget.height!.toDouble()),
-                )
-              : null,
+        iconSize: 24,
+      ),
+      dropdownStyleData: DropdownStyleData(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(1),
         ),
+      ),
+      menuItemStyleData: const MenuItemStyleData(
+        padding: EdgeInsets.symmetric(horizontal: 16),
       ),
     );
   }

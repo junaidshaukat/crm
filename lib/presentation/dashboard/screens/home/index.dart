@@ -25,11 +25,14 @@ class HomeScreen extends StatelessWidget {
           List<Organizations> organizations = controller.organizations.value;
           if (props.useState.value == UseState.none ||
               props.useState.value == UseState.loading) {
-            return SimpleDropDown(
-              hintText: 'processing'.tr,
-              items: const [],
-              onSelected: (option) {},
-              padding: EdgeInsets.symmetric(horizontal: 10.h),
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.h),
+              child: SimpleDropDown(
+                hintText: 'processing'.tr,
+                items: const [],
+                onSelected: (option) {},
+                padding: EdgeInsets.symmetric(horizontal: 10.h),
+              ),
             );
           } else {
             if (props.error.value.message != null) {
@@ -238,17 +241,14 @@ class HomeScreen extends StatelessWidget {
                                         contentPadding: EdgeInsets.zero,
                                         insetPadding:
                                             const EdgeInsets.only(left: 0),
-                                        content: Obx(
-                                          () => FilterByYearsDialog(
-                                            year: controller.year.value,
-                                            yearList: DateTime.now().yearList(),
-                                            onChanged: (option) {
-                                              controller.year.value =
-                                                  option?.value;
-                                            },
-                                            onPressed:
-                                                controller.setDonationYear,
-                                          ),
+                                        content: FilterByYearsDialog(
+                                          year: controller.year.value,
+                                          yearList: DateTime.now().yearList(),
+                                          onChanged: (option) {
+                                            controller.year.value =
+                                                option?.value;
+                                          },
+                                          onPressed: controller.setDonationYear,
                                         ),
                                       ),
                                     );
@@ -359,29 +359,26 @@ class HomeScreen extends StatelessWidget {
                                         contentPadding: EdgeInsets.zero,
                                         insetPadding:
                                             const EdgeInsets.only(left: 0),
-                                        content: Obx(
-                                          () => FilterByRangeDialog(
-                                            year: controller.year.value,
-                                            month: controller
-                                                .month.value.monthName,
-                                            yearList: DateTime.now().yearList(),
-                                            monthList:
-                                                DateTime.now().monthList(),
-                                            onChangeYear: (option) {
-                                              if (option.value != null) {
-                                                controller.year(option.value);
-                                              }
-                                            },
-                                            onChangeMonth: (option) {
-                                              if (option.value != null) {
-                                                controller.month(option.value
-                                                    .toString()
-                                                    .monthNumber);
-                                              }
-                                            },
-                                            onPressed:
-                                                controller.setDonationMonth,
-                                          ),
+                                        content: FilterByRangeDialog(
+                                          year: controller.year.value,
+                                          month:
+                                              controller.month.value.monthName,
+                                          yearList: DateTime.now().yearList(),
+                                          monthList: DateTime.now().monthList(),
+                                          onChangeYear: (option) {
+                                            if (option.value != null) {
+                                              controller.year(option.value);
+                                            }
+                                          },
+                                          onChangeMonth: (option) {
+                                            if (option.value != null) {
+                                              controller.month(option.value
+                                                  .toString()
+                                                  .monthNumber);
+                                            }
+                                          },
+                                          onPressed:
+                                              controller.setDonationMonth,
                                         ),
                                       ),
                                     );
