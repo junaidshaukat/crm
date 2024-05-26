@@ -169,41 +169,6 @@ class CompaignScreen extends StatelessWidget {
                   onSelected: controller.selectFields,
                 ),
               ),
-
-              // SizedBox(
-              //   height: 60.v,
-              //   child: Obx(() {
-              //     return ListView.separated(
-              //       itemCount: controller.options.value.length,
-              //       scrollDirection: Axis.horizontal,
-              //       itemBuilder: (BuildContext context, int index) {
-              //         String? label = controller.options.value[index];
-              //         return InputChip(
-              //           label: Text(
-              //             label ?? '',
-              //             style: TextStyle(
-              //               color: appTheme.gray80001,
-              //               fontFamily: 'Poppins',
-              //               fontWeight: FontWeight.w500,
-              //             ),
-              //           ),
-              //           onDeleted: () {
-              //             // controller.removeField(field);
-              //           },
-              //           shape: RoundedRectangleBorder(
-              //             borderRadius: BorderRadius.circular(12),
-              //             side: BorderSide(color: appTheme.gray100),
-              //           ),
-              //           backgroundColor: appTheme.gray100.withOpacity(0.2),
-              //         );
-              //       },
-              //       separatorBuilder: (BuildContext context, int index) {
-              //         return SizedBox(width: 4.h);
-              //       },
-              //     );
-              //   }),
-              // ),
-
               Obx(
                 () => Column(
                   children: controller.fields.value.map((field) {
@@ -233,21 +198,19 @@ class CompaignScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  width: 352.h,
-                  hintText: controller.pageSize.value.toString(),
-                  items: pageSizeList.map((e) {
-                    return DropDown(
-                      id: e,
-                      title: e.toString().tr,
-                      value: e,
-                    );
-                  }).toList(),
-                  onSelected: (option) {
-                    controller.pageSize.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                width: 352.h,
+                hintText: controller.pageSize.value.toString(),
+                items: pageSizeList.map((e) {
+                  return DropDown(
+                    id: e,
+                    title: e.toString().tr,
+                    value: e,
+                  );
+                }).toList(),
+                onSelected: (option) {
+                  controller.pageSize.value = option?.value;
+                },
               ),
               SizedBox(height: 8.v),
               Text(
@@ -260,21 +223,19 @@ class CompaignScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  width: 352.h,
-                  hintText: controller.by.value?.label ?? "sort_by".tr,
-                  items: controller.fields.value.map((field) {
-                    return DropDown(
-                      id: field.value,
-                      title: field.label.toString(),
-                      value: field,
-                    );
-                  }).toList(),
-                  onSelected: (option) {
-                    controller.by.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                width: 352.h,
+                hintText: controller.by.value?.label ?? "sort_by".tr,
+                items: controller.fields.value.map((field) {
+                  return DropDown(
+                    id: field.value,
+                    title: field.label.toString(),
+                    value: field,
+                  );
+                }).toList(),
+                onSelected: (option) {
+                  controller.by.value = option?.value;
+                },
               ),
               SizedBox(height: 8.v),
               Text(
@@ -287,20 +248,17 @@ class CompaignScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  width: 352.h,
-                  hintText: controller.order.value.tr,
-                  items: [
-                    DropDown(
-                        id: '1', title: 'ascending'.tr, value: 'Ascending'),
-                    DropDown(
-                        id: '2', title: 'descending'.tr, value: 'Descending'),
-                  ],
-                  onSelected: (option) {
-                    controller.order.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                width: 352.h,
+                hintText: controller.order.value.tr,
+                items: [
+                  DropDown(id: '1', title: 'ascending'.tr, value: 'Ascending'),
+                  DropDown(
+                      id: '2', title: 'descending'.tr, value: 'Descending'),
+                ],
+                onSelected: (option) {
+                  controller.order.value = option?.value;
+                },
               ),
               SizedBox(height: 16.v),
               Padding(
