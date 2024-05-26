@@ -247,11 +247,11 @@ class SimpleDropDownState extends State<SimpleDropDown> {
           ),
         ),
         menuStyle: MenuStyle(
-          // visualDensity: VisualDensity.adaptivePlatformDensity,
-          // padding: const WidgetStatePropertyAll(
-          //   EdgeInsets.zero,
-          // ),
-          elevation: const WidgetStatePropertyAll(3),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.zero,
+          ),
+          elevation: const WidgetStatePropertyAll(5),
           alignment: Alignment.bottomLeft,
           maximumSize: widget.height != null
               ? WidgetStatePropertyAll(
