@@ -127,7 +127,7 @@ class UpdateMediaScreen extends StatelessWidget {
   }
 
   Future<void> picker({
-    bool imagePicker = false,
+    bool imagePicker = true,
   }) async {
     if (imagePicker) {
       Pickers.media().then((result) async {
