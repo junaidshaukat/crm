@@ -111,7 +111,12 @@ class LineGraph extends StatelessWidget {
     if (max == null || min == null) {
       return 1.0;
     } else {
-      return (max / 4).roundToDouble();
+      double interval = (max / 4).roundToDouble();
+      if (interval <= 0) {
+        return 1;
+      } else {
+        return interval;
+      }
     }
   }
 
