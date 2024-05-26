@@ -43,7 +43,6 @@ class HomeScreen extends StatelessWidget {
                 child: SimpleDropDown(
                   width: (375 - 32).h,
                   onSelected: controller.setOrganization,
-                  // padding: EdgeInsets.symmetric(horizontal: 10.h),
                   hintText: controller.getOrganization.name?.organizationTitle(
                           controller.getOrganization.location) ??
                       'select_an_organization'.tr,

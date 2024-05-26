@@ -232,9 +232,9 @@ class HomeCompaignsScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 2.v),
-                        Obx(
-                          () => SimpleDropDown(
-                            width: 334.h,
+                        Obx(() {
+                          return SimpleDropDown(
+                            width: (375 - 40).h,
                             hintText: controller.year.value ?? "select_year".tr,
                             items: DateTime.now().yearList().map((year) {
                               return DropDown(
@@ -245,8 +245,8 @@ class HomeCompaignsScreen extends StatelessWidget {
                             onSelected: (option) {
                               controller.year(option?.value);
                             },
-                          ),
-                        ),
+                          );
+                        }),
                         SizedBox(height: 4.v),
                         ChannelTypeshWidget(
                           controller: controller,
