@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
-enum ConsoleMode { debug, live, both }
+enum ConsoleMode { debug, release, both }
 
 class Console {
   final ConsoleMode mode;
@@ -32,4 +32,4 @@ class Console {
   }
 }
 
-Console console = Console(ConsoleMode.debug);
+Console console = Console(ConsoleMode.release);
