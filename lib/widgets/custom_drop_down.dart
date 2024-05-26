@@ -372,9 +372,8 @@ class SimpleDropDown extends StatelessWidget {
         iconSize: 24,
       ),
       dropdownStyleData: DropdownStyleData(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1),
-        ),
+        maxHeight: height?.toDouble() ?? double.maxFinite,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(1)),
       ),
       menuItemStyleData: const MenuItemStyleData(
         padding: EdgeInsets.symmetric(horizontal: 16),

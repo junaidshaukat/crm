@@ -232,21 +232,17 @@ class HomeCompaignsScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 2.v),
-                        Obx(() {
-                          return SimpleDropDown(
-                            width: (375 - 40).h,
-                            hintText: controller.year.value ?? "select_year".tr,
-                            items: DateTime.now().yearList().map((year) {
-                              return DropDown(
-                                  id: year,
-                                  title: year.toString(),
-                                  value: year);
-                            }).toList(),
-                            onSelected: (option) {
-                              controller.year(option?.value);
-                            },
-                          );
-                        }),
+                        SimpleDropDown(
+                          width: (375 - 40).h,
+                          hintText: controller.year.value ?? "select_year".tr,
+                          items: DateTime.now().yearList().map((year) {
+                            return DropDown(
+                                id: year, title: year.toString(), value: year);
+                          }).toList(),
+                          onSelected: (option) {
+                            controller.year(option?.value);
+                          },
+                        ),
                         SizedBox(height: 4.v),
                         ChannelTypeshWidget(
                           controller: controller,
@@ -299,22 +295,20 @@ class HomeCompaignsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 2.v),
-                                  Obx(
-                                    () => SimpleDropDown(
-                                      width: 162.h,
-                                      hintText: controller.year.value ??
-                                          "select_year".tr,
-                                      items:
-                                          DateTime.now().yearList().map((year) {
-                                        return DropDown(
-                                            id: year,
-                                            title: year.toString(),
-                                            value: year);
-                                      }).toList(),
-                                      onSelected: (option) {
-                                        controller.year(option?.value);
-                                      },
-                                    ),
+                                  SimpleDropDown(
+                                    width: 162.h,
+                                    hintText: controller.year.value ??
+                                        "select_year".tr,
+                                    items:
+                                        DateTime.now().yearList().map((year) {
+                                      return DropDown(
+                                          id: year,
+                                          title: year.toString(),
+                                          value: year);
+                                    }).toList(),
+                                    onSelected: (option) {
+                                      controller.year(option?.value);
+                                    },
                                   ),
                                 ],
                               ),
@@ -336,24 +330,21 @@ class HomeCompaignsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 2.v),
-                                  Obx(
-                                    () => SimpleDropDown(
-                                      width: 162.h,
-                                      height: 300,
-                                      hintText: controller.month.value ??
-                                          "select_month".tr,
-                                      items: DateTime.now()
-                                          .monthList()
-                                          .map((month) {
-                                        return DropDown(
-                                            id: month,
-                                            title: month.toString(),
-                                            value: month);
-                                      }).toList(),
-                                      onSelected: (option) {
-                                        controller.month(option?.value);
-                                      },
-                                    ),
+                                  SimpleDropDown(
+                                    width: 162.h,
+                                    height: 300,
+                                    hintText: controller.month.value ??
+                                        "select_month".tr,
+                                    items:
+                                        DateTime.now().monthList().map((month) {
+                                      return DropDown(
+                                          id: month,
+                                          title: month.toString(),
+                                          value: month);
+                                    }).toList(),
+                                    onSelected: (option) {
+                                      controller.month(option?.value);
+                                    },
                                   ),
                                 ],
                               ),
