@@ -155,29 +155,27 @@ class AnalyticsScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              Obx(
-                                                () => SimpleDropDown(
-                                                  width: 228.h,
-                                                  hintText: controller
-                                                      .numberOfYears.value
-                                                      .toString()
-                                                      .padLeft(2, '0'),
-                                                  items: [1, 2, 3, 4, 5]
-                                                      .map(
-                                                        (e) => DropDown(
-                                                          id: e,
-                                                          title: e
-                                                              .toString()
-                                                              .padLeft(2, '0'),
-                                                          value: e,
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                  onSelected: (option) {
-                                                    controller.numberOfYears(
-                                                        option?.value);
-                                                  },
-                                                ),
+                                              SimpleDropDown(
+                                                width: 228.h,
+                                                hintText: controller
+                                                    .numberOfYears.value
+                                                    .toString()
+                                                    .padLeft(2, '0'),
+                                                items: [1, 2, 3, 4, 5]
+                                                    .map(
+                                                      (e) => DropDown(
+                                                        id: e,
+                                                        title: e
+                                                            .toString()
+                                                            .padLeft(2, '0'),
+                                                        value: e,
+                                                      ),
+                                                    )
+                                                    .toList(),
+                                                onSelected: (option) {
+                                                  controller.numberOfYears(
+                                                      option?.value);
+                                                },
                                               ),
                                               SizedBox(height: 7.v),
                                               CustomElevatedButton(
@@ -483,26 +481,24 @@ class AnalyticsScreen extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                      Obx(
-                                                        () => SimpleDropDown(
-                                                          width: 228.h,
-                                                          hintText: controller
-                                                              .year.value,
-                                                          items: DateTime.now()
-                                                              .yearList()
-                                                              .map(
-                                                                (e) => DropDown(
-                                                                  id: e,
-                                                                  title: e,
-                                                                  value: e,
-                                                                ),
-                                                              )
-                                                              .toList(),
-                                                          onSelected: (option) {
-                                                            controller.year(
-                                                                option?.value);
-                                                          },
-                                                        ),
+                                                      SimpleDropDown(
+                                                        width: 228.h,
+                                                        hintText: controller
+                                                            .year.value,
+                                                        items: DateTime.now()
+                                                            .yearList()
+                                                            .map(
+                                                              (e) => DropDown(
+                                                                id: e,
+                                                                title: e,
+                                                                value: e,
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onSelected: (option) {
+                                                          controller.year(
+                                                              option?.value);
+                                                        },
                                                       ),
                                                       SizedBox(height: 7.v),
                                                       CustomElevatedButton(
@@ -702,41 +698,38 @@ class AnalyticsScreen extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                      Obx(
-                                                        () => SimpleDropDown(
-                                                          width: 228.h,
-                                                          height: 300,
-                                                          hintText: controller
-                                                                  .month
-                                                                  .value
-                                                                  ?.monthName ??
-                                                              'select_month'.tr,
-                                                          items: DateTime.now()
-                                                              .monthList(
-                                                                  selectMonth:
-                                                                      true)
-                                                              .map(
-                                                                (e) => DropDown(
-                                                                  id: e
-                                                                      .monthNumber,
-                                                                  title: e,
-                                                                  value: e
-                                                                      .monthNumber,
-                                                                ),
-                                                              )
-                                                              .toList(),
-                                                          onSelected: (option) {
-                                                            if (option?.value ==
-                                                                '') {
-                                                              controller.month
-                                                                  .value = null;
-                                                            } else {
-                                                              controller.month(
-                                                                  option
-                                                                      ?.value);
-                                                            }
-                                                          },
-                                                        ),
+                                                      SimpleDropDown(
+                                                        width: 228.h,
+                                                        height: 300,
+                                                        hintText: controller
+                                                                .month
+                                                                .value
+                                                                ?.monthName ??
+                                                            'select_month'.tr,
+                                                        items: DateTime.now()
+                                                            .monthList(
+                                                                selectMonth:
+                                                                    true)
+                                                            .map(
+                                                              (e) => DropDown(
+                                                                id: e
+                                                                    .monthNumber,
+                                                                title: e,
+                                                                value: e
+                                                                    .monthNumber,
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onSelected: (option) {
+                                                          if (option?.value ==
+                                                              '') {
+                                                            controller.month
+                                                                .value = null;
+                                                          } else {
+                                                            controller.month(
+                                                                option?.value);
+                                                          }
+                                                        },
                                                       ),
                                                       SizedBox(height: 7.v),
                                                       Padding(
@@ -756,26 +749,24 @@ class AnalyticsScreen extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                      Obx(
-                                                        () => SimpleDropDown(
-                                                          width: 228.h,
-                                                          hintText: controller
-                                                              .year.value,
-                                                          items: DateTime.now()
-                                                              .yearList()
-                                                              .map(
-                                                                (e) => DropDown(
-                                                                  id: e,
-                                                                  title: e,
-                                                                  value: e,
-                                                                ),
-                                                              )
-                                                              .toList(),
-                                                          onSelected: (option) {
-                                                            controller.year(
-                                                                option?.value);
-                                                          },
-                                                        ),
+                                                      SimpleDropDown(
+                                                        width: 228.h,
+                                                        hintText: controller
+                                                            .year.value,
+                                                        items: DateTime.now()
+                                                            .yearList()
+                                                            .map(
+                                                              (e) => DropDown(
+                                                                id: e,
+                                                                title: e,
+                                                                value: e,
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onSelected: (option) {
+                                                          controller.year(
+                                                              option?.value);
+                                                        },
                                                       ),
                                                       SizedBox(height: 7.v),
                                                       CustomElevatedButton(
@@ -974,26 +965,24 @@ class AnalyticsScreen extends StatelessWidget {
                                                           ),
                                                         ),
                                                       ),
-                                                      Obx(
-                                                        () => SimpleDropDown(
-                                                          width: 228.h,
-                                                          hintText: controller
-                                                              .year.value,
-                                                          items: DateTime.now()
-                                                              .yearList()
-                                                              .map(
-                                                                (e) => DropDown(
-                                                                  id: e,
-                                                                  title: e,
-                                                                  value: e,
-                                                                ),
-                                                              )
-                                                              .toList(),
-                                                          onSelected: (option) {
-                                                            controller.year(
-                                                                option?.value);
-                                                          },
-                                                        ),
+                                                      SimpleDropDown(
+                                                        width: 228.h,
+                                                        hintText: controller
+                                                            .year.value,
+                                                        items: DateTime.now()
+                                                            .yearList()
+                                                            .map(
+                                                              (e) => DropDown(
+                                                                id: e,
+                                                                title: e,
+                                                                value: e,
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onSelected: (option) {
+                                                          controller.year(
+                                                              option?.value);
+                                                        },
                                                       ),
                                                       SizedBox(height: 7.v),
                                                       CustomElevatedButton(
