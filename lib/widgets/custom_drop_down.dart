@@ -249,7 +249,7 @@ class SimpleDropDownState extends State<SimpleDropDown> {
         // padding: const WidgetStatePropertyAll(
         //   EdgeInsets.zero,
         // ),
-        // elevation: const WidgetStatePropertyAll(3),
+        elevation: const WidgetStatePropertyAll(3),
         alignment: Alignment.bottomLeft,
         maximumSize: widget.height != null
             ? WidgetStatePropertyAll(
