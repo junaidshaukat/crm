@@ -184,13 +184,13 @@ class SimpleDropDownState extends State<SimpleDropDown> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
+      color: Colors.transparent,
       child: DropdownMenu<DropDown>(
         enabled: widget.enabled,
         hintText: widget.hintText,
         enableSearch: false,
         expandedInsets: widget.padding,
         requestFocusOnTap: false,
-        width: MediaQuery.of(context).size.width,
         onSelected: (item) {
           setState(() {
             selectedItem = item;
