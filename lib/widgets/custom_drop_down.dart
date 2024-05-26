@@ -184,13 +184,13 @@ class SimpleDropDownState extends State<SimpleDropDown> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      color: Colors.transparent,
+      padding: EdgeInsets.zero,
       child: DropdownMenu<DropDown>(
         enabled: widget.enabled,
         hintText: widget.hintText,
         enableSearch: false,
-        expandedInsets: widget.padding,
         requestFocusOnTap: false,
+        expandedInsets: EdgeInsets.only(left: 0, right: 0),
         onSelected: (item) {
           setState(() {
             selectedItem = item;
@@ -249,7 +249,7 @@ class SimpleDropDownState extends State<SimpleDropDown> {
         menuStyle: MenuStyle(
           visualDensity: VisualDensity.adaptivePlatformDensity,
           padding: const WidgetStatePropertyAll(
-            EdgeInsets.zero,
+            EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
           ),
           elevation: const WidgetStatePropertyAll(5),
           alignment: Alignment.bottomLeft,
