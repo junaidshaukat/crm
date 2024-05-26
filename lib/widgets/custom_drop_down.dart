@@ -184,7 +184,7 @@ class SimpleDropDownState extends State<SimpleDropDown> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      padding: EdgeInsets.zero,
+      margin: EdgeInsets.zero,
       child: DropdownMenu<DropDown>(
         enabled: widget.enabled,
         hintText: widget.hintText,
