@@ -38,20 +38,23 @@ class HomeScreen extends StatelessWidget {
                 onRefresh: () async {},
               );
             } else {
-              return SimpleDropDown(
-                onSelected: controller.setOrganization,
-                padding: EdgeInsets.symmetric(horizontal: 10.h),
-                hintText: controller.getOrganization.name?.organizationTitle(
-                        controller.getOrganization.location) ??
-                    'select_an_organization'.tr,
-                items: organizations.map((organization) {
-                  return DropDown(
-                    id: organization.tagNumber,
-                    title: organization.name
-                        ?.organizationTitle(organization.location),
-                    value: organization,
-                  );
-                }).toList(),
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.h),
+                child: SimpleDropDown(
+                  onSelected: controller.setOrganization,
+                  // padding: EdgeInsets.symmetric(horizontal: 10.h),
+                  hintText: controller.getOrganization.name?.organizationTitle(
+                          controller.getOrganization.location) ??
+                      'select_an_organization'.tr,
+                  items: organizations.map((organization) {
+                    return DropDown(
+                      id: organization.tagNumber,
+                      title: organization.name
+                          ?.organizationTitle(organization.location),
+                      value: organization,
+                    );
+                  }).toList(),
+                ),
               );
             }
           }
