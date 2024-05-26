@@ -120,6 +120,48 @@ class CreateMediaScreen extends StatelessWidget {
     );
   }
 
+  void onTap() async {
+    await mediaPicker();
+  }
+
+  Future<void> mediaPicker() async {
+    Pickers.media().then((result) {
+      console.log(result);
+    });
+  }
+
+  Future<void> filePicker() async {
+    Pickers.file().then((result) async {
+      MediaFile media = MediaFile();
+      if (result != null) {
+        PlatformFile file = result.files.first;
+        media.name = file.name;
+        media.size = file.size.bytesToMB;
+        media.extn = file.extension ?? '';
+        media.path = file.path ?? '';
+
+        if (media.content == ContentType.image) {}
+
+        if (media.content == ContentType.video) {
+          VideoPlayerValue? videoPlayerValue =
+              await VideoDetails.getInfo(File(file.xFile.path));
+
+          media.duration = videoPlayerValue?.duration.inSeconds ?? 0;
+          media.resolution = videoPlayerValue?.size ?? Size.zero;
+          controller.durationController.text = media.duration.toString();
+        }
+
+        controller.mediaFileController.text = media.name;
+        controller.mediaFile.value = media;
+        console.log(media.toJson());
+      } else {
+        MediaFile media = MediaFile();
+        controller.mediaFile.value = media;
+        controller.mediaFileController.clear();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,41 +212,7 @@ class CreateMediaScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 5.v),
                       InkWell(
-                        onTap: () {
-                          Pickers.file().then((result) async {
-                            MediaFile media = MediaFile();
-                            if (result != null) {
-                              PlatformFile file = result.files.first;
-                              media.name = file.name;
-                              media.size = file.size.bytesToMB;
-                              media.extn = file.extension ?? '';
-                              media.path = file.path ?? '';
-
-                              if (media.content == ContentType.image) {}
-
-                              if (media.content == ContentType.video) {
-                                VideoPlayerValue? videoPlayerValue =
-                                    await VideoDetails.getInfo(
-                                        File(file.xFile.path));
-
-                                media.duration =
-                                    videoPlayerValue?.duration.inSeconds ?? 0;
-                                media.resolution =
-                                    videoPlayerValue?.size ?? Size.zero;
-                                controller.durationController.text =
-                                    media.duration.toString();
-                              }
-
-                              controller.mediaFileController.text = media.name;
-                              controller.mediaFile.value = media;
-                              console.log(media.toJson());
-                            } else {
-                              MediaFile media = MediaFile();
-                              controller.mediaFile.value = media;
-                              controller.mediaFileController.clear();
-                            }
-                          });
-                        },
+                        onTap: onTap,
                         child: Container(
                           width: double.maxFinite,
                           padding: EdgeInsets.symmetric(
