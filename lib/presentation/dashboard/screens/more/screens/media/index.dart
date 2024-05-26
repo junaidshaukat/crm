@@ -504,38 +504,40 @@ class MediaCentreScreen extends StatelessWidget {
               ),
             ),
           if (control == 'textbox' && value == "media_type")
-            SimpleDropDown(
-              icon: SizedBox(
-                width: 80.h,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.arrow_drop_down),
-                    IconButton(
-                      onPressed: onRemove,
-                      icon: Icon(
-                        Icons.close,
-                        color: appTheme.gray400,
+            Obx(
+              () => SimpleDropDown2(
+                icon: SizedBox(
+                  width: 80.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.arrow_drop_down),
+                      IconButton(
+                        onPressed: onRemove,
+                        icon: Icon(
+                          Icons.close,
+                          color: appTheme.gray400,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                hintText: dropdown.value ?? hintText,
+                items: ["image", "video"]
+                    .map(
+                      (e) => DropDown(
+                        id: e,
+                        title: e.toString().padLeft(2, '0'),
+                        value: e,
                       ),
                     )
-                  ],
-                ),
+                    .toList(),
+                onSelected: (option) {
+                  onChanged!(option?.value);
+                  dropdown.value = option?.value;
+                },
               ),
-              hintText: dropdown.value ?? hintText,
-              items: ["image", "video"]
-                  .map(
-                    (e) => DropDown(
-                      id: e,
-                      title: e.toString().padLeft(2, '0'),
-                      value: e,
-                    ),
-                  )
-                  .toList(),
-              onSelected: (option) {
-                onChanged!(option?.value);
-                dropdown.value = option?.value;
-              },
             ),
         ],
       ),
