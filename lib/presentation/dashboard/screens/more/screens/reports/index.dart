@@ -46,17 +46,15 @@ class ReportsScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 3.v),
-                    Obx(
-                      () => SimpleDropDown(
-                        width: 342.h,
-                        hintText: controller.reportDataSelect.value?.name ??
-                            'select'.tr,
-                        items: controller.reportData.map((e) {
-                          return DropDown(
-                              id: e.tagNumber, title: e.name!, value: e);
-                        }).toList(),
-                        onSelected: controller.onChangedForm,
-                      ),
+                    SimpleDropDown(
+                      width: 342.h,
+                      hintText: controller.reportDataSelect.value?.name ??
+                          'select'.tr,
+                      items: controller.reportData.map((e) {
+                        return DropDown(
+                            id: e.tagNumber, title: e.name!, value: e);
+                      }).toList(),
+                      onSelected: controller.onChangedForm,
                     ),
                     SizedBox(height: 3.v),
                     Obx(() {

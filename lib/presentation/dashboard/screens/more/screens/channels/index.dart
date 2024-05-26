@@ -297,20 +297,18 @@ class ChannelsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  hintText: controller.pageSize.value.toString(),
-                  items: pageSizeList.map((e) {
-                    return DropDown(
-                      id: e,
-                      title: e.toString().tr,
-                      value: e,
-                    );
-                  }).toList(),
-                  onSelected: (option) {
-                    controller.pageSize.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                hintText: controller.pageSize.value.toString(),
+                items: pageSizeList.map((e) {
+                  return DropDown(
+                    id: e,
+                    title: e.toString().tr,
+                    value: e,
+                  );
+                }).toList(),
+                onSelected: (option) {
+                  controller.pageSize.value = option?.value;
+                },
               ),
               SizedBox(height: 8.v),
               Text(
@@ -323,21 +321,19 @@ class ChannelsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  hintText: controller.by2.value?.label ?? "sort_by".tr,
-                  items: controller.fields.map((field) {
-                    return DropDown(
-                      id: field.value,
-                      title: field.label.toString(),
-                      value: field,
-                    );
-                  }).toList(),
-                  onSelected: (option) {
-                    controller.request.by = option?.value.value.toString();
-                    controller.by2.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                hintText: controller.by2.value?.label ?? "sort_by".tr,
+                items: controller.fields.map((field) {
+                  return DropDown(
+                    id: field.value,
+                    title: field.label.toString(),
+                    value: field,
+                  );
+                }).toList(),
+                onSelected: (option) {
+                  controller.request.by = option?.value.value.toString();
+                  controller.by2.value = option?.value;
+                },
               ),
               SizedBox(height: 8.v),
               Text(
@@ -350,26 +346,24 @@ class ChannelsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  hintText: controller.order.value.tr,
-                  items: [
-                    DropDown(
-                      id: '1',
-                      title: 'ascending'.tr,
-                      value: 'ascending',
-                    ),
-                    DropDown(
-                      id: '2',
-                      title: 'descending'.tr,
-                      value: 'descending',
-                    ),
-                  ],
-                  onSelected: (option) {
-                    controller.request.order = option?.value.toString().orderBy;
-                    controller.order.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                hintText: controller.order.value.tr,
+                items: [
+                  DropDown(
+                    id: '1',
+                    title: 'ascending'.tr,
+                    value: 'ascending',
+                  ),
+                  DropDown(
+                    id: '2',
+                    title: 'descending'.tr,
+                    value: 'descending',
+                  ),
+                ],
+                onSelected: (option) {
+                  controller.request.order = option?.value.toString().orderBy;
+                  controller.order.value = option?.value;
+                },
               ),
               SizedBox(height: 16.v),
               Padding(

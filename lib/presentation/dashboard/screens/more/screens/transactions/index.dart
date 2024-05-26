@@ -322,22 +322,20 @@ class TransactionsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  width: 353.h,
-                  height: 280,
-                  hintText: controller.pageSize.value.toString(),
-                  items: pageSizeList2.map((e) {
-                    return DropDown(
-                      id: e,
-                      title: e.toString().tr,
-                      value: e,
-                    );
-                  }).toList(),
-                  onSelected: (option) {
-                    controller.pageSize.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                width: 353.h,
+                height: 280,
+                hintText: controller.pageSize.value.toString(),
+                items: pageSizeList2.map((e) {
+                  return DropDown(
+                    id: e,
+                    title: e.toString().tr,
+                    value: e,
+                  );
+                }).toList(),
+                onSelected: (option) {
+                  controller.pageSize.value = option?.value;
+                },
               ),
               SizedBox(height: 8.v),
               Text(
@@ -350,22 +348,20 @@ class TransactionsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  width: 353.h,
-                  height: 280,
-                  hintText: controller.by.value?.label ?? "sort_by".tr,
-                  items: controller.fields.map((field) {
-                    return DropDown(
-                      id: field.value,
-                      title: field.label.toString(),
-                      value: field,
-                    );
-                  }).toList(),
-                  onSelected: (option) {
-                    controller.by2.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                width: 353.h,
+                height: 280,
+                hintText: controller.by.value?.label ?? "sort_by".tr,
+                items: controller.fields.map((field) {
+                  return DropDown(
+                    id: field.value,
+                    title: field.label.toString(),
+                    value: field,
+                  );
+                }).toList(),
+                onSelected: (option) {
+                  controller.by2.value = option?.value;
+                },
               ),
               SizedBox(height: 8.v),
               Text(
@@ -378,21 +374,18 @@ class TransactionsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown(
-                  width: 353.h,
-                  height: 280,
-                  hintText: controller.order.value.tr,
-                  items: [
-                    DropDown(
-                        id: '1', title: 'ascending'.tr, value: 'Ascending'),
-                    DropDown(
-                        id: '2', title: 'descending'.tr, value: 'Descending'),
-                  ],
-                  onSelected: (option) {
-                    controller.order.value = option?.value;
-                  },
-                ),
+              SimpleDropDown(
+                width: 353.h,
+                height: 280,
+                hintText: controller.order.value.tr,
+                items: [
+                  DropDown(id: '1', title: 'ascending'.tr, value: 'Ascending'),
+                  DropDown(
+                      id: '2', title: 'descending'.tr, value: 'Descending'),
+                ],
+                onSelected: (option) {
+                  controller.order.value = option?.value;
+                },
               ),
               SizedBox(height: 16.v),
               Padding(
