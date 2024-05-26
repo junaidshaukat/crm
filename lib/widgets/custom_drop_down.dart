@@ -147,22 +147,22 @@ class PageSizeDropDown extends StatelessWidget {
 class SimpleDropDown extends StatefulWidget {
   const SimpleDropDown({
     super.key,
-    this.width,
-    this.height,
-    this.items,
     this.icon,
-    this.enabled = true,
-    this.padding = EdgeInsets.zero,
+    this.items,
+    this.height,
     this.hintText,
-    this.onSelected,
-    this.circularRadius = 4,
-    this.borderRadius,
     this.overflow,
+    this.onSelected,
+    this.borderRadius,
+    this.enabled = true,
+    this.circularRadius = 4,
+    this.width = double.maxFinite,
+    this.padding = EdgeInsets.zero,
   });
 
   final bool enabled;
   final Widget? icon;
-  final double? width;
+  final double width;
   final int? height;
   final String? hintText;
   final EdgeInsets? padding;
@@ -188,7 +188,7 @@ class SimpleDropDownState extends State<SimpleDropDown> {
       enableSearch: false,
       expandedInsets: widget.padding,
       requestFocusOnTap: false,
-      width: widget.width ?? double.maxFinite,
+      width: MediaQuery.of(context).size.width,
       onSelected: (item) {
         setState(() {
           selectedItem = item;
@@ -245,11 +245,11 @@ class SimpleDropDownState extends State<SimpleDropDown> {
         ),
       ),
       menuStyle: MenuStyle(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        padding: const WidgetStatePropertyAll(
-          EdgeInsets.zero,
-        ),
-        elevation: const WidgetStatePropertyAll(3),
+        // visualDensity: VisualDensity.adaptivePlatformDensity,
+        // padding: const WidgetStatePropertyAll(
+        //   EdgeInsets.zero,
+        // ),
+        // elevation: const WidgetStatePropertyAll(3),
         alignment: Alignment.bottomLeft,
         maximumSize: widget.height != null
             ? WidgetStatePropertyAll(
