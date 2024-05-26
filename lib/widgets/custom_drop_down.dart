@@ -190,7 +190,8 @@ class SimpleDropDownState extends State<SimpleDropDown> {
         hintText: widget.hintText,
         enableSearch: false,
         requestFocusOnTap: false,
-        expandedInsets: EdgeInsets.only(left: 0, right: 0),
+        width: widget.width,
+        // expandedInsets: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
         onSelected: (item) {
           setState(() {
             selectedItem = item;
