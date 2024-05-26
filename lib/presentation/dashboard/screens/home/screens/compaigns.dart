@@ -6,19 +6,10 @@ class HomeCompaignsScreen extends StatelessWidget {
   HomeCompaignsScreen({super.key});
 
   void onTapFilter() {
-    DropListModel dropListModel = DropListModel([
-      OptionItem(id: "1", title: "Jatin Sharma", data: 'CSE Student'),
-      OptionItem(id: "2", title: "Puneet Chand", data: 'CSE Student'),
-      OptionItem(id: "3", title: "Vikas Bhardwaj", data: 'CSE Student'),
-      OptionItem(id: "4", title: "Rakesh Kumar", data: 'CSE Student'),
-      OptionItem(id: "5", title: "Alok Dubey", data: 'CSE Student'),
-      OptionItem(id: "6", title: "Kiran Yadav", data: 'CSE Student'),
-      OptionItem(id: "7", title: "Pradeep Kumar", data: 'CSE Student'),
-      OptionItem(id: "8", title: "Amit Kumar", data: 'CSE Student'),
-      OptionItem(id: "9", title: "Shweta Sharma", data: 'CSE Student'),
-      OptionItem(id: "10", title: "Ankit Bhist", data: 'CSE Student'),
-    ]);
-    OptionItem optionItemSelected = OptionItem(title: "Select User");
+    final List<String> genderItems = [
+      'Male',
+      'Female',
+    ];
 
     PageController pageController =
         PageController(initialPage: controller.initialPage.value);
@@ -236,20 +227,59 @@ class HomeCompaignsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SelectDropList(
-                          itemSelected: optionItemSelected,
-                          dropListModel: dropListModel,
-                          showIcon: false,
-                          showArrowIcon: true,
-                          showBorder: true,
-                          enable: true,
-                          paddingTop: 0,
-                          paddingDropItem: const EdgeInsets.only(
-                              left: 20, top: 10, bottom: 10, right: 20),
-                          suffixIcon: Icons.arrow_drop_down,
-                          containerPadding: const EdgeInsets.all(10),
-                          icon: const Icon(Icons.person, color: Colors.black),
-                          onOptionSelected: (optionItem) {},
+                        DropdownButtonFormField2<String>(
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1),
+                            ),
+                            // Add more decoration..
+                          ),
+                          hint: const Text(
+                            'Select Your Gender',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          items: genderItems
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select gender.';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            //Do something when selected item is changed.
+                          },
+                          onSaved: (value) {},
+                          buttonStyleData: const ButtonStyleData(
+                            padding: EdgeInsets.only(right: 8),
+                          ),
+                          iconStyleData: const IconStyleData(
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black45,
+                            ),
+                            iconSize: 24,
+                          ),
+                          dropdownStyleData: DropdownStyleData(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1),
+                            ),
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                          ),
                         ),
                         Text(
                           "year".tr,
