@@ -183,22 +183,31 @@ class SimpleDropDown extends StatelessWidget {
     return DropdownButtonFormField2<DropDown>(
       isExpanded: true,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+        contentPadding: EdgeInsets.symmetric(vertical: 12.v),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(1),
+          borderSide: BorderSide(
+            width: 1.0,
+            color: appTheme.gray400,
+          ),
+          borderRadius: borderRadius ??
+              BorderRadius.circular(
+                circularRadius.adaptSize,
+              ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: appTheme.gray400,
             width: 1.0,
+            color: appTheme.gray400,
           ),
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(circularRadius.adaptSize),
+          borderRadius: borderRadius ??
+              BorderRadius.circular(
+                circularRadius.adaptSize,
+              ),
         ),
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: appTheme.gray400,
             width: 1.0,
+            color: appTheme.gray400,
           ),
           borderRadius: borderRadius ??
               BorderRadius.circular(
@@ -207,8 +216,8 @@ class SimpleDropDown extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: appTheme.gray400,
             width: 1.0,
+            color: appTheme.gray400,
           ),
           borderRadius: borderRadius ??
               BorderRadius.circular(
@@ -243,19 +252,101 @@ class SimpleDropDown extends StatelessWidget {
       buttonStyleData: const ButtonStyleData(
         padding: EdgeInsets.only(right: 8),
       ),
-      iconStyleData: const IconStyleData(
+      iconStyleData: IconStyleData(
         icon: Icon(
           Icons.arrow_drop_down,
-          color: Colors.black45,
+          color: appTheme.gray500,
         ),
-        iconSize: 24,
       ),
       dropdownStyleData: DropdownStyleData(
         maxHeight: height?.toDouble() ?? double.maxFinite,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(1)),
       ),
-      menuItemStyleData: const MenuItemStyleData(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+    );
+  }
+}
+
+class SimpleDropDown2 extends StatelessWidget {
+  const SimpleDropDown2({
+    super.key,
+    this.icon,
+    this.items,
+    this.height,
+    this.hintText,
+    this.overflow,
+    this.onSelected,
+    this.borderRadius,
+    this.enabled = true,
+    this.circularRadius = 4,
+    this.width = double.maxFinite,
+    this.padding = EdgeInsets.zero,
+    this.onSaved,
+  });
+
+  final bool enabled;
+  final Widget? icon;
+  final double width;
+  final int? height;
+  final String? hintText;
+  final EdgeInsets? padding;
+  final List<DropDown>? items;
+  final void Function(DropDown?)? onSelected;
+  final void Function(DropDown?)? onSaved;
+
+  final BorderRadius? borderRadius;
+  final int circularRadius;
+  final TextOverflow? overflow;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonHideUnderline(
+      child: DropdownButton2<DropDown>(
+        isExpanded: true,
+        hint: Text(
+          hintText ?? '',
+          style: TextStyle(
+            color: appTheme.gray80001,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+        items: items
+            ?.map((item) => DropdownMenuItem(
+                  value: item,
+                  child: Text(
+                    item.title,
+                    style: TextStyle(
+                      color: appTheme.gray80001,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ))
+            .toList(),
+        onChanged: onSelected,
+        buttonStyleData: ButtonStyleData(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1.0,
+              color: appTheme.gray400,
+            ),
+            borderRadius: borderRadius ??
+                BorderRadius.circular(
+                  circularRadius.adaptSize,
+                ),
+          ),
+        ),
+        dropdownStyleData: DropdownStyleData(
+          maxHeight: height?.toDouble() ?? double.maxFinite,
+        ),
+        menuItemStyleData: const MenuItemStyleData(),
+        onMenuStateChange: (isOpen) {},
+        iconStyleData: IconStyleData(
+          icon: Icon(
+            Icons.arrow_drop_down,
+            color: appTheme.gray500,
+          ),
+        ),
       ),
     );
   }

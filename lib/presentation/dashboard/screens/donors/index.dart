@@ -143,7 +143,7 @@ class DonorsScreen extends StatelessWidget {
               ),
               SizedBox(height: 2.v),
               Obx(
-                () => SimpleDropDown(
+                () => SimpleDropDown2(
                   width: 352.h,
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')

@@ -154,7 +154,7 @@ class CompaignScreen extends StatelessWidget {
               ),
               SizedBox(height: 2.v),
               Obx(
-                () => SimpleDropDown(
+                () => SimpleDropDown2(
                   width: 353.h,
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')

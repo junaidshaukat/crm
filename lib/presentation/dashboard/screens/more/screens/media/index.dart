@@ -604,7 +604,7 @@ class MediaCentreScreen extends StatelessWidget {
               ),
               SizedBox(height: 2.v),
               Obx(
-                () => SimpleDropDown(
+                () => SimpleDropDown2(
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,

@@ -252,7 +252,7 @@ class TransactionsScreen extends StatelessWidget {
               ),
               SizedBox(height: 2.v),
               Obx(
-                () => SimpleDropDown(
+                () => SimpleDropDown2(
                   width: 353.h,
                   height: 260,
                   hintText: controller.getDropDownHint.isNotEmpty
