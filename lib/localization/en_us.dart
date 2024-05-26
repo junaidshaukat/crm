@@ -53,7 +53,7 @@ final Map<String, String> enUs = {
   "filter_by_year_and_month": "Filter By Year And Month",
   "transaction": "Transaction",
   "receipted": "Receipted",
-  "qrcode_saved": "QR code has been saved successfully in download directory.",
+  "qrcode_saved": "QR code has been saved successfully.",
 
   /// Compaign Screen
   "filter_compaign": "Filter Compaign",
@@ -150,8 +150,7 @@ final Map<String, String> enUs = {
   /// Reports Screen
   "select": "Select",
   "generate_report": "Generate Report",
-  "report_saved":
-      "Report file has been saved successfully in download directory",
+  "report_saved": "Report file has been saved successfully.",
 
   /// Transactions Screen
   "filter_transaction": "Filter Transaction",
@@ -182,7 +181,7 @@ final Map<String, String> enUs = {
       "I want to specify number of recurring payments",
   "minimum_recurrings_02": "Minimum Recurrings: 02",
   "transaction_export":
-      "Transactions records file has been saved successfully in download directory.",
+      "Transactions records file has been saved successfully.",
 
   /// Users Screen
   "users": "Users",
