@@ -20,6 +20,7 @@ class CreateCampaignScreen extends StatelessWidget {
         issueTaxReceipt: controller.issueTaxReceiptController.value,
         donationCampaign: controller.donationCampaignController.value,
         status: controller.statusController.value,
+        hidden: controller.hiddenController.value,
         iconTag: controller.icon.value.tagNumber.toString(),
         nodes: controller.nodes.value,
         taxReceiptRatio: controller.taxReceiptRatioController.text,
@@ -573,8 +574,6 @@ class CreateCampaignScreen extends StatelessWidget {
                       ),
                       Wrap(
                         spacing: 12.adaptSize,
-                        // runAlignment: WrapAlignment.spaceBetween,
-                        // alignment: WrapAlignment.spaceBetween,
                         crossAxisAlignment: WrapCrossAlignment.end,
                         children: [
                           SizedBox(
@@ -628,6 +627,18 @@ class CreateCampaignScreen extends StatelessWidget {
                                   controller
                                       .allowRecurringModificationController
                                       .value = value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: (fdw * 0.5).h,
+                            child: Obx(
+                              () => customSwitch(
+                                label: "hidden".tr,
+                                value: controller.hiddenController.value,
+                                onChange: (value) {
+                                  controller.hiddenController.value = value;
                                 },
                               ),
                             ),

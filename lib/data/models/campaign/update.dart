@@ -12,6 +12,7 @@ class CampaignUpdateReq {
   bool? issueTaxReceipt;
   bool? donationCampaign;
   bool? status;
+  bool? hidden;
   String? iconTag;
   List<NodeData>? nodes;
   String? taxReceiptRatio;
@@ -29,6 +30,7 @@ class CampaignUpdateReq {
     this.issueTaxReceipt,
     this.donationCampaign,
     this.status,
+    this.hidden,
     this.iconTag,
     this.nodes,
     this.taxReceiptRatio,
@@ -50,6 +52,7 @@ class CampaignUpdateReq {
       'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
       'donationCampaign': donationCampaign == true ? 1 : 0,
       'status': status == true ? 1 : 0,
+      'hidden': hidden == true ? 1 : 0,
       'iconTag': iconTag,
       'nodes': nodes?.map((node) {
         return {

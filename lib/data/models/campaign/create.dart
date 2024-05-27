@@ -13,6 +13,7 @@ class CampaignCreateReq {
   bool? issueTaxReceipt;
   bool? status;
   bool? donationCampaign;
+  bool? hidden;
   bool? allowRecurringModification;
   String? iconTag;
   List<NodeData>? nodes;
@@ -29,6 +30,7 @@ class CampaignCreateReq {
     this.issueTaxReceipt,
     this.donationCampaign,
     this.status,
+    this.hidden,
     this.iconTag,
     this.nodes,
     this.taxReceiptRatio,
@@ -49,6 +51,7 @@ class CampaignCreateReq {
       'fees': fees ?? 0,
       'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
       'status': status == true ? 1 : 0,
+      'hidden': hidden == true ? 1 : 0,
       'allowRecurringModification': allowRecurringModification == true ? 1 : 0,
       'iconTag': iconTag,
       'nodes': nodes?.map((node) {

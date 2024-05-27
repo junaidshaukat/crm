@@ -28,6 +28,7 @@ class UpdateCampaignScreen extends StatelessWidget {
         issueTaxReceipt: controller.issueTaxReceiptController.value,
         donationCampaign: controller.donationCampaignController.value,
         status: controller.statusController.value,
+        hidden: controller.hiddenController.value,
         iconTag: controller.icon.value.tagNumber.toString(),
         nodes: controller.nodes.value,
       );
@@ -645,6 +646,19 @@ class UpdateCampaignScreen extends StatelessWidget {
                                   controller
                                       .allowRecurringModificationController
                                       .value = value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 175.h,
+                            child: Obx(
+                              () => customSwitch(
+                                label: "hidden".tr,
+                                width: 175.h,
+                                value: controller.hiddenController.value,
+                                onChange: (value) {
+                                  controller.hiddenController.value = value;
                                 },
                               ),
                             ),

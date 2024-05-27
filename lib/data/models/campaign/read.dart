@@ -134,6 +134,7 @@ class CampaignData {
   num? taxReceiptRatio;
   num? fees;
   bool? status;
+  bool? hidden;
   bool? issueTaxReceipt;
   bool? donationCampaign;
   bool? allowRecurringModification;
@@ -150,6 +151,7 @@ class CampaignData {
     this.startDate,
     this.endDate,
     this.status,
+    this.hidden,
     this.targetAmount,
     this.minimumAmount,
     this.sortOrder,
@@ -173,6 +175,7 @@ class CampaignData {
       startDate: json['startDate'],
       endDate: json['endDate'],
       status: json['status'],
+      hidden: json['hidden'],
       targetAmount: json['targetAmount'],
       minimumAmount: json['minimumAmount'],
       sortOrder: json['sortOrder'],
@@ -201,6 +204,7 @@ class CampaignData {
       'startDate': startDate,
       'endDate': endDate,
       'status': status,
+      'hidden': hidden,
       'targetAmount': targetAmount,
       'minimumAmount': minimumAmount,
       'sortOrder': sortOrder,

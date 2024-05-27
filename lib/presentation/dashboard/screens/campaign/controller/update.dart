@@ -26,6 +26,7 @@ class UpdateCampaignController extends GetxController {
   Rx<bool> statusController = false.obs;
   Rx<bool> issueTaxReceiptController = false.obs;
   Rx<bool> donationCampaignController = false.obs;
+  Rx<bool> hiddenController = false.obs;
   Rx<bool> allowRecurringModificationController = false.obs;
 
   Rx<String?> startDate = Rx(null);
@@ -94,6 +95,7 @@ class UpdateCampaignController extends GetxController {
     icon(IconsData());
     statusController.value = false;
     issueTaxReceiptController.value = false;
+    hiddenController.value = false;
     allowRecurringModificationController.value = false;
     startDate = Rx(null);
     startTime = Rx(null);
@@ -170,6 +172,7 @@ class UpdateCampaignController extends GetxController {
     minimumAmountController.text = campaign.minimumAmount.toString();
     feesController.text = campaign.fees.toString();
     sortOrderController.text = campaign.sortOrder.toString();
+
     taxReceiptRatioController.text = campaign.taxReceiptRatio.toString();
     icon(IconsData(
       tagNumber: campaign.icon?.tagNumber,
@@ -194,6 +197,7 @@ class UpdateCampaignController extends GetxController {
     donationCampaignController.value = campaign.donationCampaign ?? false;
     allowRecurringModificationController.value =
         campaign.allowRecurringModification ?? false;
+    hiddenController.value = campaign.hidden ?? false;
     update();
   }
 }
