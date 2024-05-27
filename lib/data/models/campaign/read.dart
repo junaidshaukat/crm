@@ -128,13 +128,15 @@ class CampaignData {
   String? description;
   String? startDate;
   String? endDate;
-  bool? status;
   num? targetAmount;
   num? minimumAmount;
   num? sortOrder;
+  num? taxReceiptRatio;
   num? fees;
+  bool? status;
   bool? issueTaxReceipt;
   bool? donationCampaign;
+  bool? allowRecurringModification;
   num? raisedAmount;
   String? currencySymbol;
   String? qrCode;
@@ -151,9 +153,11 @@ class CampaignData {
     this.targetAmount,
     this.minimumAmount,
     this.sortOrder,
+    this.taxReceiptRatio,
     this.fees,
     this.issueTaxReceipt,
     this.donationCampaign,
+    this.allowRecurringModification,
     this.raisedAmount,
     this.currencySymbol,
     this.qrCode,
@@ -172,9 +176,11 @@ class CampaignData {
       targetAmount: json['targetAmount'],
       minimumAmount: json['minimumAmount'],
       sortOrder: json['sortOrder'],
+      taxReceiptRatio: json['taxReceiptRatio'],
       fees: json['fees'],
       issueTaxReceipt: json['issueTaxReceipt'],
       donationCampaign: json['donationCampaign'],
+      allowRecurringModification: json['allowRecurringModification'],
       raisedAmount: json['raisedAmount'],
       currencySymbol: json['currencySymbol'],
       qrCode: json['qrCode'],
@@ -198,8 +204,10 @@ class CampaignData {
       'targetAmount': targetAmount,
       'minimumAmount': minimumAmount,
       'sortOrder': sortOrder,
+      'taxReceiptRatio': taxReceiptRatio,
       'fees': fees,
       'issueTaxReceipt': issueTaxReceipt,
+      'allowRecurringModification': allowRecurringModification,
       'donationCampaign': donationCampaign,
       'raisedAmount': raisedAmount,
       'currencySymbol': currencySymbol,

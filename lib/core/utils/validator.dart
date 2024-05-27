@@ -324,6 +324,28 @@ class ValidatorCampaign {
       }
     }
   }
+
+  static String? taxReceiptRatio(String? input, {bool isRequired = true}) {
+    String pattern = r'^(100(\.0{1,2})?|\d{1,2}(\.\d{1,2})?|\.\d{1,2})$';
+    RegExp regExp = RegExp(pattern);
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"campaign".tr} ${"tax_receipt_ratio".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"campaign".tr} ${"tax_receipt_ratio".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"campaign".tr.toLowerCase()} ${"tax_receipt_ratio".tr.toLowerCase()}";
+      } else {
+        return null;
+      }
+    }
+  }
 }
 
 class ValidatorDonor {

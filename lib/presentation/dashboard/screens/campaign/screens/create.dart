@@ -22,6 +22,9 @@ class CreateCampaignScreen extends StatelessWidget {
         status: controller.statusController.value,
         iconTag: controller.icon.value.tagNumber.toString(),
         nodes: controller.nodes.value,
+        taxReceiptRatio: controller.taxReceiptRatioController.text,
+        allowRecurringModification:
+            controller.allowRecurringModificationController.value,
       );
       await controller.create(request.toJson(), event);
     }
@@ -467,7 +470,7 @@ class CreateCampaignScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.42).h,
+                            width: (fdw * 0.42).h,
                             child: input(
                               label: 'target_amount'.tr,
                               hintText: 'target_amount'.tr,
@@ -480,7 +483,7 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.42).h,
+                            width: (fdw * 0.42).h,
                             child: input(
                               label: 'minimum_amount'.tr,
                               hintText: 'minimum_amount'.tr,
@@ -498,7 +501,7 @@ class CreateCampaignScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.42).h,
+                            width: (fdw * 0.42).h,
                             child: input(
                               label: 'fee'.tr,
                               hintText: 'fee'.tr,
@@ -511,7 +514,7 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.42).h,
+                            width: (fdw * 0.42).h,
                             child: input(
                               label: 'sort_order'.tr,
                               hintText: 'sort_order'.tr,
@@ -533,17 +536,49 @@ class CreateCampaignScreen extends StatelessWidget {
                               ),
                               validator: ValidatorCampaign.sortOrder,
                             ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: (fdw * 0.42).h,
+                            child: input(
+                              label: 'tax_receipt_ratio'.tr,
+                              hintText: 'tax_receipt_ratio'.tr,
+                              conn: controller.taxReceiptRatioController,
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              suffixConstraints: BoxConstraints(
+                                minHeight: 39.adaptSize,
+                                minWidth: 35.adaptSize,
+                                maxHeight: 39.adaptSize,
+                                maxWidth: 35.adaptSize,
+                              ),
+                              suffix: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 12.adaptSize,
+                                ),
+                                child: CustomImageView(
+                                  imagePath: "caret_up_down".icon.svg,
+                                ),
+                              ),
+                              validator: ValidatorCampaign.taxReceiptRatio,
+                            ),
                           )
                         ],
                       ),
                       Wrap(
                         spacing: 12.adaptSize,
-                        runAlignment: WrapAlignment.spaceBetween,
-                        alignment: WrapAlignment.spaceBetween,
+                        // runAlignment: WrapAlignment.spaceBetween,
+                        // alignment: WrapAlignment.spaceBetween,
                         crossAxisAlignment: WrapCrossAlignment.end,
                         children: [
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.48).h,
+                            width: (fdw * 0.38).h,
                             child: Obx(
                               () => customSwitch(
                                 label: "status".tr,
@@ -555,7 +590,7 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.42).h,
+                            width: (fdw * 0.38).h,
                             child: Obx(
                               () => customSwitch(
                                 label: "donation_campaign".tr,
@@ -569,7 +604,7 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (FIGMA_DESIGN_WIDTH * 0.42).h,
+                            width: (fdw * 0.38).h,
                             child: Obx(
                               () => customSwitch(
                                 label: "issue_tax_receipt".tr,
@@ -578,6 +613,21 @@ class CreateCampaignScreen extends StatelessWidget {
                                 onChange: (value) {
                                   controller.issueTaxReceiptController.value =
                                       value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: (fdw * 0.5).h,
+                            child: Obx(
+                              () => customSwitch(
+                                label: "allow_recurring_changes".tr,
+                                value: controller
+                                    .allowRecurringModificationController.value,
+                                onChange: (value) {
+                                  controller
+                                      .allowRecurringModificationController
+                                      .value = value;
                                 },
                               ),
                             ),
@@ -625,7 +675,7 @@ class CreateCampaignScreen extends StatelessWidget {
                                 Rx<bool?> status = Rx(node.status);
                                 return Obx(
                                   () => SizedBox(
-                                    width: (FIGMA_DESIGN_WIDTH * 0.44).h,
+                                    width: (fdw * 0.44).h,
                                     child: customSwitch(
                                       label: node.organizationDefinedName
                                           .toString(),

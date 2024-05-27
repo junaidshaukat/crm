@@ -282,6 +282,8 @@ final Map<String, String> enUs = {
   "card": "Card",
   "number": "Number",
   "minimum_recurrings": "Minimum recurrings",
+  "tax_receipt_ratio": "Tax Receipt Ratio",
+  "allow_recurring_changes": "Allow Recurring Changes",
 
   /// Error
   "network_err": "Network Error",

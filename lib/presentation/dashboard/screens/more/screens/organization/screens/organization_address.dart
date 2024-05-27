@@ -114,13 +114,13 @@ class OrganizationAddressScreen extends StatelessWidget {
 
                 if (useState == UseState.none || useState == UseState.loading) {
                   return SizedBox(
-                    height: FIGMA_DESIGN_HEIGHT * 0.75.v,
+                    height: fdh * 0.75.v,
                     child: const CircularProgress(),
                   );
                 } else {
                   if (useError.message != null) {
                     return SizedBox(
-                      height: FIGMA_DESIGN_HEIGHT * 0.75.v,
+                      height: fdh * 0.75.v,
                       child: TryAgain(tryAgain: () async {
                         useError.message = null;
                         controller.tryAgain();

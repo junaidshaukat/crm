@@ -14,6 +14,8 @@ class CampaignUpdateReq {
   bool? status;
   String? iconTag;
   List<NodeData>? nodes;
+  String? taxReceiptRatio;
+  bool? allowRecurringModification;
 
   CampaignUpdateReq({
     this.name,
@@ -29,6 +31,8 @@ class CampaignUpdateReq {
     this.status,
     this.iconTag,
     this.nodes,
+    this.taxReceiptRatio,
+    this.allowRecurringModification,
   });
 
   Map<String, dynamic> toJson() {
@@ -41,6 +45,8 @@ class CampaignUpdateReq {
       'minimumAmount': minimumAmount,
       'sortOrder': sortOrder,
       'fees': fees,
+      'taxReceiptRatio': taxReceiptRatio,
+      'allowRecurringModification': allowRecurringModification == true ? 1 : 0,
       'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
       'donationCampaign': donationCampaign == true ? 1 : 0,
       'status': status == true ? 1 : 0,

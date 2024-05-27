@@ -19,12 +19,14 @@ class UpdateCampaignController extends GetxController {
   TextEditingController minimumAmountController = TextEditingController();
   TextEditingController feesController = TextEditingController();
   TextEditingController sortOrderController = TextEditingController();
+  TextEditingController taxReceiptRatioController = TextEditingController();
 
   Rx<IconsData> icon = Rx(IconsData());
 
   Rx<bool> statusController = false.obs;
   Rx<bool> issueTaxReceiptController = false.obs;
   Rx<bool> donationCampaignController = false.obs;
+  Rx<bool> allowRecurringModificationController = false.obs;
 
   Rx<String?> startDate = Rx(null);
   Rx<String?> startTime = Rx(null);
@@ -49,6 +51,7 @@ class UpdateCampaignController extends GetxController {
     minimumAmountController.dispose();
     feesController.dispose();
     sortOrderController.dispose();
+    taxReceiptRatioController.dispose();
   }
 
   Future getIcons() async {
@@ -87,9 +90,11 @@ class UpdateCampaignController extends GetxController {
     minimumAmountController.clear();
     feesController.clear();
     sortOrderController.clear();
+    taxReceiptRatioController.clear();
     icon(IconsData());
     statusController.value = false;
     issueTaxReceiptController.value = false;
+    allowRecurringModificationController.value = false;
     startDate = Rx(null);
     startTime = Rx(null);
     endDate = Rx(null);
@@ -165,6 +170,7 @@ class UpdateCampaignController extends GetxController {
     minimumAmountController.text = campaign.minimumAmount.toString();
     feesController.text = campaign.fees.toString();
     sortOrderController.text = campaign.sortOrder.toString();
+    taxReceiptRatioController.text = campaign.taxReceiptRatio.toString();
     icon(IconsData(
       tagNumber: campaign.icon?.tagNumber,
       filename: campaign.icon?.filename,
@@ -186,6 +192,8 @@ class UpdateCampaignController extends GetxController {
     statusController.value = campaign.status ?? false;
     issueTaxReceiptController.value = campaign.issueTaxReceipt ?? false;
     donationCampaignController.value = campaign.donationCampaign ?? false;
+    allowRecurringModificationController.value =
+        campaign.allowRecurringModification ?? false;
     update();
   }
 }

@@ -9,9 +9,11 @@ class CampaignCreateReq {
   String? minimumAmount;
   String? sortOrder;
   String? fees;
+  String? taxReceiptRatio;
   bool? issueTaxReceipt;
   bool? status;
   bool? donationCampaign;
+  bool? allowRecurringModification;
   String? iconTag;
   List<NodeData>? nodes;
 
@@ -29,6 +31,8 @@ class CampaignCreateReq {
     this.status,
     this.iconTag,
     this.nodes,
+    this.taxReceiptRatio,
+    this.allowRecurringModification,
   });
 
   Map<String, dynamic> toJson() {
@@ -39,11 +43,13 @@ class CampaignCreateReq {
       'endDate': endDate,
       'targetAmount': targetAmount ?? 0,
       'minimumAmount': minimumAmount ?? 0,
+      'taxReceiptRatio': taxReceiptRatio ?? 0,
       'sortOrder': sortOrder ?? 1,
       'donationCampaign': donationCampaign == true ? 1 : 0,
       'fees': fees ?? 0,
       'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
       'status': status == true ? 1 : 0,
+      'allowRecurringModification': allowRecurringModification == true ? 1 : 0,
       'iconTag': iconTag,
       'nodes': nodes?.map((node) {
         return {

@@ -18,7 +18,7 @@ class HomeRecurringScreen extends StatelessWidget {
       ),
       Container(
         width: double.maxFinite,
-        height: (FIGMA_DESIGN_HEIGHT * 0.9).adaptSize,
+        height: (fdh * 0.9).adaptSize,
         margin: EdgeInsets.only(bottom: 0.v),
         padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.v),
         decoration: AppDecoration.outlineBluegray100011,

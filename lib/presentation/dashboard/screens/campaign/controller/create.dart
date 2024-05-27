@@ -22,12 +22,15 @@ class CreateCampaignController extends GetxController {
       TextEditingController(text: '0');
   TextEditingController feesController = TextEditingController(text: '0');
   TextEditingController sortOrderController = TextEditingController(text: '1');
+  TextEditingController taxReceiptRatioController =
+      TextEditingController(text: '0');
 
   Rx<IconsData> icon = Rx(IconsData());
 
   Rx<bool> statusController = false.obs;
   Rx<bool> issueTaxReceiptController = false.obs;
   Rx<bool> donationCampaignController = false.obs;
+  Rx<bool> allowRecurringModificationController = false.obs;
 
   Rx<String?> startDate = Rx(null);
   Rx<String?> startTime = Rx(null);
@@ -55,6 +58,7 @@ class CreateCampaignController extends GetxController {
     minimumAmountController.dispose();
     feesController.dispose();
     sortOrderController.dispose();
+    taxReceiptRatioController.dispose();
   }
 
   Future getIcons() async {
@@ -118,10 +122,12 @@ class CreateCampaignController extends GetxController {
     minimumAmountController.text = '0';
     feesController.text = '0';
     sortOrderController.text = '1';
+    taxReceiptRatioController.text = '0';
     icon(IconsData());
     statusController.value = false;
     issueTaxReceiptController.value = false;
     donationCampaignController.value = false;
+    allowRecurringModificationController.value = false;
     startDate = Rx(null);
     startTime = Rx(null);
     endDate = Rx(null);

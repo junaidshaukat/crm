@@ -7,14 +7,14 @@ enum DeviceType { mobile, tablet, desktop }
 
 enum PlatformType { android, ios, fuchsia, linux, macos, windows, other, web }
 
-// These are the Viewport values of your Figma Design.
-// These are used in the code as a reference to create your UI Responsively.
-// ignore: constant_identifier_names
-const num FIGMA_DESIGN_WIDTH = 375;
-// ignore: constant_identifier_names
-const num FIGMA_DESIGN_HEIGHT = 812;
-// ignore: constant_identifier_names
-const num FIGMA_DESIGN_STATUS_BAR = 0;
+/// FIGMA DESIGN WIDTH 375
+const num fdw = 375;
+
+/// FIGMA DESIGN HEIGHT 812
+const num fdh = 812;
+
+/// FIGMA DESIGN STATUS BAR 0
+const num fdsb = 0;
 
 typedef ResponsiveBuild = Widget Function(
   BuildContext context,
@@ -104,12 +104,10 @@ class SizeUtils {
 
     // Sets screen width and height
     if (orientation == Orientation.portrait) {
-      width =
-          boxConstraints.maxWidth.isNonZero(defaultValue: FIGMA_DESIGN_WIDTH);
+      width = boxConstraints.maxWidth.isNonZero(defaultValue: fdw);
       height = boxConstraints.maxHeight.isNonZero();
     } else {
-      width =
-          boxConstraints.maxHeight.isNonZero(defaultValue: FIGMA_DESIGN_WIDTH);
+      width = boxConstraints.maxHeight.isNonZero(defaultValue: fdw);
       height = boxConstraints.maxWidth.isNonZero();
     }
     deviceType = getDeviceType;
@@ -127,12 +125,11 @@ extension ResponsiveExtension on num {
 
   /// This method is used to set padding/margin (for the left and Right side) &
   /// width of the screen or widget according to the Viewport width.
-  double get h => ((this * _width) / FIGMA_DESIGN_WIDTH);
+  double get h => ((this * _width) / fdw);
 
   /// This method is used to set padding/margin (for the top and bottom side) &
   /// height of the screen or widget according to the Viewport height.
-  double get v =>
-      (this * _height) / (FIGMA_DESIGN_HEIGHT - FIGMA_DESIGN_STATUS_BAR);
+  double get v => (this * _height) / (fdh - fdsb);
 
   /// This method is used to set smallest px in image height and width
   double get adaptSize {
