@@ -326,7 +326,7 @@ class ValidatorCampaign {
   }
 
   static String? taxReceiptRatio(String? input, {bool isRequired = true}) {
-    String pattern = r'^(100(\.0{1,2})?|\d{1,2}(\.\d{1,2})?|\.\d{1,2})$';
+    String pattern = r'^(0(\.[0-9]{1,2})?|1(\.0{1,2})?)$';
     RegExp regExp = RegExp(pattern);
     if (input != null && isRequired == false && input.isNotEmpty) {
       isRequired = true;

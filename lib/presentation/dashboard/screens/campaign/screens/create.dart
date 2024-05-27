@@ -47,6 +47,7 @@ class CreateCampaignScreen extends StatelessWidget {
     TextInputType? keyboardType,
     int? maxLines,
     bool readOnly = false,
+    EdgeInsets? contentPadding,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -58,7 +59,7 @@ class CreateCampaignScreen extends StatelessWidget {
           "$label".tr,
           style: TextStyle(
             color: appTheme.gray80001,
-            fontSize: 14.fSize,
+            fontSize: 13.fSize,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,
           ),
@@ -74,10 +75,23 @@ class CreateCampaignScreen extends StatelessWidget {
             prefix: prefix,
             suffix: suffix,
             maxLines: maxLines,
+            contentPadding: contentPadding,
             keyboardType: keyboardType,
             prefixConstraints: prefixConstraints,
             suffixConstraints: suffixConstraints,
             onTap: onTap,
+            textStyle: TextStyle(
+              color: appTheme.gray80001,
+              fontSize: 13.fSize,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w300,
+            ),
+            hintStyle: TextStyle(
+              color: appTheme.gray80001,
+              fontSize: 13.fSize,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w300,
+            ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -317,46 +331,40 @@ class CreateCampaignScreen extends StatelessWidget {
   }
 
   Widget customSwitch({
-    required String label,
-    num width = 50,
-    double? sizedBoxWidth,
     bool? value,
-    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
-    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
+    num width = 160,
+    required String label,
     required dynamic Function(bool) onChange,
   }) {
-    return SizedBox(
-      width: sizedBoxWidth ?? 110.adaptSize,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-        children: [
-          SizedBox(height: 14.v),
-          Text(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 12.v),
+        SizedBox(
+          width: width.h,
+          child: Text(
             label,
-            overflow: TextOverflow.clip,
-            maxLines: 2,
             style: TextStyle(
               color: appTheme.gray80001,
-              fontSize: 14.fSize,
+              fontSize: 12.fSize,
               fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 2.v),
-          SizedBox(
-            width: width.h,
-            child: FittedBox(
-              fit: BoxFit.fill,
-              child: CustomSwitch(
-                value: value,
-                onChange: onChange,
-              ),
+        ),
+        SizedBox(height: 2.v),
+        SizedBox(
+          width: 50.h,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: CustomSwitch(
+              value: value,
+              onChange: onChange,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -367,7 +375,7 @@ class CreateCampaignScreen extends StatelessWidget {
         children: [
           SizedBox(height: 64.v),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.h),
+            padding: EdgeInsets.symmetric(horizontal: 8.h),
             child: AppbarWithBackAndFilter(
               title: "add_campaign".tr,
             ),
@@ -376,7 +384,7 @@ class CreateCampaignScreen extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.maxFinite,
-              padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
+              padding: EdgeInsets.symmetric(horizontal: 8.h, vertical: 16.v),
               decoration: AppDecoration.outlinePrimary.copyWith(
                 borderRadius: BorderRadiusStyle.customBorderTL28,
               ),
@@ -471,7 +479,7 @@ class CreateCampaignScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: (fdw * 0.42).h,
+                            width: 175.h,
                             child: input(
                               label: 'target_amount'.tr,
                               hintText: 'target_amount'.tr,
@@ -484,7 +492,7 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (fdw * 0.42).h,
+                            width: 175.h,
                             child: input(
                               label: 'minimum_amount'.tr,
                               hintText: 'minimum_amount'.tr,
@@ -502,7 +510,7 @@ class CreateCampaignScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: (fdw * 0.42).h,
+                            width: 175.h,
                             child: input(
                               label: 'fee'.tr,
                               hintText: 'fee'.tr,
@@ -515,7 +523,7 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (fdw * 0.42).h,
+                            width: 175.h,
                             child: input(
                               label: 'sort_order'.tr,
                               hintText: 'sort_order'.tr,
@@ -544,7 +552,7 @@ class CreateCampaignScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: (fdw * 0.42).h,
+                            width: 175.h,
                             child: input(
                               label: 'tax_receipt_ratio'.tr,
                               hintText: 'tax_receipt_ratio'.tr,
@@ -573,13 +581,15 @@ class CreateCampaignScreen extends StatelessWidget {
                         ],
                       ),
                       Wrap(
-                        spacing: 12.adaptSize,
+                        spacing: 8.h,
+                        runSpacing: 2.v,
                         crossAxisAlignment: WrapCrossAlignment.end,
                         children: [
                           SizedBox(
-                            width: (fdw * 0.38).h,
+                            width: 175.h,
                             child: Obx(
                               () => customSwitch(
+                                width: 175.h,
                                 label: "status".tr,
                                 value: controller.statusController.value,
                                 onChange: (value) {
@@ -589,9 +599,23 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (fdw * 0.38).h,
+                            width: 175.h,
                             child: Obx(
                               () => customSwitch(
+                                width: 175.h,
+                                label: "hidden".tr,
+                                value: controller.hiddenController.value,
+                                onChange: (value) {
+                                  controller.hiddenController.value = value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 175.h,
+                            child: Obx(
+                              () => customSwitch(
+                                width: 175.h,
                                 label: "donation_campaign".tr,
                                 value:
                                     controller.donationCampaignController.value,
@@ -603,9 +627,10 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (fdw * 0.38).h,
+                            width: 175.h,
                             child: Obx(
                               () => customSwitch(
+                                width: 175.h,
                                 label: "issue_tax_receipt".tr,
                                 value:
                                     controller.issueTaxReceiptController.value,
@@ -617,9 +642,10 @@ class CreateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: (fdw * 0.5).h,
+                            width: 175.h,
                             child: Obx(
                               () => customSwitch(
+                                width: 175.h,
                                 label: "allow_recurring_changes".tr,
                                 value: controller
                                     .allowRecurringModificationController.value,
@@ -627,18 +653,6 @@ class CreateCampaignScreen extends StatelessWidget {
                                   controller
                                       .allowRecurringModificationController
                                       .value = value;
-                                },
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: (fdw * 0.5).h,
-                            child: Obx(
-                              () => customSwitch(
-                                label: "hidden".tr,
-                                value: controller.hiddenController.value,
-                                onChange: (value) {
-                                  controller.hiddenController.value = value;
                                 },
                               ),
                             ),
@@ -675,9 +689,8 @@ class CreateCampaignScreen extends StatelessWidget {
                             );
                           }
                           return Wrap(
-                            spacing: 12.adaptSize,
-                            runAlignment: WrapAlignment.spaceBetween,
-                            alignment: WrapAlignment.spaceBetween,
+                            spacing: 8.h,
+                            runSpacing: 2.v,
                             crossAxisAlignment: WrapCrossAlignment.end,
                             children: List.generate(
                               controller.nodes.value.length,
@@ -686,8 +699,9 @@ class CreateCampaignScreen extends StatelessWidget {
                                 Rx<bool?> status = Rx(node.status);
                                 return Obx(
                                   () => SizedBox(
-                                    width: (fdw * 0.44).h,
+                                    width: 175.h,
                                     child: customSwitch(
+                                      width: 175.h,
                                       label: node.organizationDefinedName
                                           .toString(),
                                       value: status.value,

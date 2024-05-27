@@ -339,9 +339,9 @@ class UpdateCampaignScreen extends StatelessWidget {
   }
 
   Widget customSwitch({
-    required String label,
-    num width = 160,
     bool? value,
+    num width = 160,
+    required String label,
     required dynamic Function(bool) onChange,
   }) {
     return Column(
@@ -422,7 +422,6 @@ class UpdateCampaignScreen extends StatelessWidget {
                       ),
                       Obx(() => browse(
                             icon: controller.icon,
-                            //  validator: ValidatorCampaign.icon,
                           )),
                       Obx(
                         () => input(
@@ -587,8 +586,8 @@ class UpdateCampaignScreen extends StatelessWidget {
                         ],
                       ),
                       Wrap(
-                        spacing: 6.h,
-                        runSpacing: 4.v,
+                        spacing: 8.h,
+                        runSpacing: 2.v,
                         crossAxisAlignment: WrapCrossAlignment.end,
                         children: [
                           SizedBox(
@@ -600,6 +599,19 @@ class UpdateCampaignScreen extends StatelessWidget {
                                 value: controller.statusController.value,
                                 onChange: (value) {
                                   controller.statusController.value = value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 175.h,
+                            child: Obx(
+                              () => customSwitch(
+                                label: "hidden".tr,
+                                width: 175.h,
+                                value: controller.hiddenController.value,
+                                onChange: (value) {
+                                  controller.hiddenController.value = value;
                                 },
                               ),
                             ),
@@ -650,19 +662,6 @@ class UpdateCampaignScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 175.h,
-                            child: Obx(
-                              () => customSwitch(
-                                label: "hidden".tr,
-                                width: 175.h,
-                                value: controller.hiddenController.value,
-                                onChange: (value) {
-                                  controller.hiddenController.value = value;
-                                },
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                       SizedBox(height: 14.v),
@@ -696,8 +695,8 @@ class UpdateCampaignScreen extends StatelessWidget {
                           }
 
                           return Wrap(
-                            spacing: 6.h,
-                            runSpacing: 4.v,
+                            spacing: 8.h,
+                            runSpacing: 2.v,
                             crossAxisAlignment: WrapCrossAlignment.end,
                             children: List.generate(
                               controller.nodes.value.length,
