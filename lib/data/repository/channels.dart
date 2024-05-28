@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class ChannelsApis extends Client {
   ChannelsApis();
 
+  /// api/admin/v1/channel
   Future<ChannelReadRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class ChannelsApis extends Client {
     }
   }
 
+  /// api/admin/v1/channelSummary
   Future<ChannelSummaryRes> channelSummary({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -63,6 +65,7 @@ class ChannelsApis extends Client {
     }
   }
 
+  /// api/admin/v1/channel
   Future<ChannelsRes> channel({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -93,6 +96,7 @@ class ChannelsApis extends Client {
     }
   }
 
+  /// api/admin/v1/channel/$tagNumber
   Future<ChannelUpdateRes> updateChannelName({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

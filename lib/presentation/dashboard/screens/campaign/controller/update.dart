@@ -200,4 +200,16 @@ class UpdateCampaignController extends GetxController {
     hiddenController.value = campaign.hidden ?? false;
     update();
   }
+
+  void clearStartDateController() {
+    startDate.value = null;
+    startDateController.clear();
+    update();
+  }
+
+  void clearEndDateController() {
+    endDate.value = null;
+    endDateController.clear();
+    update();
+  }
 }

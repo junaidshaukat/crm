@@ -29,6 +29,7 @@ class CreateUsersScreen extends StatelessWidget {
     List<DropDown>? items,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
+    EdgeInsets? contentPadding,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -52,10 +53,11 @@ class CreateUsersScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 10.h,
-              vertical: 16.v,
-            ),
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                  vertical: 16.v,
+                  horizontal: 8.h,
+                ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

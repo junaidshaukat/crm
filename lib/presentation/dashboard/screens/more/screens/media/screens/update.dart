@@ -34,6 +34,7 @@ class UpdateMediaScreen extends StatelessWidget {
     List<DropDown>? items,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
+    EdgeInsets? contentPadding,
     TextInputType? keyboardType = TextInputType.text,
   }) {
     return Column(
@@ -59,6 +60,11 @@ class UpdateMediaScreen extends StatelessWidget {
             validator: validator,
             fillColor: appTheme.gray10001,
             keyboardType: keyboardType,
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                  vertical: 16.v,
+                  horizontal: 8.h,
+                ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

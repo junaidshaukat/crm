@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class QrCodeApis extends Client {
   QrCodeApis();
 
+  /// api/admin/v1/qrCode
   Future<QrReadRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class CampaignApis extends Client {
   CampaignApis();
 
+  /// api/admin/v1/campaign
   Future<CampaignsRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class CampaignApis extends Client {
     }
   }
 
+  /// api/admin/v1/campaign
   Future<CampaignCreateRes> create({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -62,6 +64,7 @@ class CampaignApis extends Client {
     }
   }
 
+  /// api/admin/v1/campaign/$tagNumber
   Future<CampaignUpdateRes> update({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -92,6 +95,7 @@ class CampaignApis extends Client {
     }
   }
 
+  /// api/admin/v1/campaign/$tagNumber
   Future<CampaignsRes> delete({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

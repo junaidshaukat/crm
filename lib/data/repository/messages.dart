@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class MessagesApis extends Client {
   MessagesApis();
 
+  /// api/admin/v1/messages
   Future<ListOfValuesRes> messages({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class MessagesApis extends Client {
     }
   }
 
+  /// api/admin/v1/lov
   Future<ListOfValuesRes> lov({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -63,6 +65,7 @@ class MessagesApis extends Client {
     }
   }
 
+  /// api/admin/v1/dynamicLov
   Future<ListOfValuesRes> dynamicLov({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -93,6 +96,7 @@ class MessagesApis extends Client {
     }
   }
 
+  /// api/admin/v1/routeLov
   Future<RouteLovRes> routeLov({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

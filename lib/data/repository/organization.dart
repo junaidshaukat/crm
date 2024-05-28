@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class OrganizationApis extends Client {
   OrganizationApis();
 
+  /// api/admin/v1/organization
   Future<OrganizationRes> organization({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationProfileUpdateRes> organizationProfileUpdate({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -63,6 +65,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationAddressUpdateRes> organizationAddressUpdate({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -93,6 +96,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationSupplementaryDataUpdateRes>
       organizationSupplementaryDataUpdate({
     Map<String, String> headers = const {
@@ -124,6 +128,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationContactUpdateRes> organizationContactUpdate({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -154,6 +159,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/signature?_method=PUT
   Future<OrganizationSignatureUpdateRes> signatureUpdate({
     Map<String, String> headers = const {
       'Content-type': 'multipart/form-data',
@@ -184,6 +190,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationCharityProfileUpdateRes> charityProfileUpdate({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -214,6 +221,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationSupplementaryCharityDataUpdateRes> charityAddressUpdate({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -246,6 +254,7 @@ class OrganizationApis extends Client {
     }
   }
 
+  /// api/admin/v1/organization/$tagNumber
   Future<OrganizationSupplementaryCharityDataUpdateRes>
       charitySupplementaryUpdate({
     Map<String, String> headers = const {

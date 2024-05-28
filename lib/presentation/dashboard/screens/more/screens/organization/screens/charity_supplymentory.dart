@@ -39,6 +39,7 @@ class OrganizationCharitySupplementaryDataScreen extends StatelessWidget {
     Widget? suffix,
     BoxConstraints? suffixConstraints,
     void Function()? onTap,
+    EdgeInsets? contentPadding,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -66,10 +67,11 @@ class OrganizationCharitySupplementaryDataScreen extends StatelessWidget {
             suffix: suffix,
             suffixConstraints: suffixConstraints,
             onTap: onTap,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 10.h,
-              vertical: 16.v,
-            ),
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                  vertical: 16.v,
+                  horizontal: 8.h,
+                ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

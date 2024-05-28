@@ -85,7 +85,11 @@ class UpdateCampaignScreen extends StatelessWidget {
             prefix: prefix,
             suffix: suffix,
             maxLines: maxLines,
-            contentPadding: contentPadding,
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                  vertical: 16.v,
+                  horizontal: 8.h,
+                ),
             keyboardType: keyboardType,
             prefixConstraints: prefixConstraints,
             suffixConstraints: suffixConstraints,
@@ -430,6 +434,10 @@ class UpdateCampaignScreen extends StatelessWidget {
                           hintText: controller.startDate.value ??
                               'start_date_and_time'.tr,
                           conn: controller.startDateController,
+                          suffix: IconButton(
+                            onPressed: controller.clearStartDateController,
+                            icon: const Icon(Icons.clear),
+                          ),
                           onTap: () async {
                             DateTime? date = await Pickers.date(Get.context!);
                             TimeOfDay? time = await Pickers.time(Get.context!);
@@ -456,6 +464,10 @@ class UpdateCampaignScreen extends StatelessWidget {
                           hintText: controller.endDate.value ??
                               'end_date_and_time'.tr,
                           conn: controller.endDateController,
+                          suffix: IconButton(
+                            onPressed: controller.clearEndDateController,
+                            icon: const Icon(Icons.clear),
+                          ),
                           onTap: () async {
                             DateTime? date = await Pickers.date(Get.context!);
                             TimeOfDay? time = await Pickers.time(Get.context!);

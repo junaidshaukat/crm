@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class ReportApis extends Client {
   ReportApis();
 
+  /// api/admin/v1/report
   Future<ReportRes> caller({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class ReportApis extends Client {
     }
   }
 
+  /// api/admin/v1/report/$tagNumber
   Future<ReportFormRes> form({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -64,6 +66,7 @@ class ReportApis extends Client {
     }
   }
 
+  /// api/admin/v1/reportHelper/preview
   Future<ReportGenrateRes> genrate({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

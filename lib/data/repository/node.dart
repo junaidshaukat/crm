@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class NodesApis extends Client {
   NodesApis();
 
+  /// api/admin/v1/node
   Future<NodeReadRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

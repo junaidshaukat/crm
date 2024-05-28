@@ -1,6 +1,7 @@
 import '/core/app_export.dart';
 
 class PublicApis extends Client {
+  /// api/v1/public/state
   Future<CountryStateRes> states({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -36,6 +37,7 @@ class PublicApis extends Client {
     }
   }
 
+  /// api/v1/public/country
   Future<CountryRes> country({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -71,6 +73,7 @@ class PublicApis extends Client {
     }
   }
 
+  /// api/admin/v1/auth/login
   Future<LoginRes> authLogin({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -105,6 +108,7 @@ class PublicApis extends Client {
     }
   }
 
+  /// api/admin/v1/auth/resetPassword
   Future<ResetPasswordRes> resetPassword({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -134,6 +138,7 @@ class PublicApis extends Client {
     }
   }
 
+  /// api/admin/v1/auth/forgetPassword
   Future<ForgetPasswordRes> forgetPassword({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

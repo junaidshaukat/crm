@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class IconsApis extends Client {
   IconsApis();
 
+  /// api/admin/v1/icon
   Future<IconsReadRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

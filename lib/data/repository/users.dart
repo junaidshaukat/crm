@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class UsersApis extends Client {
   UsersApis();
 
+  /// api/admin/v1/auth/profile
   Future<ProfileRes> profile({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class UsersApis extends Client {
     }
   }
 
+  /// api/admin/v1/user
   Future<UsersReadRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -63,6 +65,7 @@ class UsersApis extends Client {
     }
   }
 
+  /// api/admin/v1/user
   Future<UsersCreateRes> create({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -92,6 +95,7 @@ class UsersApis extends Client {
     }
   }
 
+  /// api/admin/v1/user/$tagNumber
   Future<UsersUpdateRes> update({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -122,6 +126,7 @@ class UsersApis extends Client {
     }
   }
 
+  /// api/admin/v1/user/$tagNumber
   Future<UsersDeleteRes> delete({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -153,6 +158,7 @@ class UsersApis extends Client {
     }
   }
 
+  /// api/admin/v1/user/logout
   Future<UsersLogoutRes> logout({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

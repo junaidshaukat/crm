@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class MediaApis extends Client {
   MediaApis();
 
+  /// api/admin/v1/widget
   Future<WidgetRes> widget({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class MediaApis extends Client {
     }
   }
 
+  /// api/admin/v1/media
   Future<MediaRes> media({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -63,6 +65,7 @@ class MediaApis extends Client {
     }
   }
 
+  /// api/admin/v1/media/$tagNumber
   Future<MediaDeleteRes> delete({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -94,6 +97,7 @@ class MediaApis extends Client {
     }
   }
 
+  /// api/admin/v1/media
   Future<CreateMediaRes> create({
     Map<String, String> headers = const {
       'Content-type': 'multipart/form-data',
@@ -123,6 +127,7 @@ class MediaApis extends Client {
     }
   }
 
+  /// api/admin/v1/media/$tagNumber?_method=PUT
   Future<UpdateMediaRes> update({
     Map<String, String> headers = const {
       'Content-type': 'multipart/form-data',
@@ -153,6 +158,7 @@ class MediaApis extends Client {
     }
   }
 
+  /// api/admin/v1/widget/$tagNumber
   Future<WidgetUpdateRes> updateWidget({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

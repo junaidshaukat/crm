@@ -1,6 +1,7 @@
 import '/core/app_export.dart';
 
 class DashboardApis extends Client {
+  /// api/admin/v1/auth/profile
   Future<ProfileRes> getProfile({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -28,6 +29,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/auth/profile
   Future<ProfileRes> getOrganizations({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -55,6 +57,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/numberOfFollowers
   Future<DonorsAndFollowersRes> getDonorsAndFollowers({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -83,6 +86,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/totalTransactions
   Future<TotalTransactionsRes> getTotalTransactions({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -111,6 +115,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/totalTransactionsOfYear
   Future<ThisYearTransactionsRes> getThisYearTransactions({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -139,6 +144,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/totalDonations
   Future<DonationSinceRes> getDonationSince({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -167,6 +173,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/totalDonationOfYear
   Future<DonationYearRes> getDonationYear({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -197,6 +204,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/daySummary
   Future<DonationDayRes> getDonationDay({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -227,6 +235,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/monthSummary
   Future<DonationMonthRes> getDonationMonth({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -257,6 +266,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/auth/setOrganization
   Future<SetOrganizationRes> setOrganization({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -287,6 +297,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/campaignSummary
   Future<CampaignSummaryRes> getCampaignSummary({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -318,6 +329,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/campaignYearSummary
   Future<CampaignSummaryYearRes> getCampaignSummaryYear({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -348,6 +360,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/campaignYearMonthSummary
   Future<CampaignSummaryMonthRes> getCampaignSummaryMonth({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -378,6 +391,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/campaignYearMonthDaySummary
   Future<CampaignSummaryDayRes> getCampaignSummaryDay({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -408,6 +422,7 @@ class DashboardApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/recurring
   Future<RecurringSummaryRes> getRecurringSummary({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

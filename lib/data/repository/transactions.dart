@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class TransactionsApis extends Client {
   TransactionsApis();
 
+  /// api/admin/v1/transaction
   Future<TransactionsRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class TransactionsApis extends Client {
     }
   }
 
+  /// api/admin/v1/transaction/cardTransaction
   Future<TransactionRes> create({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -62,6 +64,7 @@ class TransactionsApis extends Client {
     }
   }
 
+  /// api/admin/v1/transaction/sendInvoice
   Future<SendInvoiceRes> sendInvoice({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -91,6 +94,7 @@ class TransactionsApis extends Client {
     }
   }
 
+  /// api/admin/v1/transaction/updateEmail
   Future<UpdateEmailRes> updateEmail({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -120,6 +124,7 @@ class TransactionsApis extends Client {
     }
   }
 
+  /// api/admin/v1/donor/payment/wallet
   Future<WalletRes> wallet({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -150,6 +155,7 @@ class TransactionsApis extends Client {
     }
   }
 
+  /// api/admin/v1/transaction/data/export
   Future<TransactionExportRes> download({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

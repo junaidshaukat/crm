@@ -47,6 +47,7 @@ class UpdateDonorScreen extends StatelessWidget {
     bool readOnly = false,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
+    EdgeInsets? contentPadding,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -71,10 +72,11 @@ class UpdateDonorScreen extends StatelessWidget {
             validator: validator,
             readOnly: readOnly,
             fillColor: appTheme.gray10001,
-            contentPadding: EdgeInsets.symmetric(
-              vertical: 16.v,
-              horizontal: 12.h,
-            ),
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                  vertical: 16.v,
+                  horizontal: 8.h,
+                ),
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

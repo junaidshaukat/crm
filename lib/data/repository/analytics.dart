@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class AnalyticsApis extends Client {
   AnalyticsApis();
 
+  /// api/admin/v1/dashboard/yearOverYears
   Future<YearOverYearRes> yearOverYears({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -34,6 +35,7 @@ class AnalyticsApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/tenderTypes
   Future<TenderTypesRes> tenderTypes({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -63,6 +65,7 @@ class AnalyticsApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/channelTypeSummary
   Future<ChannelTypesRes> channelTypes({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -93,6 +96,7 @@ class AnalyticsApis extends Client {
     }
   }
 
+  /// api/admin/v1/dashboard/receipted
   Future<ReceiptedRes> receipted({
     Map<String, String> headers = const {
       'Content-type': 'application/json',

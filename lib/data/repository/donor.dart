@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 class DonorApis extends Client {
   DonorApis();
 
+  /// api/admin/v1/donor/donor
   Future<DonorReadRes> read({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -33,6 +34,7 @@ class DonorApis extends Client {
     }
   }
 
+  /// api/admin/v1/donor/donor
   Future<DonorCreateRes> create({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -62,6 +64,7 @@ class DonorApis extends Client {
     }
   }
 
+  /// api/admin/v1/donor/donor/$tagNumber
   Future<DonorUpdateRes> update({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
@@ -92,6 +95,7 @@ class DonorApis extends Client {
     }
   }
 
+  /// api/admin/v1/donor/donor/$id
   Future<DonorDeleteRes> delete({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
