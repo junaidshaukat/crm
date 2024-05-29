@@ -58,21 +58,50 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
         ),
         SizedBox(height: 2.adaptSize),
         if (!dropDown)
-          CustomTextFormField(
-            readOnly: readOnly,
-            controller: conn,
-            hintText: "$hintText".tr,
-            validator: validator,
-            fillColor: appTheme.gray10001,
-            suffix: suffix,
-            suffixConstraints: suffixConstraints,
-            contentPadding: contentPadding,
-            borderDecoration: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: appTheme.gray400,
+          if (suffix != null)
+            SizedBox(
+              height: 60,
+              width: double.maxFinite,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: CustomTextFormField(
+                      readOnly: readOnly,
+                      controller: conn,
+                      hintText: "$hintText".tr,
+                      validator: validator,
+                      fillColor: appTheme.gray10001,
+                      contentPadding: contentPadding,
+                      borderDecoration: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: appTheme.gray400,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 4.h),
+                  Expanded(flex: 1, child: suffix),
+                ],
+              ),
+            )
+          else if (suffix == null)
+            CustomTextFormField(
+              readOnly: readOnly,
+              controller: conn,
+              hintText: "$hintText".tr,
+              validator: validator,
+              fillColor: appTheme.gray10001,
+              suffix: suffix,
+              suffixConstraints: suffixConstraints,
+              contentPadding: contentPadding,
+              borderDecoration: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: appTheme.gray400,
+                ),
               ),
             ),
-          ),
         if (dropDown)
           SimpleDropDown(
             height: 40,
@@ -199,31 +228,14 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
                         hintText: 'last_update'.tr,
                         conn: controller.updateDateTimeController,
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: input(
-                              label: 'portal_url'.tr,
-                              hintText: 'portal_url'.tr,
-                              conn: controller.portalUrlController,
-                            ),
-                          ),
-                          SizedBox(width: 4.h),
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                QrCodeDownload(
-                                  controller: controller,
-                                  qrCode: organization.portalUrl,
-                                ),
-                                SizedBox(height: 6.v),
-                              ],
-                            ),
-                          ),
-                        ],
+                      input(
+                        label: 'portal_url'.tr,
+                        hintText: 'portal_url'.tr,
+                        suffix: QrCodeDownload(
+                          controller: controller,
+                          qrCode: organization.portalUrl,
+                        ),
+                        conn: controller.portalUrlController,
                       ),
                       Obx(
                         () => customSwitch(
