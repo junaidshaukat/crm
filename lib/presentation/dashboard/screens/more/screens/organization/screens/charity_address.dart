@@ -74,7 +74,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
             ),
           ),
         if (dropDown)
-          SimpleDropDown(
+          SimpleDropDown2(
             width: 342.h,
             height: height,
             hintText: hintText,
