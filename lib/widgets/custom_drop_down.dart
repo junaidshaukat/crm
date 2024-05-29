@@ -179,11 +179,10 @@ class SimpleDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    console.log(items);
     return DropdownButtonFormField2<DropDown>(
       isExpanded: true,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 12.v),
+        contentPadding: EdgeInsets.symmetric(vertical: 8.v),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             width: 1.0,

@@ -482,37 +482,37 @@ class CreditCarForm extends StatelessWidget {
         key: controller.formKey,
         child: Column(
           children: [
-            InkWell(
-              onTap: scanCard,
-              child: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15.h,
-                  vertical: 12.v,
-                ),
-                decoration: AppDecoration.outlineBluegray50.copyWith(
-                  border: Border.all(color: appTheme.gray400),
-                  borderRadius: BorderRadiusStyle.roundedBorder8,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CustomImageView(
-                      imagePath: "scan_card".image.png,
-                      height: 80.v,
-                    ),
-                    SizedBox(height: 8.v),
-                    Text(
-                      "scan_card".tr,
-                      style: CustomTextStyles.bodyMediumGray80001,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 12.v),
-            Divider(height: 4.v),
+            // InkWell(
+            //   onTap: scanCard,
+            //   child: Container(
+            //     width: double.maxFinite,
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: 15.h,
+            //       vertical: 12.v,
+            //     ),
+            //     decoration: AppDecoration.outlineBluegray50.copyWith(
+            //       border: Border.all(color: appTheme.gray400),
+            //       borderRadius: BorderRadiusStyle.roundedBorder8,
+            //     ),
+            //     child: Column(
+            //       mainAxisSize: MainAxisSize.min,
+            //       crossAxisAlignment: CrossAxisAlignment.center,
+            //       children: [
+            //         CustomImageView(
+            //           imagePath: "scan_card".image.png,
+            //           height: 80.v,
+            //         ),
+            //         SizedBox(height: 8.v),
+            //         Text(
+            //           "scan_card".tr,
+            //           style: CustomTextStyles.bodyMediumGray80001,
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(height: 12.v),
+            // Divider(height: 4.v),
             SizedBox(height: 12.v),
             listTile(
               control: "textbox",

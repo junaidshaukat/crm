@@ -135,44 +135,40 @@ class NewTransactionScreen extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                         validator: ValidatorNewTransaction.email,
                       ),
-                      Obx(
-                        () => listTile(
-                          label: "campaign".tr,
-                          control: "dropdown",
-                          hintText:
-                              controller.campaign.value.label ?? "select...".tr,
-                          validator: ValidatorNewTransaction.campaign,
-                          items: routeValues.activeCampaigns?.map((campaign) {
-                            return DropDown(
-                              id: campaign.campaignTag,
-                              title: campaign.label ?? '',
-                              value: campaign,
-                            );
-                          }).toList(),
-                          onChanged: (option) {
-                            controller.campaign.value = option?.value;
-                            controller.amountController.text =
-                                "${option?.value.minimumAmount}";
-                          },
-                        ),
+                      listTile(
+                        label: "campaign".tr,
+                        control: "dropdown",
+                        hintText:
+                            controller.campaign.value.label ?? "select...".tr,
+                        validator: ValidatorNewTransaction.campaign,
+                        items: routeValues.activeCampaigns?.map((campaign) {
+                          return DropDown(
+                            id: campaign.campaignTag,
+                            title: campaign.label ?? '',
+                            value: campaign,
+                          );
+                        }).toList(),
+                        onChanged: (option) {
+                          controller.campaign.value = option?.value;
+                          controller.amountController.text =
+                              "${option?.value.minimumAmount}";
+                        },
                       ),
-                      Obx(
-                        () => listTile(
-                          label: "frequency".tr,
-                          control: "dropdown",
-                          hintText: controller.frequency.value.title,
-                          validator: ValidatorNewTransaction.frequency,
-                          items: controller.frequencies.map((frequency) {
-                            return DropDown(
-                              id: frequency.id,
-                              title: frequency.title,
-                              value: frequency,
-                            );
-                          }).toList(),
-                          onChanged: (option) {
-                            controller.frequency.value = option?.value;
-                          },
-                        ),
+                      listTile(
+                        label: "frequency".tr,
+                        control: "dropdown",
+                        hintText: controller.frequency.value.title,
+                        validator: ValidatorNewTransaction.frequency,
+                        items: controller.frequencies.map((frequency) {
+                          return DropDown(
+                            id: frequency.id,
+                            title: frequency.title,
+                            value: frequency,
+                          );
+                        }).toList(),
+                        onChanged: (option) {
+                          controller.frequency.value = option?.value;
+                        },
                       ),
                       Obx(() {
                         bool variation = controller.frequency.value.variation;
