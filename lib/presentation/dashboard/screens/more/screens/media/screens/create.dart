@@ -56,11 +56,7 @@ class CreateMediaScreen extends StatelessWidget {
             validator: validator,
             fillColor: appTheme.gray10001,
             keyboardType: keyboardType,
-            contentPadding: contentPadding ??
-                EdgeInsets.symmetric(
-                  vertical: 16.v,
-                  horizontal: 8.h,
-                ),
+            contentPadding: contentPadding,
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

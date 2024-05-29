@@ -66,11 +66,7 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
             fillColor: appTheme.gray10001,
             suffix: suffix,
             suffixConstraints: suffixConstraints,
-            contentPadding: contentPadding ??
-                EdgeInsets.symmetric(
-                  vertical: 16.v,
-                  horizontal: 8.h,
-                ),
+            contentPadding: contentPadding,
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

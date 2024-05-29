@@ -75,11 +75,7 @@ class CreateCampaignScreen extends StatelessWidget {
             prefix: prefix,
             suffix: suffix,
             maxLines: maxLines,
-            contentPadding: contentPadding ??
-                EdgeInsets.symmetric(
-                  vertical: 16.v,
-                  horizontal: 12.h,
-                ),
+            contentPadding: contentPadding,
             keyboardType: keyboardType,
             prefixConstraints: prefixConstraints,
             suffixConstraints: suffixConstraints,

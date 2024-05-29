@@ -67,11 +67,7 @@ class OrganizationCharitySupplementaryDataScreen extends StatelessWidget {
             suffix: suffix,
             suffixConstraints: suffixConstraints,
             onTap: onTap,
-            contentPadding: contentPadding ??
-                EdgeInsets.symmetric(
-                  vertical: 16.v,
-                  horizontal: 8.h,
-                ),
+            contentPadding: contentPadding,
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

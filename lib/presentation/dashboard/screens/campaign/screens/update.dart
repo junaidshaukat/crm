@@ -85,11 +85,7 @@ class UpdateCampaignScreen extends StatelessWidget {
             prefix: prefix,
             suffix: suffix,
             maxLines: maxLines,
-            contentPadding: contentPadding ??
-                EdgeInsets.symmetric(
-                  vertical: 16.v,
-                  horizontal: 8.h,
-                ),
+            contentPadding: contentPadding,
             keyboardType: keyboardType,
             prefixConstraints: prefixConstraints,
             suffixConstraints: suffixConstraints,

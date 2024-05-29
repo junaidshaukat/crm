@@ -34,6 +34,7 @@ class CreateDonorScreen extends StatelessWidget {
     List<DropDown>? items,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
+    EdgeInsets? contentPadding,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -57,10 +58,7 @@ class CreateDonorScreen extends StatelessWidget {
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
-            contentPadding: EdgeInsets.symmetric(
-              vertical: 16.v,
-              horizontal: 12.h,
-            ),
+            contentPadding: contentPadding,
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,

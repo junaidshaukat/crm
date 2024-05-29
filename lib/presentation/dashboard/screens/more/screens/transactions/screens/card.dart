@@ -75,6 +75,7 @@ class CardScreen extends StatelessWidget {
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
     dynamic Function(bool)? onChange,
+    EdgeInsets? contentPadding,
   }) {
     return SizedBox(
       width: double.maxFinite,
@@ -100,10 +101,7 @@ class CardScreen extends StatelessWidget {
                 keyboardType: keyboardType,
                 textInputAction: textInputAction,
                 controller: textEditingController,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 16.v,
-                ),
+                contentPadding: contentPadding,
               ),
             if (control == "textarea")
               CustomTextFormField(
@@ -411,6 +409,7 @@ class CreditCarForm extends StatelessWidget {
     void Function(DropDown?)? onChanged,
     void Function(bool)? onChange,
     void Function(String)? change,
+    EdgeInsets? contentPadding,
   }) {
     return SizedBox(
       width: double.maxFinite,
@@ -437,10 +436,7 @@ class CreditCarForm extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: change,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 16.v,
-                ),
+                contentPadding: contentPadding,
               ),
             if (control == "textarea")
               CustomTextFormField(
