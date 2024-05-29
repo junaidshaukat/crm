@@ -447,10 +447,7 @@ class CreditCarForm extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: change,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 16.v,
-                ),
+                contentPadding: contentPadding,
               ),
             if (control == "dropdown")
               SimpleDropDown(
@@ -549,50 +546,46 @@ class CreditCarForm extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Obx(
-                    () => listTile(
-                      label: "expiry_month".tr,
-                      control: "dropdown",
-                      hintText: controller.expiryMonth.value,
-                      items:
-                          DateTime.now().monthList(inNumber: true).map((month) {
-                        return DropDown(
-                          id: month,
-                          title: month,
-                          value: month,
-                        );
-                      }).toList(),
-                      onChanged: (option) {
-                        controller.expiryMonth.value = option?.value;
-                        request.expiryMonth = option?.value;
-                      },
-                    ),
+                  child: listTile(
+                    label: "expiry_month".tr,
+                    control: "dropdown",
+                    hintText: controller.expiryMonth.value,
+                    items:
+                        DateTime.now().monthList(inNumber: true).map((month) {
+                      return DropDown(
+                        id: month,
+                        title: month,
+                        value: month,
+                      );
+                    }).toList(),
+                    onChanged: (option) {
+                      controller.expiryMonth.value = option?.value;
+                      request.expiryMonth = option?.value;
+                    },
                   ),
                 ),
                 SizedBox(width: 12.h),
                 Expanded(
-                  child: Obx(
-                    () => listTile(
-                      label: "expiry_year".tr,
-                      control: "dropdown",
-                      hintText: controller.expiryYear.value,
-                      items: DateTime.now()
-                          .yearList(
-                        numberOfYears: 15,
-                        reverse: false,
-                      )
-                          .map((month) {
-                        return DropDown(
-                          id: month,
-                          title: month,
-                          value: month,
-                        );
-                      }).toList(),
-                      onChanged: (option) {
-                        controller.expiryYear.value = option?.value;
-                        request.expiryYear = option?.value;
-                      },
-                    ),
+                  child: listTile(
+                    label: "expiry_year".tr,
+                    control: "dropdown",
+                    hintText: controller.expiryYear.value,
+                    items: DateTime.now()
+                        .yearList(
+                      numberOfYears: 15,
+                      reverse: false,
+                    )
+                        .map((month) {
+                      return DropDown(
+                        id: month,
+                        title: month,
+                        value: month,
+                      );
+                    }).toList(),
+                    onChanged: (option) {
+                      controller.expiryYear.value = option?.value;
+                      request.expiryYear = option?.value;
+                    },
                   ),
                 ),
               ],
