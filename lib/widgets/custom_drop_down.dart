@@ -250,8 +250,9 @@ class SimpleDropDown extends StatelessWidget {
       validator: validator,
       onChanged: onSelected,
       onSaved: onSaved,
-      buttonStyleData: const ButtonStyleData(
-        padding: EdgeInsets.only(right: 8),
+      buttonStyleData: ButtonStyleData(
+        padding: EdgeInsets.symmetric(vertical: 2.v),
+        height: 38.v,
       ),
       iconStyleData: IconStyleData(
         icon: Icon(
@@ -282,6 +283,7 @@ class SimpleDropDown2 extends StatelessWidget {
     this.width = double.maxFinite,
     this.padding = EdgeInsets.zero,
     this.onSaved,
+    this.contentPadding = EdgeInsets.zero,
   });
 
   final bool enabled;
@@ -297,6 +299,7 @@ class SimpleDropDown2 extends StatelessWidget {
   final BorderRadius? borderRadius;
   final int circularRadius;
   final TextOverflow? overflow;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
