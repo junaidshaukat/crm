@@ -43,6 +43,7 @@ class UpdateDonorScreen extends StatelessWidget {
     String? hintText,
     TextEditingController? conn,
     bool dropDown = false,
+    bool dropDown2 = false,
     List<DropDown>? items,
     bool readOnly = false,
     String? Function(String?)? validator,
@@ -65,7 +66,7 @@ class UpdateDonorScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: 2.adaptSize),
-        if (!dropDown)
+        if (!dropDown && !dropDown2)
           CustomTextFormField(
             controller: conn,
             hintText: "$hintText".tr,
@@ -79,10 +80,18 @@ class UpdateDonorScreen extends StatelessWidget {
               ),
             ),
           ),
+        if (dropDown2)
+          SimpleDropDown2(
+            height: 300,
+            items: items,
+            hintText: hintText,
+            onSelected: onChanged,
+          ),
         if (dropDown)
           SimpleDropDown(
-            hintText: hintText,
+            height: 300,
             items: items,
+            hintText: hintText,
             onSelected: onChanged,
           ),
         SizedBox(height: 4.adaptSize),
@@ -174,7 +183,7 @@ class UpdateDonorScreen extends StatelessWidget {
                       ),
                       Obx(
                         () => input(
-                          dropDown: true,
+                          dropDown2: true,
                           label: 'country'.tr,
                           hintText: controller.country.value?.name ??
                               controller.countryController.text,
@@ -193,7 +202,7 @@ class UpdateDonorScreen extends StatelessWidget {
                       Obx(() {
                         if (controller.provinces.isNotEmpty) {
                           return input(
-                            dropDown: true,
+                            dropDown2: true,
                             label:
                                 controller.country.value!.code?.toLowerCase() ==
                                         'us'

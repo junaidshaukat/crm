@@ -219,7 +219,7 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
                                   controller: controller,
                                   qrCode: organization.portalUrl,
                                 ),
-                                SizedBox(height: 4.h),
+                                SizedBox(height: 6.v),
                               ],
                             ),
                           ),
@@ -286,15 +286,14 @@ class QrCodeDownload extends StatelessWidget {
     return Obx(() {
       if (downloading.isFalse) {
         return CustomElevatedButton(
-          height: 50,
           text: "qr_code".tr,
           isDisabled: controller!.env.gatewayNodeTag > 0 ? false : true,
           leftIcon: Container(
             margin: EdgeInsets.only(right: 6.h),
             child: CustomImageView(
+              width: 16,
+              height: 16,
               imagePath: "download".icon.svg,
-              height: 18.adaptSize,
-              width: 18.adaptSize,
             ),
           ),
           buttonStyle: CustomButtonStyles.fillGrayTL4,
@@ -306,15 +305,14 @@ class QrCodeDownload extends StatelessWidget {
         );
       } else {
         return CustomElevatedButton(
-          height: 50,
           text: "".tr,
           isDisabled: qrCode != null ? false : true,
           leftIcon: Container(
             padding: EdgeInsets.all(6.adaptSize),
             child: Center(
               child: CircularProgress(
-                width: 18,
-                height: 18,
+                width: 16,
+                height: 16,
                 colorAnimation: appTheme.whiteA700,
               ),
             ),

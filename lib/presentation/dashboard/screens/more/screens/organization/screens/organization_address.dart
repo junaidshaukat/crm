@@ -39,6 +39,7 @@ class OrganizationAddressScreen extends StatelessWidget {
     String? hintText,
     TextEditingController? conn,
     bool dropDown = false,
+    bool dropDown2 = false,
     List<DropDown>? items,
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
@@ -60,7 +61,7 @@ class OrganizationAddressScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: 2.adaptSize),
-        if (!dropDown)
+        if (!dropDown && !dropDown2)
           CustomTextFormField(
             controller: conn,
             hintText: "$hintText".tr,
@@ -75,6 +76,14 @@ class OrganizationAddressScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
+            height: height,
+            width: 342.h,
+            hintText: hintText,
+            items: items,
+            onSelected: onChanged,
+          ),
+        if (dropDown2)
+          SimpleDropDown2(
             height: height,
             width: 342.h,
             hintText: hintText,
@@ -161,7 +170,7 @@ class OrganizationAddressScreen extends StatelessWidget {
                         Obx(
                           () => input(
                             height: 260,
-                            dropDown: true,
+                            dropDown2: true,
                             label: 'country'.tr,
                             hintText: controller.country.value?.name ??
                                 'select_country'.tr,
@@ -182,7 +191,7 @@ class OrganizationAddressScreen extends StatelessWidget {
                           if (controller.provinces.isNotEmpty) {
                             return input(
                               height: 260,
-                              dropDown: true,
+                              dropDown2: true,
                               label: controller.country.value!.code
                                           ?.toLowerCase() ==
                                       'us'
