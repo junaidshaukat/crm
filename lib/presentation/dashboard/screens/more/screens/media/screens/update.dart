@@ -267,12 +267,18 @@ class UpdateMediaScreen extends StatelessWidget {
                                         double width = resolution.width;
                                         double height = resolution.height;
 
-                                        if (width <= 15 || width >= 1921) {
+                                        if (width <= 0 || height <= 0) {
                                           return "video_resolution_required".tr;
-                                        }
-
-                                        if (height <= 15 || height >= 1081) {
-                                          return "video_resolution_required".tr;
+                                        } else {
+                                          if (width >= 1080 && width <= 1920) {
+                                            return "video_resolution_required"
+                                                .tr;
+                                          }
+                                          if (height >= 1080 &&
+                                              height <= 1920) {
+                                            return "video_resolution_required"
+                                                .tr;
+                                          }
                                         }
                                       }
 
