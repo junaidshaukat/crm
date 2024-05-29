@@ -37,6 +37,7 @@ class NewTransactionScreen extends StatelessWidget {
     String? Function(String?)? validator,
     void Function(DropDown?)? onChanged,
     void Function(String)? onChange,
+    EdgeInsets? contentPadding,
   }) {
     return SizedBox(
       width: double.maxFinite,
@@ -63,10 +64,7 @@ class NewTransactionScreen extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: onChange,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 16.v,
-                ),
+                contentPadding: contentPadding,
               ),
             if (control == "textarea")
               CustomTextFormField(
@@ -77,10 +75,7 @@ class NewTransactionScreen extends StatelessWidget {
                 textInputAction: textInputAction,
                 controller: textEditingController,
                 onChanged: onChange,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.h,
-                  vertical: 16.v,
-                ),
+                contentPadding: contentPadding,
               ),
             if (control == "dropdown")
               SimpleDropDown(

@@ -160,6 +160,7 @@ class SimpleDropDown extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.validator,
     this.onSaved,
+    this.contentPadding = EdgeInsets.zero,
   });
 
   final bool enabled;
@@ -175,6 +176,7 @@ class SimpleDropDown extends StatelessWidget {
   final BorderRadius? borderRadius;
   final int circularRadius;
   final TextOverflow? overflow;
+  final EdgeInsetsGeometry? contentPadding;
   final String? Function(DropDown?)? validator;
 
   @override
@@ -182,7 +184,7 @@ class SimpleDropDown extends StatelessWidget {
     return DropdownButtonFormField2<DropDown>(
       isExpanded: true,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 8.v),
+        contentPadding: contentPadding,
         border: OutlineInputBorder(
           borderSide: BorderSide(
             width: 1.0,
