@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -123,8 +124,11 @@ class OrganizationSupplymentoryDataController extends GetxController {
 
   Future<void> download(
       Uint8List data, String fileName, String mimeType) async {
-    await DocumentFileSavePlus().saveFile(data, fileName, mimeType);
-    Toasts.success(message: "qrcode_saved".tr);
+    await DocumentFileSavePlus().saveFile(data, fileName, mimeType).then((res) {
+      if (Platform.isAndroid) {
+        Toasts.success(message: "qrcode_saved".tr);
+      }
+    });
   }
 
   Future<bool> qrCode(String? qrCode) async {
