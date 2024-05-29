@@ -180,8 +180,7 @@ final Map<String, String> enUs = {
   "specify_number_of_recurring":
       "I want to specify number of recurring payments",
   "minimum_recurrings_02": "Minimum Recurrings: 02",
-  "transaction_export":
-      "File has been saved successfully.",
+  "transaction_export": "File has been saved successfully.",
 
   /// Users Screen
   "users": "Users",
