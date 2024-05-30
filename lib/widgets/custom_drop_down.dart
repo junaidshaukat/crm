@@ -251,7 +251,8 @@ class SimpleDropDown extends StatelessWidget {
       onChanged: onSelected,
       onSaved: onSaved,
       buttonStyleData: ButtonStyleData(
-        padding: EdgeInsets.zero,
+        height: 50.v,
+        padding: const EdgeInsets.symmetric(vertical: 2),
       ),
       iconStyleData: IconStyleData(
         icon: Icon(
