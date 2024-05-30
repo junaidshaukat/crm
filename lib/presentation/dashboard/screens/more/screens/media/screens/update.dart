@@ -262,25 +262,25 @@ class UpdateMediaScreen extends StatelessWidget {
                                         return "media_file_required".tr;
                                       }
 
-                                      if (media.type == "video") {
-                                        Size resolution = media.resolution;
-                                        double width = resolution.width;
-                                        double height = resolution.height;
+                                      // if (media.type == "video") {
+                                      //   Size resolution = media.resolution;
+                                      //   double width = resolution.width;
+                                      //   double height = resolution.height;
 
-                                        if (width <= 0 || height <= 0) {
-                                          return "video_resolution_required".tr;
-                                        } else {
-                                          if (width >= 1080 && width <= 1920) {
-                                            return "video_resolution_required"
-                                                .tr;
-                                          }
-                                          if (height >= 1080 &&
-                                              height <= 1920) {
-                                            return "video_resolution_required"
-                                                .tr;
-                                          }
-                                        }
-                                      }
+                                      //   if (width <= 0 || height <= 0) {
+                                      //     return "video_resolution_required".tr;
+                                      //   } else {
+                                      //     if (width >= 1080 && width <= 1920) {
+                                      //       return "video_resolution_required"
+                                      //           .tr;
+                                      //     }
+                                      //     if (height >= 1080 &&
+                                      //         height <= 1920) {
+                                      //       return "video_resolution_required"
+                                      //           .tr;
+                                      //     }
+                                      //   }
+                                      // }
 
                                       if (input == null) {
                                         return "media_file_required".tr;
