@@ -3,6 +3,7 @@ import '/core/app_export.dart';
 
 class CreateMediaScreen extends StatelessWidget {
   CreateMediaScreen({super.key, required this.event});
+
   final void Function(dynamic) event;
   final CreateMediaController controller = Get.put(CreateMediaController());
 
