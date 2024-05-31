@@ -13,6 +13,8 @@ class Pickers {
       } else {
         return null;
       }
+    }, onError: (error) {
+      throw error;
     });
   }
 
@@ -60,6 +62,8 @@ class Pickers {
       } else {
         return null;
       }
+    }, onError: (error) {
+      throw error;
     });
   }
 

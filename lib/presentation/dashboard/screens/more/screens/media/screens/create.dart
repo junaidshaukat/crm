@@ -136,11 +136,13 @@ class CreateMediaScreen extends StatelessWidget {
           controller.durationController.text = media.duration.toString();
           controller.mediaFileController.text = media.name;
           controller.mediaFile.value = media;
-          console.log(media.toJson());
+          console.log(media.toJson(), name: 'media', force: true);
         } else {
           controller.mediaFile.value = null;
           controller.mediaFileController.clear();
         }
+      }, onError: (error) {
+        console.log(error, name: 'media', force: true);
       });
     } else {
       Pickers.file().then((result) async {
@@ -150,11 +152,13 @@ class CreateMediaScreen extends StatelessWidget {
           controller.durationController.text = media.duration.toString();
           controller.mediaFileController.text = media.name;
           controller.mediaFile.value = media;
-          console.log(media.toJson());
+          console.log(media.toJson(), name: 'media', force: true);
         } else {
           controller.mediaFile.value = null;
           controller.mediaFileController.clear();
         }
+      }, onError: (error) {
+        console.log(error, name: 'media', force: true);
       });
     }
   }
