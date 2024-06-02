@@ -15,6 +15,9 @@ class Client {
         }
 
         bool debug = options.extra['debug'] ?? false;
+
+        if (options.data is FormData) {}
+
         if (debug) {
           console.log(
             {
