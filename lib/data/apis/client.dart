@@ -18,7 +18,6 @@ class Client {
 
         if (options.data is FormData) {
           FormData formData = options.data as FormData;
-
           List<MapEntry<String, String>> fields = formData.fields;
           List<MapEntry<String, MultipartFile>> files = formData.files;
 
@@ -31,6 +30,12 @@ class Client {
           for (var file in files) {
             String fileName = file.key;
             MultipartFile fileValue = file.value;
+            console.log({
+              'fileName': fileName,
+              'contentType': fileValue.contentType,
+              'filename': fileValue.filename,
+              'length': fileValue.length,
+            });
             console.log('File: $fileName, Size: ${fileValue.length}');
           }
         }
