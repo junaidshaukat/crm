@@ -16,7 +16,24 @@ class Client {
 
         bool debug = options.extra['debug'] ?? false;
 
-        if (options.data is FormData) {}
+        if (options.data is FormData) {
+          FormData formData = options.data as FormData;
+
+          List<MapEntry<String, String>> fields = formData.fields;
+          List<MapEntry<String, MultipartFile>> files = formData.files;
+
+          for (var field in fields) {
+            String fieldName = field.key;
+            String fieldValue = field.value;
+            console.log('Field: $fieldName, Value: $fieldValue');
+          }
+
+          for (var file in files) {
+            String fileName = file.key;
+            MultipartFile fileValue = file.value;
+            console.log('File: $fileName, Size: ${fileValue.length}');
+          }
+        }
 
         if (debug) {
           console.log(
