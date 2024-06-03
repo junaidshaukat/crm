@@ -301,7 +301,8 @@ class HomeScreen extends StatelessWidget {
                                         content: FilterByDayDialog(
                                           date: controller.date,
                                           onChanged: () {
-                                            Pickers.date(Get.context!)
+                                            pickers
+                                                .date(Get.context!)
                                                 .then((date) {
                                               if (date != null) {
                                                 controller.date(

@@ -220,7 +220,7 @@ class ReportsCard extends StatelessWidget {
                 filter.addAll(map);
               },
               onTap: () {
-                Pickers.date(Get.context!).then((val) {
+                pickers.date(Get.context!).then((val) {
                   if (val != null) {
                     rx.value = val.format('yyyy-MM-dd');
                     Map<String, dynamic> map = {};

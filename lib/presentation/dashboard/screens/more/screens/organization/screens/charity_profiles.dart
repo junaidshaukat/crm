@@ -157,7 +157,7 @@ class OrganizationCharityProfileScreen extends StatelessWidget {
                       text: "choose_file".tr,
                       buttonStyle: CustomButtonStyles.outlineGray,
                       onPressed: () {
-                        Pickers.media().then((file) {
+                        pickers.media().then((file) {
                           if (file != null) {
                             controller.signature.value = file;
                           }

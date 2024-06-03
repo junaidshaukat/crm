@@ -402,7 +402,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                             borderDecoration: const OutlineInputBorder(),
                             readOnly: true,
                             onTap: () {
-                              Pickers.date(Get.context!).then((date) {
+                              pickers.date(Get.context!).then((date) {
                                 if (date != null) {
                                   controller.day(date);
                                 }

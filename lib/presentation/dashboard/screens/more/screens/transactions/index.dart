@@ -82,8 +82,8 @@ class TransactionsScreen extends StatelessWidget {
                   hintText: datetime.value ?? hintText,
                   onChanged: onChanged,
                   onTap: () async {
-                    DateTime? date = await Pickers.date(Get.context!);
-                    TimeOfDay? time = await Pickers.time(Get.context!);
+                    DateTime? date = await pickers.date(Get.context!);
+                    TimeOfDay? time = await pickers.time(Get.context!);
                     if (date != null && time == null) {
                       datetime.value = '${date.format('yyyy-MM-dd')} 00:00:00';
                       onChanged!(datetime.value!);

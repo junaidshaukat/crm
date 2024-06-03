@@ -462,7 +462,7 @@ class MediaCentreScreen extends StatelessWidget {
                 hintText: date.value ?? hintText,
                 onChanged: onChanged,
                 onTap: () {
-                  Pickers.date(Get.context!).then((val) {
+                  pickers.date(Get.context!).then((val) {
                     if (val != null) {
                       date.value = val.formatYYYYMMDD;
                       onChanged!(val.formatYYYYMMDD);

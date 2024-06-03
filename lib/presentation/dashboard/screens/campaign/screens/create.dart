@@ -429,8 +429,8 @@ class CreateCampaignScreen extends StatelessWidget {
                             icon: const Icon(Icons.clear),
                           ),
                           onTap: () async {
-                            DateTime? date = await Pickers.date(Get.context!);
-                            TimeOfDay? time = await Pickers.time(Get.context!);
+                            DateTime? date = await pickers.date(Get.context!);
+                            TimeOfDay? time = await pickers.time(Get.context!);
                             if (date != null && time == null) {
                               controller.startDate.value =
                                   '${date.format('yyyy-MM-dd')} 00:00:00';
@@ -460,8 +460,8 @@ class CreateCampaignScreen extends StatelessWidget {
                             icon: const Icon(Icons.clear),
                           ),
                           onTap: () async {
-                            DateTime? date = await Pickers.date(Get.context!);
-                            TimeOfDay? time = await Pickers.time(Get.context!);
+                            DateTime? date = await pickers.date(Get.context!);
+                            TimeOfDay? time = await pickers.time(Get.context!);
                             if (date != null && time == null) {
                               controller.endDate.value =
                                   '${date.format('yyyy-MM-dd')} 00:00:00';

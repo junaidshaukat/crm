@@ -68,7 +68,7 @@ class FilterByDayDialog extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Pickers.date(Get.context!).then((value) {
+                  pickers.date(Get.context!).then((value) {
                     if (value != null) {
                       date.value = value;
                     }

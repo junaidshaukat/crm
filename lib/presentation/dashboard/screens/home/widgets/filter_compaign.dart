@@ -69,7 +69,7 @@ class DayWidget extends StatelessWidget {
         borderDecoration: const OutlineInputBorder(),
         readOnly: true,
         onTap: () {
-          Pickers.date(Get.context!).then((value) {
+          pickers.date(Get.context!).then((value) {
             if (value != null) {
               controller.day = value.day.toString().padLeft(2, '0');
               controller.date.value = value;

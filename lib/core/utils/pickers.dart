@@ -3,9 +3,39 @@ import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
 class Pickers {
-  static List<String> allowed = ["jpg", "jpeg", "png", "bmp", "gif", "mp4"];
+  List<String> allowed = ["jpg", "jpeg", "png", "bmp", "gif", "mp4"];
 
-  static Future<File?> media({bool gallery = true}) {
+  Future<void> getCache() async {
+    Directory cache = await getTemporaryDirectory();
+    List<FileSystemEntity> contents = cache.listSync(recursive: true);
+    for (FileSystemEntity entity in contents) {
+      console.log(entity.path);
+    }
+  }
+
+  Future<bool> clearCache() async {
+    try {
+      Directory cache = await getTemporaryDirectory();
+      List<FileSystemEntity> contents = cache.listSync(recursive: true);
+      for (var entity in contents) {
+        if (entity is File) {
+          if (await entity.exists()) {
+            await entity.delete();
+          }
+        } else if (entity is Directory) {
+          if (await entity.exists()) {
+            await entity.delete(recursive: true);
+          }
+        }
+      }
+      return true;
+    } catch (e) {
+      console.log("Error while clearing cache: $e");
+      return false;
+    }
+  }
+
+  Future<File?> media({bool gallery = true}) {
     ImagePicker picker = ImagePicker();
     return picker.pickMedia().then((file) {
       if (file != null) {
@@ -18,7 +48,7 @@ class Pickers {
     });
   }
 
-  static Future<File?> multiMedia({
+  Future<File?> multiMedia({
     bool video = false,
     bool gallery = true,
   }) {
@@ -36,7 +66,7 @@ class Pickers {
     }
   }
 
-  static Future<FilePickerResult?> file({
+  Future<FilePickerResult?> file({
     String? dialogTitle,
     String? initialDirectory,
     FileType type = FileType.custom,
@@ -67,7 +97,7 @@ class Pickers {
     });
   }
 
-  static Future<DateTime?> date(
+  Future<DateTime?> date(
     BuildContext context, {
     DateTime? initialDate,
     DateTime? firstDate,
@@ -140,7 +170,7 @@ class Pickers {
     });
   }
 
-  static Future<TimeOfDay?> time(
+  Future<TimeOfDay?> time(
     BuildContext context, {
     TimeOfDay? initialTime,
     Widget Function(BuildContext, Widget?)? builder,
@@ -200,3 +230,5 @@ class Pickers {
     });
   }
 }
+
+Pickers pickers = Pickers();
