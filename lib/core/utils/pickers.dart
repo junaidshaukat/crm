@@ -35,8 +35,9 @@ class Pickers {
     }
   }
 
-  Future<File?> media({bool gallery = true}) {
+  Future<File?> media() {
     ImagePicker picker = ImagePicker();
+    try {} catch (err) {}
     return picker.pickMedia().then((file) {
       if (file != null) {
         return File(file.path);

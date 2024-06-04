@@ -100,7 +100,6 @@ class AnalyticsApis extends Client {
   Future<ReceiptedRes> receipted({
     Map<String, String> headers = const {
       'Content-type': 'application/json',
-      'Authorization': 'Bearer {{adminToken}}',
     },
     Map<String, dynamic> requestData = const {},
     bool debug = true,
