@@ -118,7 +118,7 @@ final Map<String, String> enUs = {
   "muted": "Muted",
   "description": "Description",
   "select_file": "Select file",
-  "media_file": "Media (Upload Image/Video files only. Max File Size 20MB)",
+  "media_file": "Media File",
   "are_you_sure_delete_media": "Are you sure you want to delete this Media?",
 
   /// Organization Screen
@@ -284,6 +284,7 @@ final Map<String, String> enUs = {
   "tax_receipt_ratio": "Tax Receipt Ratio",
   "allow_recurring_changes": "Allow Recurring Changes",
   'hidden': "Hidden",
+  "media_type": "Media Type",
 
   /// Error
   "network_err": "Network Error",
@@ -324,4 +325,5 @@ final Map<String, String> enUs = {
   "file_size_exceed": "File size exceeds maximum allowed size (20 MB)",
   "video_resolution_required":
       "Video resolution must be between 16x16 to 1920x1080",
+  "please_select_a_valid": "Please select a valid"
 };

@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import '/core/app_export.dart';
 
-enum ContentType { image, video, other }
+enum MediaType { image, video, other }
 
 class MediaFile {
   final bool imagePicker;
@@ -48,19 +48,6 @@ class MediaFile {
     return bytes / (1024 * 1024);
   }
 
-  ContentType get content {
-    List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
-    List videos = ['mp4'];
-
-    if (images.contains(extn.toLowerCase())) {
-      return ContentType.image;
-    } else if (videos.contains(extn.toLowerCase())) {
-      return ContentType.video;
-    } else {
-      return ContentType.other;
-    }
-  }
-
   String get type {
     List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
     List videos = ['mp4'];
@@ -99,7 +86,6 @@ class MediaFile {
       'size': size,
       'path': path,
       'type': type,
-      'content': content,
       'duration': duration,
       'resolution': resolution,
     };

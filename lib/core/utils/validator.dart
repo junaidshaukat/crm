@@ -1096,6 +1096,28 @@ class ValidatorMedia {
     }
   }
 
+  static String? mediaType(String? input, {bool isRequired = true}) {
+    String pattern = r'^(video|image)$';
+    RegExp regExp = RegExp(pattern);
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"media".tr} ${"type".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"media".tr} ${"type".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_select_a_valid".tr} ${"media".tr.toLowerCase()} ${"type".tr.toLowerCase()}";
+      } else {
+        return null;
+      }
+    }
+  }
+
   static bool isImage(String? input, {bool isRequired = true}) {
     String pattern = r'^(jpg|jpeg|png|bmp|gif)$';
     RegExp regExp = RegExp(pattern, caseSensitive: false);

@@ -134,7 +134,7 @@ class UpdateCampaignScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 4.adaptSize),
+        SizedBox(height: 4.v),
         Padding(
           padding: EdgeInsets.only(left: 4.h),
           child: Text(
@@ -147,7 +147,7 @@ class UpdateCampaignScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 2.adaptSize),
+        SizedBox(height: 2.v),
         TextFormField(
           validator: validator,
           readOnly: true,
@@ -166,8 +166,8 @@ class UpdateCampaignScreen extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: CustomImageView(
+                    height: 40.v,
                     fit: BoxFit.contain,
-                    height: 40.adaptSize,
                     imagePath: icon.value.filename ?? "icon".icon.svg,
                   ),
                 ),
@@ -179,18 +179,18 @@ class UpdateCampaignScreen extends StatelessWidget {
                   onPressed: () {
                     Get.dialog(
                       AlertDialog(
-                        contentPadding: EdgeInsets.zero,
+                        contentPadding: EdgeInsets.all(12.h),
                         backgroundColor: Colors.transparent,
                         insetPadding: EdgeInsets.only(bottom: 0.v),
                         content: Container(
+                          width: double.maxFinite,
                           decoration: AppDecoration.fillPrimary.copyWith(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8.adaptSize),
-                              topRight: Radius.circular(8.adaptSize),
+                              topLeft: Radius.circular(12.h),
+                              topRight: Radius.circular(12.h),
                             ),
                           ),
-                          width: 360.h,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,8 +201,8 @@ class UpdateCampaignScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(6.h),
                                 decoration: AppDecoration.fillPrimary.copyWith(
                                   borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8.adaptSize),
-                                    topRight: Radius.circular(8.adaptSize),
+                                    topLeft: Radius.circular(12.h),
+                                    topRight: Radius.circular(12.h),
                                   ),
                                 ),
                                 child: Row(
@@ -220,9 +220,10 @@ class UpdateCampaignScreen extends StatelessWidget {
                                       ),
                                     ),
                                     CustomImageView(
+                                      width: 15.h,
+                                      height: 15.v,
                                       imagePath: "close".icon.svg,
-                                      height: 15.adaptSize,
-                                      width: 15.adaptSize,
+                                      svgColor: appTheme.whiteA700,
                                       onTap: () {
                                         if (controller.props.useState.value !=
                                             UseState.deleting) {
@@ -250,7 +251,8 @@ class UpdateCampaignScreen extends StatelessWidget {
                               const Divider(),
                               SizedBox(height: 16.v),
                               SizedBox(
-                                height: 400.adaptSize,
+                                height: 400.v,
+                                width: double.maxFinite,
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.vertical,
                                   child: Center(
@@ -259,17 +261,21 @@ class UpdateCampaignScreen extends StatelessWidget {
                                         if (controller
                                                 .propsIcons.useState.value ==
                                             UseState.loading) {
-                                          return const CircularProgress(
-                                            width: 12,
-                                            height: 12,
+                                          return SizedBox(
+                                            height: 400.v,
+                                            width: double.maxFinite,
+                                            child: CircularProgress(
+                                              width: 24.adaptSize,
+                                              height: 24.adaptSize,
+                                            ),
                                           );
                                         } else if (controller
                                             .icons.value.isEmpty) {
                                           return Text("no_records_found".tr);
                                         } else {
                                           return Wrap(
-                                            spacing: 8.adaptSize,
-                                            runSpacing: 8.adaptSize,
+                                            spacing: 8.h,
+                                            runSpacing: 8.v,
                                             children: List.generate(
                                               controller.icons.value.length,
                                               (index) {
@@ -283,8 +289,8 @@ class UpdateCampaignScreen extends StatelessWidget {
                                                   child: CustomImageView(
                                                     imagePath: controller.icons
                                                         .value[index].filename,
-                                                    width: 44.adaptSize,
-                                                    height: 44.adaptSize,
+                                                    width: 44.h,
+                                                    height: 44.v,
                                                   ),
                                                 );
                                               },

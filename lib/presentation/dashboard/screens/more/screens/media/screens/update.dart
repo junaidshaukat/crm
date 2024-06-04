@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
@@ -33,14 +35,17 @@ class UpdateMediaScreen extends StatelessWidget {
   }
 
   Widget input({
+    int? height,
     String? label,
     String? hintText,
-    TextEditingController? conn,
     bool dropDown = false,
+    bool readOnly = false,
     List<DropDown>? items,
-    String? Function(String?)? validator,
-    void Function(DropDown?)? onChanged,
+    void Function()? onTap,
     EdgeInsets? contentPadding,
+    TextEditingController? conn,
+    void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
     TextInputType? keyboardType = TextInputType.text,
   }) {
     return Column(
@@ -61,7 +66,9 @@ class UpdateMediaScreen extends StatelessWidget {
         SizedBox(height: 2.adaptSize),
         if (!dropDown)
           CustomTextFormField(
+            onTap: onTap,
             controller: conn,
+            readOnly: readOnly,
             hintText: "$hintText".tr,
             validator: validator,
             fillColor: appTheme.gray10001,
@@ -75,15 +82,15 @@ class UpdateMediaScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            height: 40,
+            items: items,
+            height: height,
             hintText: hintText,
+            onSelected: onChanged,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
               height: 23.v,
               width: 34.h,
             ),
-            items: items,
-            onSelected: onChanged,
           ),
         SizedBox(height: 4.adaptSize),
       ],
@@ -130,41 +137,45 @@ class UpdateMediaScreen extends StatelessWidget {
     );
   }
 
-  void onTap() async {
-    await picker(imagePicker: true);
-  }
+  Future<void> onTap() async {
+    if (controller.mediaType.value == 'image') {
+      try {
+        File? result = await pickers.image();
+        if (result != null) {
+          MediaFile media = MediaFile(true, ipResult: result);
+          await media.init();
+          controller.durationController.text = media.duration.toString();
+          controller.mediaFileController.text = media.name;
+          controller.mediaFile.value = media;
+          console.log(media.toJson(), name: 'media', force: true);
+        } else {
+          controller.mediaFile.value = null;
+          controller.mediaFileController.clear();
+        }
+      } catch (e) {
+        controller.mediaFile.value = null;
+        controller.mediaFileController.clear();
+      }
+    }
 
-  Future<void> picker({
-    bool imagePicker = true,
-  }) async {
-    if (imagePicker) {
-      pickers.media().then((result) async {
+    if (controller.mediaType.value == 'video') {
+      try {
+        File? result = await pickers.video();
         if (result != null) {
-          MediaFile media = MediaFile(imagePicker, ipResult: result);
+          MediaFile media = MediaFile(true, ipResult: result);
           await media.init();
           controller.durationController.text = media.duration.toString();
           controller.mediaFileController.text = media.name;
           controller.mediaFile.value = media;
-          console.log(media.toJson());
+          console.log(media.toJson(), name: 'media', force: true);
         } else {
           controller.mediaFile.value = null;
           controller.mediaFileController.clear();
         }
-      });
-    } else {
-      pickers.file().then((result) async {
-        if (result != null) {
-          MediaFile media = MediaFile(imagePicker, fpResult: result);
-          await media.init();
-          controller.durationController.text = media.duration.toString();
-          controller.mediaFileController.text = media.name;
-          controller.mediaFile.value = media;
-          console.log(media.toJson());
-        } else {
-          controller.mediaFile.value = null;
-          controller.mediaFileController.clear();
-        }
-      });
+      } catch (e) {
+        controller.mediaFile.value = null;
+        controller.mediaFileController.clear();
+      }
     }
   }
 
@@ -216,76 +227,58 @@ class UpdateMediaScreen extends StatelessWidget {
                               isRequired: false);
                         },
                       ),
-                      SizedBox(height: 4.v),
-                      Text(
-                        "media_file".tr,
-                        style: theme.textTheme.titleSmall,
+                      input(
+                        dropDown: true,
+                        label: 'media_type'.tr,
+                        hintText: controller.mediaType.value,
+                        items: [
+                          DropDown(id: 1, title: 'image'.tr, value: 'image'),
+                          DropDown(id: 2, title: 'video'.tr, value: 'video'),
+                        ]
+                            .map(
+                              (option) => DropDown(
+                                id: option.id,
+                                title: option.title,
+                                value: option.value,
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (option) {
+                          controller.mediaFile.value = null;
+                          controller.mediaFileController.clear();
+                          controller.mediaType.value = option?.value;
+                        },
                       ),
-                      SizedBox(height: 5.v),
-                      InkWell(
+                      input(
                         onTap: onTap,
-                        child: Container(
-                          width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 64.v,
-                          ),
-                          decoration: AppDecoration.fillWhite.copyWith(
-                            border: Border.all(color: appTheme.gray400),
-                            borderRadius: BorderRadiusStyle.roundedBorder12,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CustomImageView(
-                                imagePath: "image".icon.svg,
-                                height: 28.adaptSize,
-                                width: 28.adaptSize,
-                              ),
-                              SizedBox(height: 17.v),
-                              Flexible(
-                                child: TextFormField(
-                                  readOnly: true,
-                                  controller: controller.mediaFileController,
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    hintText: "select_file".tr,
-                                    border: InputBorder.none,
-                                  ),
-                                  validator: (input) {
-                                    MediaFile? media =
-                                        controller.mediaFile.value;
+                        readOnly: true,
+                        label: 'media_file'.tr,
+                        hintText: 'media_file'.tr,
+                        conn: controller.mediaFileController,
+                        validator: (val) {
+                          MediaFile? media = controller.mediaFile.value;
 
-                                    if (media != null) {
-                                      if (media.size > 20) {
-                                        return "file_size_exceed".tr;
-                                      }
+                          if (media != null) {
+                            if (media.size > 20) {
+                              return "file_size_exceed".tr;
+                            }
 
-                                      if (media.size <= 0) {
-                                        return "media_file_required".tr;
-                                      }
+                            if (media.size <= 0) {
+                              return "media_file_required".tr;
+                            }
 
-                                      if (input == null) {
-                                        return "media_file_required".tr;
-                                      }
+                            if (val == null) {
+                              return "media_file_required".tr;
+                            }
 
-                                      if (input.isEmpty) {
-                                        return "media_file_extension_required"
-                                            .tr;
-                                      }
-                                      return null;
-                                    }
+                            if (val.isEmpty) {
+                              return "media_file_extension_required".tr;
+                            }
+                            return null;
+                          }
 
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                          return null;
+                        },
                       ),
                       Row(
                         children: [

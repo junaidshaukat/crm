@@ -52,6 +52,64 @@ class Pickers {
     }
   }
 
+  Future<File?> image({
+    double? maxWidth,
+    double? maxHeight,
+    int? imageQuality,
+    bool requestFullMetadata = true,
+    ImageSource source = ImageSource.gallery,
+    CameraDevice preferredCameraDevice = CameraDevice.rear,
+  }) async {
+    ImagePicker picker = ImagePicker();
+    try {
+      if (await clearCache()) {
+        XFile? file = await picker.pickImage(
+          source: source,
+          maxWidth: maxWidth,
+          maxHeight: maxHeight,
+          imageQuality: imageQuality,
+          requestFullMetadata: requestFullMetadata,
+          preferredCameraDevice: preferredCameraDevice,
+        );
+        if (file != null) {
+          return File(file.path);
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<File?> video({
+    Duration? maxDuration,
+    ImageSource source = ImageSource.gallery,
+    CameraDevice preferredCameraDevice = CameraDevice.rear,
+  }) async {
+    ImagePicker picker = ImagePicker();
+    try {
+      if (await clearCache()) {
+        XFile? file = await picker.pickVideo(
+          source: source,
+          maxDuration: maxDuration,
+          preferredCameraDevice: preferredCameraDevice,
+        );
+        if (file != null) {
+          return File(file.path);
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<File?> multiMedia({
     bool video = false,
     bool gallery = true,

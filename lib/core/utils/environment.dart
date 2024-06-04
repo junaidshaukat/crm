@@ -2,7 +2,7 @@ import '/core/app_export.dart';
 
 class EnvConfig {
   Box env = Hive.box(HiveBox.environment);
-  String get hostname => 'https://donorapi.mervice.ca';
+  String get baseUrl => 'https://donorapi.mervice.ca';
   String? get adminToken => env.get('adminToken');
   String? get email => env.get('email');
   String? get password => env.get('password');

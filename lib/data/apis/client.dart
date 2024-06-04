@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class Client {
-  final String _baseUrl = EnvConfig().hostname;
   Dio get dio {
     Dio client = Dio();
-    client.options.baseUrl = _baseUrl;
+    client.options.baseUrl = EnvConfig().baseUrl;
 
     Map<String, String> headers = {
       "Content-Type": "application/json",
@@ -17,15 +18,43 @@ class Client {
 
     client.options.headers = headers;
 
+    client.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        error: true,
+        logPrint: (o) => debugPrint(o.toString()),
+      ),
+    );
+
+    // client.interceptors.add(
+    //   InterceptorsWrapper(
+    //     onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+    //       return handler.next(options);
+    //     },
+    //     onResponse: (Response response, ResponseInterceptorHandler handler) {
+    //       return handler.next(response);
+    //     },
+    //     onError: (DioException error, ErrorInterceptorHandler handler) {
+    //       return handler.next(error);
+    //     },
+    //   ),
+    // );
+
     return client;
   }
 
   bool isSuccessCall(Response response, {bool debug = false}) {
     if (debug) {
-      console.log(response.headers, name: 'isSuccessCall');
-      console.log(response.extra, name: 'isSuccessCall');
-      console.log(response.statusMessage, name: 'isSuccessCall');
-      console.log(response.data, name: 'isSuccessCall');
+      console.log({
+        'headers': response.headers,
+        'extra': response.extra,
+        'statusMessage': response.statusMessage,
+        'data': response.data,
+      }, name: 'isSuccessCall');
     }
     return response.statusCode! >= 200 && response.statusCode! < 300;
   }
