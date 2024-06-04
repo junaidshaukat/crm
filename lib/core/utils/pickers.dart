@@ -30,23 +30,26 @@ class Pickers {
       }
       return true;
     } catch (e) {
-      console.log("Error while clearing cache: $e");
-      return false;
+      return true;
     }
   }
 
-  Future<File?> media() {
+  Future<File?> media() async {
     ImagePicker picker = ImagePicker();
-    try {} catch (err) {}
-    return picker.pickMedia().then((file) {
-      if (file != null) {
-        return File(file.path);
+    try {
+      if (await clearCache()) {
+        XFile? file = await picker.pickMedia();
+        if (file != null) {
+          return File(file.path);
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
-    }, onError: (error) {
-      throw error;
-    });
+    } catch (error) {
+      rethrow;
+    }
   }
 
   Future<File?> multiMedia({
