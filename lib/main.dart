@@ -7,7 +7,6 @@ void main() async {
   await Hive.initFlutter();
   await HiveBox.initHive();
   await EnvConfig().initHive();
-  await pickers.clearCache();
 
   WidgetsFlutterBinding.ensureInitialized();
   PackageInfo packageInfo = await PackageInfo.fromPlatform();

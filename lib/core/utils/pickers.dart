@@ -15,6 +15,7 @@ class Pickers {
 
   Future<bool> clearCache() async {
     try {
+      await getCache();
       Directory cache = await getTemporaryDirectory();
       List<FileSystemEntity> contents = cache.listSync(recursive: true);
       for (var entity in contents) {

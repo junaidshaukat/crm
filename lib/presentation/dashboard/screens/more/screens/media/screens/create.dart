@@ -21,11 +21,7 @@ class CreateMediaScreen extends StatelessWidget {
         isMuted: controller.isMuted.value,
         mediaFile: controller.mediaFile.value?.file,
       );
-      controller.create(request.toJson(), event).then((res) async {
-        await pickers.getCache();
-        await pickers.clearCache();
-        await pickers.getCache();
-      });
+      await controller.create(request.toJson(), event);
     }
   }
 
