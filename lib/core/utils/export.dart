@@ -1,5 +1,4 @@
 export 'assets.dart';
-export 'backgroung.dart';
 export 'casting.dart';
 export 'chart_colors.dart';
 export 'connectivity.dart';

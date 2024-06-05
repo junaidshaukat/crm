@@ -6,6 +6,5 @@ class InitialBindings extends Bindings {
     Get.put(Api());
     Get.put(Internet());
     Get.put(PrefUtils());
-    Get.put(Backgroung());
   }
 }
