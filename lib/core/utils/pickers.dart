@@ -20,12 +20,12 @@ class Pickers {
       List<FileSystemEntity> contents = cache.listSync(recursive: true);
       for (var entity in contents) {
         if (entity is File) {
-          if (await entity.exists()) {
-            await entity.delete();
+          if (entity.existsSync()) {
+            entity.deleteSync();
           }
         } else if (entity is Directory) {
-          if (await entity.exists()) {
-            await entity.delete(recursive: true);
+          if (entity.existsSync()) {
+            entity.deleteSync(recursive: true);
           }
         }
       }
@@ -53,6 +53,10 @@ class Pickers {
     }
   }
 
+  String extn(String path) {
+    return path.split('/').last.split('.').last;
+  }
+
   Future<File?> image({
     double? maxWidth,
     double? maxHeight,
@@ -64,7 +68,8 @@ class Pickers {
     ImagePicker picker = ImagePicker();
     try {
       if (await clearCache()) {
-        XFile? file = await picker.pickImage(
+        Directory cache = await getTemporaryDirectory();
+        XFile? xFile = await picker.pickImage(
           source: source,
           maxWidth: maxWidth,
           maxHeight: maxHeight,
@@ -72,8 +77,12 @@ class Pickers {
           requestFullMetadata: requestFullMetadata,
           preferredCameraDevice: preferredCameraDevice,
         );
-        if (file != null) {
-          return File(file.path);
+        if (xFile != null) {
+          File temp = File(xFile.path);
+          String ext = extn(xFile.path);
+          String path = '${cache.path}/${fn.randomString}.$ext';
+          File file = await temp.copy(path);
+          return file;
         } else {
           return null;
         }
@@ -93,13 +102,18 @@ class Pickers {
     ImagePicker picker = ImagePicker();
     try {
       if (await clearCache()) {
-        XFile? file = await picker.pickVideo(
+        Directory cache = await getTemporaryDirectory();
+        XFile? xFile = await picker.pickVideo(
           source: source,
           maxDuration: maxDuration,
           preferredCameraDevice: preferredCameraDevice,
         );
-        if (file != null) {
-          return File(file.path);
+        if (xFile != null) {
+          File temp = File(xFile.path);
+          String ext = extn(xFile.path);
+          String path = '${cache.path}/${fn.randomString}.$ext';
+          File file = await temp.copy(path);
+          return file;
         } else {
           return null;
         }

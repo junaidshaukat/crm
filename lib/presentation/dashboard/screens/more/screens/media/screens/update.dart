@@ -32,6 +32,7 @@ class UpdateMediaScreen extends StatelessWidget {
     int? height,
     String? label,
     String? hintText,
+    bool browse = false,
     bool dropDown = false,
     bool readOnly = false,
     List<DropDown>? items,
@@ -68,6 +69,39 @@ class UpdateMediaScreen extends StatelessWidget {
             fillColor: appTheme.gray10001,
             keyboardType: keyboardType,
             contentPadding: contentPadding,
+            suffixConstraints: browse == true
+                ? BoxConstraints(
+                    minWidth: 100.h,
+                    maxWidth: 100.h,
+                    minHeight: 50.v,
+                    maxHeight: 50.v,
+                  )
+                : null,
+            suffix: browse == true
+                ? Container(
+                    width: 100.h,
+                    height: 50.v,
+                    decoration: BoxDecoration(
+                      color: appTheme.green800,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(4.h),
+                        bottomRight: Radius.circular(4.h),
+                      ),
+                      border: Border.all(
+                        color: appTheme.gray400,
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'browse'.tr,
+                        style: TextStyle(
+                          color: appTheme.whiteA700,
+                        ),
+                      ),
+                    ),
+                  )
+                : null,
             borderDecoration: OutlineInputBorder(
               borderSide: BorderSide(
                 color: appTheme.gray400,
@@ -245,6 +279,7 @@ class UpdateMediaScreen extends StatelessWidget {
                       ),
                       input(
                         onTap: onTap,
+                        browse: true,
                         readOnly: true,
                         label: 'media_file'.tr,
                         hintText: 'media_file'.tr,

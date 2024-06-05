@@ -7,6 +7,7 @@ export 'constant.dart';
 export 'environment.dart';
 export 'exceptions.dart';
 export 'extensions.dart';
+export 'functions.dart';
 export 'initial_bindings.dart';
 export 'logger.dart';
 export 'media.dart';
