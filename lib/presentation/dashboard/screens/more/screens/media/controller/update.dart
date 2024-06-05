@@ -47,6 +47,7 @@ class UpdateMediaController extends GetxController {
         Toasts.success(
           message: response.message.toString(),
         );
+        refresh();
       } else {
         throw response;
       }
