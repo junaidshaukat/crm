@@ -285,6 +285,8 @@ final Map<String, String> enUs = {
   "allow_recurring_changes": "Allow Recurring Changes",
   'hidden': "Hidden",
   "media_type": "Media Type",
+  "image": "Image",
+  "video": "Video",
 
   /// Error
   "network_err": "Network Error",
