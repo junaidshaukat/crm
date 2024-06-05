@@ -22,7 +22,7 @@ class UpdateMediaScreen extends StatelessWidget {
         fullScreen: controller.fullScreen.value,
         status: controller.status.value,
         isMuted: controller.isMuted.value,
-        mediaFile: controller.mediaFile.value?.file,
+        mediaFile: controller.media.value?.file,
       );
       await controller.create(media.tagNumber, request.toJson(), event);
     }
@@ -166,44 +166,21 @@ class UpdateMediaScreen extends StatelessWidget {
   }
 
   Future<void> onTap() async {
-    if (controller.mediaType.value == 'image') {
-      try {
-        File? result = await pickers.image();
-        if (result != null) {
-          MediaFile media = MediaFile(true, ipResult: result);
-          await media.init();
-          controller.durationController.text = media.duration.toString();
-          controller.mediaFileController.text = media.name;
-          controller.mediaFile.value = media;
-          console.log(media.toJson(), name: 'media', force: true);
-        } else {
-          controller.mediaFile.value = null;
-          controller.mediaFileController.clear();
-        }
-      } catch (e) {
-        controller.mediaFile.value = null;
+    try {
+      File? file = await pickers.media();
+      if (file != null) {
+        Media media = await Media.factory(file);
+        controller.durationController.text = media.duration.toString();
+        controller.mediaFileController.text = media.name;
+        controller.media.value = media;
+        console.log(media.toJson(), name: 'media', force: true);
+      } else {
+        controller.media.value = null;
         controller.mediaFileController.clear();
       }
-    }
-
-    if (controller.mediaType.value == 'video') {
-      try {
-        File? result = await pickers.video();
-        if (result != null) {
-          MediaFile media = MediaFile(true, ipResult: result);
-          await media.init();
-          controller.durationController.text = media.duration.toString();
-          controller.mediaFileController.text = media.name;
-          controller.mediaFile.value = media;
-          console.log(media.toJson(), name: 'media', force: true);
-        } else {
-          controller.mediaFile.value = null;
-          controller.mediaFileController.clear();
-        }
-      } catch (e) {
-        controller.mediaFile.value = null;
-        controller.mediaFileController.clear();
-      }
+    } catch (e) {
+      controller.media.value = null;
+      controller.mediaFileController.clear();
     }
   }
 
@@ -256,28 +233,6 @@ class UpdateMediaScreen extends StatelessWidget {
                         },
                       ),
                       input(
-                        dropDown: true,
-                        label: 'media_type'.tr,
-                        hintText: controller.mediaType.value,
-                        items: [
-                          DropDown(id: 1, title: 'image'.tr, value: 'image'),
-                          DropDown(id: 2, title: 'video'.tr, value: 'video'),
-                        ]
-                            .map(
-                              (option) => DropDown(
-                                id: option.id,
-                                title: option.title,
-                                value: option.value,
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (option) {
-                          controller.mediaFile.value = null;
-                          controller.mediaFileController.clear();
-                          controller.mediaType.value = option?.value;
-                        },
-                      ),
-                      input(
                         onTap: onTap,
                         browse: true,
                         readOnly: true,
@@ -285,28 +240,22 @@ class UpdateMediaScreen extends StatelessWidget {
                         hintText: 'media_file'.tr,
                         conn: controller.mediaFileController,
                         validator: (val) {
-                          MediaFile? media = controller.mediaFile.value;
+                          Media? media = controller.media.value;
                           if (media != null) {
                             if (val == null) {
                               return "media_file_required".tr;
-                            }
-
-                            if (media.size <= 0) {
+                            } else if (media.size <= 0) {
                               return "media_file_required".tr;
-                            }
-
-                            if (media.size > 20) {
+                            } else if (media.size > 20) {
                               return "file_size_exceed".tr;
-                            }
-
-                            if (!media.supported) {
+                            } else if (!media.supported) {
                               return "media_file_extension_required".tr;
+                            } else {
+                              return null;
                             }
-
+                          } else {
                             return null;
                           }
-
-                          return null;
                         },
                       ),
                       Row(

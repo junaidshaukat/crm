@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
 class Pickers {
-  List<String> allowed = ["jpg", "jpeg", "png", "bmp", "gif", "mp4"];
+  List<String> allowed = ["jpg", "jpeg", "png", "bmp", "gif", "mp4", "mov"];
 
   Future<void> getCache() async {
     Directory cache = await getTemporaryDirectory();
@@ -38,13 +38,10 @@ class Pickers {
   Future<File?> media() async {
     ImagePicker picker = ImagePicker();
     try {
-      if (await clearCache()) {
-        XFile? file = await picker.pickMedia();
-        if (file != null) {
-          return File(file.path);
-        } else {
-          return null;
-        }
+      await clearCache();
+      XFile? xFile = await picker.pickMedia();
+      if (xFile != null) {
+        return await copy(File(xFile.path));
       } else {
         return null;
       }
@@ -53,39 +50,20 @@ class Pickers {
     }
   }
 
-  String extn(String path) {
-    return path.split('/').last.split('.').last;
+  Future<File> copy(File file) async {
+    Directory cache = await getTemporaryDirectory();
+    String ext = file.path.split('/').last.split('.').last;
+    String path = '${cache.path}/${fn.randomString}.$ext';
+    return await file.copy(path);
   }
 
-  Future<File?> image({
-    double? maxWidth,
-    double? maxHeight,
-    int? imageQuality,
-    bool requestFullMetadata = true,
-    ImageSource source = ImageSource.gallery,
-    CameraDevice preferredCameraDevice = CameraDevice.rear,
-  }) async {
+  Future<File?> image({ImageSource source = ImageSource.gallery}) async {
     ImagePicker picker = ImagePicker();
     try {
-      if (await clearCache()) {
-        Directory cache = await getTemporaryDirectory();
-        XFile? xFile = await picker.pickImage(
-          source: source,
-          maxWidth: maxWidth,
-          maxHeight: maxHeight,
-          imageQuality: imageQuality,
-          requestFullMetadata: requestFullMetadata,
-          preferredCameraDevice: preferredCameraDevice,
-        );
-        if (xFile != null) {
-          File temp = File(xFile.path);
-          String ext = extn(xFile.path);
-          String path = '${cache.path}/${fn.randomString}.$ext';
-          File file = await temp.copy(path);
-          return file;
-        } else {
-          return null;
-        }
+      await clearCache();
+      XFile? xFile = await picker.pickImage(source: source);
+      if (xFile != null) {
+        return await copy(File(xFile.path));
       } else {
         return null;
       }
@@ -94,84 +72,19 @@ class Pickers {
     }
   }
 
-  Future<File?> video({
-    Duration? maxDuration,
-    ImageSource source = ImageSource.gallery,
-    CameraDevice preferredCameraDevice = CameraDevice.rear,
-  }) async {
+  Future<File?> video({ImageSource source = ImageSource.gallery}) async {
     ImagePicker picker = ImagePicker();
     try {
-      if (await clearCache()) {
-        Directory cache = await getTemporaryDirectory();
-        XFile? xFile = await picker.pickVideo(
-          source: source,
-          maxDuration: maxDuration,
-          preferredCameraDevice: preferredCameraDevice,
-        );
-        if (xFile != null) {
-          File temp = File(xFile.path);
-          String ext = extn(xFile.path);
-          String path = '${cache.path}/${fn.randomString}.$ext';
-          File file = await temp.copy(path);
-          return file;
-        } else {
-          return null;
-        }
+      await clearCache();
+      XFile? xFile = await picker.pickVideo(source: source);
+      if (xFile != null) {
+        return await copy(File(xFile.path));
       } else {
         return null;
       }
     } catch (error) {
       rethrow;
     }
-  }
-
-  Future<File?> multiMedia({
-    bool video = false,
-    bool gallery = true,
-  }) {
-    ImagePicker picker = ImagePicker();
-    ImageSource source = gallery ? ImageSource.gallery : ImageSource.camera;
-
-    if (video) {
-      return picker.pickVideo(source: source).then((file) {
-        return file != null ? File(file.path) : null;
-      });
-    } else {
-      return picker.pickImage(source: source).then((file) {
-        return file != null ? File(file.path) : null;
-      });
-    }
-  }
-
-  Future<FilePickerResult?> file({
-    String? dialogTitle,
-    String? initialDirectory,
-    FileType type = FileType.custom,
-    List<String>? allowedExtensions,
-    dynamic Function(FilePickerStatus)? onFileLoading,
-    bool allowCompression = true,
-    int compressionQuality = 30,
-    bool allowMultiple = false,
-    bool withData = false,
-    bool withReadStream = false,
-    bool lockParentWindow = false,
-    bool readSequential = false,
-  }) async {
-    FilePicker picker = FilePicker.platform;
-    return picker
-        .pickFiles(
-      type: type,
-      allowedExtensions: allowedExtensions ?? allowed,
-    )
-        .then((file) {
-      if (file != null) {
-        return file;
-      } else {
-        return null;
-      }
-    }, onError: (error) {
-      throw error;
-    });
   }
 
   Future<DateTime?> date(

@@ -22,8 +22,6 @@ class ViewScreenState extends State<ViewScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       media = Get.arguments;
-      console.log(media.toJson(), force: true);
-
       if (media.mediaType == "video") {
         isMuted = media.isMuted;
         Uri uri = Uri.parse(media.path);

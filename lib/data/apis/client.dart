@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '/core/app_export.dart';
 
 class Client {
@@ -26,23 +24,9 @@ class Client {
         responseHeader: true,
         responseBody: true,
         error: true,
-        logPrint: (o) => debugPrint(o.toString()),
+        logPrint: (o) => console.log(o.toString(), name: 'LogInterceptor'),
       ),
     );
-
-    // client.interceptors.add(
-    //   InterceptorsWrapper(
-    //     onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-    //       return handler.next(options);
-    //     },
-    //     onResponse: (Response response, ResponseInterceptorHandler handler) {
-    //       return handler.next(response);
-    //     },
-    //     onError: (DioException error, ErrorInterceptorHandler handler) {
-    //       return handler.next(error);
-    //     },
-    //   ),
-    // );
 
     return client;
   }

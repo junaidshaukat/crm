@@ -1,102 +1,88 @@
 import 'dart:io';
 import 'dart:ui';
-
 import '/core/app_export.dart';
 
-enum MediaType { image, video, other }
+class Media {
+  final File file;
+  final String path;
+  final String name;
+  final String extn;
+  final String type;
+  final double size;
+  final int duration;
+  final bool supported;
+  final Size resolution;
 
-class MediaFile {
-  final bool imagePicker;
-  final File? ipResult;
-  final FilePickerResult? fpResult;
-  VideoPlayerValue? video;
-
-  List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
-  List videos = ['mp4', 'mov'];
-
-  MediaFile(
-    this.imagePicker, {
-    this.ipResult,
-    this.fpResult,
+  Media({
+    required this.extn,
+    required this.file,
+    required this.name,
+    required this.path,
+    required this.size,
+    required this.type,
+    required this.duration,
+    required this.supported,
+    required this.resolution,
   });
 
-  File get file {
-    if (imagePicker) {
-      return File(ipResult!.path);
-    } else {
-      return File(fpResult!.xFiles.first.path);
-    }
-  }
+  static Future<Media> factory(File param) async {
+    int duration = 1;
+    bool supported = false;
+    VideoPlayerValue? video;
+    Size resolution = Size.zero;
 
-  Future<void> init() async {
+    List videos = ['mp4', 'mov'];
+    List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
+
+    File file = param;
+    String path = file.path;
+    String name = path.split('/').last;
+    double size = file.lengthSync() / (1024 * 1024);
+    String extn = path.split('/').last.split('.').last;
+    String type = images.contains(extn.toLowerCase()) == true
+        ? 'image'
+        : videos.contains(extn.toLowerCase()) == true
+            ? 'video'
+            : 'unsupported';
+
+    if (type == 'image') {
+      supported = true;
+    }
+
     if (type == 'video') {
+      supported = true;
       video = await VideoDetails.getInfo(file);
+      duration = video?.duration.inSeconds ?? 0;
+      resolution = video?.size ?? Size.zero;
     }
-  }
 
-  String get path {
-    return file.path;
-  }
-
-  String get name {
-    return path.split('/').last;
-  }
-
-  String get extn {
-    return path.split('/').last.split('.').last;
-  }
-
-  bool get supported {
-    if (images.contains(extn.toLowerCase())) {
-      return true;
-    } else if (videos.contains(extn.toLowerCase())) {
-      return true;
-    } else {
-      return false;
+    if (type == 'unsupported') {
+      supported = false;
     }
-  }
 
-  double get size {
-    int bytes = file.lengthSync();
-    return bytes / (1024 * 1024);
-  }
-
-  String get type {
-    if (images.contains(extn.toLowerCase())) {
-      return 'image';
-    } else if (videos.contains(extn.toLowerCase())) {
-      return 'video';
-    } else {
-      return 'other';
-    }
-  }
-
-  int get duration {
-    if (type == 'video') {
-      return video?.duration.inSeconds ?? 0;
-    } else {
-      return 1;
-    }
-  }
-
-  Size get resolution {
-    if (type == 'video') {
-      return video?.size ?? Size.zero;
-    } else {
-      return Size.zero;
-    }
+    return Media(
+      extn: extn,
+      file: file,
+      name: name,
+      path: path,
+      size: size,
+      type: type,
+      duration: duration,
+      supported: supported,
+      resolution: resolution,
+    );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'picker': imagePicker ? 'image_picker' : 'file_picker',
+      'extn': extn,
       'file': file,
       'name': name,
-      'extn': extn,
-      'size': size,
       'path': path,
+      'size': size,
       'type': type,
       'duration': duration,
+      'supported': supported,
       'resolution': resolution,
     };
   }

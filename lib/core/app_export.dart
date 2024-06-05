@@ -5,7 +5,6 @@ export 'package:intl/intl.dart';
 export 'package:fl_chart/fl_chart.dart';
 export 'package:local_auth/local_auth.dart';
 export 'package:local_auth/error_codes.dart';
-export 'package:file_picker/file_picker.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:image_picker/image_picker.dart';
@@ -21,6 +20,7 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:document_file_save_plus/document_file_save_plus.dart';
 export 'package:flutter_volume_controller/flutter_volume_controller.dart';
+export 'package:video_compress/video_compress.dart';
 
 export 'utils/export.dart';
 export '/data/export.dart';
