@@ -31,7 +31,7 @@ class Media {
     VideoPlayerValue? video;
     Size resolution = Size.zero;
 
-    List videos = ['mp4', 'mov'];
+    List videos = ['mp4'];
     List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
 
     File file = param;

@@ -311,7 +311,7 @@ final Map<String, String> enUs = {
   "video_not_supported": "Video not supported",
   "media_file_required": "Media file required",
   "media_file_extension_required":
-      "For image required format: jpg, jpeg, png, bmp, gif \nFor video required format: mp4, mov",
+      "For image required format: jpg, jpeg, png, bmp, gif \nFor video required format: mp4",
   "input_is_required": "Input is required",
   "amount_cannot_be_less_then": "Amount cannot be less then",
   "please_enter_your_email": "Please enter your email",
