@@ -20,7 +20,6 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:document_file_save_plus/document_file_save_plus.dart';
 export 'package:flutter_volume_controller/flutter_volume_controller.dart';
-export 'package:video_compress/video_compress.dart';
 
 export 'utils/export.dart';
 export '/data/export.dart';
