@@ -286,23 +286,23 @@ class UpdateMediaScreen extends StatelessWidget {
                         conn: controller.mediaFileController,
                         validator: (val) {
                           MediaFile? media = controller.mediaFile.value;
-
                           if (media != null) {
-                            if (media.size > 20) {
-                              return "file_size_exceed".tr;
+                            if (val == null) {
+                              return "media_file_required".tr;
                             }
 
                             if (media.size <= 0) {
                               return "media_file_required".tr;
                             }
 
-                            if (val == null) {
-                              return "media_file_required".tr;
+                            if (media.size > 20) {
+                              return "file_size_exceed".tr;
                             }
 
-                            if (val.isEmpty) {
+                            if (!media.supported) {
                               return "media_file_extension_required".tr;
                             }
+
                             return null;
                           }
 

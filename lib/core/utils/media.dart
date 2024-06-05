@@ -11,6 +11,9 @@ class MediaFile {
   final FilePickerResult? fpResult;
   VideoPlayerValue? video;
 
+  List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
+  List videos = ['mp4', 'mov'];
+
   MediaFile(
     this.imagePicker, {
     this.ipResult,
@@ -43,15 +46,22 @@ class MediaFile {
     return path.split('/').last.split('.').last;
   }
 
+  bool get supported {
+    if (images.contains(extn.toLowerCase())) {
+      return true;
+    } else if (videos.contains(extn.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   double get size {
     int bytes = file.lengthSync();
     return bytes / (1024 * 1024);
   }
 
   String get type {
-    List images = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
-    List videos = ['mp4'];
-
     if (images.contains(extn.toLowerCase())) {
       return 'image';
     } else if (videos.contains(extn.toLowerCase())) {
@@ -77,7 +87,7 @@ class MediaFile {
     }
   }
 
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'picker': imagePicker ? 'image_picker' : 'file_picker',
       'file': file,

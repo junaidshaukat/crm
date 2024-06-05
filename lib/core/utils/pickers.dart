@@ -9,7 +9,7 @@ class Pickers {
     Directory cache = await getTemporaryDirectory();
     List<FileSystemEntity> contents = cache.listSync(recursive: true);
     for (FileSystemEntity entity in contents) {
-      console.log(entity.path);
+      console.log(entity.path, force: true);
     }
   }
 
@@ -20,12 +20,12 @@ class Pickers {
       List<FileSystemEntity> contents = cache.listSync(recursive: true);
       for (var entity in contents) {
         if (entity is File) {
-          if (entity.existsSync()) {
-            entity.deleteSync();
+          if (await entity.exists()) {
+            await entity.delete();
           }
         } else if (entity is Directory) {
-          if (entity.existsSync()) {
-            entity.deleteSync(recursive: true);
+          if (await entity.exists()) {
+            await entity.delete(recursive: true);
           }
         }
       }

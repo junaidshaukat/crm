@@ -276,23 +276,23 @@ class CreateMediaScreen extends StatelessWidget {
                         hintText: 'media_file'.tr,
                         conn: controller.mediaFileController,
                         validator: (val) {
-                          MediaFile? mediaFile = controller.mediaFile.value;
-                          if (mediaFile != null) {
-                            if (mediaFile.size > 20) {
+                          MediaFile? media = controller.mediaFile.value;
+                          if (media != null) {
+                            if (media.size <= 0) {
+                              return "media_file_required".tr;
+                            }
+
+                            if (media.size > 20) {
                               return "file_size_exceed".tr;
                             }
 
-                            if (mediaFile.size <= 0) {
-                              return "media_file_required".tr;
+                            if (!media.supported) {
+                              return "media_file_extension_required".tr;
                             }
                           }
 
-                          if (val == null || mediaFile == null) {
+                          if (val == null || media == null) {
                             return "media_file_required".tr;
-                          }
-
-                          if (val.isEmpty) {
-                            return "media_file_extension_required".tr;
                           }
 
                           return null;
