@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
 class Pickers {
-  List<String> allowed = ["jpg", "jpeg", "png", "bmp", "gif", "mp4", "mov"];
+  List<String> images = ["jpg", "jpeg", "png", "bmp", "gif"];
+  List<String> videos = ["mp4", "mov"];
 
   Future<void> getCache() async {
     Directory cache = await getTemporaryDirectory();
@@ -78,12 +79,16 @@ class Pickers {
     String ext = file.path.split('/').last.split('.').last;
     String path = '${cache.path}/${fn.randomString}.$ext';
     if (mediaType == 'video') {
-      if (ext.toLowerCase() != 'mp4') {
-        File? temp = await convert(file);
-        if (temp != null) {
-          return await temp.copy(path);
+      if (videos.contains(ext.toLowerCase())) {
+        if (ext.toLowerCase() != 'mp4') {
+          File? temp = await convert(file);
+          if (temp != null) {
+            return await temp.copy(path);
+          } else {
+            return null;
+          }
         } else {
-          return null;
+          return await file.copy(path);
         }
       } else {
         return await file.copy(path);
