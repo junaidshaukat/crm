@@ -73,40 +73,36 @@ class Pickers {
     }
   }
 
-  Future<File> copy(File file) async {
+  Future<File?> copy(File file, {String mediaType = 'image'}) async {
     Directory cache = await getTemporaryDirectory();
     String ext = file.path.split('/').last.split('.').last;
     String path = '${cache.path}/${fn.randomString}.$ext';
-    return await file.copy(path);
-  }
-
-  Future<File?> image({ImageSource source = ImageSource.gallery}) async {
-    ImagePicker picker = ImagePicker();
-    try {
-      await clearCache();
-      XFile? xFile = await picker.pickImage(source: source);
-      if (xFile != null) {
-        return await copy(File(xFile.path));
+    if (mediaType == 'video') {
+      if (ext.toLowerCase() != 'mp4') {
+        File? temp = await convert(file);
+        if (temp != null) {
+          return await temp.copy(path);
+        } else {
+          return null;
+        }
       } else {
-        return null;
+        return await file.copy(path);
       }
-    } catch (error) {
-      rethrow;
+    } else {
+      return await file.copy(path);
     }
   }
 
-  Future<File?> video({ImageSource source = ImageSource.gallery}) async {
-    ImagePicker picker = ImagePicker();
+  Future<File?> convert(File file) async {
     try {
-      await clearCache();
-      XFile? xFile = await picker.pickVideo(source: source);
-      if (xFile != null) {
-        return await copy(File(xFile.path));
-      } else {
-        return null;
-      }
-    } catch (error) {
-      rethrow;
+      MediaInfo? media = await VideoCompress.compressVideo(
+        file.path,
+        deleteOrigin: false,
+        quality: VideoQuality.DefaultQuality,
+      );
+      return media?.file;
+    } catch (e) {
+      return null;
     }
   }
 
