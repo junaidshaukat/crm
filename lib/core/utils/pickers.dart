@@ -82,6 +82,8 @@ class Pickers {
       if (videos.contains(ext.toLowerCase())) {
         if (ext.toLowerCase() != 'mp4') {
           File? temp = await convert(file);
+          console.log(temp, force: true, name: 'convert');
+
           if (temp != null) {
             ext = temp.path.split('/').last.split('.').last;
             path = '${cache.path}/${fn.randomString}.$ext';
