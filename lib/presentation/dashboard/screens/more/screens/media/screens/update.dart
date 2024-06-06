@@ -233,6 +233,28 @@ class UpdateMediaScreen extends StatelessWidget {
                         },
                       ),
                       input(
+                        dropDown: true,
+                        label: 'media_type'.tr,
+                        hintText: controller.mediaType.value,
+                        items: [
+                          DropDown(id: 1, title: 'image'.tr, value: 'image'),
+                          DropDown(id: 2, title: 'video'.tr, value: 'video'),
+                        ]
+                            .map(
+                              (option) => DropDown(
+                                id: option.id,
+                                title: option.title,
+                                value: option.value,
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (option) {
+                          controller.media.value = null;
+                          controller.mediaFileController.clear();
+                          controller.mediaType.value = option?.value;
+                        },
+                      ),
+                      input(
                         onTap: onTap,
                         browse: true,
                         readOnly: true,

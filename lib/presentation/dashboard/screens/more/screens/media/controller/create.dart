@@ -16,7 +16,9 @@ class CreateMediaController extends GetxController {
   RxBool status = RxBool(false);
   RxBool isMuted = RxBool(false);
   Rx<Media?> media = Rx(null);
+  Rx<String> mediaType = Rx("image");
   Rx<String?> mediaFileErr = Rx(null);
+
 
   Future create(
     Map<String, dynamic> requestData,

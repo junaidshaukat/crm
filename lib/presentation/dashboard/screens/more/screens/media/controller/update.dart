@@ -16,6 +16,7 @@ class UpdateMediaController extends GetxController {
   RxBool status = RxBool(false);
   RxBool isMuted = RxBool(false);
   Rx<Media?> media = Rx(null);
+  Rx<String> mediaType = Rx("image");
 
   void setTextEditingController(MediaData media) {
     nameController.text = media.name;
@@ -25,7 +26,8 @@ class UpdateMediaController extends GetxController {
     mediaFileController.text = media.url;
     fullScreen.value = media.fullScreen;
     status.value = media.status;
-    isMuted.value = media.isMuted;
+    isMuted.value = media.isMuted;    mediaType.value = media.mediaType;
+
   }
 
   Future create(
