@@ -108,7 +108,8 @@ class Pickers {
         quality: VideoQuality.DefaultQuality,
       );
       return media?.file;
-    } catch (e) {
+    } catch (err) {
+      console.log(err, force: true, name: 'convert');
       return null;
     }
   }
