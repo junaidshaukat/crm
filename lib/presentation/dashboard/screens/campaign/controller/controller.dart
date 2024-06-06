@@ -221,7 +221,7 @@ class CompaignController extends GetxController {
         }
       });
     } catch (e) {
-      console.log(e);
+      rethrow;
     }
   }
 

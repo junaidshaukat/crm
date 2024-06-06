@@ -8,7 +8,6 @@ class UpdateCampaignScreen extends StatelessWidget {
 
   UpdateCampaignScreen(this.campaign, this.event, {super.key}) {
     controller.setTextEditingController(campaign);
-    console.log(campaign.toJson());
   }
 
   Future<void> create() async {

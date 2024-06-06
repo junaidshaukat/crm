@@ -163,13 +163,12 @@ class CreateMediaScreen extends StatelessWidget {
 
   Future<void> onTap() async {
     try {
-      File? file = await pickers.media(mediaType:controller.mediaType.value);
+      File? file = await pickers.media(mediaType: controller.mediaType.value);
       if (file != null) {
         Media media = await Media.factory(file);
         controller.durationController.text = media.duration.toString();
         controller.mediaFileController.text = media.name;
         controller.media.value = media;
-        console.log(media.toJson(), name: 'media', force: true);
       } else {
         controller.media.value = null;
         controller.mediaFileController.clear();

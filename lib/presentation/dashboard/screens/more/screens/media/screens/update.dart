@@ -173,7 +173,6 @@ class UpdateMediaScreen extends StatelessWidget {
         controller.durationController.text = media.duration.toString();
         controller.mediaFileController.text = media.name;
         controller.media.value = media;
-        console.log(media.toJson(), name: 'media', force: true);
       } else {
         controller.media.value = null;
         controller.mediaFileController.clear();

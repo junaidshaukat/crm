@@ -10,7 +10,7 @@ class Pickers {
     Directory cache = await getTemporaryDirectory();
     List<FileSystemEntity> contents = cache.listSync(recursive: true);
     for (FileSystemEntity entity in contents) {
-      console.log(entity.path, force: true);
+      console.log(entity.path);
     }
   }
 
@@ -65,7 +65,7 @@ class Pickers {
       }
 
       if (xFile != null) {
-        return await copy(File(xFile.path));
+        return await copy(File(xFile.path), mediaType: mediaType);
       } else {
         return null;
       }
@@ -75,6 +75,8 @@ class Pickers {
   }
 
   Future<File?> copy(File file, {String mediaType = 'image'}) async {
+    console.log(file, force: true, name: 'copy');
+
     Directory cache = await getTemporaryDirectory();
     String ext = file.path.split('/').last.split('.').last;
     String path = '${cache.path}/${fn.randomString}.$ext';
@@ -82,8 +84,6 @@ class Pickers {
       if (videos.contains(ext.toLowerCase())) {
         if (ext.toLowerCase() != 'mp4') {
           File? temp = await convert(file);
-          console.log(temp, force: true, name: 'convert');
-
           if (temp != null) {
             ext = temp.path.split('/').last.split('.').last;
             path = '${cache.path}/${fn.randomString}.$ext';
@@ -111,7 +111,6 @@ class Pickers {
       );
       return media?.file;
     } catch (err) {
-      console.log(err, force: true, name: 'convert');
       return null;
     }
   }

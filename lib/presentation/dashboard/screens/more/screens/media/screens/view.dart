@@ -43,7 +43,6 @@ class ViewScreenState extends State<ViewScreen> {
             isPlaying = true;
           });
         }, onError: (error) {
-          console.log(error);
           setState(() {
             initialize = false;
             supported = "video_not_supported".tr;
