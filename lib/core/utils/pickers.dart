@@ -83,6 +83,8 @@ class Pickers {
         if (ext.toLowerCase() != 'mp4') {
           File? temp = await convert(file);
           if (temp != null) {
+            ext = temp.path.split('/').last.split('.').last;
+            path = '${cache.path}/${fn.randomString}.$ext';
             return await temp.copy(path);
           } else {
             return null;
