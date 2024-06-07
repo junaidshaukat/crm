@@ -75,8 +75,6 @@ class Pickers {
   }
 
   Future<File?> copy(File file, {String mediaType = 'image'}) async {
-    console.log(file, force: true, name: 'copy');
-
     Directory cache = await getTemporaryDirectory();
     String ext = file.path.split('/').last.split('.').last;
     String path = '${cache.path}/${fn.randomString}.$ext';

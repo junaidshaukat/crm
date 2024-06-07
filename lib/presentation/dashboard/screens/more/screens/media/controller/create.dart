@@ -49,7 +49,6 @@ class CreateMediaController extends GetxController {
     void Function(String)? event,
   ) async {
     try {
-      console.log(requestData, force: true, name: 'media');
       props.useState(UseState.processing);
       CreateMediaRes response = await Get.find<Api>().media.create(
             requestData: requestData,
