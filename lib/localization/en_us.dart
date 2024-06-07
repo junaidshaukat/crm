@@ -223,7 +223,6 @@ final Map<String, String> enUs = {
   "filter_by_years": "Filter By Years",
   "filter_by_year": "Filter By Year",
   "home": "Home",
-  "icon": "Icon",
   "inactive": "Inactive",
   "invoice": "Invoice",
   "logout": "Logout",
