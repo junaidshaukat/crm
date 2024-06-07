@@ -105,6 +105,7 @@ class SigninController extends GetxController {
 
       return await login(request.toJson(), viaRequest: false);
     } catch (e) {
+      console.log(e.toString(), name: "biometrics", force: true);
       return Toasts.error(message: "capable".tr);
     }
   }
