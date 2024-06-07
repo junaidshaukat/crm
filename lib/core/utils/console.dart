@@ -47,4 +47,4 @@ class Console {
   }
 }
 
-Console console = Console(ConsoleMode.release);
+Console console = Console(ConsoleMode.debug);
