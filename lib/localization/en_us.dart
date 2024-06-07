@@ -64,7 +64,7 @@ final Map<String, String> enUs = {
   "create_campaign": "Create Campaign",
   "add_campaign": "Add Campaign",
   "target_amount": "Target Amount",
-  "icons": "Icons",
+  "icon": "Icon",
   "select_icon": "Select an icon for your campaign",
   "name": "Name",
   "donation_campaign": "Donation Campaign",

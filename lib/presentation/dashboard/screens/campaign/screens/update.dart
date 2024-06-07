@@ -137,7 +137,7 @@ class UpdateCampaignScreen extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 4.h),
           child: Text(
-            "icons".tr,
+            "icon".tr,
             style: TextStyle(
               color: appTheme.gray80001,
               fontSize: 14.fSize,
