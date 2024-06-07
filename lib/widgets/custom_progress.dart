@@ -10,12 +10,14 @@ class CustomProgressButton extends StatelessWidget {
     this.indicatorColor = const Color(0XFFFFFFFF),
     this.style,
     this.indicator = true,
+    this.textAlign= TextAlign.center,
   });
   final bool indicator;
   final String lable;
   final Color? textColor, indicatorColor;
   final double? fontSize;
   final TextStyle? style;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +30,12 @@ class CustomProgressButton extends StatelessWidget {
         if (indicator) SizedBox(width: 4.adaptSize),
         Text(
           lable,
+          textAlign: textAlign,
           style: style ??
               TextStyle(
                 fontSize: fontSize,
                 color: indicatorColor,
               ),
-          textAlign: TextAlign.center,
         ),
         SizedBox(
           width: 12.adaptSize,

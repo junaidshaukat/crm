@@ -27,6 +27,7 @@ class CreateMediaScreen extends StatelessWidget {
   Widget input({
     int? height,
     String? label,
+    Widget? suffix,
     String? hintText,
     bool browse = false,
     bool dropDown = false,
@@ -67,16 +68,17 @@ class CreateMediaScreen extends StatelessWidget {
             contentPadding: contentPadding,
             suffixConstraints: browse == true
                 ? BoxConstraints(
-                    minWidth: 100.h,
-                    maxWidth: 100.h,
+                    minWidth: 120.h,
+                    maxWidth: 120.h,
                     minHeight: 50.v,
                     maxHeight: 50.v,
                   )
                 : null,
             suffix: browse == true
                 ? Container(
-                    width: 100.h,
+                    width: 120.h,
                     height: 50.v,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: appTheme.green800,
                       borderRadius: BorderRadius.only(
@@ -88,14 +90,7 @@ class CreateMediaScreen extends StatelessWidget {
                         width: 1.0,
                       ),
                     ),
-                    child: Center(
-                      child: Text(
-                        'browse'.tr,
-                        style: TextStyle(
-                          color: appTheme.whiteA700,
-                        ),
-                      ),
-                    ),
+                    child: suffix,
                   )
                 : null,
             borderDecoration: OutlineInputBorder(
@@ -105,7 +100,7 @@ class CreateMediaScreen extends StatelessWidget {
             ),
           ),
         if (dropDown)
-          SimpleDropDown(
+          SimpleDropDown2(
             items: items,
             height: height,
             hintText: hintText,
@@ -222,54 +217,86 @@ class CreateMediaScreen extends StatelessWidget {
                         conn: controller.descriptionController,
                         validator: ValidatorMedia.description,
                       ),
-                      input(
-                        dropDown: true,
-                        label: 'media_type'.tr,
-                        hintText: controller.mediaType.value,
-                        items: [
-                          DropDown(id: 1, title: 'image'.tr, value: 'image'),
-                          DropDown(id: 2, title: 'video'.tr, value: 'video'),
-                        ]
-                            .map(
-                              (option) => DropDown(
-                                id: option.id,
-                                title: option.title,
-                                value: option.value,
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (option) {
-                          controller.media.value = null;
-                          controller.mediaFileController.clear();
-                          controller.mediaType.value = option?.value;
-                        },
-                      ),
-                      input(
-                        onTap: onTap,
-                        browse: true,
-                        readOnly: true,
-                        label: 'media_file'.tr,
-                        hintText: 'media_file'.tr,
-                        conn: controller.mediaFileController,
-                        validator: (val) {
-                          Media? media = controller.media.value;
-                          if (media != null) {
-                            if (media.size <= 0) {
+                      Obx(() {
+                        Props props = controller.propsPicking;
+                        return input(
+                          dropDown: true,
+                          label: 'media_type'.tr,
+                          hintText: controller.mediaType.value.tr,
+                          items: [
+                            DropDown(id: 1, title: 'image'.tr, value: 'image'),
+                            DropDown(id: 2, title: 'video'.tr, value: 'video'),
+                          ]
+                              .map(
+                                (option) => DropDown(
+                                  id: option.id,
+                                  title: option.title,
+                                  value: option.value,
+                                ),
+                              )
+                              .toList(),
+                          onChanged: props.useState.value == UseState.processing
+                              ? null
+                              : (option) {
+                                  controller.media.value = null;
+                                  controller.mediaFileController.clear();
+                                  controller.mediaType.value = option?.value;
+                                },
+                        );
+                      }),
+                      Obx(() {
+                        Props props = controller.propsPicking;
+                        return input(
+                          browse: true,
+                          readOnly: true,
+                          label: 'media_file'.tr,
+                          onTap: props.useState.value == UseState.processing
+                              ? null
+                              : controller.select,
+                          hintText: 'media_file'.tr,
+                          conn: controller.mediaFileController,
+                          suffix: props.useState.value == UseState.processing
+                              ? Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 12.h),
+                                  child: Center(
+                                    child: CustomProgressButton(
+                                      indicator: false,
+                                      lable: 'processing'.tr,
+                                      style: TextStyle(
+                                        color: appTheme.whiteA700,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    'browse'.tr,
+                                    style: TextStyle(
+                                      color: appTheme.whiteA700,
+                                    ),
+                                  ),
+                                ),
+                          validator: (val) {
+                            Media? media = controller.media.value;
+                            if (media != null) {
+                              if (media.size <= 0) {
+                                return "media_file_required".tr;
+                              } else if (media.size > 20) {
+                                return "file_size_exceed".tr;
+                              } else if (!media.supported) {
+                                return "media_file_extension_required".tr;
+                              } else {
+                                return null;
+                              }
+                            } else if (val == null || media == null) {
                               return "media_file_required".tr;
-                            } else if (media.size > 20) {
-                              return "file_size_exceed".tr;
-                            } else if (!media.supported) {
-                              return "media_file_extension_required".tr;
                             } else {
                               return null;
                             }
-                          } else if (val == null || media == null) {
-                            return "media_file_required".tr;
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
+                          },
+                        );
+                      }),
                       Row(
                         children: [
                           Expanded(

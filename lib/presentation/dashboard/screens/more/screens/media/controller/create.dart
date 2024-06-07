@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
 class CreateMediaController extends GetxController {
   Props props = Props();
+  Props propsPicking = Props();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -19,6 +22,27 @@ class CreateMediaController extends GetxController {
   Rx<String> mediaType = Rx("image");
   Rx<String?> mediaFileErr = Rx(null);
 
+  Future select() async {
+    try {
+      propsPicking.useState(UseState.processing);
+      File? file = await pickers.media(mediaType: mediaType.value);
+      if (file != null) {
+        Media selected = await Media.factory(file);
+        durationController.text = selected.duration.toString();
+        mediaFileController.text = selected.name;
+        media.value = selected;
+        propsPicking.useState(UseState.none);
+      } else {
+        media.value = null;
+        mediaFileController.clear();
+        propsPicking.useState(UseState.none);
+      }
+    } catch (e) {
+      media.value = null;
+      mediaFileController.clear();
+      propsPicking.useState(UseState.none);
+    }
+  }
 
   Future create(
     Map<String, dynamic> requestData,
