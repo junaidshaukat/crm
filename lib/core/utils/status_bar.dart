@@ -8,7 +8,7 @@ class StatusBar {
         statusBarColor: green ? appTheme.green : appTheme.gray,
         systemNavigationBarColor: appTheme.gray,
         systemNavigationBarDividerColor: appTheme.gray,
-        statusBarBrightness: green ? Brightness.light : Brightness.dark,
+        statusBarBrightness: green ? Brightness.dark : Brightness.light,
         statusBarIconBrightness: green ? Brightness.light : Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark,
         systemStatusBarContrastEnforced: true,
