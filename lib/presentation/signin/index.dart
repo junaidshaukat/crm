@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
-export 'binding/binding.dart';
 export 'controller/controller.dart';
 
-class SigninScreen extends GetWidget<SigninController> {
-  const SigninScreen({super.key});
+class SigninScreen extends StatelessWidget {
+  final controller = Get.put(SigninController());
+  SigninScreen({super.key});
 
   Future<void> login() async {
     Rx<UseState> useState = controller.props.useState;

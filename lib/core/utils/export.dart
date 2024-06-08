@@ -17,6 +17,7 @@ export 'pref_utils.dart';
 export 'progress_dialog_utils.dart';
 export 'props.dart';
 export 'size_utils.dart';
+export 'status_bar.dart';
 export 'url_launcher.dart';
 export 'validator.dart';
 export 'video_player.dart';

@@ -14,45 +14,33 @@ class AppRoutes {
   static List<GetPage> pages = [
     GetPage(
       name: initialRoute,
-      page: () => const SplashScreen(),
-      bindings: [
-        SplashBinding(),
-      ],
+      page: () => SplashScreen(),
+      bindings: const [],
     ),
     GetPage(
       name: initialRoute,
-      page: () => const SplashScreen(),
-      bindings: [
-        SplashBinding(),
-      ],
+      page: () => SplashScreen(),
+      bindings: const [],
     ),
     GetPage(
       name: signin,
-      page: () => const SigninScreen(),
-      bindings: [
-        SigninBinding(),
-      ],
+      page: () => SigninScreen(),
+      bindings: const [],
     ),
     GetPage(
       name: recoverPassword,
-      page: () => const RecoverPasswordScreen(),
-      bindings: [
-        RecoverPasswordBinding(),
-      ],
+      page: () => RecoverPasswordScreen(),
+      bindings: const [],
     ),
     GetPage(
       name: resetPassword,
-      page: () => const ResetPasswordScreen(),
-      bindings: [
-        ResetPasswordBinding(),
-      ],
+      page: () => ResetPasswordScreen(),
+      bindings: const [],
     ),
     GetPage(
       name: dashboard,
-      page: () => const DashboardScreen(),
-      bindings: [
-        DashboardBinding(),
-      ],
+      page: () => DashboardScreen(),
+      bindings: const [],
     ),
   ];
 }

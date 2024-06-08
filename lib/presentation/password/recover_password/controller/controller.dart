@@ -5,6 +5,11 @@ class RecoverPasswordController extends GetxController {
   Props props = Props();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
+  @override
+  void onReady() {
+    super.onReady();
+    StatusBar.setSystemUIOverlayStyle(false);
+  }
 
   @override
   void onClose() {

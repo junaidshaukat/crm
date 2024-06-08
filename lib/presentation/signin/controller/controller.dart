@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
+String emailText = "shahzad.khan@mervice.ca";
+String passwordText = "Donatenow123\$";
+
 class SigninController extends GetxController {
   Props props = Props();
   EnvConfig env = EnvConfig();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController =
+      TextEditingController(text: emailText);
+  TextEditingController passwordController =
+      TextEditingController(text: passwordText);
 
   Rx<bool> isShowPassword = true.obs;
 
   LoginRes response = LoginRes();
+
+  @override
+  void onReady() {
+    super.onReady();
+    StatusBar.setSystemUIOverlayStyle(true);
+  }
 
   @override
   void onClose() {

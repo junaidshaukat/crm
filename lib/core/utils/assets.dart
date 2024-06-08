@@ -9,6 +9,11 @@ extension Assets on String {
     return 'assets/icons/$this';
   }
 
+  ///assets/icons
+  String get lottie {
+    return 'assets/lottie/$this';
+  }
+
   ///assets/images
   String get network {
     return this;
@@ -42,5 +47,10 @@ extension Assets on String {
   ///png
   String get jpg {
     return '$this.jpg';
+  }
+
+  ///png
+  String get json {
+    return '$this.json';
   }
 }

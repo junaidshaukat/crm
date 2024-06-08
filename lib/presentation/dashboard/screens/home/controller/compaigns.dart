@@ -15,11 +15,19 @@ class HomeCompaignsController extends GetxController {
   Rx<String?> year = Rx(DateTime.now().year.toString());
   Rx<String?> month = Rx(DateTime.now().month.monthName);
   Rx<DateTime?> day = Rx(DateTime.now());
+  final controller = Get.put(DashboardController());
 
   @override
   void onReady() async {
+    controller.forceGreen.value = true;
     super.onReady();
     await ready();
+  }
+
+  @override
+  void onClose() {
+    controller.forceGreen.value = false;
+    super.onClose();
   }
 
   Future ready() async {

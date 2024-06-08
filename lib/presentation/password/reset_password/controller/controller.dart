@@ -14,6 +14,12 @@ class ResetPasswordController extends GetxController {
   ResetPasswordRes response = ResetPasswordRes();
 
   @override
+  void onReady() {
+    super.onReady();
+    StatusBar.setSystemUIOverlayStyle(false);
+  }
+
+  @override
   void onClose() {
     super.onClose();
     otpController.value.dispose();

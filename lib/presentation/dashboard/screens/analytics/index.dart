@@ -5,8 +5,8 @@ export 'widgets/export.dart';
 export 'controller/controller.dart';
 
 class AnalyticsScreen extends StatelessWidget {
-  const AnalyticsScreen({super.key, required this.controller});
-  final AnalyticsController controller;
+  AnalyticsScreen({super.key});
+  final controller = Get.put(AnalyticsController());
 
   @override
   Widget build(BuildContext context) {

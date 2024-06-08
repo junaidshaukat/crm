@@ -5,11 +5,19 @@ class HomeRecurringController extends GetxController {
   Rx<DateTime> date = Rx(DateTime.now());
 
   Rx<RecurringSummary?> recurrings = Rx(null);
+  final controller = Get.put(DashboardController());
 
   @override
   void onReady() async {
+    controller.forceGreen.value = true;
     super.onReady();
     await getRecurringSummary();
+  }
+
+  @override
+  void onClose() {
+    controller.forceGreen.value = false;
+    super.onClose();
   }
 
   Future getRecurringSummary() async {

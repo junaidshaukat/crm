@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
-export 'binding/binding.dart';
 export 'controller/controller.dart';
 
-class ResetPasswordScreen extends GetWidget<ResetPasswordController> {
-  const ResetPasswordScreen({super.key});
+class ResetPasswordScreen extends StatelessWidget {
+  final controller = Get.put(ResetPasswordController());
+  ResetPasswordScreen({super.key});
+
   void resetPassword() async {
     Rx<UseState> useState = controller.props.useState;
     if (useState.value == UseState.none) {

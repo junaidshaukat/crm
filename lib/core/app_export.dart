@@ -2,6 +2,7 @@ export 'package:dio/dio.dart';
 export 'package:get/get.dart' hide Response, FormData, MultipartFile;
 export 'package:hive/hive.dart';
 export 'package:intl/intl.dart';
+export 'package:lottie/lottie.dart';
 export 'package:fl_chart/fl_chart.dart';
 export 'package:local_auth/local_auth.dart';
 export 'package:local_auth/error_codes.dart';

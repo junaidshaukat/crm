@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
 export 'screens/export.dart';
-export 'binding/binding.dart';
 export 'controller/controller.dart';
 
-class DashboardScreen extends GetWidget<DashboardController> {
-  const DashboardScreen({super.key});
+class DashboardScreen extends StatelessWidget {
+  final controller = Get.put(DashboardController());
+
+  DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,9 @@ class DashboardScreen extends GetWidget<DashboardController> {
               case 0:
                 return DonorsScreen();
               case 1:
-                return AnalyticsScreen(
-                    controller: Get.put(AnalyticsController()));
+                return AnalyticsScreen();
               case 2:
-                return HomeScreen(controller: Get.put(HomeController()));
+                return HomeScreen();
               case 3:
                 return CompaignScreen();
               case 4:

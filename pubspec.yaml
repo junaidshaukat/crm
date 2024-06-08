@@ -37,6 +37,7 @@ dependencies:
   hive: ^2.2.3
   intl: ^0.19.0
   dio: ^5.4.2+1
+  lottie: ^3.1.2
   fl_chart: ^0.68.0
   local_auth: ^2.2.0
   hive_flutter: ^1.1.0
@@ -91,6 +92,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/lottie/
   fonts:
     - family: Poppins
       fonts:

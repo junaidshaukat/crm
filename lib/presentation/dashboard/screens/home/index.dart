@@ -6,8 +6,8 @@ export 'widgets/export.dart';
 export 'controller/controller.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.controller});
-  final HomeController controller;
+  HomeScreen({super.key});
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
-export 'binding/binding.dart';
 export 'controller/controller.dart';
 
-class RecoverPasswordScreen extends GetWidget<RecoverPasswordController> {
-  const RecoverPasswordScreen({super.key});
+class RecoverPasswordScreen extends StatelessWidget {
+  final controller = Get.put(RecoverPasswordController());
+  RecoverPasswordScreen({super.key});
 
   Future<void> forgetPassword() async {
     Rx<UseState> useState = controller.props.useState;

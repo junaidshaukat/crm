@@ -5,6 +5,8 @@ class SplashController extends GetxController {
 
   @override
   void onReady() {
+    super.onReady();
+    StatusBar.setSystemUIOverlayStyle(true);
     Future.delayed(const Duration(milliseconds: 3000), () {
       isLogin();
     });
