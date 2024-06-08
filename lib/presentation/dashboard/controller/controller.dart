@@ -81,7 +81,7 @@ class DashboardController extends GetxController {
         systemNavigationBarDividerColor: appTheme.gray,
 
         /// For iOS: Sets the brightness of the status bar (text and icons) for dark/light background.
-        statusBarBrightness: green ? Brightness.light : Brightness.dark,
+        statusBarBrightness: green ? Brightness.dark : Brightness.light,
 
         /// For Android: Sets the brightness of the status bar icons for dark/light background.
         statusBarIconBrightness: green ? Brightness.light : Brightness.dark,
