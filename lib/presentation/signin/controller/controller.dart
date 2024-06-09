@@ -6,6 +6,9 @@ class SigninController extends GetxController {
   EnvConfig env = EnvConfig();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  // final emailController = TextEditingController(text:"shahzad.khan@mervice.ca");
+  // final passwordController = TextEditingController(text: "Donatenow123\$");
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

@@ -72,11 +72,11 @@ class OrganizationCharityAddressController extends GetxController {
     countryController.text = option.value.name;
     province.value = null;
     if (option.value.code.toString().trim().toLowerCase() == 'ca') {
-      charityPostalZipCodeLabel("postal_code".tr);
+      charityPostalZipCodeLabel.value = "postal_code".tr;
     } else if (option.value.code.toString().trim().toLowerCase() == 'us') {
-      charityPostalZipCodeLabel('zip_code'.tr);
+      charityPostalZipCodeLabel.value = "zip_code".tr;
     } else {
-      charityPostalZipCodeLabel("postal_code".tr);
+      charityPostalZipCodeLabel.value = "postal_code".tr;
     }
     await getCountryStates(option.value.code);
   }

@@ -28,7 +28,6 @@ class DashboardController extends GetxController {
   }
 
   void onChangePage(int page, bool green) {
-    console.log({'page': page, 'green': green}, force: true, name: 'page');
     if (page == 0) {
       if (forceGreen.value) {
         isGreen.value = true;

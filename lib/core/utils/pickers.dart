@@ -36,20 +36,20 @@ class Pickers {
     }
   }
 
-  // Future<File?> media({required String mediaType}) async {
-  //   ImagePicker picker = ImagePicker();
-  //   try {
-  //     await clearCache();
-  //     XFile? xFile = await picker.pickMedia();
-  //     if (xFile != null) {
-  //       return await copy(File(xFile.path));
-  //     } else {
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     rethrow;
-  //   }
-  // }
+  Future<File?> pickImage({ImageSource source = ImageSource.gallery}) async {
+    ImagePicker picker = ImagePicker();
+    try {
+      await clearCache();
+      XFile? xFile = await picker.pickImage(source: source);
+      if (xFile != null) {
+        return await copy(File(xFile.path));
+      } else {
+        return null;
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
 
   Future<File?> media({String mediaType = 'image'}) async {
     try {

@@ -21,10 +21,10 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
         charityStreetAddress: controller.charityStreetAddressController.text,
         charityUnitNumber: controller.charityUnitNumberController.text,
         charityCity: controller.charityCityController.text,
+        country: controller.countryController.text,
         charityProvinceState: controller.province.value?.code,
         charityPostalZipCode: controller.charityPostalZipCodeController.text,
       );
-
       await controller.save(
         organization.tagNumber,
         request.toJson(organization.toJson()),
@@ -173,7 +173,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
                                   ),
                                 )
                                 .toList(),
-                            onChanged: null,
+                            onChanged: null, // controller.onChangedCountry,
                             validator: ValidatorOrganization.country,
                           ),
                         ),
@@ -181,7 +181,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
                           if (controller.provinces.isNotEmpty) {
                             return input(
                               dropDown: true,
-                              height: 220,
+                              height: 170,
                               label: controller.country.value!.code
                                           ?.toLowerCase() ==
                                       'us'

@@ -151,19 +151,24 @@ class OrganizationCharityProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    CustomOutlinedButton(
-                      height: 24.v,
-                      width: 94.h,
-                      text: "choose_file".tr,
-                      buttonStyle: CustomButtonStyles.outlineGray,
-                      onPressed: () {
-                        pickers.media().then((file) {
-                          if (file != null) {
-                            controller.signature.value = file;
-                          }
-                        });
-                      },
-                    ),
+                    Obx(() {
+                      Props props = controller.propsUpdateSignature;
+                      return CustomOutlinedButton(
+                        height: 24.v,
+                        width: 94.h,
+                        text: "choose_file".tr,
+                        buttonStyle: CustomButtonStyles.outlineGray,
+                        onPressed: props.useState.value == UseState.processing
+                            ? null
+                            : () {
+                                pickers.pickImage().then((file) {
+                                  if (file != null) {
+                                    controller.signature.value = file;
+                                  }
+                                });
+                              },
+                      );
+                    }),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(

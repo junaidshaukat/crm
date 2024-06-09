@@ -4,6 +4,7 @@ class OrganizationCharityAddressUpdateReq {
   String? charityStreetAddress;
   String? charityUnitNumber;
   String? charityCity;
+  String? country;
   String? charityProvinceState;
   String? charityPostalZipCode;
 
@@ -11,6 +12,7 @@ class OrganizationCharityAddressUpdateReq {
     this.charityStreetAddress,
     this.charityUnitNumber,
     this.charityCity,
+    this.country,
     this.charityProvinceState,
     this.charityPostalZipCode,
   });
@@ -28,7 +30,7 @@ class OrganizationCharityAddressUpdateReq {
       'contactEmail': data['contactEmail'],
       'contactName': data['contactName'],
       'contactPhone': data['contactPhone'],
-      'country': data['country'],
+      'country': country,
       'createDateTime': data['createDateTime'],
       'email': data['email'],
       'footerNote': data['footerNote'],
