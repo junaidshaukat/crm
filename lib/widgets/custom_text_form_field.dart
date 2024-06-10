@@ -8,7 +8,6 @@ class CustomTextFormField extends StatelessWidget {
     this.width,
     this.scrollPadding,
     this.controller,
-    this.focusNode,
     this.autofocus = false,
     this.textStyle,
     this.obscureText = false,
@@ -42,8 +41,6 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? scrollPadding;
 
   final TextEditingController? controller;
-
-  final FocusNode? focusNode;
 
   final bool? autofocus;
 
@@ -97,7 +94,6 @@ class CustomTextFormField extends StatelessWidget {
         child: TextFormField(
           autovalidateMode: autovalidateMode,
           controller: controller,
-          focusNode: focusNode ?? FocusNode(),
           autofocus: autofocus!,
           style: textStyle ??
               TextStyle(

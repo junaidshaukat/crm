@@ -125,10 +125,18 @@ class ResetPasswordScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 0.h),
                   child: Obx(
                     () => CustomTextFormField(
-                      controller: controller.passwordController,
+                      filled: true,
                       hintText: "new_password".tr,
-                      textInputAction: TextInputAction.done,
-                      keyboardType: TextInputType.visiblePassword,
+                      fillColor: appTheme.gray10001,
+                      validator: Validator.password,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      controller: controller.passwordController,
+                      obscureText: controller.isShowPassword.value,
+                      suffixConstraints: BoxConstraints(maxHeight: 50.v),
+                      prefixConstraints: BoxConstraints(maxHeight: 50.v),
+                      borderDecoration: TextFormFieldStyleHelper.fillGray,
+                      contentPadding: EdgeInsets.symmetric(vertical: 16.v),
                       prefix: Container(
                         margin: EdgeInsets.fromLTRB(
                           20.h,
@@ -142,7 +150,6 @@ class ResetPasswordScreen extends StatelessWidget {
                           width: 24.adaptSize,
                         ),
                       ),
-                      prefixConstraints: BoxConstraints(maxHeight: 50.v),
                       suffix: InkWell(
                         onTap: () {
                           controller.isShowPassword.value =
@@ -159,13 +166,6 @@ class ResetPasswordScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      suffixConstraints: BoxConstraints(maxHeight: 50.v),
-                      validator: Validator.password,
-                      obscureText: controller.isShowPassword.value,
-                      contentPadding: EdgeInsets.symmetric(vertical: 16.v),
-                      borderDecoration: TextFormFieldStyleHelper.fillGray,
-                      filled: true,
-                      fillColor: appTheme.gray10001,
                     ),
                   ),
                 ),
@@ -174,10 +174,17 @@ class ResetPasswordScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 0.h),
                   child: Obx(
                     () => CustomTextFormField(
-                      controller: controller.confirmPasswordController,
+                      filled: true,
+                      fillColor: appTheme.gray10001,
                       hintText: "confirm_password".tr,
+                      keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.done,
-                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: controller.isShowPassword1.value,
+                      controller: controller.confirmPasswordController,
+                      prefixConstraints: BoxConstraints(maxHeight: 50.v),
+                      suffixConstraints: BoxConstraints(maxHeight: 50.v),
+                      contentPadding: EdgeInsets.symmetric(vertical: 16.v),
+                      borderDecoration: TextFormFieldStyleHelper.fillGray,
                       prefix: Container(
                         margin: EdgeInsets.fromLTRB(
                           20.h,
@@ -191,7 +198,6 @@ class ResetPasswordScreen extends StatelessWidget {
                           width: 24.adaptSize,
                         ),
                       ),
-                      prefixConstraints: BoxConstraints(maxHeight: 50.v),
                       suffix: InkWell(
                         onTap: () {
                           controller.isShowPassword1.value =
@@ -208,16 +214,10 @@ class ResetPasswordScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      suffixConstraints: BoxConstraints(maxHeight: 50.v),
                       validator: (input) {
                         return Validator.confirmPassword(
                             input, controller.passwordController.text);
                       },
-                      obscureText: controller.isShowPassword1.value,
-                      contentPadding: EdgeInsets.symmetric(vertical: 16.v),
-                      borderDecoration: TextFormFieldStyleHelper.fillGray,
-                      filled: true,
-                      fillColor: appTheme.gray10001,
                     ),
                   ),
                 ),

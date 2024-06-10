@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           height: 60.v,
           width: 144.h,
         ),
-        SizedBox(height: 12.v),
+        SizedBox(height: 8.v),
         Obx(() {
           Props props = controller.propsOrganizations;
           List<Organizations> organizations = controller.organizations.value;
@@ -36,9 +36,51 @@ class HomeScreen extends StatelessWidget {
             );
           } else {
             if (props.error.value.message != null) {
-              return ItemCard(
-                error: props.error.value.message,
-                onRefresh: () async {},
+              return Container(
+                width: double.maxFinite,
+                margin: EdgeInsets.symmetric(
+                  horizontal: 16.h,
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.h,
+                  vertical: 4.v,
+                ),
+                decoration: AppDecoration.outlineBlueGray.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder16,
+                ),
+                child: SizedBox(
+                  height: 60.v,
+                  width: double.maxFinite,
+                  child: Center(
+                    child: RefreshIndicator.adaptive(
+                      onRefresh: controller.getOrganizations,
+                      child: SizedBox(
+                        height: 60.v,
+                        child: GestureDetector(
+                          onTap: controller.getOrganizations,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.refresh, color: appTheme.red900),
+                                SizedBox(width: 8.h),
+                                Text(
+                                  'try_again'.tr,
+                                  style: TextStyle(
+                                    color: appTheme.red900,
+                                    fontSize: 12.fSize,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               );
             } else {
               return Padding(
@@ -62,7 +104,7 @@ class HomeScreen extends StatelessWidget {
             }
           }
         }),
-        SizedBox(height: 12.v),
+        SizedBox(height: 8.v),
         Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(
@@ -403,7 +445,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16.v),
+              SizedBox(height: 12.v),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

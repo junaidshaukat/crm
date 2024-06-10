@@ -173,7 +173,8 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
                                   ),
                                 )
                                 .toList(),
-                            onChanged: null, // controller.onChangedCountry,
+                            onChanged:
+                                null,
                             validator: ValidatorOrganization.country,
                           ),
                         ),

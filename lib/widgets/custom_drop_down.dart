@@ -39,7 +39,6 @@ class PageSizeDropDown extends StatelessWidget {
     this.circularRadius = 4,
     this.colorBorder,
     this.icon,
-    this.focusNode,
     this.autofocus = true,
     this.hintText,
     this.hintStyle,
@@ -63,7 +62,6 @@ class PageSizeDropDown extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final int circularRadius;
   final Color? colorBorder;
-  final FocusNode? focusNode;
   final bool autofocus;
   final String? hintText;
   final TextStyle? hintStyle;
@@ -96,7 +94,6 @@ class PageSizeDropDown extends StatelessWidget {
           elevation: 12,
           isExpanded: true,
           padding: dropdownButtonPadding ?? EdgeInsets.only(left: 2.h),
-          focusNode: focusNode ?? FocusNode(),
           icon: icon ?? const Icon(Icons.arrow_drop_down),
           autofocus: autofocus,
           style: textStyle ??

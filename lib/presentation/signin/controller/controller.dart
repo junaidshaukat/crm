@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
+String? a = "shahzad.khan@mervice.ca";
+String? b = "Donatenow123\$";
+
 class SigninController extends GetxController {
   Props props = Props();
   EnvConfig env = EnvConfig();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  // final emailController = TextEditingController(text:"shahzad.khan@mervice.ca");
-  // final passwordController = TextEditingController(text: "Donatenow123\$");
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: a);
+  TextEditingController passwordController = TextEditingController(text: b);
 
   Rx<bool> isShowPassword = true.obs;
 
