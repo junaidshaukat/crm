@@ -9,8 +9,8 @@ class SigninController extends GetxController {
   EnvConfig env = EnvConfig();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController(text:a);
-  TextEditingController passwordController = TextEditingController(text:b);
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   Rx<bool> isShowPassword = true.obs;
 
