@@ -260,11 +260,13 @@ class NewTransactionScreen extends StatelessWidget {
                           );
                         }).toList(),
                         onChanged: (option) {
-                          console.log(option?.value.value);
                           if (option?.value.value == "ONETIME") {
                             controller.startDate.value = null;
+                            controller.startDateController.clear();
                           } else {
                             controller.startDate.value =
+                                DateTime.now().format('yyyy-MM-dd');
+                            controller.startDateController.text =
                                 DateTime.now().format('yyyy-MM-dd');
                           }
                           controller.frequency.value = option?.value;

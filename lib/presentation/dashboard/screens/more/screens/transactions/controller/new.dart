@@ -125,8 +125,8 @@ class NewTransactionController extends GetxController {
   }
 
   void clearStartDateController() {
-    startDate.value = null;
-    startDateController.clear();
+    startDate.value = DateTime.now().format('yyyy-MM-dd');
+    startDateController.text = DateTime.now().format('yyyy-MM-dd');
     update();
   }
 }
