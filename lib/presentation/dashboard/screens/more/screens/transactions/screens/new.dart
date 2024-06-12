@@ -459,9 +459,8 @@ class NewTransactionScreen extends StatelessWidget {
                         }
                       }),
                       Obx(() {
-                        String groupValue = controller.groupValue.value;
                         String frequency = controller.frequency.value.value;
-                        if (groupValue == 'static' && frequency != 'ONETIME') {
+                        if (frequency != 'ONETIME') {
                           return listTile(
                             readOnly: true,
                             control: "textbox",
