@@ -126,10 +126,13 @@ class OrganizationCharitySupplementaryDataScreen extends StatelessWidget {
                         hintText: 'tax_receipt_start_date'.tr,
                         conn: controller.taxReceiptStartDateController,
                         validator: ValidatorOrganization.taxReceiptStartDate,
-                        onTap: () async {
-                          DateTime? date = await pickers.date(Get.context!);
-                          controller.taxReceiptStartDateController.text =
-                              date!.format('yyyy-MM-dd');
+                        onTap: () {
+                          pickers.date(Get.context!).then((date) {
+                            if (date != null) {
+                              controller.taxReceiptStartDateController.text =
+                                  date.format('yyyy-MM-dd');
+                            }
+                          });
                         },
                       ),
                       input(
