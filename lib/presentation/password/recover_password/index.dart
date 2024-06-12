@@ -61,27 +61,36 @@ class RecoverPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40.v),
-                CustomTextFormField(
-                  width: 325.h,
-                  controller: controller.emailController,
-                  hintText: "email_address".tr,
-                  textInputAction: TextInputAction.search,
-                  alignment: Alignment.center,
-                  prefix: Container(
-                    margin: EdgeInsets.fromLTRB(20.h, 13.v, 10.h, 13.v),
-                    child: CustomImageView(
-                      imagePath: "email".icon.svg,
-                      height: 24.adaptSize,
-                      width: 24.adaptSize,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.h),
+                  child: CustomTextFormField(
+                    controller: controller.emailController,
+                    hintText: "email_address".tr,
+                    keyboardType: TextInputType.emailAddress,
+                    prefix: Container(
+                      margin: EdgeInsets.fromLTRB(
+                        20.h,
+                        13.v,
+                        10.h,
+                        13.v,
+                      ),
+                      child: CustomImageView(
+                        imagePath: "email".icon.svg,
+                        height: 24.adaptSize,
+                        width: 24.adaptSize,
+                      ),
                     ),
+                    prefixConstraints: BoxConstraints(maxHeight: 50.v),
+                    validator: Validator.email,
+                    contentPadding: EdgeInsets.only(
+                      top: 16.v,
+                      right: 30.h,
+                      bottom: 16.v,
+                    ),
+                    borderDecoration: TextFormFieldStyleHelper.fillGray,
+                    filled: true,
+                    fillColor: appTheme.gray10001,
                   ),
-                  prefixConstraints: BoxConstraints(maxHeight: 50.v),
-                  contentPadding:
-                      EdgeInsets.only(top: 16.v, right: 30.h, bottom: 16.v),
-                  borderDecoration: TextFormFieldStyleHelper.fillGrayTL5,
-                  filled: true,
-                  fillColor: appTheme.gray10001,
-                  validator: Validator.email,
                 ),
                 SizedBox(height: 16.v),
                 Obx(
