@@ -23,6 +23,7 @@ class TransactionReq {
   String? function;
 
   String? fee;
+  String? startDate;
 
   TransactionReq({
     this.currencySymbol,
@@ -44,6 +45,7 @@ class TransactionReq {
     this.userNotes,
     this.cardId,
     this.function,
+    this.startDate,
   });
 
   Map<String, dynamic> toPrint({Map<String, String>? filter}) {
@@ -116,6 +118,10 @@ class TransactionReq {
       temp['function'] = function;
     }
 
+    if (startDate != null) {
+      temp['startDate'] = startDate;
+    }
+
     return temp;
   }
 
@@ -178,6 +184,10 @@ class TransactionReq {
 
     if (function != null) {
       temp['function'] = function;
+    }
+
+    if (startDate != null) {
+      temp['startDate'] = startDate;
     }
 
     return temp;

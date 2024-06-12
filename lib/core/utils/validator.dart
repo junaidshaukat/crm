@@ -1209,6 +1209,36 @@ class ValidatorReport {
 }
 
 class ValidatorNewTransaction {
+  static String? startDate(String? input, {bool isRequired = false}) {
+    String pattern1 = r'^\d{4}-\d{2}-\d{2}\s\d{1,2}:\d{1,2}:\d{1,2}$';
+    String pattern2 = r'^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}$';
+    String pattern3 = r'^\d{4}-\d{1,2}-\d{1,2}$';
+
+    RegExp regExp1 = RegExp(pattern1);
+    RegExp regExp2 = RegExp(pattern2);
+    RegExp regExp3 = RegExp(pattern3);
+
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"transaction".tr} ${"start_date".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"transaction".tr} ${"start_date".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp1.hasMatch(input) &&
+          !regExp2.hasMatch(input) &&
+          !regExp3.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"start_date".tr.toLowerCase()} ${"".tr.toLowerCase()}";
+      } else {
+        return null;
+      }
+    }
+  }
+
   static String? email(String? input, {bool isRequired = true}) {
     const pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';

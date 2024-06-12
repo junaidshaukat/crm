@@ -9,7 +9,9 @@ class NewTransactionController extends GetxController {
   TextEditingController userNotesController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController noOfRecurringController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
   Rx<ActiveCampaign> campaign = Rx(ActiveCampaign());
+  Rx<String?> startDate = Rx(null);
 
   List<Frequency> frequencies = [
     Frequency(
@@ -96,6 +98,7 @@ class NewTransactionController extends GetxController {
         request.userNotes = userNotesController.text;
         request.billingPeriod = frequency.value.value;
         request.noOfRecurring = frequency.value.noOfRecurring;
+        request.startDate = startDate.value;
 
         Get.to(
           () => CardScreen(
@@ -119,5 +122,11 @@ class NewTransactionController extends GetxController {
       props.useState(UseState.none);
       Toasts.error(message: e.toString());
     }
+  }
+
+  void clearStartDateController() {
+    startDate.value = null;
+    startDateController.clear();
+    update();
   }
 }

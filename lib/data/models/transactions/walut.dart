@@ -2,7 +2,6 @@ import '/core/app_export.dart';
 
 class WalletReq {
   String? email;
-
   WalletReq({this.email});
 
   Map<String, dynamic> toJson({Map<String, String>? filter}) {

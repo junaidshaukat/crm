@@ -21,23 +21,28 @@ class NewTransactionScreen extends StatelessWidget {
         WalletReq request = WalletReq(
           email: controller.emailController.text,
         );
+        console.log(request.toJson(), force: true);
+
         await controller.wallet(request.toJson(), currencySymbol);
       }
     }
   }
 
   Widget listTile({
-    required String label,
-    String? hintText,
+    Widget? suffix,
     String? control,
+    String? hintText,
     List<DropDown>? items,
+    bool readOnly = false,
+    required String label,
+    void Function()? onTap,
+    EdgeInsets? contentPadding,
+    void Function(String)? onChange,
+    void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
     TextEditingController? textEditingController,
     TextInputType? keyboardType = TextInputType.text,
     TextInputAction? textInputAction = TextInputAction.next,
-    String? Function(String?)? validator,
-    void Function(DropDown?)? onChanged,
-    void Function(String)? onChange,
-    EdgeInsets? contentPadding,
   }) {
     return SizedBox(
       width: double.maxFinite,
@@ -58,24 +63,29 @@ class NewTransactionScreen extends StatelessWidget {
             ),
             if (control == "textbox")
               CustomTextFormField(
+                onTap: onTap,
+                suffix: suffix,
+                readOnly: readOnly,
                 hintText: hintText,
+                onChanged: onChange,
                 validator: validator,
                 keyboardType: keyboardType,
+                contentPadding: contentPadding,
                 textInputAction: textInputAction,
                 controller: textEditingController,
-                onChanged: onChange,
-                contentPadding: contentPadding,
               ),
             if (control == "textarea")
               CustomTextFormField(
                 maxLines: 4,
+                suffix: suffix,
+                readOnly: readOnly,
                 hintText: hintText,
+                onChanged: onChange,
                 validator: validator,
                 keyboardType: keyboardType,
+                contentPadding: contentPadding,
                 textInputAction: textInputAction,
                 controller: textEditingController,
-                onChanged: onChange,
-                contentPadding: contentPadding,
               ),
             if (control == "dropdown")
               SimpleDropDown(
@@ -92,8 +102,96 @@ class NewTransactionScreen extends StatelessWidget {
     );
   }
 
+  Widget input({
+    String? label,
+    String? hintText,
+    Widget? prefix,
+    Widget? suffix,
+    BoxConstraints? prefixConstraints,
+    BoxConstraints? suffixConstraints,
+    TextEditingController? conn,
+    bool dropDown = false,
+    List<DropDown>? items,
+    void Function()? onTap,
+    String? Function(String?)? validator,
+    void Function(DropDown?)? onChanged,
+    TextInputType? keyboardType,
+    int? maxLines,
+    bool readOnly = false,
+    EdgeInsets? contentPadding,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 4.adaptSize),
+        Text(
+          "$label".tr,
+          style: TextStyle(
+            color: appTheme.gray80001,
+            fontSize: 13.fSize,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: 2.adaptSize),
+        if (!dropDown)
+          CustomTextFormField(
+            readOnly: readOnly,
+            controller: conn,
+            hintText: "$hintText".tr,
+            validator: validator,
+            fillColor: appTheme.gray10001,
+            prefix: prefix,
+            suffix: suffix,
+            maxLines: maxLines,
+            contentPadding: contentPadding,
+            keyboardType: keyboardType,
+            prefixConstraints: prefixConstraints,
+            suffixConstraints: suffixConstraints,
+            onTap: onTap,
+            textStyle: TextStyle(
+              color: appTheme.gray80001,
+              fontSize: 13.fSize,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w300,
+            ),
+            hintStyle: TextStyle(
+              color: appTheme.gray80001,
+              fontSize: 13.fSize,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w300,
+            ),
+            borderDecoration: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: appTheme.gray400,
+              ),
+            ),
+          ),
+        if (dropDown)
+          SimpleDropDown(
+            height: 40,
+            hintText: hintText,
+            icon: CustomImageView(
+              imagePath: "dropdown".icon.svg,
+              height: 23.v,
+              width: 34.h,
+            ),
+            items: items,
+            onSelected: onChanged,
+          ),
+        SizedBox(height: 4.adaptSize),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    console.log({
+      'groupValue': controller.groupValue.value,
+      'frequency': controller.frequency.value.value,
+    }, force: true);
     return Scaffold(
       body: Column(
         children: [
@@ -165,6 +263,32 @@ class NewTransactionScreen extends StatelessWidget {
                           controller.frequency.value = option?.value;
                         },
                       ),
+                      Obx(() {
+                        return listTile(
+                          control: "textbox",
+                          label:
+                              "${"minimum_amount".tr}: $currencySymbol ${controller.campaign.value.minimumAmount ?? 0.00}",
+                          hintText: "0.00",
+                          textInputAction: TextInputAction.done,
+                          textEditingController: controller.amountController,
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
+                          ),
+                          validator: (input) {
+                            num minimum =
+                                controller.campaign.value.minimumAmount ?? 0;
+                            num amount = 0;
+
+                            if (input != null) {
+                              amount = num.tryParse(input) ?? 0;
+                              if (amount < minimum) {
+                                return "${"amount_cannot_be_less_then".tr} $minimum";
+                              }
+                            }
+                            return ValidatorNewTransaction.amount(input);
+                          },
+                        );
+                      }),
                       Obx(() {
                         bool variation = controller.frequency.value.variation;
                         if (variation) {
@@ -334,32 +458,41 @@ class NewTransactionScreen extends StatelessWidget {
                           return const SizedBox();
                         }
                       }),
-                      Obx(
-                        () => listTile(
-                          control: "textbox",
-                          label:
-                              "${"minimum_amount".tr}: $currencySymbol ${controller.campaign.value.minimumAmount ?? 0.00}",
-                          hintText: "0.00",
-                          textInputAction: TextInputAction.done,
-                          textEditingController: controller.amountController,
-                          keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true,
-                          ),
-                          validator: (input) {
-                            num minimum =
-                                controller.campaign.value.minimumAmount ?? 0;
-                            num amount = 0;
-
-                            if (input != null) {
-                              amount = num.tryParse(input) ?? 0;
-                              if (amount < minimum) {
-                                return "${"amount_cannot_be_less_then".tr} $minimum";
-                              }
-                            }
-                            return ValidatorNewTransaction.amount(input);
-                          },
-                        ),
-                      ),
+                      Obx(() {
+                        String groupValue = controller.groupValue.value;
+                        String frequency = controller.frequency.value.value;
+                        if (groupValue == 'static' && frequency != 'ONETIME') {
+                          return listTile(
+                            readOnly: true,
+                            control: "textbox",
+                            label: "start_date".tr,
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: ValidatorNewTransaction.startDate,
+                            hintText:
+                                controller.startDate.value ?? 'start_date'.tr,
+                            textEditingController:
+                                controller.startDateController,
+                            suffix: IconButton(
+                              onPressed: controller.clearStartDateController,
+                              icon: const Icon(Icons.clear),
+                            ),
+                            onTap: () {
+                              pickers
+                                  .date(Get.context!, firstDate: DateTime.now())
+                                  .then((date) {
+                                if (date != null) {
+                                  controller.startDate.value =
+                                      date.format('yyyy-MM-dd');
+                                  controller.startDateController.text =
+                                      date.format('yyyy-MM-dd');
+                                }
+                              });
+                            },
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      }),
                       listTile(
                         label: "note".tr,
                         control: "textarea",
@@ -369,9 +502,8 @@ class NewTransactionScreen extends StatelessWidget {
                         keyboardType: TextInputType.text,
                         validator: ValidatorNewTransaction.notes,
                       ),
-                      SizedBox(height: 16.v),
-                      Obx(
-                        () => CustomElevatedButton(
+                      Obx(() {
+                        return CustomElevatedButton(
                           text: controller.props.useState.value == UseState.none
                               ? "next".tr
                               : "",
@@ -382,8 +514,8 @@ class NewTransactionScreen extends StatelessWidget {
                                       lable: 'processing'.tr,
                                     ),
                           onPressed: onPressed,
-                        ),
-                      ),
+                        );
+                      }),
                       SizedBox(height: 80.v)
                     ],
                   ),
