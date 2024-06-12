@@ -21,8 +21,6 @@ class NewTransactionScreen extends StatelessWidget {
         WalletReq request = WalletReq(
           email: controller.emailController.text,
         );
-        console.log(request.toJson(), force: true);
-
         await controller.wallet(request.toJson(), currencySymbol);
       }
     }
@@ -188,10 +186,6 @@ class NewTransactionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    console.log({
-      'groupValue': controller.groupValue.value,
-      'frequency': controller.frequency.value.value,
-    }, force: true);
     return Scaffold(
       body: Column(
         children: [

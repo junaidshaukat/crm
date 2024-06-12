@@ -46,8 +46,6 @@ class CardScreen extends StatelessWidget {
       request.saveCard = wallet.saveCard ?? false;
       request.function = wallet.function;
 
-      console.log(request.toJson(), force: true);
-
       Get.to(
         () => ConfirmScreen(request: request),
       );

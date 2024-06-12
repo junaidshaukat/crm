@@ -24,8 +24,6 @@ class ConfirmScreen extends StatelessWidget {
     Rx<UseState> useState = controller.props.useState;
     if (useState.value == UseState.none) {
       request.amount = total;
-      console.log(request.toJson(), force: true);
-
       await controller.create(request.toJson());
     }
   }

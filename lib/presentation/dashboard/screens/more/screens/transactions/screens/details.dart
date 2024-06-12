@@ -214,7 +214,6 @@ class TransactionDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    console.log(transaction.toJson());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
