@@ -222,6 +222,7 @@ class Transaction {
   bool? canDelete;
   String? createDatetime;
   String? updateDatetime;
+  String? startDate;
   dynamic recurringPayment;
 
   Transaction({
@@ -268,6 +269,7 @@ class Transaction {
     this.createDatetime,
     this.updateDatetime,
     this.recurringPayment,
+    this.startDate,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
@@ -315,6 +317,7 @@ class Transaction {
       createDatetime: json['createDatetime'],
       updateDatetime: json['updateDatetime'],
       recurringPayment: json['recurringPayment'],
+      startDate: json['startDate'],
     );
   }
 
@@ -363,6 +366,7 @@ class Transaction {
       'createDatetime': createDatetime,
       'updateDatetime': updateDatetime,
       'recurringPayment': recurringPayment,
+      'startDate': startDate,
     };
   }
 }

@@ -214,6 +214,7 @@ class TransactionDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    console.log(transaction.toJson());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -337,7 +338,14 @@ class TransactionDetailsScreen extends StatelessWidget {
                           value: "${data.value.cardType}",
                         ),
                       ),
-                      SizedBox(height: 34.v),
+                      if (data.value.startDate != null)
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.h),
+                          child: listTile(
+                            label: "start_date".tr,
+                            value: "${data.value.startDate}",
+                          ),
+                        ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.h),
                         child: Row(
