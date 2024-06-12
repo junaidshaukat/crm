@@ -260,6 +260,13 @@ class NewTransactionScreen extends StatelessWidget {
                           );
                         }).toList(),
                         onChanged: (option) {
+                          console.log(option?.value.value);
+                          if (option?.value.value == "ONETIME") {
+                            controller.startDate.value = null;
+                          } else {
+                            controller.startDate.value =
+                                DateTime.now().format('yyyy-MM-dd');
+                          }
                           controller.frequency.value = option?.value;
                         },
                       ),
@@ -467,7 +474,12 @@ class NewTransactionScreen extends StatelessWidget {
                             label: "start_date".tr,
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.emailAddress,
-                            validator: ValidatorNewTransaction.startDate,
+                            validator: (value) {
+                              return ValidatorNewTransaction.startDate(
+                                value,
+                                isRequired: true,
+                              );
+                            },
                             hintText:
                                 controller.startDate.value ?? 'start_date'.tr,
                             textEditingController:

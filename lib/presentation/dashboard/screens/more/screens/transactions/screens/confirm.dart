@@ -170,6 +170,13 @@ class ConfirmScreen extends StatelessWidget {
                       hintText: "${request.campaign}",
                     ),
                     SizedBox(height: 6.v),
+                    if (request.startDate != null)
+                      input(
+                        control: "textbox",
+                        label: "start_date".tr,
+                        hintText: "${request.startDate}",
+                      ),
+                    SizedBox(height: 6.v),
                     Row(
                       children: [
                         Expanded(
