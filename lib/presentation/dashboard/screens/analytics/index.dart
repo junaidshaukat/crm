@@ -10,6 +10,8 @@ class AnalyticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.initialPage(0);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
