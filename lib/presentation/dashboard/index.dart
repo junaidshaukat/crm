@@ -13,25 +13,23 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: appTheme.gray8000,
-      body: SafeArea(
-        child: Obx(
-          () {
-            switch (controller.currentPage.value) {
-              case 0:
-                return DonorsScreen();
-              case 1:
-                return AnalyticsScreen();
-              case 2:
-                return HomeScreen();
-              case 3:
-                return CompaignScreen();
-              case 4:
-                return MoreScreen();
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
+      body: Obx(
+        () {
+          switch (controller.currentPage.value) {
+            case 0:
+              return DonorsScreen();
+            case 1:
+              return AnalyticsScreen();
+            case 2:
+              return HomeScreen();
+            case 3:
+              return CompaignScreen();
+            case 4:
+              return MoreScreen();
+            default:
+              return const SizedBox.shrink();
+          }
+        },
       ),
       bottomNavigationBar: BottomNavigation(
         barBackgroundColor: Colors.white,

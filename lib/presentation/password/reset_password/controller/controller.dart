@@ -16,7 +16,7 @@ class ResetPasswordController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    StatusBar.setSystemUIOverlayStyle(false);
+    StatusBar.set(false);
   }
 
   @override

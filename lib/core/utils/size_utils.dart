@@ -70,6 +70,7 @@ class Sizer extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       return OrientationBuilder(builder: (context, orientation) {
         SizeUtils.setScreenSize(constraints, orientation);
+        SizeUtils.statusBarHeight = MediaQuery.of(context).padding.top;
         return builder(context, orientation, SizeUtils.deviceType);
       });
     });
@@ -93,6 +94,9 @@ class SizeUtils {
 
   /// Device's Width
   static late double width;
+
+  /// Retrieve the status bar height
+  static late num statusBarHeight;
 
   static void setScreenSize(
     BoxConstraints constraints,

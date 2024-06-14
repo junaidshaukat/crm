@@ -477,7 +477,7 @@ class DonorsScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: 36.v),
+          SizedBox(height: (SizeUtils.statusBarHeight + 24).v),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.h),
             child: AppbarWithBackAndFilter(

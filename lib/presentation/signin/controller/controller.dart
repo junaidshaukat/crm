@@ -19,7 +19,7 @@ class SigninController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    StatusBar.setSystemUIOverlayStyle(true);
+    StatusBar.set(true);
   }
 
   @override

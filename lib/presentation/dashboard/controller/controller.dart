@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/core/app_export.dart';
 
@@ -11,7 +12,7 @@ class DashboardController extends GetxController {
     super.onReady();
 
     if (currentPage.value == 2) {
-      setSystemUIOverlayStyle(false);
+      set(false);
     }
 
     ever(currentPage, (page) {
@@ -23,7 +24,7 @@ class DashboardController extends GetxController {
     });
 
     ever(isGreen, (green) {
-      setSystemUIOverlayStyle(green);
+      set(green);
     });
   }
 
@@ -67,34 +68,32 @@ class DashboardController extends GetxController {
     }
   }
 
+  void set(bool green) {
+    setSystemUIOverlayStyle(green);
+  }
+
   void setSystemUIOverlayStyle(bool green) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
+    if (getPlaform == PlatformType.android) {
+      console.log({'green': green}, force: true, name: 'android');
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          systemNavigationBarColor: appTheme.gray,
+          systemNavigationBarDividerColor: appTheme.gray,
+          systemNavigationBarIconBrightness: Brightness.dark,
+          statusBarColor: green ? appTheme.green : Colors.transparent,
+          statusBarBrightness: green ? Brightness.light : Brightness.dark,
+          statusBarIconBrightness: green ? Brightness.light : Brightness.dark,
+        ),
+      );
+    }
 
-          /// Sets the background color of the status bar.
-          // statusBarColor: green ? appTheme.green : appTheme.gray,
-
-          // /// Sets the background color of the system navigation bar.
-          // systemNavigationBarColor: appTheme.gray,
-
-          // /// Sets the color of the divider between the navigation bar and the app content.
-          // systemNavigationBarDividerColor: appTheme.gray,
-
-          // /// For iOS: Sets the brightness of the status bar (text and icons) for dark/light background.
-          // statusBarBrightness: green ? Brightness.dark : Brightness.light,
-
-          // /// For Android: Sets the brightness of the status bar icons for dark/light background.
-          // statusBarIconBrightness: green ? Brightness.light : Brightness.dark,
-
-          // /// For Android: Sets the brightness of the navigation bar icons for dark/light background.
-          // systemNavigationBarIconBrightness: Brightness.dark,
-
-          // /// Enforces a contrast between the status bar content and the status bar background.
-          // systemStatusBarContrastEnforced: true,
-
-          // /// Enforces a contrast between the navigation bar content and the navigation bar background.
-          // systemNavigationBarContrastEnforced: true,
-          ),
-    );
+    if (getPlaform == PlatformType.ios) {
+      console.log({'green': green}, force: true, name: 'ios');
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: green ? Brightness.light : Brightness.dark,
+        ),
+      );
+    }
   }
 }

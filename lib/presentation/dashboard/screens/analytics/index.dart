@@ -13,10 +13,9 @@ class AnalyticsScreen extends StatelessWidget {
     controller.initialPage(0);
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          SizedBox(height: 36.v),
+          SizedBox(height: (SizeUtils.statusBarHeight + 24).v),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.h),
             child: AppbarWithBackAndFilter(

@@ -39,15 +39,15 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
           theme: theme,
+          getPages: AppRoutes.pages,
           translations: AppLocalization(),
-          locale: AppLocalization.onInit(),
-          fallbackLocale: AppLocalization.fallbackLocale,
           title: 'donor_choice_manager'.tr,
+          locale: AppLocalization.onInit(),
+          debugShowCheckedModeBanner: false,
           initialBinding: InitialBindings(),
           initialRoute: AppRoutes.initialRoute,
-          getPages: AppRoutes.pages,
+          fallbackLocale: AppLocalization.fallbackLocale,
         );
       },
     );

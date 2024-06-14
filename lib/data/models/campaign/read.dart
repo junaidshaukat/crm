@@ -135,6 +135,7 @@ class CampaignData {
   num? fees;
   bool? status;
   bool? hidden;
+  bool? enableQuantity;
   bool? issueTaxReceipt;
   bool? donationCampaign;
   bool? allowRecurringModification;
@@ -165,6 +166,7 @@ class CampaignData {
     this.qrCode,
     this.icon,
     this.nodes,
+    this.enableQuantity = false,
   });
 
   factory CampaignData.fromJson(Map<String, dynamic> json) {
@@ -183,6 +185,7 @@ class CampaignData {
       fees: json['fees'],
       issueTaxReceipt: json['issueTaxReceipt'],
       donationCampaign: json['donationCampaign'],
+      enableQuantity: json['enableQuantity'],
       allowRecurringModification: json['allowRecurringModification'],
       raisedAmount: json['raisedAmount'],
       currencySymbol: json['currencySymbol'],
@@ -210,6 +213,7 @@ class CampaignData {
       'sortOrder': sortOrder,
       'taxReceiptRatio': taxReceiptRatio,
       'fees': fees,
+      'enableQuantity': enableQuantity,
       'issueTaxReceipt': issueTaxReceipt,
       'allowRecurringModification': allowRecurringModification,
       'donationCampaign': donationCampaign,

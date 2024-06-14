@@ -14,16 +14,17 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 1,
+          flex: 2,
           child: Container(
             color: appTheme.gray,
             width: double.infinity,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomImageView(
-                  imagePath: "logo@2".icon.svg,
-                  height: 60.v,
                   width: 144.h,
+                  height: 60.v,
+                  imagePath: "logo@2".icon.svg,
                 ),
                 SizedBox(height: 12.v),
                 Obx(() {
@@ -119,7 +120,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 4,
+          flex: 6,
           child: Container(
             color: appTheme.gray,
             width: double.infinity,
