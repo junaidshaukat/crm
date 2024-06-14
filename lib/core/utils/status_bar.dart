@@ -8,7 +8,6 @@ class StatusBar {
 
   static void setSystemUIOverlayStyle(bool green) {
     if (getPlaform == PlatformType.android) {
-      console.log({'green': green}, force: true, name: 'android');
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
           systemNavigationBarColor: appTheme.gray,
@@ -22,7 +21,6 @@ class StatusBar {
     }
 
     if (getPlaform == PlatformType.ios) {
-      console.log({'green': green}, force: true, name: 'ios');
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
           statusBarBrightness: green ? Brightness.light : Brightness.dark,
