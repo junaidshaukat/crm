@@ -286,6 +286,7 @@ final Map<String, String> enUs = {
   "media_type": "Media Type",
   "image": "Image",
   "video": "Video",
+  "enable_quantity":"Enable Quantity",
 
   /// Error
   "network_err": "Network Error",

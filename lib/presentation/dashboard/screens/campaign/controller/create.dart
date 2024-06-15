@@ -30,7 +30,8 @@ class CreateCampaignController extends GetxController {
   Rx<bool> statusController = false.obs;
   Rx<bool> issueTaxReceiptController = false.obs;
   Rx<bool> donationCampaignController = false.obs;
-  Rx<bool> hiddenController = false.obs;
+  Rx<bool> hiddenController = false.obs;  
+  Rx<bool> enableQuantityController = false.obs;
   Rx<bool> allowRecurringModificationController = false.obs;
 
   Rx<String?> startDate = Rx(null);
