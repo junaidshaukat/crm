@@ -219,6 +219,7 @@ class Transaction {
   dynamic cardholderName;
   Donor? donor;
   bool? canEdit;
+  bool? canRefund;
   bool? canDelete;
   String? createDatetime;
   String? updateDatetime;
@@ -266,6 +267,7 @@ class Transaction {
     this.donor,
     this.canEdit,
     this.canDelete,
+    this.canRefund,
     this.createDatetime,
     this.updateDatetime,
     this.recurringPayment,
@@ -314,6 +316,7 @@ class Transaction {
       donor: json['donor'] != null ? Donor.fromJson(json['donor']) : null,
       canEdit: json['canEdit'],
       canDelete: json['canDelete'],
+      canRefund: json['canRefund'],
       createDatetime: json['createDatetime'],
       updateDatetime: json['updateDatetime'],
       recurringPayment: json['recurringPayment'],
@@ -363,6 +366,7 @@ class Transaction {
       'donor': donor?.toJson(),
       'canEdit': canEdit,
       'canDelete': canDelete,
+      'canRefund': canRefund,
       'createDatetime': createDatetime,
       'updateDatetime': updateDatetime,
       'recurringPayment': recurringPayment,

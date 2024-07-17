@@ -6,17 +6,8 @@ class Pickers {
   List<String> images = ["jpg", "jpeg", "png", "bmp", "gif"];
   List<String> videos = ["mp4", "mov"];
 
-  Future<void> getCache() async {
-    Directory cache = await getTemporaryDirectory();
-    List<FileSystemEntity> contents = cache.listSync(recursive: true);
-    for (FileSystemEntity entity in contents) {
-      console.log(entity.path);
-    }
-  }
-
   Future<bool> clearCache() async {
     try {
-      await getCache();
       Directory cache = await getTemporaryDirectory();
       List<FileSystemEntity> contents = cache.listSync(recursive: true);
       for (var entity in contents) {

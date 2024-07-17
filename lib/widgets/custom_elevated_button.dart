@@ -60,3 +60,38 @@ class CustomElevatedButton extends BaseButton {
         ),
       );
 }
+
+class OutlineIconButton extends StatelessWidget {
+  final Widget? child;
+  final double? width;
+  final double? height;
+  final Color color;
+  final void Function()? onPressed;
+
+  const OutlineIconButton({
+    super.key,
+    this.color = const Color(0xFF000000),
+    this.width,
+    this.height,
+    this.child,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: width,
+        height: height,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(2.adaptSize),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: color, width: 1),
+        ),
+        child: child,
+      ),
+    );
+  }
+}

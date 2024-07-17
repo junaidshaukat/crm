@@ -657,7 +657,7 @@ class DonorsScreen extends StatelessWidget {
                                           children: [
                                             listTile(
                                               label: "phone".tr,
-                                              value: "${donor.phone}",
+                                              value: "${donor.phone ?? "None"}",
                                             ),
                                             SizedBox(height: 4.v),
                                             Divider(

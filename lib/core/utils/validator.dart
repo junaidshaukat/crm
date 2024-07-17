@@ -1208,6 +1208,59 @@ class ValidatorReport {
   }
 }
 
+class ValidatorTransaction {
+  static String? notes(String? input, {bool isRequired = true}) {
+    String pattern = r'^.{1,1000}$';
+    RegExp regExp = RegExp(pattern);
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"refund".tr} ${"notes".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"refund".tr} ${"notes".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"refund".tr.toLowerCase()} ${"notes".tr.toLowerCase()}";
+      } else {
+        return null;
+      }
+    }
+  }
+
+  static String? maxAmount(String? input, num max, {bool isRequired = true}) {
+    String pattern = r'^\d*\.?\d{1,2}$';
+    RegExp regExp = RegExp(pattern);
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"refund".tr} ${"max_amount".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"refund".tr} ${"max_amount".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"refund".tr.toLowerCase()} ${"amount".tr.toLowerCase()}";
+      } else {
+        if (num.parse(input) > max) {
+          return "${"maximum_allowed".tr} \$$max.";
+        } else if (num.parse(input) == 0) {
+          return "${"refund".tr} ${"max_amount".tr.toLowerCase()} ${"cannot_be_zero".tr.toLowerCase()}";
+        } else if (num.parse(input) < 0) {
+          return "negative".tr;
+        }
+        return null;
+      }
+    }
+  }
+}
+
 class ValidatorNewTransaction {
   static String? startDate(String? input, {bool isRequired = false}) {
     String pattern1 = r'^\d{4}-\d{2}-\d{2}\s\d{1,2}:\d{1,2}:\d{1,2}$';

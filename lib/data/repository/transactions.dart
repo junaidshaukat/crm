@@ -187,4 +187,65 @@ class TransactionsApis extends Client {
       rethrow;
     }
   }
+
+  Future<RefundsRes> refunds({
+    Map<String, String> headers = const {
+      'Content-type': 'application/json',
+    },
+    Map<String, dynamic> requestData = const {},
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+      console.log(requestData, force: true);
+      Response response = await dio.get(
+        '/api/admin/v1/refund',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        queryParameters: requestData,
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        console.log(response.data, force: true);
+        return RefundsRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? RefundsRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<RefundRes> refund({
+    Map<String, String> headers = const {
+      'Content-type': 'application/json',
+    },
+    Map<String, dynamic> requestData = const {},
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+      console.log(requestData, force: true);
+      Response response = await dio.post(
+        '/api/admin/v1/refund',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        console.log(response.data, force: true);
+        return RefundRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? RefundRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

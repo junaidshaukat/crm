@@ -9,6 +9,7 @@ class TransactionsScreen extends StatelessWidget {
   TransactionsScreen({super.key});
   final controller = Get.put(TransactionsController());
   final Rx<String?> currency = Rx(null);
+
   Widget visibility({
     required bool visible,
     required String label,
