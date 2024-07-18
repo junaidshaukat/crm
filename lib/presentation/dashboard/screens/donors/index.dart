@@ -9,159 +9,6 @@ export 'controller/controller.dart';
 class DonorsScreen extends StatelessWidget {
   final DonorsController controller = Get.put(DonorsController());
   DonorsScreen({super.key});
-/*
-  Widget visibility({
-    required bool visible,
-    required String label,
-    required String control,
-    TextEditingController? controller,
-    String? hintText,
-    void Function(String)? onChanged,
-    required void Function()? onRemove,
-    void Function()? onTap,
-    required DonorsController conn,
-  }) {
-    Rx<String?> date = Rx(null);
-
-    return Visibility(
-      visible: visible,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              color: appTheme.black900,
-              fontSize: 15.fSize,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          SizedBox(height: 2.v),
-          if (control == 'datetime' || control == 'date')
-            Obx(() {
-              return Input(
-                readOnly: true,
-                controller: controller,
-                hintText: date.value ?? hintText,
-                onChanged: onChanged,
-                onTap: () {
-                  pickers.date(Get.context!).then((val) {
-                    if (val != null) {
-                      date.value = val.formatYYYYMMDD;
-                      onChanged!(val.formatYYYYMMDD);
-                    }
-                  });
-                },
-                suffixIcon: IconButton(
-                  onPressed: onRemove,
-                  icon: Icon(
-                    Icons.close,
-                    color: appTheme.gray400,
-                  ),
-                ),
-              );
-            }),
-          if (control != 'date')
-            Input(
-              readOnly: control == 'date' ? true : false,
-              controller: controller,
-              hintText: control == 'date' ? date.value : hintText,
-              onChanged: onChanged,
-              onTap: control == 'date' ? onTap : null,
-              suffixIcon: IconButton(
-                onPressed: onRemove,
-                icon: Icon(
-                  Icons.close,
-                  color: appTheme.gray400,
-                ),
-              ),
-            ),
-          if (control == 'checkboxList')
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: appTheme.black900,
-                    fontSize: 15.fSize,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    onRemove!();
-                  },
-                  icon: const Icon(Icons.close),
-                )
-              ],
-            ),
-          if (control == 'checkboxList')
-            Wrap(
-              children: list.map(
-                (e) {
-                  RxBool check = false.obs;
-                  if (conn.query.containsKey(value)) {
-                    List temp = conn.query[value] as List;
-                    if (temp.contains(e['value'])) {
-                      check.value = true;
-                    }
-                  }
-                  return GestureDetector(
-                    onTap: () {
-                      check.value = check.toggle().value;
-                      onSelect!({
-                        'key': value,
-                        'label': e['label'],
-                        'value': e['value'],
-                        'checked': check.value
-                      });
-                    },
-                    child: SizedBox(
-                      width: 170.h,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Obx(
-                            () {
-                              return Checkbox(
-                                value: check.value,
-                                side: BorderSide(
-                                  color: appTheme.primary,
-                                  width: 1.8,
-                                ),
-                                onChanged: (checked) {
-                                  check.value = checked!;
-                                  onSelect!({
-                                    'key': value,
-                                    'label': e['label'],
-                                    'value': e['value'],
-                                    'checked': checked
-                                  });
-                                },
-                              );
-                            },
-                          ),
-                          Expanded(child: Text(e['label']))
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ).toList(),
-            ),
-        ],
-      ),
-    );
-  }
-
-  */
 
   Widget visibility({
     required bool visible,
@@ -1141,6 +988,20 @@ class DonorsScreen extends StatelessWidget {
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
+                                            if (donor.accountType == 'B') ...[
+                                              listTile(
+                                                label: "business_name".tr,
+                                                value: donor.businessName ??
+                                                    "None",
+                                              ),
+                                               SizedBox(height: 4.v),
+                                            Divider(
+                                              color: appTheme.gray600
+                                                  .withOpacity(0.4),
+                                              indent: 0.h,
+                                            ),
+                                            SizedBox(height: 3.v),
+                                            ],
                                             listTile(
                                               label: "phone".tr,
                                               value: "${donor.phone ?? "None"}",
