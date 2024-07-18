@@ -7,6 +7,14 @@ class CreateDonorsController extends GetxController {
   Props propsStates = Props();
 
   Rx<CountryData?> country = Rx(null);
+  Rx<AccountType> accountType = Rx(
+    AccountType(
+      id: 1,
+      name: 'individual'.tr,
+      value: 'I',
+    ),
+  );
+
   Rx<CountrySatesData?> province = Rx(null);
 
   RxList<CountryData> countries = RxList([]);
@@ -14,6 +22,7 @@ class CreateDonorsController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  TextEditingController businessNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleInitialsController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -37,6 +46,7 @@ class CreateDonorsController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    businessNameController.dispose();
     firstNameController.dispose();
     middleInitialsController.dispose();
     lastNameController.dispose();
@@ -51,6 +61,14 @@ class CreateDonorsController extends GetxController {
   }
 
   void clear() {
+    accountType = Rx(
+      AccountType(
+        id: 1,
+        name: 'individual'.tr,
+        value: 'I',
+      ),
+    );
+    businessNameController.clear();
     firstNameController.clear();
     middleInitialsController.clear();
     lastNameController.clear();
@@ -65,6 +83,10 @@ class CreateDonorsController extends GetxController {
     country.value = null;
     province.value = null;
     update();
+  }
+
+  void onChangedAccountType(option) {
+    accountType(option.value);
   }
 
   Future<void> onChangedCountry(option) async {

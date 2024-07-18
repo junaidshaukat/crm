@@ -1,4 +1,5 @@
 export 'country.dart';
+export 'account_type.dart';
 export 'forget_password.dart';
 export 'login.dart';
 export 'otp_verification.dart';

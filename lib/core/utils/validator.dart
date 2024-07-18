@@ -349,7 +349,7 @@ class ValidatorCampaign {
 }
 
 class ValidatorDonor {
-  static String? firstName(String? input, {bool isRequired = true}) {
+  static String? businessName(String? input, {bool isRequired = true}) {
     String pattern = r'^.{1,50}$';
     RegExp regExp = RegExp(pattern);
     if (input != null && isRequired == false && input.isNotEmpty) {
@@ -360,18 +360,19 @@ class ValidatorDonor {
       return null;
     } else {
       if (input == null) {
-        return "${"donor".tr} ${"first_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+        return "${"donor".tr} ${"business_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
       } else if (input.isEmpty) {
-        return "${"donor".tr} ${"first_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+        return "${"donor".tr} ${"business_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
       } else if (!regExp.hasMatch(input)) {
-        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"first_name".tr.toLowerCase()}";
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"business_name".tr.toLowerCase()}";
       } else {
         return null;
       }
     }
   }
 
-  static String? middleName(String? input, {bool isRequired = false}) {
+  static String? firstName(String? input, String contact,
+      {bool isRequired = true}) {
     String pattern = r'^.{1,50}$';
     RegExp regExp = RegExp(pattern);
     if (input != null && isRequired == false && input.isNotEmpty) {
@@ -382,18 +383,19 @@ class ValidatorDonor {
       return null;
     } else {
       if (input == null) {
-        return "${"donor".tr} ${"middle_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+        return "${"donor".tr} ${contact.toLowerCase()} ${"first_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
       } else if (input.isEmpty) {
-        return "${"donor".tr} ${"middle_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+        return "${"donor".tr} ${contact.toLowerCase()} ${"first_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
       } else if (!regExp.hasMatch(input)) {
-        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"middle_name".tr.toLowerCase()}";
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${contact.toLowerCase()} ${"first_name".tr.toLowerCase()}";
       } else {
         return null;
       }
     }
   }
 
-  static String? lastName(String? input, {bool isRequired = true}) {
+  static String? middleName(String? input, String contact,
+      {bool isRequired = false}) {
     String pattern = r'^.{1,50}$';
     RegExp regExp = RegExp(pattern);
     if (input != null && isRequired == false && input.isNotEmpty) {
@@ -404,11 +406,34 @@ class ValidatorDonor {
       return null;
     } else {
       if (input == null) {
-        return "${"donor".tr} ${"last_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+        return "${"donor".tr} ${contact.toLowerCase()} ${"middle_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
       } else if (input.isEmpty) {
-        return "${"donor".tr} ${"last_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+        return "${"donor".tr} ${contact.toLowerCase()} ${"middle_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
       } else if (!regExp.hasMatch(input)) {
-        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"last_name".tr.toLowerCase()}";
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${contact.toLowerCase()} ${"middle_name".tr.toLowerCase()}";
+      } else {
+        return null;
+      }
+    }
+  }
+
+  static String? lastName(String? input, String contact,
+      {bool isRequired = true}) {
+    String pattern = r'^.{1,50}$';
+    RegExp regExp = RegExp(pattern);
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"donor".tr} ${contact.toLowerCase()} ${"last_name".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"donor".tr} ${contact.toLowerCase()} ${"last_name".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${contact.toLowerCase()} ${"last_name".tr.toLowerCase()}";
       } else {
         return null;
       }
@@ -504,6 +529,52 @@ class ValidatorDonor {
     }
   }
 
+  static String? postalCode(String? input, {bool isRequired = true}) {
+    String pattern = r'^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$';
+    RegExp regExp = RegExp(pattern);
+
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"donor".tr} ${"postal_code".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"donor".tr} ${"postal_code".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"postal_code".tr.toLowerCase()} (e.g., A1A 1A1).";
+      } else {
+        return null;
+      }
+    }
+  }
+
+  static String? zipCode(String? input, {bool isRequired = true}) {
+    String pattern = r'^\d{5}(-\d{4})?$';
+    RegExp regExp = RegExp(pattern);
+
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    if (!isRequired) {
+      return null;
+    } else {
+      if (input == null) {
+        return "${"donor".tr} ${"zip_code".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"donor".tr} ${"zip_code".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"zip_code".tr.toLowerCase()} (e.g., 12345 or 12345-6789).";
+      } else {
+        return null;
+      }
+    }
+  }
+
   static String? province(String? input, {bool isRequired = true}) {
     String pattern = r'^.{1,100}$';
     RegExp regExp = RegExp(pattern);
@@ -522,6 +593,34 @@ class ValidatorDonor {
       } else if (!regExp.hasMatch(input)) {
         return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"province".tr.toLowerCase()}";
       } else {
+        return null;
+      }
+    }
+  }
+
+  static String? accountType(String? input, {bool isRequired = true}) {
+    // Regular expression pattern to match "business" or "individual"
+    String pattern = r'^(business|individual)$';
+    RegExp regExp = RegExp(pattern);
+
+    // If input is not null and isRequired is false but input is not empty, set isRequired to true
+    if (input != null && isRequired == false && input.isNotEmpty) {
+      isRequired = true;
+    }
+
+    // If input is not required, return null
+    if (!isRequired) {
+      return null;
+    } else {
+      // Check for null, empty, or invalid input and return corresponding error messages
+      if (input == null) {
+        return "${"donor".tr} ${"type".tr.toLowerCase()} ${"cannot_be_null".tr.toLowerCase()}";
+      } else if (input.isEmpty) {
+        return "${"donor".tr} ${"type".tr.toLowerCase()} ${"cannot_be_empty".tr.toLowerCase()}";
+      } else if (!regExp.hasMatch(input)) {
+        return "${"please_enter_valid".tr} ${"donor".tr.toLowerCase()} ${"type".tr.toLowerCase()}";
+      } else {
+        // Return null if input is valid
         return null;
       }
     }
@@ -572,7 +671,7 @@ class ValidatorDonor {
   }
 
   static String? phone(String? input, {bool isRequired = true}) {
-    String pattern = r'^[0-9]{7,15}$';
+    String pattern = r'^[0-9]{10,15}$';
     RegExp regExp = RegExp(pattern);
     if (input != null && isRequired == false && input.isNotEmpty) {
       isRequired = true;

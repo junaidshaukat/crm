@@ -2,6 +2,8 @@ import '/core/app_export.dart';
 
 class DonorUpdateReq {
   String? tagNumber;
+  String? accountType;
+  String? businessName;
   String? firstName;
   String? middleName;
   String? lastName;
@@ -17,9 +19,12 @@ class DonorUpdateReq {
   String? status;
   String? allowContact;
   String? notifyNewCampaign;
+  String? profileImage;
 
   DonorUpdateReq({
     this.tagNumber,
+    this.accountType,
+    this.businessName,
     this.firstName,
     this.middleName,
     this.lastName,
@@ -35,11 +40,14 @@ class DonorUpdateReq {
     this.status = '1',
     this.allowContact = '1',
     this.notifyNewCampaign = '1',
+    this.profileImage,
   });
 
   factory DonorUpdateReq.fromJson(Map<String, dynamic> json) {
     return DonorUpdateReq(
       tagNumber: json['tagNumber'],
+      accountType: json['accountType'],
+      businessName: json['businessName'],
       firstName: json['firstName'],
       middleName: json['middleName'],
       lastName: json['lastName'],
@@ -55,12 +63,15 @@ class DonorUpdateReq {
       status: json['status'],
       allowContact: json['allowContact'],
       notifyNewCampaign: json['notifyNewCampaign'],
+      profileImage: json['profileImage'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'tagNumber': tagNumber,
+      "accountType": accountType,
+      "businessName": businessName,
       "firstName": firstName,
       "middleName": middleName,
       "lastName": lastName,
@@ -76,6 +87,7 @@ class DonorUpdateReq {
       "status": status,
       "allowContact": allowContact,
       "notifyNewCampaign": notifyNewCampaign,
+      "profileImage": profileImage,
     };
   }
 }

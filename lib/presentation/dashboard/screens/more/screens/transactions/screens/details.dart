@@ -697,23 +697,6 @@ class TransactionDetailsScreen extends StatelessWidget {
                                               ),
                                             ),
                                           );
-
-                                          // Get.defaultDialog(
-                                          //   title: 'notes'.tr,
-                                          //   content: Column(
-                                          //     children: [
-                                          //       Text(
-                                          //           'This is the content of the dialog.'),
-                                          //       SizedBox(height: 20),
-                                          //       ElevatedButton(
-                                          //         onPressed: () {
-                                          //           Get.back(); // Close the dialog
-                                          //         },
-                                          //         child: Text('Close'),
-                                          //       ),
-                                          //     ],
-                                          //   ),
-                                          // );
                                         },
                                       ),
                                       SizedBox(width: 8.h),

@@ -1,6 +1,8 @@
 import '/core/app_export.dart';
 
 class DonorCreateReq {
+  String? accountType;
+  String? businessName;
   String? firstName;
   String? middleInitials;
   String? lastName;
@@ -18,6 +20,8 @@ class DonorCreateReq {
   String? notifyNewCampaign;
 
   DonorCreateReq({
+    this.accountType,
+    this.businessName,
     this.firstName,
     this.middleInitials,
     this.lastName,
@@ -37,6 +41,8 @@ class DonorCreateReq {
 
   factory DonorCreateReq.fromJson(Map<String, dynamic> json) {
     return DonorCreateReq(
+      accountType: json['accountType'],
+      businessName: json['businessName'],
       firstName: json['firstName'],
       middleInitials: json['middleInitials'],
       lastName: json['lastName'],
@@ -56,6 +62,8 @@ class DonorCreateReq {
   }
   Map<String, dynamic> toJson() {
     return {
+      "accountType": accountType ?? '',
+      "businessName": businessName ?? '',
       "firstName": firstName ?? '',
       "middleInitials": middleInitials ?? '',
       "lastName": lastName ?? '',

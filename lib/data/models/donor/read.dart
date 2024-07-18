@@ -11,7 +11,8 @@ class DonorReadReq {
     this.order = 'asc',
   });
 
-  Map<String, dynamic> toJson({Map<String, String>? filter}) {
+  Map<String, dynamic> toJson(
+      {Map<String, String>? filter, Map<String, List>? query}) {
     final temp = <String, dynamic>{};
     if (page != null) {
       temp['page'] = page;
@@ -28,6 +29,10 @@ class DonorReadReq {
 
     if (filter != null) {
       temp.addAll(filter);
+    }
+
+    if (query != null) {
+      temp.addAll(query);
     }
 
     return temp;
@@ -121,6 +126,8 @@ class DonorLinks {
 
 class DonorData {
   num? tagNumber;
+  String? accountType;
+  String? businessName;
   String? firstName;
   String? middleName;
   String? lastName;
@@ -137,11 +144,14 @@ class DonorData {
   dynamic lastLogin;
   num? allowContact;
   num? notifyNewCampaign;
+  String? profileImage;
   String? createDateTime;
   String? updateDateTime;
 
   DonorData({
     this.tagNumber,
+    this.accountType,
+    this.businessName,
     this.firstName,
     this.middleName,
     this.lastName,
@@ -158,6 +168,7 @@ class DonorData {
     this.lastLogin,
     this.allowContact,
     this.notifyNewCampaign,
+    this.profileImage,
     this.createDateTime,
     this.updateDateTime,
   });
@@ -165,6 +176,8 @@ class DonorData {
   factory DonorData.fromJson(Map<String, dynamic> json) {
     return DonorData(
       tagNumber: json['tagNumber'],
+      accountType: json['accountType'],
+      businessName: json['businessName'],
       firstName: json['firstName'],
       middleName: json['middleName'],
       lastName: json['lastName'],
@@ -181,6 +194,7 @@ class DonorData {
       lastLogin: json['lastLogin'],
       allowContact: json['allowContact'],
       notifyNewCampaign: json['notifyNewCampaign'],
+      profileImage: json['profileImage'],
       createDateTime: json['createDateTime'],
       updateDateTime: json['updateDateTime'],
     );
