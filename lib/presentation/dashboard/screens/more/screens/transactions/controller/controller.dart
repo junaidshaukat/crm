@@ -9,6 +9,8 @@ export 'new.dart';
 
 class TransactionsController extends GetxController {
   Props props = Props();
+  Props propsRefund = Props();
+
   EnvConfig env = EnvConfig();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   RxInt selectedchannel = RxInt(0);
@@ -17,6 +19,7 @@ class TransactionsController extends GetxController {
   Rx<TransactionLinks> links = Rx(TransactionLinks());
 
   RxList<Fields> fields = RxList([]);
+  Rx<RefundsRes> refund = Rx(RefundsRes());
   Rx<Map<String, dynamic>> routeValues = Rx({});
 
   Rx<int> page = Rx(1);
@@ -39,7 +42,11 @@ class TransactionsController extends GetxController {
     by: "transaction_tag",
   );
 
+  Rx<num> eligibleRefundAmount = Rx(0);
+
   TextEditingController email = TextEditingController();
+  TextEditingController notes = TextEditingController();
+  TextEditingController maxAmount = TextEditingController();
 
   @override
   void onReady() async {
@@ -59,6 +66,7 @@ class TransactionsController extends GetxController {
             requestData: request.toJson(),
           );
       if (response.result == true) {
+        routeValues.value.clear();
         routeValues.value = response.data;
       } else {
         throw response;
@@ -110,6 +118,7 @@ class TransactionsController extends GetxController {
             requestData: request.toJson(),
           );
       if (response.result == true) {
+        fields.clear();
         fields.addAll(reorderList(response.data!));
       } else {
         throw response;
@@ -130,6 +139,8 @@ class TransactionsController extends GetxController {
             requestData: request.toJson(filter: filter, query: query),
           );
       if (response.result == true) {
+        transactions.clear();
+
         transactions(response.data!.transactions);
         currencySymbol(response.data!.currencySymbol);
         links.value = response.links!;
@@ -248,6 +259,81 @@ class TransactionsController extends GetxController {
       Toasts.error(message: e.toString());
     } catch (e) {
       Toasts.error(message: e.toString());
+    }
+  }
+
+  Future<void> refunds(int? tagNumber) async {
+    try {
+      notes.clear();
+      propsRefund.useState(UseState.loading);
+
+      RefundsRes response = await Get.find<Api>().transactions.refunds(
+        requestData: {'tagNumber': tagNumber},
+      );
+      if (response.result == true) {
+        maxAmount.text = "${response.eligibleRefundAmount}";
+        eligibleRefundAmount(response.eligibleRefundAmount);
+        refund(response);
+        propsRefund.useState(UseState.none);
+      } else {
+        propsRefund.useState(UseState.none);
+        throw response;
+      }
+    } on UpdateEmailRes catch (e) {
+      Toasts.error(message: e.message);
+      propsRefund.useState(UseState.none);
+    } on DioResponse catch (e) {
+      Toasts.error(message: e.message);
+      propsRefund.useState(UseState.none);
+    } on NoInternetException catch (e) {
+      Toasts.error(message: e.toString());
+      propsRefund.useState(UseState.none);
+    } catch (e) {
+      Toasts.error(message: e.toString());
+      propsRefund.useState(UseState.none);
+    }
+  }
+
+  Future<void> onRefund({
+    int? tagNumber,
+    num? amount,
+    String? userNotes,
+    required void Function() callback,
+  }) async {
+    try {
+      propsRefund.useState(UseState.processing);
+      RefundReq requestData = RefundReq(
+        tagNumber: tagNumber,
+        amount: amount,
+        userNotes: userNotes,
+      );
+
+      RefundRes response = await Get.find<Api>().transactions.refund(
+            requestData: requestData.toJson(),
+          );
+      if (response.result == true) {
+        callback();
+        Get.back();
+        Toasts.success(message: response.message);
+        propsRefund.useState(UseState.none);
+        onReady();
+      } else {
+        propsRefund.useState(UseState.none);
+
+        throw response;
+      }
+    } on UpdateEmailRes catch (e) {
+      Toasts.error(message: e.message);
+      propsRefund.useState(UseState.none);
+    } on DioResponse catch (e) {
+      Toasts.error(message: e.message);
+      propsRefund.useState(UseState.none);
+    } on NoInternetException catch (e) {
+      Toasts.error(message: e.toString());
+      propsRefund.useState(UseState.none);
+    } catch (e) {
+      Toasts.error(message: e.toString());
+      propsRefund.useState(UseState.none);
     }
   }
 

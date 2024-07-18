@@ -10,6 +10,10 @@ class CreateDonorScreen extends StatelessWidget {
   Future<void> create() async {
     if (controller.formKey.currentState!.validate()) {
       DonorCreateReq request = DonorCreateReq(
+        accountType: controller.accountType.value.value,
+        businessName: controller.accountType.value.value == "B"
+            ? controller.businessNameController.text
+            : null,
         firstName: controller.firstNameController.text,
         middleInitials: controller.middleInitialsController.text,
         lastName: controller.lastNameController.text,
@@ -115,24 +119,100 @@ class CreateDonorScreen extends StatelessWidget {
                       SizedBox(height: 14.v),
                       const Center(child: CustomDivider()),
                       SizedBox(height: 19.v),
-                      input(
-                        label: 'first_name'.tr,
-                        hintText: 'first_name'.tr,
-                        conn: controller.firstNameController,
-                        validator: ValidatorDonor.firstName,
+                      Obx(
+                        () => input(
+                          dropDown2: true,
+                          label: 'donor_type'.tr,
+                          hintText: controller.accountType.value.name,
+                          items: [
+                            AccountType(
+                              id: 1,
+                              name: 'individual'.tr,
+                              value: 'I',
+                            ),
+                            AccountType(
+                              id: 2,
+                              name: 'business'.tr,
+                              value: 'B',
+                            )
+                          ]
+                              .map(
+                                (type) => DropDown(
+                                  id: type.id,
+                                  title: type.name,
+                                  value: type,
+                                ),
+                              )
+                              .toList(),
+                          onChanged: controller.onChangedAccountType,
+                          validator: ValidatorDonor.accountType,
+                        ),
                       ),
-                      input(
-                        label: 'middle_name'.tr,
-                        hintText: 'middle_name'.tr,
-                        conn: controller.middleInitialsController,
-                        validator: ValidatorDonor.middleName,
-                      ),
-                      input(
-                        label: 'last_name'.tr,
-                        hintText: 'last_name'.tr,
-                        conn: controller.lastNameController,
-                        validator: ValidatorDonor.lastName,
-                      ),
+                      Obx(() {
+                        bool visible = controller.accountType.value.value == "B"
+                            ? true
+                            : false;
+                        return Column(
+                          children: [
+                            Visibility(
+                              visible: visible,
+                              child: input(
+                                label: 'business_name'.tr,
+                                hintText: 'business_name'.tr,
+                                conn: controller.businessNameController,
+                                validator: visible
+                                    ? ValidatorDonor.businessName
+                                    : null,
+                              ),
+                            ),
+                            input(
+                              label: visible
+                                  ? "${'contact'.tr} ${'first_name'.tr}"
+                                  : 'first_name'.tr,
+                              hintText: visible
+                                  ? "${'contact'.tr} ${'first_name'.tr}"
+                                  : 'first_name'.tr,
+                              conn: controller.firstNameController,
+                              validator: (val) {
+                                return ValidatorDonor.firstName(
+                                  val,
+                                  visible ? 'contact'.tr : '',
+                                );
+                              },
+                            ),
+                            input(
+                              label: visible
+                                  ? "${'contact'.tr} ${'middle_name'.tr}"
+                                  : 'middle_name'.tr,
+                              hintText: visible
+                                  ? "${'contact'.tr} ${'middle_name'.tr}"
+                                  : 'middle_name'.tr,
+                              conn: controller.middleInitialsController,
+                              validator: (val) {
+                                return ValidatorDonor.middleName(
+                                  val,
+                                  visible ? 'contact'.tr : '',
+                                );
+                              },
+                            ),
+                            input(
+                              label: visible
+                                  ? "${'contact'.tr} ${'last_name'.tr}"
+                                  : 'last_name'.tr,
+                              hintText: visible
+                                  ? "${'contact'.tr} ${'last_name'.tr}"
+                                  : 'last_name'.tr,
+                              conn: controller.lastNameController,
+                              validator: (val) {
+                                return ValidatorDonor.lastName(
+                                  val,
+                                  visible ? 'contact'.tr : '',
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      }),
                       input(
                         label: 'phone'.tr,
                         hintText: 'phone'.tr,
@@ -238,7 +318,11 @@ class CreateDonorScreen extends StatelessWidget {
                                   ? 'zip_code'.tr
                                   : 'postal_code'.tr,
                           conn: controller.postalZipCodeController,
-                          validator: ValidatorDonor.postalZipCode,
+                          validator:
+                              controller.country.value?.code?.toLowerCase() ==
+                                      'us'
+                                  ? ValidatorDonor.zipCode
+                                  : ValidatorDonor.postalCode,
                         ),
                       ),
                       SizedBox(height: 16.v),

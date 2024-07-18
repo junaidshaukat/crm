@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import '/core/app_export.dart';
 
@@ -32,6 +34,7 @@ class FieldController {
 
 class DonorsController extends GetxController {
   Props props = Props();
+  Props propsProfile = Props();
 
   RxList<DonorData> donors = <DonorData>[].obs;
   Rx<DonorLinks> links = Rx(DonorLinks());
@@ -46,35 +49,96 @@ class DonorsController extends GetxController {
   Rx<String> order = Rx("ascending");
 
   Map<String, String> filter = {};
+  Map<String, List> query = {};
+  Rx<Map<String, dynamic>> routeValues = Rx({});
+
+  Rx<File?> profileImage = Rx(null);
 
   @override
   void onInit() async {
+    await Future.wait([
+      getListOfValues(),
+      getRouteName(),
+      getDonors(),
+    ]);
     super.onInit();
-    await getListOfValues();
-    await getDonors();
   }
 
-  Future getListOfValues() async {
+  Future<void> getRouteName() async {
+    try {
+      RouteLovReq request = RouteLovReq(routeName: 'donor');
+      RouteLovRes response = await Get.find<Api>().messages.routeLov(
+            requestData: request.toJson(),
+          );
+      if (response.result == true) {
+        routeValues.value.clear();
+        Map<String, dynamic> data = response.data as Map<String, dynamic>;
+
+        if (!data.containsKey("account_type")) {
+          data.addAll({
+            "account_type": [
+              {"value": "B", "label": "Business"},
+              {"value": "I", "label": "Individual"},
+            ]
+          });
+        }
+
+        routeValues.value = data;
+      } else {
+        throw response;
+      }
+    } on DioResponse catch (e) {
+      props.error(UseError(message: e.message));
+    } on NoInternetException catch (e) {
+      props.error(UseError(message: e.toString()));
+    } catch (e) {
+      props.error(UseError(message: e.toString()));
+    }
+  }
+
+  List<Fields> reorderList(List<ListOfValues>? list) {
+    List<Fields> textboxItems = [];
+    List<Fields> otherItems = [];
+
+    // Separating items based on control value
+    for (var item in list!) {
+      if (item.control == 'textbox') {
+        textboxItems.add(Fields(
+          value: item.value,
+          label: item.label,
+          control: item.control,
+          selected: false.obs,
+        ));
+      } else {
+        otherItems.add(Fields(
+          value: item.value,
+          label: item.label,
+          control: item.control,
+          selected: false.obs,
+        ));
+      }
+    }
+
+    // Combining the lists with textbox items first
+    List<Fields> reorderedList = [];
+    reorderedList.addAll(textboxItems);
+    reorderedList.addAll(otherItems);
+
+    return reorderedList;
+  }
+
+  Future<void> getListOfValues() async {
     try {
       ListOfValuesReq request = ListOfValuesReq(listName: 'donorFilter');
       ListOfValuesRes response = await Get.find<Api>().messages.lov(
             requestData: request.toJson(),
           );
       if (response.result == true) {
-        for (var element in response.data!) {
-          fields.add(Fields(
-            value: element.value,
-            label: element.label,
-            control: element.control,
-            selected: false.obs,
-          ));
-        }
-        return response;
+        fields.clear();
+        fields.addAll(reorderList(response.data!));
       } else {
         throw response;
       }
-    } on ListOfValuesRes catch (e) {
-      props.error(UseError(message: e.message));
     } on DioResponse catch (e) {
       props.error(UseError(message: e.message));
     } on NoInternetException catch (e) {
@@ -102,7 +166,7 @@ class DonorsController extends GetxController {
       }
 
       DonorReadRes response = await Get.find<Api>().donor.read(
-            requestData: request.toJson(filter: filter),
+            requestData: request.toJson(filter: filter, query: query),
           );
       if (response.result == true) {
         donors.value = response.data;
@@ -137,6 +201,7 @@ class DonorsController extends GetxController {
   }
 
   Future<void> reloadData() async {
+    props.error(UseError(message: null));
     await getDonors();
   }
 
@@ -155,6 +220,73 @@ class DonorsController extends GetxController {
     Get.back();
     page.value = 1;
     await getDonors();
+  }
+
+  Future<void> updateProfileImage(num? tagNumber, File file) async {
+    try {
+      propsProfile.useState(UseState.updating);
+      FormData requestData = FormData.fromMap({
+        'tagNumber': tagNumber,
+        'profileImage': await MultipartFile.fromFile(
+          file.path,
+          filename: file.path.filename,
+        ),
+      });
+
+      UpdateProfileImageRes response = await Get.find<Api>()
+          .donor
+          .updateProfileImage(requestData: requestData);
+
+      if (response.result == true) {
+        propsProfile.useState(UseState.none);
+        Get.back();
+        await getDonors();
+      } else {
+        throw response;
+      }
+    } on UpdateProfileImageRes catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.message.toString());
+    } on DioResponse catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.message.toString());
+    } on NoInternetException catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.toString());
+    } catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.toString());
+    }
+  }
+
+  Future<void> deleteProfileImage(num? tagNumber) async {
+    try {
+      propsProfile.useState(UseState.deleting);
+      DeleteProfileImageRes response =
+          await Get.find<Api>().donor.deleteProfileImage(
+        requestData: {"tagNumber": tagNumber},
+      );
+
+      if (response.result == true) {
+        propsProfile.useState(UseState.none);
+        Get.back();
+        await getDonors();
+      } else {
+        throw response;
+      }
+    } on DeleteProfileImageRes catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.message.toString());
+    } on DioResponse catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.message.toString());
+    } on NoInternetException catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.toString());
+    } catch (e) {
+      propsProfile.useState(UseState.none);
+      Toasts.error(message: e.toString());
+    }
   }
 
   Future<void> deleteDonor(num? tagNumber) async {
@@ -189,6 +321,7 @@ class DonorsController extends GetxController {
   }
 
   Future<void> reset() async {
+    query.clear();
     page.value = 1;
     pageSize.value = 10;
     by.value = null;
@@ -200,6 +333,7 @@ class DonorsController extends GetxController {
         field.data = null;
       }
     }
+    props.error(UseError(message: null));
     await getDonors();
   }
 

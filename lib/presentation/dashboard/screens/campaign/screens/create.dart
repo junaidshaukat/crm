@@ -23,6 +23,7 @@ class CreateCampaignScreen extends StatelessWidget {
         hidden: controller.hiddenController.value,
         iconTag: controller.icon.value.tagNumber.toString(),
         nodes: controller.nodes.value,
+        enableQuantity: controller.enableQuantityController.value,
         taxReceiptRatio: controller.taxReceiptRatioController.text,
         allowRecurringModification:
             controller.allowRecurringModificationController.value,
@@ -667,6 +668,21 @@ class CreateCampaignScreen extends StatelessWidget {
                                   controller
                                       .allowRecurringModificationController
                                       .value = value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 175.h,
+                            child: Obx(
+                              () => customSwitch(
+                                width: 175.h,
+                                label: "enable_quantity".tr,
+                                value:
+                                    controller.enableQuantityController.value,
+                                onChange: (value) {
+                                  controller.enableQuantityController.value =
+                                      value;
                                 },
                               ),
                             ),

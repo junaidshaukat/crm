@@ -28,6 +28,7 @@ class UpdateCampaignScreen extends StatelessWidget {
         donationCampaign: controller.donationCampaignController.value,
         status: controller.statusController.value,
         hidden: controller.hiddenController.value,
+        enableQuantity: controller.enableQuantityController.value,
         iconTag: controller.icon.value.tagNumber.toString(),
         nodes: controller.nodes.value,
       );
@@ -671,6 +672,21 @@ class UpdateCampaignScreen extends StatelessWidget {
                                   controller
                                       .allowRecurringModificationController
                                       .value = value;
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 175.h,
+                            child: Obx(
+                              () => customSwitch(
+                                width: 175.h,
+                                label: "enable_quantity".tr,
+                                value:
+                                    controller.enableQuantityController.value,
+                                onChange: (value) {
+                                  controller.enableQuantityController.value =
+                                      value;
                                 },
                               ),
                             ),

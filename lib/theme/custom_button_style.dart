@@ -1,5 +1,5 @@
-import '/core/app_export.dart';
 import 'package:flutter/material.dart';
+import '/core/app_export.dart';
 
 /// A class that offers pre-defined button styles for customizing button appearance.
 class CustomButtonStyles {
@@ -72,8 +72,15 @@ class CustomButtonStyles {
           borderRadius: BorderRadius.circular(4.h),
         ),
       );
+
   static ButtonStyle get fillRedA => ElevatedButton.styleFrom(
         backgroundColor: appTheme.redA700,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.h),
+        ),
+      );
+  static ButtonStyle get fillPrimaryA => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.h),
         ),

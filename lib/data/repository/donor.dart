@@ -126,4 +126,62 @@ class DonorApis extends Client {
       rethrow;
     }
   }
+
+  Future<UpdateProfileImageRes> updateProfileImage({
+    Map<String, String> headers = const {
+      'Content-type': 'multipart/form-data',
+    },
+    FormData? requestData,
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+
+      Response response = await dio.post(
+        '/api/admin/v1/donor/updateProfileImage?_method=PUT',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        return UpdateProfileImageRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? UpdateProfileImageRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<DeleteProfileImageRes> deleteProfileImage({
+    Map<String, String> headers = const {
+      'Content-type': 'application/json',
+    },
+    Map<String, dynamic> requestData = const {},
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+
+      Response response = await dio.delete(
+        '/api/admin/v1/donor/deleteProfileImage',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        return DeleteProfileImageRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? DeleteProfileImageRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

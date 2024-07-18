@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
 
@@ -15,43 +17,155 @@ class DonorsScreen extends StatelessWidget {
     TextEditingController? controller,
     String? hintText,
     void Function(String)? onChanged,
+    void Function(dynamic)? onSelect,
     required void Function()? onRemove,
     void Function()? onTap,
+    dynamic value,
+    dynamic checkboxList,
+    required DonorsController conn,
   }) {
-    Rx<String?> date = Rx(null);
+    List list = [];
+
+    Rx<bool?> switchs = Rx(hintText == '1' ? true : false);
+    Rx<String?> datetime = Rx(null);
+
+    if (checkboxList != null) list = checkboxList as List;
 
     return Visibility(
       visible: visible,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              color: appTheme.black900,
-              fontSize: 15.fSize,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          SizedBox(height: 2.v),
-          if (control == 'datetime' || control == 'date')
-            Obx(() {
-              return Input(
-                readOnly: true,
-                controller: controller,
-                hintText: date.value ?? hintText,
-                onChanged: onChanged,
-                onTap: () {
-                  pickers.date(Get.context!).then((val) {
-                    if (val != null) {
-                      date.value = val.formatYYYYMMDD;
-                      onChanged!(val.formatYYYYMMDD);
+      child: SizedBox(
+        width: fdw.h,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (control == 'textbox' ||
+                control == "datetime" ||
+                control == "date" ||
+                control == "switch")
+              Text(
+                label,
+                style: TextStyle(
+                  color: appTheme.black900,
+                  fontSize: 15.fSize,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            if (control == 'checkboxList')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    label,
+                    style: TextStyle(
+                      color: appTheme.black900,
+                      fontSize: 15.fSize,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      conn.query.remove(value);
+                      onRemove!();
+                    },
+                    icon: const Icon(Icons.close),
+                  )
+                ],
+              ),
+            if (control == 'datetime' || control == 'date')
+              Obx(() {
+                return Input(
+                  readOnly: true,
+                  controller: controller,
+                  hintText: datetime.value ?? hintText,
+                  onChanged: onChanged,
+                  onTap: () async {
+                    DateTime? date = await pickers.date(Get.context!);
+                    TimeOfDay? time = await pickers.time(Get.context!);
+                    if (date != null && time == null) {
+                      datetime.value = '${date.format('yyyy-MM-dd')} 00:00:00';
+                      onChanged!(datetime.value!);
                     }
-                  });
-                },
+                    if (date != null && time != null) {
+                      datetime.value =
+                          '${date.format('yyyy-MM-dd')} ${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:00';
+                      onChanged!(datetime.value!);
+                    }
+                  },
+                  suffixIcon: IconButton(
+                    onPressed: onRemove,
+                    icon: Icon(
+                      Icons.close,
+                      color: appTheme.gray400,
+                    ),
+                  ),
+                );
+              }),
+            if (control == 'checkboxList')
+              Wrap(
+                children: list.map(
+                  (e) {
+                    RxBool check = false.obs;
+                    if (conn.query.containsKey(value)) {
+                      List temp = conn.query[value] as List;
+                      if (temp.contains(e['value'])) {
+                        check.value = true;
+                      }
+                    }
+                    return GestureDetector(
+                      onTap: () {
+                        check.value = check.toggle().value;
+                        onSelect!({
+                          'key': value,
+                          'label': e['label'],
+                          'value': e['value'],
+                          'checked': check.value
+                        });
+                      },
+                      child: SizedBox(
+                        width: 170.h,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Obx(
+                              () {
+                                return Checkbox(
+                                  value: check.value,
+                                  side: BorderSide(
+                                    color: appTheme.primary,
+                                    width: 1.8,
+                                  ),
+                                  onChanged: (checked) {
+                                    check.value = checked!;
+                                    onSelect!({
+                                      'key': value,
+                                      'label': e['label'],
+                                      'value': e['value'],
+                                      'checked': checked
+                                    });
+                                  },
+                                );
+                              },
+                            ),
+                            Expanded(child: Text(e['label']))
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+            if (control == 'textbox')
+              Input(
+                controller: controller,
+                hintText: hintText,
+                onChanged: onChanged,
+                borderColor: appTheme.gray400,
                 suffixIcon: IconButton(
                   onPressed: onRemove,
                   icon: Icon(
@@ -59,24 +173,21 @@ class DonorsScreen extends StatelessWidget {
                     color: appTheme.gray400,
                   ),
                 ),
-              );
-            }),
-          if (control != 'date')
-            Input(
-              readOnly: control == 'date' ? true : false,
-              controller: controller,
-              hintText: control == 'date' ? date.value : hintText,
-              onChanged: onChanged,
-              onTap: control == 'date' ? onTap : null,
-              suffixIcon: IconButton(
-                onPressed: onRemove,
-                icon: Icon(
-                  Icons.close,
-                  color: appTheme.gray400,
-                ),
               ),
-            )
-        ],
+            if (control == 'switch')
+              Obx(() {
+                onChanged!(switchs.value == true ? '1' : '0');
+                return CustomSwitch(
+                  value: switchs.value,
+                  alignment: Alignment.bottomLeft,
+                  onChange: (option) {
+                    switchs(option);
+                  },
+                );
+              }),
+            SizedBox(height: 4.v)
+          ],
+        ),
       ),
     );
   }
@@ -163,10 +274,34 @@ class DonorsScreen extends StatelessWidget {
                 () => Column(
                   children: controller.fields.map((field) {
                     return visibility(
+                      conn: controller,
+                      checkboxList: controller.routeValues.value[field.value],
                       visible: field.selected!.value,
                       label: field.label.toString(),
                       control: field.control!,
                       hintText: field.data,
+                      value: field.value,
+                      onSelect: (option) {
+                        if (controller.query.containsKey(option['key'])) {
+                          if (option['checked'] == true) {
+                            if (controller.query[option['key']]!
+                                    .contains(option['value']) ==
+                                false) {
+                              controller.query[option['key']]
+                                  ?.add(option['value']);
+                            }
+                          }
+                          if (option['checked'] == false) {
+                            if (controller.query[option['key']]!
+                                .contains(option['value'])) {
+                              controller.query[option['key']]
+                                  ?.remove(option['value']);
+                            }
+                          }
+                        } else {
+                          controller.query[option['key']] = [option['value']];
+                        }
+                      },
                       onChanged: (val) {
                         controller.onChangedField(val, field);
                       },
@@ -472,6 +607,207 @@ class DonorsScreen extends StatelessWidget {
     );
   }
 
+  Widget? avatar(DonorData donor) {
+    return CircleAvatar(
+      radius: 44.adaptSize,
+      backgroundImage: donor.profileImage != null
+          ? NetworkImage(donor.profileImage ?? "")
+          : null,
+      child: donor.profileImage == null
+          ? Text(
+              "${donor.firstName.toString().avatar}${donor.lastName.toString().avatar}",
+              style: TextStyle(
+                color: appTheme.whiteA700,
+                fontSize: 16.fSize,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
+            )
+          : null,
+    );
+  }
+
+  void onTapAvatar(DonorData donor) {
+    controller.profileImage.value = null;
+
+    Get.dialog(
+      AlertDialog(
+        contentPadding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.only(bottom: 0.v),
+        content: Container(
+          decoration: AppDecoration.fillPrimary.copyWith(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8.adaptSize),
+              topRight: Radius.circular(8.adaptSize),
+            ),
+          ),
+          width: 260.h,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: double.maxFinite,
+                padding: EdgeInsets.all(6.h),
+                decoration: AppDecoration.fillPrimary.copyWith(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8.adaptSize),
+                    topRight: Radius.circular(8.adaptSize),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "profile".tr,
+                      style: TextStyle(
+                        color: appTheme.whiteA700,
+                        fontSize: 12.fSize,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    CustomImageView(
+                      svgColor: appTheme.white,
+                      imagePath: "close".icon.svg,
+                      height: 15.adaptSize,
+                      width: 15.adaptSize,
+                      onTap: () {
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 8.v),
+              Obx(() {
+                File? image = controller.profileImage.value;
+                return Stack(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 88.adaptSize,
+                      backgroundImage: image != null
+                          ? FileImage(image)
+                          : donor.profileImage != null
+                              ? NetworkImage(donor.profileImage ?? "")
+                              : null,
+                      child: image == null
+                          ? donor.profileImage == null
+                              ? Text(
+                                  "${donor.firstName.toString().avatar}${donor.lastName.toString().avatar}",
+                                  style: TextStyle(
+                                    color: appTheme.whiteA700,
+                                    fontSize: 32.fSize,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                              : null
+                          : null,
+                    ),
+                    Positioned(
+                      bottom: 4.v,
+                      right: 4.h,
+                      child: InkWell(
+                        onTap: () {
+                          pickers.pickImage().then((file) {
+                            if (file != null) {
+                              controller.profileImage.value = file;
+                              controller.profileImage.refresh();
+                            }
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8.adaptSize),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: appTheme.primary),
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            color: appTheme.primary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+              SizedBox(height: 8.v),
+              Padding(
+                padding: EdgeInsets.only(right: 8.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Obx(() {
+                      return CustomElevatedButton(
+                        width: 100.h,
+                        height: 32.v,
+                        text: controller.propsProfile.useState.value !=
+                                UseState.deleting
+                            ? "delete".tr
+                            : "",
+                        buttonStyle: CustomButtonStyles.fillRedA,
+                        leftIcon: controller.propsProfile.useState.value ==
+                                UseState.deleting
+                            ? CustomProgressButton(
+                                indicator: false,
+                                lable: 'processing'.tr,
+                              )
+                            : null,
+                        onPressed: () async {
+                          if (controller.propsProfile.useState.value !=
+                              UseState.deleting) {
+                            await controller
+                                .deleteProfileImage(donor.tagNumber);
+                          }
+                        },
+                      );
+                    }),
+                    SizedBox(width: 8.v),
+                    Obx(() {
+                      return CustomElevatedButton(
+                        width: 100.h,
+                        height: 32.v,
+                        text: controller.propsProfile.useState.value !=
+                                UseState.updating
+                            ? "update".tr
+                            : "",
+                        buttonStyle: CustomButtonStyles.fillPrimaryA,
+                        leftIcon: controller.propsProfile.useState.value ==
+                                UseState.updating
+                            ? CustomProgressButton(
+                                indicator: false,
+                                lable: 'processing'.tr,
+                              )
+                            : null,
+                        onPressed: () async {
+                          if (controller.propsProfile.useState.value !=
+                              UseState.processing) {
+                            await controller.updateProfileImage(
+                              donor.tagNumber,
+                              controller.profileImage.value!,
+                            );
+                          }
+                        },
+                      );
+                    }),
+                  ],
+                ),
+              ),
+              SizedBox(height: 8.v),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -602,14 +938,11 @@ class DonorsScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(100),
                                             ),
-                                            child: Text(
-                                              "${donor.firstName.toString().avatar}${donor.lastName.toString().avatar}",
-                                              style: TextStyle(
-                                                color: appTheme.whiteA700,
-                                                fontSize: 16.fSize,
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                            child: InkWell(
+                                              onTap: () {
+                                                onTapAvatar(donor);
+                                              },
+                                              child: avatar(donor),
                                             ),
                                           ),
                                           Padding(
@@ -655,9 +988,23 @@ class DonorsScreen extends StatelessWidget {
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
+                                            if (donor.accountType == 'B') ...[
+                                              listTile(
+                                                label: "business_name".tr,
+                                                value: donor.businessName ??
+                                                    "None",
+                                              ),
+                                               SizedBox(height: 4.v),
+                                            Divider(
+                                              color: appTheme.gray600
+                                                  .withOpacity(0.4),
+                                              indent: 0.h,
+                                            ),
+                                            SizedBox(height: 3.v),
+                                            ],
                                             listTile(
                                               label: "phone".tr,
-                                              value: "${donor.phone}",
+                                              value: "${donor.phone ?? "None"}",
                                             ),
                                             SizedBox(height: 4.v),
                                             Divider(

@@ -1,4 +1,4 @@
-import '../common/message.dart';
+import '/core/app_export.dart';
 
 class ListOfValuesReq {
   String? listName;

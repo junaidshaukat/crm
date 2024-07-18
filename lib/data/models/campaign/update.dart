@@ -36,7 +36,7 @@ class CampaignUpdateReq {
     this.nodes,
     this.taxReceiptRatio,
     this.allowRecurringModification,
-    this.enableQuantity = false,
+    this.enableQuantity,
   });
 
   Map<String, dynamic> toJson() {
@@ -55,7 +55,7 @@ class CampaignUpdateReq {
       'donationCampaign': donationCampaign == true ? 1 : 0,
       'status': status == true ? 1 : 0,
       'hidden': hidden == true ? 1 : 0,
-      'enableQuantity': enableQuantity == true ? 1 : 0,
+      'enableQuantity': enableQuantity,
       'iconTag': iconTag,
       'nodes': nodes?.map((node) {
         return {

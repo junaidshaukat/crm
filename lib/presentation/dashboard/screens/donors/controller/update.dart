@@ -4,6 +4,13 @@ import '/core/app_export.dart';
 class UpdateDonorsController extends GetxController {
   Props props = Props();
 
+  Rx<AccountType> accountType = Rx(
+    AccountType(
+      id: 2,
+      name: 'business'.tr,
+      value: 'B',
+    ),
+  );
   Rx<CountryData?> country = Rx(null);
   Rx<CountrySatesData?> province = Rx(null);
 
@@ -12,6 +19,7 @@ class UpdateDonorsController extends GetxController {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  TextEditingController businessNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleInitialsController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -25,6 +33,19 @@ class UpdateDonorsController extends GetxController {
   TextEditingController postalZipCodeController = TextEditingController();
 
   Future<void> setTextEditingController(DonorData donor) async {
+    accountType = Rx(donor.accountType == 'B'
+        ? AccountType(
+            id: 2,
+            name: 'business'.tr,
+            value: 'B',
+          )
+        : AccountType(
+            id: 1,
+            name: 'individual'.tr,
+            value: 'I',
+          ));
+
+    businessNameController.text = donor.businessName ?? '';
     firstNameController.text = donor.firstName ?? '';
     middleInitialsController.text = donor.middleName ?? '';
     lastNameController.text = donor.lastName ?? '';
@@ -44,6 +65,7 @@ class UpdateDonorsController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    businessNameController.dispose();
     firstNameController.dispose();
     middleInitialsController.dispose();
     lastNameController.dispose();
@@ -58,6 +80,14 @@ class UpdateDonorsController extends GetxController {
   }
 
   void clear() {
+    accountType = Rx(
+      AccountType(
+        id: 1,
+        name: 'individual'.tr,
+        value: 'I',
+      ),
+    );
+    businessNameController.clear();
     firstNameController.clear();
     middleInitialsController.clear();
     lastNameController.clear();
@@ -71,6 +101,10 @@ class UpdateDonorsController extends GetxController {
     country.value = null;
     province.value = null;
     update();
+  }
+
+  void onChangedAccountType(option) {
+    accountType(option.value);
   }
 
   Future<void> onChangedCountry(option) async {
