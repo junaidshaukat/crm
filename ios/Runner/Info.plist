@@ -2,23 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
-		<key>NSFaceIDUsageDescription</key>
-		<string>We use Face ID to authenticate you.</string>
-		<key>NSBiometricUsageDescription</key>
-		<string>We use biometric authentication to secure your data.</string>
-		<key>NSPhotoLibraryUsageDescription</key>
-		<string>We need access to your photo library to select images.</string>
-		<key>NSMicrophoneUsageDescription</key>
-		<string>We need access to your microphone to record audio for videos.</string>
-		<key>NSCameraUsageDescription</key>
-		<string>We need access to your camera to take photos.</string>
-		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>sms</string>
-			<string>tel</string>
-		</array>
-		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>photo</string>
+		<key>CADisableMinimumFrameDurationOnPhone</key>
+		<true/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
@@ -39,25 +24,16 @@
 		<string>????</string>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>sms</string>
+			<string>tel</string>
+		</array>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
-		<key>UILaunchStoryboardName</key>
-		<string>LaunchScreen</string>
-		<key>UIMainStoryboardFile</key>
-		<string>Main</string>
-		<key>UISupportedInterfaceOrientations</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-		</array>
-		<key>CADisableMinimumFrameDurationOnPhone</key>
-		<true/>
-		<key>UIApplicationSupportsIndirectInputEvents</key>
-		<true/>
-		<key>UISupportsDocumentBrowser</key>
-		<true/>
 		<key>LSSupportsOpeningDocumentsInPlace</key>
-		<true/>
-		<key>UIFileSharingEnabled</key>
 		<true/>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
@@ -66,16 +42,33 @@
 			<key>NSAllowsArbitraryLoads</key>
 			<true/>
 		</dict>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>We need your location to show it on the map</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>We need your location to show it on the map</string>
-		<key>io.flutter.embedded_views_preview</key>
+		<key>NSBiometricUsageDescription</key>
+		<string>We use biometric authentication to secure your data.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>We need access to your camera to take photos.</string>
+		<key>NSFaceIDUsageDescription</key>
+		<string>We use Face ID to authenticate you.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>We need access to your microphone to record audio for videos.</string>
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>photo</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>We need access to your photo library to select images.</string>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
-		<key>UIBackgroundModes</key>
+		<key>UIFileSharingEnabled</key>
+		<true/>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
+		<key>UIMainStoryboardFile</key>
+		<string>Main</string>
+		<key>UIRequiresFullScreen</key>
+		<true/>
+		<key>UISupportedInterfaceOrientations</key>
 		<array>
-			<string>fetch</string>
-			<string>location</string>
+			<string>UIInterfaceOrientationPortrait</string>
 		</array>
+		<key>UISupportsDocumentBrowser</key>
+		<true/>
 	</dict>
 </plist>
