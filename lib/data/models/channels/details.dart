@@ -1,1 +1,100 @@
+import '/core/app_export.dart';
 
+class ChannelDetailsReq {
+  String? year;
+  String? month;
+  String? day;
+
+  ChannelDetailsReq({
+    this.year,
+    this.month,
+    this.day,
+  });
+
+  factory ChannelDetailsReq.fromJson(Map<String, dynamic> json) {
+    return ChannelDetailsReq(
+      year: json['year'],
+      month: json['month'],
+      day: json['day'],
+    );
+  }
+
+  Map<String, dynamic> toJson({
+    Map<String, String>? filter,
+    Map<String, List>? query,
+  }) {
+    final temp = <String, dynamic>{};
+
+    if (year != null) {
+      temp['year'] = year;
+    }
+
+    if (month != null) {
+      temp['month'] = month;
+    }
+
+    if (day != null) {
+      temp['day'] = day;
+    }
+
+    return temp;
+  }
+}
+
+class ChannelDetailsRes {
+  String instanceId;
+  bool? result;
+  String? message;
+  MessageDetails? messageDetails;
+  List<ChannelDetails>? data;
+
+  ChannelDetailsRes({
+    this.instanceId = '',
+    this.result,
+    this.message,
+    this.messageDetails,
+    this.data,
+  });
+
+  factory ChannelDetailsRes.fromJson(Map<String, dynamic> json) {
+    return ChannelDetailsRes(
+      instanceId: json['instanceId'] ?? '',
+      result: json['result'],
+      message: json['message'],
+      messageDetails: MessageDetails.fromJson(json['messageDetails']),
+      data: json['data'] != null
+          ? List<ChannelDetails>.from(
+              json['data'].map((x) => ChannelDetails.fromJson(x)),
+            )
+          : null,
+    );
+  }
+}
+
+class ChannelDetails {
+  String amount;
+  String campaign;
+  num numberOfTransaction;
+
+  ChannelDetails({
+    required this.amount,
+    required this.campaign,
+    required this.numberOfTransaction,
+  });
+
+  factory ChannelDetails.fromJson(Map<String, dynamic> json) {
+    return ChannelDetails(
+      amount: json['amount'],
+      campaign: json['campaign'],
+      numberOfTransaction: json['numberOfTransaction'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'amount': amount,
+      'campaign': campaign,
+      'numberOfTransaction': numberOfTransaction,
+    };
+  }
+}

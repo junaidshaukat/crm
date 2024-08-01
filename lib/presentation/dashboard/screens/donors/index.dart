@@ -556,7 +556,10 @@ class DonorsScreen extends StatelessWidget {
                                   hintText: "radius".tr,
                                   controller: controller.radiusController,
                                   onChanged: (val) {
-                                    controller.radius.value = double.parse(val);
+                                    if (val.isNotEmpty) {
+                                      controller.radius.value =
+                                          double.parse(val);
+                                    }
                                   },
                                 ),
                               ],
@@ -582,7 +585,8 @@ class DonorsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 2.v),
-                                Input(
+                                InputForm(
+                                  readOnly: true,
                                   hintText: "latitude".tr,
                                   controller: controller.latitudeController,
                                 ),
@@ -605,7 +609,8 @@ class DonorsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 2.v),
-                                Input(
+                                InputForm(
+                                  readOnly: true,
                                   hintText: "longitude".tr,
                                   controller: controller.longitudeController,
                                 ),
@@ -1348,10 +1353,12 @@ class DonorsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8.v),
                   Obx(() {
+                    DonorLinks links = controller.links.value;
                     return WebPagination(
-                      displayItemCount: 3,
-                      currentPage: controller.page.value,
-                      totalPage: controller.totalPage.value,
+                      displayItemCount:
+                          (links.lastPage?.toInt() ?? 0) > 3 ? 3 : 0,
+                      currentPage: links.currentPage?.toInt() ?? 0,
+                      totalPage: links.lastPage?.toInt() ?? 0,
                       onPageChanged: controller.onPageChanged,
                     );
                   }),

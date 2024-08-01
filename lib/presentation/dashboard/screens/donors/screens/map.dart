@@ -130,7 +130,9 @@ class _GoogleMapsState extends State<GoogleMaps> {
                 setState(() {});
               });
             },
-            icon: const Icon(Icons.location_on),
+            icon: CustomImageView(
+              imagePath: 'map_location'.icon.svg,
+            ),
           ),
         ),
       ],

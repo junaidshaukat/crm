@@ -205,6 +205,51 @@ class DonorsController extends GetxController {
     }
   }
 
+  Future<void> getDonorsNearest() async {
+    try {
+      props.useState(UseState.loading);
+      filter.clear();
+      NearByReq request = NearByReq(
+        radius: radius.value,
+        latitude: latitude.value,
+        longitude: longitude.value,
+        postalZipCode: postalZipCode.value,
+      );
+
+      for (var field in fields) {
+        if (field.selected!.isTrue) {
+          if (field.data != null) filter[field.value!] = field.data.toString();
+        }
+      }
+
+      NearByRes response = await Get.find<Api>().donor.nearBy(
+            requestData: request.toJson(),
+          );
+      if (response.result == true) {
+        donors.value = response.data;
+        links.value = response.links ?? DonorLinks();
+        page(response.links?.currentPage?.toInt());
+        pageSize(response.links?.perPage?.toInt());
+        totalPage(response.links?.lastPage?.toInt());
+        props.useState(UseState.done);
+      } else {
+        throw response;
+      }
+    } on NearByRes catch (e) {
+      props.useState(UseState.done);
+      props.error(UseError(message: e.message));
+    } on DioResponse catch (e) {
+      props.useState(UseState.done);
+      props.error(UseError(message: e.message));
+    } on NoInternetException catch (e) {
+      props.useState(UseState.done);
+      props.error(UseError(message: e.toString()));
+    } catch (e) {
+      props.useState(UseState.done);
+      props.error(UseError(message: e.toString()));
+    }
+  }
+
   Future<void> tryAgain() async {
     props.useState(UseState.loading);
     props.error(UseError(message: null));
@@ -236,11 +281,10 @@ class DonorsController extends GetxController {
       Get.back();
       page.value = 1;
       await getDonors();
-    }
-    if (byNearest) {
+    } else if (byNearest) {
       Get.back();
       page.value = 1;
-      await getDonors();
+      await getDonorsNearest();
     }
   }
 
@@ -376,7 +420,7 @@ class DonorsController extends GetxController {
         }
       }
       props.error(UseError(message: null));
-      await getDonors();
+      await getDonorsNearest();
     }
   }
 

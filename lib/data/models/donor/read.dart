@@ -94,17 +94,17 @@ class DonorLinks {
   num? to;
 
   DonorLinks({
-    this.total,
-    this.count,
-    this.perPage,
-    this.currentPage,
-    this.lastPage,
+    this.total = 0,
+    this.count = 0,
+    this.perPage = 0,
+    this.currentPage = 0,
+    this.lastPage = 0,
     this.firstPageUrl,
     this.lastPageUrl,
     this.nextPageUrl,
     this.previousPageUrl,
-    this.from,
-    this.to,
+    this.from = 0,
+    this.to = 0,
   });
 
   factory DonorLinks.fromJson(Map<String, dynamic> json) {

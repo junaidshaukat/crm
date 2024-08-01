@@ -22,6 +22,7 @@ class ChannelsController extends GetxController {
   Props propsChannelSummary = Props();
   Props propsRegisteredChannels = Props();
   Props propsUpdateChannel = Props();
+  Props propsChannelDetails = Props();
 
   RxList<ChennelMenu> channelSummary = RxList([]);
 
@@ -30,6 +31,7 @@ class ChannelsController extends GetxController {
   RxInt selectedchannel = RxInt(0);
 
   RxList<ChannelsData> channels = RxList([]);
+  RxList<ChannelDetails> channelDetails = RxList([]);
   Rx<ChannelsLinks> links = Rx(ChannelsLinks());
 
   RxList<Fields> fields = RxList([]);
@@ -54,6 +56,12 @@ class ChannelsController extends GetxController {
     order: "ascending".toString().orderBy,
     by: "payment_processor",
   );
+
+  Rx<num?> tagNumber = Rx(null);
+
+  Rx<String?> year = Rx(null);
+  Rx<String?> month = Rx(null);
+  Rx<String?> day = Rx(null);
 
   @override
   void onReady() async {
@@ -201,6 +209,39 @@ class ChannelsController extends GetxController {
     } catch (e) {
       propsRegisteredChannels.useState(UseState.done);
       propsRegisteredChannels.error(UseError(message: e.toString()));
+    }
+  }
+
+  Future<void> getChannelDetails() async {
+    try {
+      propsChannelDetails.useState(UseState.loading);
+
+      ChannelDetailsReq request = ChannelDetailsReq(
+        year: year.value,
+        month: month.value,
+        day: day.value,
+      );
+
+      ChannelDetailsRes response = await Get.find<Api>().channels.details(
+            tagNumber: tagNumber.value,
+            requestData: request.toJson(),
+          );
+      if (response.result == true) {
+        channelDetails.value = response.data!;
+
+        propsChannelDetails.useState(UseState.done);
+      } else {
+        throw response;
+      }
+    } on DioResponse catch (e) {
+      propsChannelDetails.useState(UseState.done);
+      propsChannelDetails.error(UseError(message: e.message));
+    } on NoInternetException catch (e) {
+      propsChannelDetails.useState(UseState.done);
+      propsChannelDetails.error(UseError(message: e.toString()));
+    } catch (e) {
+      propsChannelDetails.useState(UseState.done);
+      propsChannelDetails.error(UseError(message: e.toString()));
     }
   }
 

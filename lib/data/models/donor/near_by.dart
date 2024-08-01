@@ -32,18 +32,18 @@ class NearByReq {
 }
 
 class NearByRes {
-  final bool result;
-  final String message;
-  final List<String> messageDetails;
-  final DonorLinks links;
-  final List<DonorData> data;
+  bool result;
+  String message;
+  DonorLinks? links;
+  List<DonorData> data;
+  MessageDetails messageDetails;
 
   NearByRes({
-    required this.result,
-    required this.message,
-    required this.messageDetails,
+    this.message = '',
+    this.result = false,
     required this.links,
-    required this.data,
+    this.data = const [],
+    required this.messageDetails,
   });
 
   factory NearByRes.fromJson(Map<String, dynamic> json) {
@@ -55,11 +55,11 @@ class NearByRes {
     }
 
     return NearByRes(
+      data: donorDataList,
       result: json['result'],
       message: json['message'],
-      messageDetails: List<String>.from(json['messageDetails']),
-      links: DonorLinks.fromJson(json['links']),
-      data: donorDataList,
+      messageDetails: MessageDetails.fromJson(json['messageDetails']),
+      links: json['links'] != null ? DonorLinks.fromJson(json['links']) : null,
     );
   }
 }

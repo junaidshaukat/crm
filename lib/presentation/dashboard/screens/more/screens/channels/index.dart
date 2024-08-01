@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/core/app_export.dart';
+import 'screens/details.dart';
 
 export 'controller/controller.dart';
 
@@ -768,102 +769,117 @@ class ChannelsScreen extends StatelessWidget {
                                       borderRadius:
                                           BorderRadiusStyle.roundedBorder5,
                                     ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '${channel.organizationDefinedName}',
-                                                style: TextStyle(
-                                                  color:
-                                                      theme.colorScheme.primary,
-                                                  fontSize: 12.fSize,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                              SizedBox(height: 4.v),
-                                              Text(
-                                                '${channel.type} ${channel.tagNumber}',
-                                                style: TextStyle(
-                                                  color: appTheme.gray80001,
-                                                  fontSize: 12.fSize,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.tagNumber.value =
+                                            channel.tagNumber;
+
+                                        controller.getChannelDetails();
+
+                                        Get.to(
+                                          () => ChannelDetailsScreen(
+                                            channel: channel,
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                channel.userName ?? '',
-                                                style: TextStyle(
-                                                  color:
-                                                      theme.colorScheme.primary,
-                                                  fontSize: 12.fSize,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w700,
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '${channel.organizationDefinedName}',
+                                                  style: TextStyle(
+                                                    color: theme
+                                                        .colorScheme.primary,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
                                                 ),
-                                              ),
-                                              SizedBox(height: 4.v),
-                                              Text(
-                                                channel.passcode ?? '',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: appTheme.gray80001,
-                                                  fontSize: 12.fSize,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w500,
+                                                SizedBox(height: 4.v),
+                                                Text(
+                                                  '${channel.type} ${channel.tagNumber}',
+                                                  style: TextStyle(
+                                                    color: appTheme.gray80001,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              CustomImageView(
-                                                imagePath: "edit".icon.svg,
-                                                height: 21.adaptSize,
-                                                width: 21.adaptSize,
-                                                onTap: () {
-                                                  editChannelName(channel);
-                                                },
-                                              ),
-                                              SizedBox(height: 4.v),
-                                              Text(
-                                                '${channel.currencySymbol}${channel.raisedAmount}',
-                                                style: TextStyle(
-                                                  color:
-                                                      theme.colorScheme.primary,
-                                                  fontSize: 12.fSize,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w700,
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  channel.userName ?? '',
+                                                  style: TextStyle(
+                                                    color: theme
+                                                        .colorScheme.primary,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(height: 4.v),
+                                                Text(
+                                                  channel.passcode ?? '',
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: appTheme.gray80001,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                CustomImageView(
+                                                  imagePath: "edit".icon.svg,
+                                                  height: 21.adaptSize,
+                                                  width: 21.adaptSize,
+                                                  onTap: () {
+                                                    editChannelName(channel);
+                                                  },
+                                                ),
+                                                SizedBox(height: 4.v),
+                                                Text(
+                                                  '${channel.currencySymbol}${channel.raisedAmount}',
+                                                  style: TextStyle(
+                                                    color: theme
+                                                        .colorScheme.primary,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },

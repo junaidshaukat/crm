@@ -96,6 +96,38 @@ class ChannelsApis extends Client {
     }
   }
 
+  /// api/admin/v1/channel
+  Future<ChannelDetailsRes> details({
+    Map<String, String> headers = const {
+      'Content-type': 'application/json',
+    },
+    num? tagNumber,
+    Map<String, dynamic> requestData = const {},
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+
+      Response response = await dio.get(
+        '/api/admin/v1/channel/$tagNumber',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        queryParameters: requestData,
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        return ChannelDetailsRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? ChannelDetailsRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   /// api/admin/v1/channel/$tagNumber
   Future<ChannelUpdateRes> updateChannelName({
     Map<String, String> headers = const {

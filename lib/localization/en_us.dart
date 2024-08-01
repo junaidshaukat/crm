@@ -266,6 +266,7 @@ final Map<String, String> enUs = {
   "payment": "Payment",
   "longitude": "Longitude",
   "latitude": "Latitude",
+  "channel_details": "Channel Details",
   "percentage": "Percentage",
   "postal_code": "Postal Code",
   "postal_zip_code": "Postal/Zip Code",
