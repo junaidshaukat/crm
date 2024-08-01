@@ -5,6 +5,7 @@ export './dashboard.dart';
 export './donor.dart';
 export './icons.dart';
 export './media.dart';
+export './highlights.dart';
 export './messages.dart';
 export './node.dart';
 export './organization.dart';

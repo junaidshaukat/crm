@@ -180,197 +180,197 @@ class TransactionData {
 }
 
 class Transaction {
-  int? organizationTag;
+  num? fee;
   int? nodeTag;
+  Donor? donor;
+  String? email;
+  dynamic notes;
+  bool? canEdit;
+  String? invoice;
+  bool? canRefund;
+  bool? canDelete;
   String? nodeName;
   String? nodeType;
-  String? paymentProcessor;
   int? campaignTag;
   String? campaign;
-  String? campaignImage;
-  bool? taxDeductible;
-  int? transactionTag;
-  String? invoice;
-  num? approvedAmount;
-  num? fee;
-  String? email;
-  String? cardAccount;
-  String? cardIssueCode;
-  String? approvalCode;
-  String? responseCode;
-  String? sequenceNumber;
   String? cardType;
+  dynamic firstSix;
   String? cardBrand;
   String? cardImage;
   String? entryMode;
-  String? entryModeImage;
-  String? transactionDate;
-  dynamic batchNumber;
-  dynamic applicationIdentifier;
-  dynamic transactionCryptogram;
-  dynamic terminalVerificationResults;
-  dynamic terminalStatusIndicator;
-  dynamic notes;
   dynamic userNotes;
-  String? taxDeductibleImage;
+  String? startDate;
+  bool? taxDeductible;
+  int? transactionTag;
+  num? approvedAmount;
+  String? cardAccount;
+  dynamic batchNumber;
+  int? organizationTag;
+  String? approvalCode;
+  String? responseCode;
+  String? campaignImage;
+  String? cardIssueCode;
+  String? sequenceNumber;
+  String? entryModeImage;
   bool? taxReceiptIssued;
   dynamic taxReceiptDate;
-  dynamic firstSix;
   dynamic cardholderName;
-  Donor? donor;
-  bool? canEdit;
-  bool? canRefund;
-  bool? canDelete;
   String? createDatetime;
   String? updateDatetime;
-  String? startDate;
+  String? transactionDate;
+  String? paymentProcessor;
   dynamic recurringPayment;
+  String? taxDeductibleImage;
+  dynamic applicationIdentifier;
+  dynamic transactionCryptogram;
+  dynamic terminalStatusIndicator;
+  dynamic terminalVerificationResults;
 
   Transaction({
-    this.organizationTag,
-    this.nodeTag,
-    this.nodeName,
-    this.nodeType,
-    this.paymentProcessor,
-    this.campaignTag,
-    this.campaign,
-    this.campaignImage,
-    this.taxDeductible,
-    this.transactionTag,
-    this.invoice,
-    this.approvedAmount,
     this.fee,
     this.email,
-    this.cardAccount,
-    this.cardIssueCode,
-    this.approvalCode,
-    this.responseCode,
-    this.sequenceNumber,
+    this.notes,
+    this.donor,
+    this.nodeTag,
+    this.invoice,
+    this.canEdit,
+    this.nodeName,
+    this.nodeType,
+    this.campaign,
     this.cardType,
+    this.firstSix,
     this.cardBrand,
     this.cardImage,
     this.entryMode,
-    this.entryModeImage,
-    this.transactionDate,
-    this.batchNumber,
-    this.applicationIdentifier,
-    this.transactionCryptogram,
-    this.terminalVerificationResults,
-    this.terminalStatusIndicator,
-    this.notes,
     this.userNotes,
-    this.taxDeductibleImage,
-    this.taxReceiptIssued,
-    this.taxReceiptDate,
-    this.firstSix,
-    this.cardholderName,
-    this.donor,
-    this.canEdit,
     this.canDelete,
     this.canRefund,
+    this.startDate,
+    this.campaignTag,
+    this.cardAccount,
+    this.batchNumber,
+    this.approvalCode,
+    this.responseCode,
+    this.campaignImage,
+    this.taxDeductible,
+    this.cardIssueCode,
+    this.transactionTag,
+    this.approvedAmount,
+    this.sequenceNumber,
+    this.entryModeImage,
+    this.taxReceiptDate,
+    this.cardholderName,
     this.createDatetime,
     this.updateDatetime,
+    this.organizationTag,
+    this.transactionDate,
+    this.paymentProcessor,
+    this.taxReceiptIssued,
     this.recurringPayment,
-    this.startDate,
+    this.taxDeductibleImage,
+    this.applicationIdentifier,
+    this.transactionCryptogram,
+    this.terminalStatusIndicator,
+    this.terminalVerificationResults,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
-      organizationTag: json['organizationTag'],
-      nodeTag: json['nodeTag'],
-      nodeName: json['nodeName'],
-      nodeType: json['nodeType'],
-      paymentProcessor: json['paymentProcessor'],
-      campaignTag: json['campaignTag'],
-      campaign: json['campaign'],
-      campaignImage: json['campaignImage'],
-      taxDeductible: json['taxDeductible'],
-      transactionTag: json['transactionTag'],
-      invoice: json['invoice'],
-      approvedAmount: json['approvedAmount'],
       fee: json['fee'],
       email: json['email'],
-      cardAccount: json['cardAccount'],
-      cardIssueCode: json['cardIssueCode'],
-      approvalCode: json['approvalCode'],
-      responseCode: json['responseCode'],
-      sequenceNumber: json['sequenceNumber'],
+      notes: json['notes'],
+      nodeTag: json['nodeTag'],
+      invoice: json['invoice'],
+      canEdit: json['canEdit'],
+      nodeName: json['nodeName'],
+      nodeType: json['nodeType'],
+      campaign: json['campaign'],
       cardType: json['cardType'],
+      firstSix: json['firstSix'],
       cardBrand: json['cardBrand'],
       cardImage: json['cardImage'],
       entryMode: json['entryMode'],
-      entryModeImage: json['entryModeImage'],
-      transactionDate: json['transactionDate'],
-      batchNumber: json['batchNumber'],
-      applicationIdentifier: json['applicationIdentifier'],
-      transactionCryptogram: json['transactionCryptogram'],
-      terminalVerificationResults: json['terminalVerificationResults'],
-      terminalStatusIndicator: json['terminalStatusIndicator'],
-      notes: json['notes'],
       userNotes: json['userNotes'],
-      taxDeductibleImage: json['taxDeductibleImage'],
-      taxReceiptIssued: json['taxReceiptIssued'],
-      taxReceiptDate: json['taxReceiptDate'],
-      firstSix: json['firstSix'],
-      cardholderName: json['cardholderName'],
-      donor: json['donor'] != null ? Donor.fromJson(json['donor']) : null,
-      canEdit: json['canEdit'],
       canDelete: json['canDelete'],
       canRefund: json['canRefund'],
+      startDate: json['startDate'],
+      campaignTag: json['campaignTag'],
+      cardAccount: json['cardAccount'],
+      batchNumber: json['batchNumber'],
+      approvalCode: json['approvalCode'],
+      responseCode: json['responseCode'],
+      campaignImage: json['campaignImage'],
+      taxDeductible: json['taxDeductible'],
+      cardIssueCode: json['cardIssueCode'],
+      transactionTag: json['transactionTag'],
+      approvedAmount: json['approvedAmount'],
+      sequenceNumber: json['sequenceNumber'],
+      entryModeImage: json['entryModeImage'],
+      taxReceiptDate: json['taxReceiptDate'],
+      cardholderName: json['cardholderName'],
       createDatetime: json['createDatetime'],
       updateDatetime: json['updateDatetime'],
+      organizationTag: json['organizationTag'],
+      transactionDate: json['transactionDate'],
+      paymentProcessor: json['paymentProcessor'],
+      taxReceiptIssued: json['taxReceiptIssued'],
       recurringPayment: json['recurringPayment'],
-      startDate: json['startDate'],
+      taxDeductibleImage: json['taxDeductibleImage'],
+      applicationIdentifier: json['applicationIdentifier'],
+      transactionCryptogram: json['transactionCryptogram'],
+      terminalStatusIndicator: json['terminalStatusIndicator'],
+      terminalVerificationResults: json['terminalVerificationResults'],
+      donor: json['donor'] != null ? Donor.fromJson(json['donor']) : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'organizationTag': organizationTag,
-      'nodeTag': nodeTag,
-      'nodeName': nodeName,
-      'nodeType': nodeType,
-      'paymentProcessor': paymentProcessor,
-      'campaignTag': campaignTag,
-      'campaign': campaign,
-      'campaignImage': campaignImage,
-      'taxDeductible': taxDeductible,
-      'transactionTag': transactionTag,
-      'invoice': invoice,
-      'approvedAmount': approvedAmount,
       'fee': fee,
       'email': email,
-      'cardAccount': cardAccount,
-      'cardIssueCode': cardIssueCode,
-      'approvalCode': approvalCode,
-      'responseCode': responseCode,
-      'sequenceNumber': sequenceNumber,
+      'notes': notes,
+      'nodeTag': nodeTag,
+      'invoice': invoice,
+      'canEdit': canEdit,
+      'nodeName': nodeName,
+      'nodeType': nodeType,
+      'campaign': campaign,
       'cardType': cardType,
+      'firstSix': firstSix,
       'cardBrand': cardBrand,
       'cardImage': cardImage,
       'entryMode': entryMode,
-      'entryModeImage': entryModeImage,
-      'transactionDate': transactionDate,
-      'batchNumber': batchNumber,
-      'applicationIdentifier': applicationIdentifier,
-      'transactionCryptogram': transactionCryptogram,
-      'terminalVerificationResults': terminalVerificationResults,
-      'terminalStatusIndicator': terminalStatusIndicator,
-      'notes': notes,
       'userNotes': userNotes,
-      'taxDeductibleImage': taxDeductibleImage,
-      'taxReceiptIssued': taxReceiptIssued,
-      'taxReceiptDate': taxReceiptDate,
-      'firstSix': firstSix,
-      'cardholderName': cardholderName,
-      'donor': donor?.toJson(),
-      'canEdit': canEdit,
       'canDelete': canDelete,
       'canRefund': canRefund,
+      'startDate': startDate,
+      'donor': donor?.toJson(),
+      'campaignTag': campaignTag,
+      'cardAccount': cardAccount,
+      'batchNumber': batchNumber,
+      'approvalCode': approvalCode,
+      'responseCode': responseCode,
+      'campaignImage': campaignImage,
+      'taxDeductible': taxDeductible,
+      'cardIssueCode': cardIssueCode,
+      'transactionTag': transactionTag,
+      'approvedAmount': approvedAmount,
+      'sequenceNumber': sequenceNumber,
+      'entryModeImage': entryModeImage,
+      'taxReceiptDate': taxReceiptDate,
+      'cardholderName': cardholderName,
       'createDatetime': createDatetime,
       'updateDatetime': updateDatetime,
+      'organizationTag': organizationTag,
+      'transactionDate': transactionDate,
+      'paymentProcessor': paymentProcessor,
+      'taxReceiptIssued': taxReceiptIssued,
       'recurringPayment': recurringPayment,
-      'startDate': startDate,
+      'taxDeductibleImage': taxDeductibleImage,
+      'applicationIdentifier': applicationIdentifier,
+      'transactionCryptogram': transactionCryptogram,
+      'terminalStatusIndicator': terminalStatusIndicator,
+      'terminalVerificationResults': terminalVerificationResults,
     };
   }
 }

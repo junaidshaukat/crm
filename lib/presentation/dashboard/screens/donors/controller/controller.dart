@@ -5,6 +5,7 @@ import '/core/app_export.dart';
 
 export 'create.dart';
 export 'update.dart';
+export 'details.dart';
 
 class Fields {
   String? value;
@@ -53,6 +54,17 @@ class DonorsController extends GetxController {
   Rx<Map<String, dynamic>> routeValues = Rx({});
 
   Rx<File?> profileImage = Rx(null);
+
+  Rx<int> selectedIndex = Rx(1);
+  Rx<double> latitude = Rx(0.0);
+  Rx<double> longitude = Rx(0.0);
+  Rx<double> radius = Rx(50.0);
+  Rx<String> postalZipCode = Rx('');
+
+  TextEditingController radiusController = TextEditingController(text: '50');
+  TextEditingController postalZipCodeController = TextEditingController();
+  TextEditingController latitudeController = TextEditingController();
+  TextEditingController longitudeController = TextEditingController();
 
   @override
   void onInit() async {
@@ -216,10 +228,20 @@ class DonorsController extends GetxController {
     await getDonors();
   }
 
-  Future<void> onPressedFilter() async {
-    Get.back();
-    page.value = 1;
-    await getDonors();
+  Future<void> onPressedFilter({
+    bool byFields = false,
+    bool byNearest = false,
+  }) async {
+    if (byFields) {
+      Get.back();
+      page.value = 1;
+      await getDonors();
+    }
+    if (byNearest) {
+      Get.back();
+      page.value = 1;
+      await getDonors();
+    }
   }
 
   Future<void> updateProfileImage(num? tagNumber, File file) async {
@@ -320,21 +342,42 @@ class DonorsController extends GetxController {
     }
   }
 
-  Future<void> reset() async {
-    query.clear();
-    page.value = 1;
-    pageSize.value = 10;
-    by.value = null;
-    order.value = "ascending";
-    filter.clear();
-    for (Fields field in fields) {
-      if (field.selected!.isTrue) {
-        field.selected!(false);
-        field.data = null;
+  Future<void> reset({
+    bool byFields = false,
+    bool byNearest = false,
+  }) async {
+    if (byFields) {
+      query.clear();
+      page.value = 1;
+      pageSize.value = 10;
+      by.value = null;
+      order.value = "ascending";
+      filter.clear();
+      for (Fields field in fields) {
+        if (field.selected!.isTrue) {
+          field.selected!(false);
+          field.data = null;
+        }
       }
+      props.error(UseError(message: null));
+      await getDonors();
     }
-    props.error(UseError(message: null));
-    await getDonors();
+    if (byNearest) {
+      query.clear();
+      page.value = 1;
+      pageSize.value = 10;
+      by.value = null;
+      order.value = "ascending";
+      filter.clear();
+      for (Fields field in fields) {
+        if (field.selected!.isTrue) {
+          field.selected!(false);
+          field.data = null;
+        }
+      }
+      props.error(UseError(message: null));
+      await getDonors();
+    }
   }
 
   List<String> get getDropDownHint {
@@ -380,5 +423,12 @@ class DonorsController extends GetxController {
         field.data = null;
       }
     }
+  }
+
+  void onChangeLocation(LatLng position) {
+    latitude.value = position.latitude;
+    longitude.value = position.longitude;
+    latitudeController.text = position.latitude.toStringAsFixed(6);
+    longitudeController.text = position.longitude.toStringAsFixed(6);
   }
 }

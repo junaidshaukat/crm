@@ -7,5 +7,6 @@ class InitialBindings extends Bindings {
     Get.put(Internet());
     Get.put(PrefUtils());
     Get.put(StatusBar());
+    Get.put(Google());
   }
 }

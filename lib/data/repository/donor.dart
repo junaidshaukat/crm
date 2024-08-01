@@ -34,6 +34,37 @@ class DonorApis extends Client {
     }
   }
 
+  /// api/admin/v1/donor/nearBy
+  Future<NearByRes> nearBy({
+    Map<String, String> headers = const {
+      'Content-type': 'application/json',
+    },
+    Map<String, dynamic> requestData = const {},
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+
+      Response response = await dio.get(
+        '/api/admin/v1/donor/nearBy',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        queryParameters: requestData,
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        return NearByRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? NearByRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   /// api/admin/v1/donor/donor
   Future<DonorCreateRes> create({
     Map<String, String> headers = const {

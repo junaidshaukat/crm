@@ -8,6 +8,8 @@ export 'controller/controller.dart';
 
 class DonorsScreen extends StatelessWidget {
   final DonorsController controller = Get.put(DonorsController());
+  final Google google = Get.put(Google());
+
   DonorsScreen({super.key});
 
   Widget visibility({
@@ -242,173 +244,429 @@ class DonorsScreen extends StatelessWidget {
                   const Spacer(flex: 2),
                 ],
               ),
-              SizedBox(height: 11.v),
-              Text(
-                "select_fields".tr,
-                style: TextStyle(
-                  color: appTheme.black900,
-                  fontSize: 15.fSize,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 2.v),
-              Obx(
-                () => SimpleDropDown2(
-                  width: 352.h,
-                  hintText: controller.getDropDownHint.isNotEmpty
-                      ? controller.getDropDownHint.join(', ')
-                      : "select_fields".tr,
-                  items: controller.getFields.map((e) {
-                    return DropDown(
-                      id: e.value,
-                      title: e.label.toString(),
-                      value: e.value,
-                    );
-                  }).toList(),
-                  onSelected: controller.selectFields,
-                ),
-              ),
-              SizedBox(height: 8.v),
-              Obx(
-                () => Column(
-                  children: controller.fields.map((field) {
-                    return visibility(
-                      conn: controller,
-                      checkboxList: controller.routeValues.value[field.value],
-                      visible: field.selected!.value,
-                      label: field.label.toString(),
-                      control: field.control!,
-                      hintText: field.data,
-                      value: field.value,
-                      onSelect: (option) {
-                        if (controller.query.containsKey(option['key'])) {
-                          if (option['checked'] == true) {
-                            if (controller.query[option['key']]!
-                                    .contains(option['value']) ==
-                                false) {
-                              controller.query[option['key']]
-                                  ?.add(option['value']);
-                            }
-                          }
-                          if (option['checked'] == false) {
-                            if (controller.query[option['key']]!
-                                .contains(option['value'])) {
-                              controller.query[option['key']]
-                                  ?.remove(option['value']);
-                            }
-                          }
-                        } else {
-                          controller.query[option['key']] = [option['value']];
-                        }
-                      },
-                      onChanged: (val) {
-                        controller.onChangedField(val, field);
-                      },
-                      onRemove: () {
-                        controller.removeField(field);
-                      },
-                    );
-                  }).toList(),
-                ),
-              ),
-              SizedBox(height: 8.v),
-              Text(
-                "record_per_page".tr,
-                style: TextStyle(
-                  color: appTheme.black900,
-                  fontSize: 15.fSize,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 2.v),
-              SimpleDropDown(
-                width: 352.h,
-                hintText: controller.pageSize.value.toString(),
-                items: pageSizeList.map((e) {
-                  return DropDown(
-                    id: e,
-                    title: e.toString().tr,
-                    value: e,
-                  );
-                }).toList(),
-                onSelected: (option) {
-                  controller.pageSize.value = option?.value;
-                },
-              ),
-              SizedBox(height: 8.v),
-              Text(
-                "sort_by".tr,
-                style: TextStyle(
-                  color: appTheme.black900,
-                  fontSize: 15.fSize,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 2.v),
-              SimpleDropDown(
-                width: 352.h,
-                hintText: controller.by.value?.label ?? "sort_by".tr,
-                items: controller.fields.map((field) {
-                  return DropDown(
-                    id: field.value,
-                    title: field.label.toString(),
-                    value: field,
-                  );
-                }).toList(),
-                onSelected: (option) {
-                  controller.by.value = option?.value;
-                },
-              ),
-              SizedBox(height: 8.v),
-              Text(
-                "order_by".tr,
-                style: TextStyle(
-                  color: appTheme.black900,
-                  fontSize: 15.fSize,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 2.v),
-              SimpleDropDown(
-                width: 352.h,
-                hintText: controller.order.value.tr,
-                items: [
-                  DropDown(id: '1', title: 'ascending'.tr, value: 'Ascending'),
-                  DropDown(
-                      id: '2', title: 'descending'.tr, value: 'Descending'),
-                ],
-                onSelected: (option) {
-                  controller.order.value = option?.value;
-                },
-              ),
-              SizedBox(height: 16.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.h),
-                child: Row(
+              Obx(() {
+                int selectedIndex = controller.selectedIndex.value;
+                return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Expanded(
-                      child: CustomElevatedButton(
-                        text: "reset".tr,
-                        margin: EdgeInsets.only(right: 4.h),
-                        buttonStyle: CustomButtonStyles.fillGray,
-                        onPressed: controller.reset,
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.selectedIndex.value = 1;
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8.adaptSize),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: selectedIndex == 1
+                                    ? appTheme.primary
+                                    : Colors.transparent,
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            'by_fields'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18.fSize,
+                              color: selectedIndex == 1
+                                  ? appTheme.primary
+                                  : appTheme.gray90001,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
+                    SizedBox(width: 16.h),
                     Expanded(
-                      child: CustomElevatedButton(
-                        text: "filter".tr,
-                        margin: EdgeInsets.only(left: 4.h),
-                        onPressed: controller.onPressedFilter,
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.selectedIndex.value = 2;
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8.adaptSize),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: selectedIndex == 2
+                                    ? appTheme.primary
+                                    : Colors.transparent,
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            'by_nearest'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18.fSize,
+                              color: selectedIndex == 2
+                                  ? appTheme.primary
+                                  : appTheme.gray90001,
+                            ),
+                          ),
+                        ),
                       ),
-                    )
+                    ),
                   ],
-                ),
-              ),
+                );
+              }),
+              Obx(() {
+                int selectedIndex = controller.selectedIndex.value;
+                if (selectedIndex == 1) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 11.v),
+                      Text(
+                        "select_fields".tr,
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 15.fSize,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(height: 2.v),
+                      Obx(
+                        () => SimpleDropDown2(
+                          width: 352.h,
+                          hintText: controller.getDropDownHint.isNotEmpty
+                              ? controller.getDropDownHint.join(', ')
+                              : "select_fields".tr,
+                          items: controller.getFields.map((e) {
+                            return DropDown(
+                              id: e.value,
+                              title: e.label.toString(),
+                              value: e.value,
+                            );
+                          }).toList(),
+                          onSelected: controller.selectFields,
+                        ),
+                      ),
+                      SizedBox(height: 8.v),
+                      Obx(
+                        () => Column(
+                          children: controller.fields.map((field) {
+                            return visibility(
+                              conn: controller,
+                              checkboxList:
+                                  controller.routeValues.value[field.value],
+                              visible: field.selected!.value,
+                              label: field.label.toString(),
+                              control: field.control!,
+                              hintText: field.data,
+                              value: field.value,
+                              onSelect: (option) {
+                                if (controller.query
+                                    .containsKey(option['key'])) {
+                                  if (option['checked'] == true) {
+                                    if (controller.query[option['key']]!
+                                            .contains(option['value']) ==
+                                        false) {
+                                      controller.query[option['key']]
+                                          ?.add(option['value']);
+                                    }
+                                  }
+                                  if (option['checked'] == false) {
+                                    if (controller.query[option['key']]!
+                                        .contains(option['value'])) {
+                                      controller.query[option['key']]
+                                          ?.remove(option['value']);
+                                    }
+                                  }
+                                } else {
+                                  controller.query[option['key']] = [
+                                    option['value']
+                                  ];
+                                }
+                              },
+                              onChanged: (val) {
+                                controller.onChangedField(val, field);
+                              },
+                              onRemove: () {
+                                controller.removeField(field);
+                              },
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      SizedBox(height: 8.v),
+                      Text(
+                        "record_per_page".tr,
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 15.fSize,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(height: 2.v),
+                      SimpleDropDown(
+                        width: 352.h,
+                        hintText: controller.pageSize.value.toString(),
+                        items: pageSizeList.map((e) {
+                          return DropDown(
+                            id: e,
+                            title: e.toString().tr,
+                            value: e,
+                          );
+                        }).toList(),
+                        onSelected: (option) {
+                          controller.pageSize.value = option?.value;
+                        },
+                      ),
+                      SizedBox(height: 8.v),
+                      Text(
+                        "sort_by".tr,
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 15.fSize,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(height: 2.v),
+                      SimpleDropDown(
+                        width: 352.h,
+                        hintText: controller.by.value?.label ?? "sort_by".tr,
+                        items: controller.fields.map((field) {
+                          return DropDown(
+                            id: field.value,
+                            title: field.label.toString(),
+                            value: field,
+                          );
+                        }).toList(),
+                        onSelected: (option) {
+                          controller.by.value = option?.value;
+                        },
+                      ),
+                      SizedBox(height: 8.v),
+                      Text(
+                        "order_by".tr,
+                        style: TextStyle(
+                          color: appTheme.black900,
+                          fontSize: 15.fSize,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(height: 2.v),
+                      SimpleDropDown(
+                        width: 352.h,
+                        hintText: controller.order.value.tr,
+                        items: [
+                          DropDown(
+                              id: '1',
+                              title: 'ascending'.tr,
+                              value: 'Ascending'),
+                          DropDown(
+                              id: '2',
+                              title: 'descending'.tr,
+                              value: 'Descending'),
+                        ],
+                        onSelected: (option) {
+                          controller.order.value = option?.value;
+                        },
+                      ),
+                      SizedBox(height: 16.v),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: CustomElevatedButton(
+                                text: "reset".tr,
+                                margin: EdgeInsets.only(right: 4.h),
+                                buttonStyle: CustomButtonStyles.fillGray,
+                                onPressed: () {
+                                  controller.reset(byFields: true);
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomElevatedButton(
+                                text: "filter".tr,
+                                margin: EdgeInsets.only(left: 4.h),
+                                onPressed: () {
+                                  controller.onPressedFilter(byFields: true);
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 11.v),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "postal_zip_code".tr,
+                                  style: TextStyle(
+                                    color: appTheme.black900,
+                                    fontSize: 15.fSize,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 2.v),
+                                InputForm(
+                                  hintText: "postal_zip_code".tr,
+                                  controller:
+                                      controller.postalZipCodeController,
+                                  onChanged: (val) {
+                                    controller.postalZipCode.value = val;
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 8.v),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "radius".tr,
+                                  style: TextStyle(
+                                    color: appTheme.black900,
+                                    fontSize: 15.fSize,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 2.v),
+                                InputForm(
+                                  hintText: "radius".tr,
+                                  controller: controller.radiusController,
+                                  onChanged: (val) {
+                                    controller.radius.value = double.parse(val);
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 8.v),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "latitude".tr,
+                                  style: TextStyle(
+                                    color: appTheme.black900,
+                                    fontSize: 15.fSize,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 2.v),
+                                Input(
+                                  hintText: "latitude".tr,
+                                  controller: controller.latitudeController,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 8.v),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "longitude".tr,
+                                  style: TextStyle(
+                                    color: appTheme.black900,
+                                    fontSize: 15.fSize,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 2.v),
+                                Input(
+                                  hintText: "longitude".tr,
+                                  controller: controller.longitudeController,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 8.v),
+                      Container(
+                        height: 350.v,
+                        width: double.maxFinite,
+                        decoration:
+                            AppDecoration.outlineBluegray100011.copyWith(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: const Offset(1, 1),
+                            ),
+                          ],
+                        ),
+                        child: GoogleMaps(
+                          onChangeLocation: controller.onChangeLocation,
+                        ),
+                      ),
+                      SizedBox(height: 8.v),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: CustomElevatedButton(
+                                text: "reset".tr,
+                                margin: EdgeInsets.only(right: 4.h),
+                                buttonStyle: CustomButtonStyles.fillGray,
+                                onPressed: () {
+                                  controller.reset(byNearest: true);
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomElevatedButton(
+                                text: "filter".tr,
+                                margin: EdgeInsets.only(left: 4.h),
+                                onPressed: () {
+                                  controller.onPressedFilter(byNearest: true);
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              }),
             ],
           ),
         ),
@@ -962,6 +1220,17 @@ class DonorsScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          const Spacer(),
+                                          IconButton(
+                                            onPressed: () {
+                                              Get.to(
+                                                () => DonorDetailsScreen(donor),
+                                              );
+                                            },
+                                            icon: CustomImageView(
+                                              imagePath: 'arrow_right'.icon.svg,
+                                            ),
+                                          )
                                         ],
                                       ),
                                       SizedBox(height: 12.v),
@@ -994,13 +1263,13 @@ class DonorsScreen extends StatelessWidget {
                                                 value: donor.businessName ??
                                                     "None",
                                               ),
-                                               SizedBox(height: 4.v),
-                                            Divider(
-                                              color: appTheme.gray600
-                                                  .withOpacity(0.4),
-                                              indent: 0.h,
-                                            ),
-                                            SizedBox(height: 3.v),
+                                              SizedBox(height: 4.v),
+                                              Divider(
+                                                color: appTheme.gray600
+                                                    .withOpacity(0.4),
+                                                indent: 0.h,
+                                              ),
+                                              SizedBox(height: 3.v),
                                             ],
                                             listTile(
                                               label: "phone".tr,

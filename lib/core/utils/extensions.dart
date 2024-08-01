@@ -91,6 +91,11 @@ extension DateTimeExtension on DateTime {
     return '${millisecondsSinceEpoch ~/ 1000}';
   }
 
+  List<String> numberOfYears([int length = 5]) {
+    return List.generate(
+        length, (index) => (index += 1).toString().padLeft(2, '0'));
+  }
+
   List<String> yearList({
     int numberOfYears = 5,
     bool reverse = true,
@@ -110,6 +115,13 @@ extension DateTimeExtension on DateTime {
       );
       return ascendingOrder ? years.reversed.toList() : years;
     }
+  }
+
+  List<String> monthsList([
+    int length = 20,
+  ]) {
+    return List.generate(
+        length, (index) => (index += 1).toString().padLeft(2, '0'));
   }
 
   List<String> monthList({

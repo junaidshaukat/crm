@@ -197,7 +197,6 @@ class TransactionsApis extends Client {
   }) async {
     try {
       isNetworkConnected();
-      console.log(requestData, force: true);
       Response response = await dio.get(
         '/api/admin/v1/refund',
         options: Options(headers: headers, extra: {'debug': debug}),
@@ -205,7 +204,6 @@ class TransactionsApis extends Client {
         data: requestData,
       );
       if (isSuccessCall(response, debug: debug)) {
-        console.log(response.data, force: true);
         return RefundsRes.fromJson(response.data);
       } else {
         throw response.data != null
@@ -228,14 +226,12 @@ class TransactionsApis extends Client {
   }) async {
     try {
       isNetworkConnected();
-      console.log(requestData, force: true);
       Response response = await dio.post(
         '/api/admin/v1/refund',
         options: Options(headers: headers, extra: {'debug': debug}),
         data: requestData,
       );
       if (isSuccessCall(response, debug: debug)) {
-        console.log(response.data, force: true);
         return RefundRes.fromJson(response.data);
       } else {
         throw response.data != null

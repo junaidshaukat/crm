@@ -4,21 +4,23 @@ import '/core/app_export.dart';
 class FilterByYearsDialog extends StatelessWidget {
   const FilterByYearsDialog({
     super.key,
+    this.hintText,
     this.onChanged,
     this.onPressed,
-    required this.yearList,
     required this.year,
+    required this.yearList,
   });
 
   final String year;
+  final String? hintText;
   final List<String> yearList;
-  final void Function(DropDown?)? onChanged;
   final void Function()? onPressed;
+  final void Function(DropDown?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 100.h, right: 24.h),
+      margin: EdgeInsets.only(left: 60.h, right: 24.h),
       padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 5.v),
       decoration: AppDecoration.outlineBluegray100011.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder8,
@@ -37,7 +39,7 @@ class FilterByYearsDialog extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
-                    "filter_by_years".tr,
+                    hintText ?? "filter_by_years".tr,
                     style: TextStyle(
                       color: appTheme.gray80001,
                       fontSize: 12.fSize,
@@ -60,7 +62,7 @@ class FilterByYearsDialog extends StatelessWidget {
           ),
           SizedBox(height: 4.v),
           SimpleDropDown(
-            width: 148.h,
+            width: 180.h,
             hintText: year,
             items: yearList.map((val) {
               return DropDown(
@@ -75,7 +77,7 @@ class FilterByYearsDialog extends StatelessWidget {
           SizedBox(height: 7.v),
           CustomElevatedButton(
             height: 40.v,
-            width: 149.h,
+            width: 180.h,
             text: "filter".tr,
             onPressed: onPressed,
           )

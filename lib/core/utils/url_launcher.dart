@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '/core/app_export.dart';
 
 class Launcher {
@@ -34,6 +36,18 @@ class Launcher {
     Uri url = Uri(scheme: 'sms', path: phone);
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
+    } else {
+      throw Exception('${"could_not_launch".tr} $url');
+    }
+  }
+
+  static void maps(String address) async {
+    String encodedAddress = Uri.encodeComponent(address);
+    String url = Platform.isIOS
+        ? 'maps:0,0?q=$encodedAddress'
+        : 'geo:0,0?q=$encodedAddress';
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
     } else {
       throw Exception('${"could_not_launch".tr} $url');
     }

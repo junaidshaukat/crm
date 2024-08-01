@@ -17,6 +17,7 @@ class Api {
   TransactionsApis transactions = TransactionsApis();
   UsersApis users = UsersApis();
   RecognizedApis recognized = RecognizedApis();
+  HighlightsApis highlights = HighlightsApis();
 
   Api();
 }
