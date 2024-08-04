@@ -349,6 +349,8 @@ class DonorDetailsScreen extends StatelessWidget {
             ),
           ),
           const Divider(),
+          SizedBox(height: 4.v),
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.h),
             child: Wrap(
