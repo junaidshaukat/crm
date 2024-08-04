@@ -140,6 +140,7 @@ class DonorData {
   String? country;
   String? email;
   dynamic phone;
+  num? distance;
   num? status;
   dynamic lastLogin;
   num? allowContact;
@@ -162,6 +163,7 @@ class DonorData {
     this.provinceState,
     this.country,
     this.email,
+    this.distance = 0,
     this.accountPassword,
     this.phone,
     this.status,
@@ -184,6 +186,7 @@ class DonorData {
       streetAddress: json['streetAddress'],
       unitNumber: json['unitNumber'],
       city: json['city'],
+      distance: json['distance'] ?? 0,
       postalZipCode: json['postalZipCode'],
       provinceState: json['provinceState'],
       country: json['country'],

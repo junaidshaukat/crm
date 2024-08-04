@@ -58,7 +58,11 @@ class DonorDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget listTile({required String label, required String value}) {
+  Widget listTile({
+    String? icon,
+    required String label,
+    required String value,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -71,15 +75,24 @@ class DonorDetailsScreen extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        Text(
-          value,
-          style: TextStyle(
-            color: appTheme.gray600,
-            fontSize: 11.fSize,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
+        if (icon != null) ...[
+          CustomImageView(
+            width: 24.h,
+            height: 24.v,
+            imagePath: icon,
           ),
-        ),
+        ],
+        if (icon == null) ...[
+          Text(
+            value,
+            style: TextStyle(
+              color: appTheme.gray600,
+              fontSize: 11.fSize,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
       ],
     );
   }
@@ -340,138 +353,72 @@ class DonorDetailsScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 4.h),
             child: Wrap(
               children: transactions.transactions!.map((item) {
-                return Container(
-                  width: double.maxFinite,
-                  margin: EdgeInsets.symmetric(vertical: 4.v),
-                  padding: EdgeInsets.symmetric(vertical: 8.v),
-                  decoration: AppDecoration.outlineBluegray100011.copyWith(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: const Offset(1, 1),
-                      ),
-                    ],
-                  ),
+                return CustomCard(
                   child: Column(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 4.v),
+                        decoration: AppDecoration.fillLightGreen,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Expanded(
-                              child: Text(
-                                'campaign'.tr,
-                                style: CustomTextStyles.labelLargeBold,
-                              ),
+                            listTile(
+                              value: '',
+                              label: "icon".tr,
+                              icon: item.campaignLogo,
                             ),
-                            Expanded(
-                              child: Text(
-                                'channel'.tr,
-                                style: CustomTextStyles.labelLargeBold,
-                              ),
+                            SizedBox(height: 4.v),
+                            Divider(
+                              color: appTheme.gray600.withOpacity(0.4),
+                              indent: 0.h,
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 4.v),
-                      const Divider(
-                        thickness: 2,
-                      ),
-                      SizedBox(height: 4.v),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  CustomImageView(
-                                    width: 24.h,
-                                    height: 24.v,
-                                    imagePath: item.campaignLogo,
-                                  ),
-                                  SizedBox(width: 8.h),
-                                  Text(
-                                    item.campaign ?? '',
-                                    style: CustomTextStyles.labelMediumGray600,
-                                  )
-                                ],
-                              ),
+                            SizedBox(height: 4.v),
+                            listTile(
+                              label: "campaign".tr,
+                              value: "${item.campaign}",
                             ),
-                            Expanded(
-                              child: Text(
-                                item.nodeType ?? '',
-                                style: CustomTextStyles.labelMediumGray600,
-                              ),
+                            SizedBox(height: 4.v),
+                            Divider(
+                              color: appTheme.gray600.withOpacity(0.4),
+                              indent: 0.h,
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 4.v),
-                      const Divider(
-                        thickness: 2,
-                      ),
-                      SizedBox(height: 4.v),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'amount'.tr,
-                                style: CustomTextStyles.labelLargeBold,
-                              ),
+                            SizedBox(height: 4.v),
+                            listTile(
+                              label: "channel".tr,
+                              value: "${item.nodeType}",
                             ),
-                            Expanded(
-                              child: Text(
-                                'tender_type'.tr,
-                                style: CustomTextStyles.labelLargeBold,
-                              ),
+                            SizedBox(height: 4.v),
+                            Divider(
+                              color: appTheme.gray600.withOpacity(0.4),
+                              indent: 0.h,
                             ),
-                            Expanded(
-                              child: Text(
-                                'date'.tr,
-                                style: CustomTextStyles.labelLargeBold,
-                              ),
+                            SizedBox(height: 4.v),
+                            listTile(
+                              label: "amount".tr,
+                              value:
+                                  "${transactions.currencySymbol}${item.approvedAmount}",
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 4.v),
-                      const Divider(
-                        thickness: 2,
-                      ),
-                      SizedBox(height: 4.v),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.h),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "${transactions.currencySymbol}${item.approvedAmount}",
-                                style: CustomTextStyles.labelMediumGray600,
-                              ),
+                            SizedBox(height: 4.v),
+                            Divider(
+                              color: appTheme.gray600.withOpacity(0.4),
+                              indent: 0.h,
                             ),
-                            Expanded(
-                              child: Text(
-                                item.cardType ?? '',
-                                style: CustomTextStyles.labelMediumGray600,
-                              ),
+                            SizedBox(height: 4.v),
+                            listTile(
+                              label: "tender_type".tr,
+                              value: "${item.cardType}",
                             ),
-                            Expanded(
-                              child: Text(
-                                item.transactionDate ?? '',
-                                style: CustomTextStyles.labelMediumGray600,
-                              ),
+                            SizedBox(height: 4.v),
+                            Divider(
+                              color: appTheme.gray600.withOpacity(0.4),
+                              indent: 0.h,
                             ),
+                            SizedBox(height: 4.v),
+                            listTile(
+                              label: "date".tr,
+                              value: "${item.transactionDate}",
+                            ),
+                            SizedBox(height: 4.v),
                           ],
                         ),
                       ),
@@ -574,8 +521,10 @@ class DonorDetailsScreen extends StatelessWidget {
                                       Launcher.tel(donor.phone);
                                     },
                                     child: CustomImageView(
-                                      height: 22.v,
-                                      imagePath: 'phone'.icon.svg,
+                                      width: 20.h,
+                                      height: 20.v,
+                                      svgColor: appTheme.primary,
+                                      imagePath: 'telephone'.icon.svg,
                                     ),
                                   ),
                                   SizedBox(width: 8.h),
@@ -584,8 +533,10 @@ class DonorDetailsScreen extends StatelessWidget {
                                       Launcher.mailto(donor.email ?? '');
                                     },
                                     child: CustomImageView(
-                                      height: 22.v,
-                                      imagePath: 'email'.icon.svg,
+                                      width: 20.h,
+                                      height: 20.v,
+                                      svgColor: appTheme.primary,
+                                      imagePath: 'envelope'.icon.svg,
                                     ),
                                   ),
                                   SizedBox(width: 8.h),
@@ -594,8 +545,10 @@ class DonorDetailsScreen extends StatelessWidget {
                                       Launcher.maps(donor.streetAddress ?? '');
                                     },
                                     child: CustomImageView(
-                                      height: 22.v,
-                                      imagePath: 'location'.icon.svg,
+                                      width: 20.h,
+                                      height: 20.v,
+                                      svgColor: appTheme.primary,
+                                      imagePath: 'sign-turn-right'.icon.svg,
                                     ),
                                   )
                                 ],

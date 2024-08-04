@@ -34,14 +34,12 @@ class NearByReq {
 class NearByRes {
   bool result;
   String message;
-  DonorLinks? links;
   List<DonorData> data;
   MessageDetails messageDetails;
 
   NearByRes({
     this.message = '',
     this.result = false,
-    required this.links,
     this.data = const [],
     required this.messageDetails,
   });
@@ -59,7 +57,6 @@ class NearByRes {
       result: json['result'],
       message: json['message'],
       messageDetails: MessageDetails.fromJson(json['messageDetails']),
-      links: json['links'] != null ? DonorLinks.fromJson(json['links']) : null,
     );
   }
 }

@@ -331,13 +331,107 @@ class ChannelDetailsScreen extends StatelessWidget {
                             } else {
                               return ListView.separated(
                                 shrinkWrap: true,
-                                itemCount: channels.length,
+                                itemCount: channels.length + 1,
                                 padding: EdgeInsets.zero,
                                 separatorBuilder: (context, index) {
                                   return SizedBox(height: 11.v);
                                 },
                                 itemBuilder: (context, index) {
+                                  if (index == channels.length) {
+                                    num totalAmount = channels.fold(
+                                        0.0,
+                                        (sum, item) =>
+                                            sum + (item.amount.toNum));
+                                    num totalTransaction = channels.fold(
+                                        0,
+                                        (sum, item) =>
+                                            sum + (item.numberOfTransaction));
+                                    return Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 4.h,
+                                        vertical: 4.v,
+                                      ),
+                                      decoration: AppDecoration.outlinePrimary2
+                                          .copyWith(
+                                        color: appTheme.lightGreen50,
+                                        border: Border.all(
+                                          width: 1,
+                                          color: appTheme.primary,
+                                        ),
+                                        borderRadius:
+                                            BorderRadiusStyle.roundedBorder5,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${'total'.tr} ${'transactions'.tr}",
+                                                style: TextStyle(
+                                                  color:
+                                                      theme.colorScheme.primary,
+                                                  fontSize: 12.fSize,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                              SizedBox(height: 4.v),
+                                              Text(
+                                                "${'total'.tr} ${'amount'.tr}",
+                                                style: TextStyle(
+                                                  color:
+                                                      theme.colorScheme.primary,
+                                                  fontSize: 12.fSize,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 16.h),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '$totalTransaction',
+                                                  style: TextStyle(
+                                                    color: appTheme.gray80001,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 4.v),
+                                                Text(
+                                                  '$totalAmount',
+                                                  style: TextStyle(
+                                                    color: appTheme.gray80001,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+
                                   ChannelDetails channel = channels[index];
+
                                   return Container(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 4.h,

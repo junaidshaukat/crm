@@ -508,120 +508,34 @@ class DonorsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 11.v),
-                      Row(
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "postal_zip_code".tr,
-                                  style: TextStyle(
-                                    color: appTheme.black900,
-                                    fontSize: 15.fSize,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 2.v),
-                                InputForm(
-                                  hintText: "postal_zip_code".tr,
-                                  controller:
-                                      controller.postalZipCodeController,
-                                  onChanged: (val) {
-                                    controller.postalZipCode.value = val;
-                                  },
-                                ),
-                              ],
+                          Text(
+                            "radius".tr,
+                            style: TextStyle(
+                              color: appTheme.black900,
+                              fontSize: 15.fSize,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                          SizedBox(width: 8.v),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "radius".tr,
-                                  style: TextStyle(
-                                    color: appTheme.black900,
-                                    fontSize: 15.fSize,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 2.v),
-                                InputForm(
-                                  hintText: "radius".tr,
-                                  controller: controller.radiusController,
-                                  onChanged: (val) {
-                                    if (val.isNotEmpty) {
-                                      controller.radius.value =
-                                          double.parse(val);
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 8.v),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "latitude".tr,
-                                  style: TextStyle(
-                                    color: appTheme.black900,
-                                    fontSize: 15.fSize,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 2.v),
-                                InputForm(
-                                  readOnly: true,
-                                  hintText: "latitude".tr,
-                                  controller: controller.latitudeController,
-                                ),
-                              ],
-                            ),
+                          SizedBox(height: 2.v),
+                          InputForm(
+                            hintText: "radius".tr,
+                            controller: controller.radiusController,
+                            onChanged: (val) {
+                              if (val.isNotEmpty) {
+                                controller.radius.value = double.parse(val);
+                              }
+                            },
                           ),
-                          SizedBox(width: 8.v),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "longitude".tr,
-                                  style: TextStyle(
-                                    color: appTheme.black900,
-                                    fontSize: 15.fSize,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 2.v),
-                                InputForm(
-                                  readOnly: true,
-                                  hintText: "longitude".tr,
-                                  controller: controller.longitudeController,
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
                       SizedBox(height: 8.v),
                       Container(
-                        height: 350.v,
+                        height: 400.v,
                         width: double.maxFinite,
                         decoration:
                             AppDecoration.outlineBluegray100011.copyWith(
@@ -1276,6 +1190,21 @@ class DonorsScreen extends StatelessWidget {
                                               ),
                                               SizedBox(height: 3.v),
                                             ],
+                                            if (donor.distance != null) ...[
+                                              if (donor.distance! > 0) ...[
+                                                listTile(
+                                                  label: "distance".tr,
+                                                  value: "${donor.distance}",
+                                                ),
+                                                SizedBox(height: 4.v),
+                                                Divider(
+                                                  color: appTheme.gray600
+                                                      .withOpacity(0.4),
+                                                  indent: 0.h,
+                                                ),
+                                                SizedBox(height: 3.v),
+                                              ],
+                                            ],
                                             listTile(
                                               label: "phone".tr,
                                               value: "${donor.phone ?? "None"}",
@@ -1353,14 +1282,18 @@ class DonorsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8.v),
                   Obx(() {
-                    DonorLinks links = controller.links.value;
-                    return WebPagination(
-                      displayItemCount:
-                          (links.lastPage?.toInt() ?? 0) > 3 ? 3 : 0,
-                      currentPage: links.currentPage?.toInt() ?? 0,
-                      totalPage: links.lastPage?.toInt() ?? 0,
-                      onPageChanged: controller.onPageChanged,
-                    );
+                    DonorLinks? links = controller.links.value;
+                    if (links != null) {
+                      return WebPagination(
+                        displayItemCount:
+                            (links.lastPage?.toInt() ?? 0) > 3 ? 3 : 0,
+                        currentPage: links.currentPage?.toInt() ?? 0,
+                        totalPage: links.lastPage?.toInt() ?? 0,
+                        onPageChanged: controller.onPageChanged,
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
                   }),
                   SizedBox(height: 30.v),
                 ],

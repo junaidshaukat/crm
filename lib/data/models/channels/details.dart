@@ -90,6 +90,19 @@ class ChannelDetails {
     );
   }
 
+  num totalAmount(List<ChannelDetails> items) {
+    final total = items.fold(0.0, (sum, item) => sum + (item.amount.toNum));
+    if (total == 0) return 0;
+    return total;
+  }
+
+  num totalTransaction(List<ChannelDetails> items) {
+    final total =
+        items.fold(0.0, (sum, item) => sum + (item.numberOfTransaction));
+    if (total == 0) return 0;
+    return total;
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'amount': amount,

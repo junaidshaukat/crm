@@ -38,7 +38,7 @@ class DonorsController extends GetxController {
   Props propsProfile = Props();
 
   RxList<DonorData> donors = <DonorData>[].obs;
-  Rx<DonorLinks> links = Rx(DonorLinks());
+  Rx<DonorLinks?> links = Rx(null);
   RxList<Fields> fields = RxList([]);
 
   Rx<int> page = Rx(1);
@@ -216,21 +216,12 @@ class DonorsController extends GetxController {
         postalZipCode: postalZipCode.value,
       );
 
-      for (var field in fields) {
-        if (field.selected!.isTrue) {
-          if (field.data != null) filter[field.value!] = field.data.toString();
-        }
-      }
-
       NearByRes response = await Get.find<Api>().donor.nearBy(
             requestData: request.toJson(),
           );
       if (response.result == true) {
         donors.value = response.data;
-        links.value = response.links ?? DonorLinks();
-        page(response.links?.currentPage?.toInt());
-        pageSize(response.links?.perPage?.toInt());
-        totalPage(response.links?.lastPage?.toInt());
+        links.value = null;
         props.useState(UseState.done);
       } else {
         throw response;
@@ -397,6 +388,9 @@ class DonorsController extends GetxController {
       by.value = null;
       order.value = "ascending";
       filter.clear();
+      radius.value = 50;
+      radiusController.clear();
+      radiusController.text = '50';
       for (Fields field in fields) {
         if (field.selected!.isTrue) {
           field.selected!(false);
@@ -408,6 +402,9 @@ class DonorsController extends GetxController {
     }
     if (byNearest) {
       query.clear();
+      radius.value = 50;
+      radiusController.clear();
+      radiusController.text = '50';
       page.value = 1;
       pageSize.value = 10;
       by.value = null;

@@ -142,20 +142,20 @@ class Transactions {
 
   Map<String, dynamic> toJson() {
     return {
-      'tagNumber': tagNumber,
       'nodeName': nodeName,
       'nodeType': nodeType,
-      'campaignTag': campaignTag,
       'campaign': campaign,
-      'campaignLogo': campaignLogo,
-      'approvedAmount': approvedAmount,
-      'cardBrand': cardBrand,
       'cardType': cardType,
+      'tagNumber': tagNumber,
+      'cardBrand': cardBrand,
       'cardImage': cardImage,
-      'transactionDate': transactionDate,
+      'campaignTag': campaignTag,
+      'campaignLogo': campaignLogo,
       'taxDeductible': taxDeductible,
-      'taxDeductibleImage': taxDeductibleImage,
+      'approvedAmount': approvedAmount,
       'taxReceiptDate': taxReceiptDate,
+      'transactionDate': transactionDate,
+      'taxDeductibleImage': taxDeductibleImage,
     };
   }
 }
