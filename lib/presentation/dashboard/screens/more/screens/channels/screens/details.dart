@@ -367,8 +367,6 @@ class ChannelDetailsScreen extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
                                         children: [
                                           Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -398,36 +396,49 @@ class ChannelDetailsScreen extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(right: 16.h),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  '$totalTransaction',
-                                                  textAlign: TextAlign.right,
-                                                  style: TextStyle(
-                                                    color: appTheme.gray80001,
-                                                    fontSize: 12.fSize,
-                                                    fontFamily: 'Poppins',
-                                                    fontWeight: FontWeight.w500,
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              SizedBox(
+                                                width: 200.h,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                    right: 8.h,
+                                                  ),
+                                                  child: Text(
+                                                    '$totalTransaction',
+                                                    textAlign: TextAlign.right,
+                                                    style: TextStyle(
+                                                      fontSize: 12.fSize,
+                                                      fontFamily: 'Poppins',
+                                                      color: appTheme.gray80001,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
                                                   ),
                                                 ),
-                                                SizedBox(height: 4.v),
-                                                Text(
-                                                  '$currencySymbol$totalAmount',
-                                                  style: TextStyle(
-                                                    color: appTheme.gray80001,
-                                                    fontSize: 12.fSize,
-                                                    fontFamily: 'Poppins',
-                                                    fontWeight: FontWeight.w500,
+                                              ),
+                                              SizedBox(height: 4.v),
+                                              SizedBox(
+                                                width: 200.h,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                    right: 8.h,
+                                                  ),
+                                                  child: Text(
+                                                    '$currencySymbol$totalAmount',
+                                                    textAlign: TextAlign.right,
+                                                    style: TextStyle(
+                                                      fontSize: 12.fSize,
+                                                      fontFamily: 'Poppins',
+                                                      color: appTheme.gray80001,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -457,7 +468,8 @@ class ChannelDetailsScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(
+                                        SizedBox(
+                                          width: 100.h,
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
@@ -486,7 +498,8 @@ class ChannelDetailsScreen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        Expanded(
+                                        SizedBox(
+                                          width: 100.h,
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
@@ -518,11 +531,12 @@ class ChannelDetailsScreen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        Expanded(
+                                        SizedBox(
+                                          width: 100.h,
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'amount'.tr,
@@ -535,16 +549,21 @@ class ChannelDetailsScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               SizedBox(height: 4.v),
-                                              Text(
-                                                "${channel.currencySymbol}${channel.amount}",
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: appTheme.gray80001,
-                                                  fontSize: 12.fSize,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w500,
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 8.h),
+                                                child: Text(
+                                                  "${channel.currencySymbol}${channel.amount}",
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    color: appTheme.gray80001,
+                                                    fontSize: 12.fSize,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ),
                                             ],

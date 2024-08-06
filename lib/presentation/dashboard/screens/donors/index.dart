@@ -1046,20 +1046,25 @@ class DonorsScreen extends StatelessWidget {
                       SizedBox(
                         width: 90.adaptSize,
                         height: 30.adaptSize,
-                        child: Obx(
-                          () => PageSizeDropDown(
-                            circularRadius: 33,
-                            hintText: controller.pageSize.value.toString(),
-                            items: pageSizeList
-                                .map((page) => DropDown(
-                                      id: page,
-                                      value: page,
-                                      title: page.toString(),
-                                    ))
-                                .toList(),
-                            onSelected: controller.onChangedPageSize,
-                          ),
-                        ),
+                        child: Obx(() {
+                          int tab = controller.tab.value;
+                          if (tab == 2) {
+                            return const SizedBox.shrink();
+                          } else {
+                            return PageSizeDropDown(
+                              circularRadius: 33,
+                              hintText: controller.pageSize.value.toString(),
+                              items: pageSizeList
+                                  .map((page) => DropDown(
+                                        id: page,
+                                        value: page,
+                                        title: page.toString(),
+                                      ))
+                                  .toList(),
+                              onSelected: controller.onChangedPageSize,
+                            );
+                          }
+                        }),
                       ),
                     ],
                   ),
@@ -1067,6 +1072,7 @@ class DonorsScreen extends StatelessWidget {
                   Expanded(
                     child: Obx(
                       () {
+                        int tab = controller.tab.value;
                         Rx<UseState> useState = controller.props.useState;
                         Rx<UseError> error = controller.props.error;
 
@@ -1191,18 +1197,20 @@ class DonorsScreen extends StatelessWidget {
                                               SizedBox(height: 3.v),
                                             ],
                                             if (donor.distance != null) ...[
-                                              if (donor.distance! > 0) ...[
-                                                listTile(
-                                                  label: "distance".tr,
-                                                  value: "${donor.distance}",
-                                                ),
-                                                SizedBox(height: 4.v),
-                                                Divider(
-                                                  color: appTheme.gray600
-                                                      .withOpacity(0.4),
-                                                  indent: 0.h,
-                                                ),
-                                                SizedBox(height: 3.v),
+                                              if (tab == 2) ...[
+                                                if (donor.distance! > 0) ...[
+                                                  listTile(
+                                                    label: "distance".tr,
+                                                    value: "${donor.distance}",
+                                                  ),
+                                                  SizedBox(height: 4.v),
+                                                  Divider(
+                                                    color: appTheme.gray600
+                                                        .withOpacity(0.4),
+                                                    indent: 0.h,
+                                                  ),
+                                                  SizedBox(height: 3.v),
+                                                ],
                                               ],
                                             ],
                                             listTile(
@@ -1282,17 +1290,21 @@ class DonorsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8.v),
                   Obx(() {
+                    int tab = controller.tab.value;
                     DonorLinks? links = controller.links.value;
                     if (links != null) {
                       int displayItemCount = links.lastPage?.toInt() ?? 0;
-
-                      return WebPagination(
-                        displayItemCount:
-                            displayItemCount > 3 ? 3 : displayItemCount,
-                        currentPage: links.currentPage?.toInt() ?? 0,
-                        totalPage: links.lastPage?.toInt() ?? 0,
-                        onPageChanged: controller.onPageChanged,
-                      );
+                      if (tab == 2) {
+                        return const SizedBox.shrink();
+                      } else {
+                        return WebPagination(
+                          displayItemCount:
+                              displayItemCount > 3 ? 3 : displayItemCount,
+                          currentPage: links.currentPage?.toInt() ?? 0,
+                          totalPage: links.lastPage?.toInt() ?? 0,
+                          onPageChanged: controller.onPageChanged,
+                        );
+                      }
                     } else {
                       return const SizedBox.shrink();
                     }

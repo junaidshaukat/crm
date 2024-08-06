@@ -80,9 +80,10 @@ class DonorDetailsScreen extends StatelessWidget {
             children: [
               CustomImageView(
                 width: 24.h,
-                height: 24.v,
                 imagePath: icon,
+                fit: BoxFit.cover,
               ),
+              SizedBox(width: 4.h),
               Text(
                 value,
                 style: TextStyle(

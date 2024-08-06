@@ -56,6 +56,8 @@ class DonorsController extends GetxController {
   Rx<File?> profileImage = Rx(null);
 
   Rx<int> selectedIndex = Rx(1);
+  Rx<int> tab = Rx(1);
+
   Rx<double> latitude = Rx(0.0);
   Rx<double> longitude = Rx(0.0);
   Rx<double> radius = Rx(50.0);
@@ -269,10 +271,12 @@ class DonorsController extends GetxController {
     bool byNearest = false,
   }) async {
     if (byFields) {
+      tab.value = 1;
       Get.back();
       page.value = 1;
       await getDonors();
     } else if (byNearest) {
+      tab.value = 2;
       Get.back();
       page.value = 1;
       await getDonorsNearest();
@@ -383,6 +387,7 @@ class DonorsController extends GetxController {
   }) async {
     if (byFields) {
       query.clear();
+      tab.value = 1;
       page.value = 1;
       pageSize.value = 10;
       by.value = null;
@@ -402,6 +407,7 @@ class DonorsController extends GetxController {
     }
     if (byNearest) {
       query.clear();
+      tab.value = 2;
       radius.value = 50;
       radiusController.clear();
       radiusController.text = '50';
