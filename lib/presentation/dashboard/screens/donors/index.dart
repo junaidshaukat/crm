@@ -1284,9 +1284,11 @@ class DonorsScreen extends StatelessWidget {
                   Obx(() {
                     DonorLinks? links = controller.links.value;
                     if (links != null) {
+                      int displayItemCount = links.lastPage?.toInt() ?? 0;
+
                       return WebPagination(
                         displayItemCount:
-                            (links.lastPage?.toInt() ?? 0) > 3 ? 3 : 0,
+                            displayItemCount > 3 ? 3 : displayItemCount,
                         currentPage: links.currentPage?.toInt() ?? 0,
                         totalPage: links.lastPage?.toInt() ?? 0,
                         onPageChanged: controller.onPageChanged,

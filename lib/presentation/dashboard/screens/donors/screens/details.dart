@@ -76,10 +76,23 @@ class DonorDetailsScreen extends StatelessWidget {
           ),
         ),
         if (icon != null) ...[
-          CustomImageView(
-            width: 24.h,
-            height: 24.v,
-            imagePath: icon,
+          Row(
+            children: [
+              CustomImageView(
+                width: 24.h,
+                height: 24.v,
+                imagePath: icon,
+              ),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 11.fSize,
+                  fontFamily: 'Poppins',
+                  color: appTheme.green900,
+                  fontWeight: FontWeight.w700,
+                ),
+              )
+            ],
           ),
         ],
         if (icon == null) ...[
@@ -366,19 +379,9 @@ class DonorDetailsScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             listTile(
-                              value: '',
-                              label: "icon".tr,
-                              icon: item.campaignLogo,
-                            ),
-                            SizedBox(height: 4.v),
-                            Divider(
-                              color: appTheme.gray600.withOpacity(0.4),
-                              indent: 0.h,
-                            ),
-                            SizedBox(height: 4.v),
-                            listTile(
                               label: "campaign".tr,
                               value: "${item.campaign}",
+                              icon: item.campaignLogo,
                             ),
                             SizedBox(height: 4.v),
                             Divider(
