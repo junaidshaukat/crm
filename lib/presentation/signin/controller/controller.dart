@@ -37,6 +37,15 @@ class SigninController extends GetxController {
             requestData: requestData,
           );
       if (response.result == true) {
+        for (var org in response.data!.organizations!) {
+          if (org.tagNumber == response.data?.organizationTag) {
+            await env.putAll({
+              'gatewayNodeTag': org.gatewayNodeTag,
+              'currencySymbol': org.currencySymbol,
+            });
+          }
+        }
+
         await env.putAll({
           "adminToken": response.data?.token,
           'email': requestData['email'],

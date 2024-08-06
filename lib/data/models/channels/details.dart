@@ -74,18 +74,23 @@ class ChannelDetailsRes {
 class ChannelDetails {
   String amount;
   String campaign;
+  String currencySymbol;
   num numberOfTransaction;
 
   ChannelDetails({
     required this.amount,
     required this.campaign,
+    required this.currencySymbol,
     required this.numberOfTransaction,
   });
 
   factory ChannelDetails.fromJson(Map<String, dynamic> json) {
+    EnvConfig env = EnvConfig();
+
     return ChannelDetails(
       amount: json['amount'],
       campaign: json['campaign'],
+      currencySymbol: env.currencySymbol,
       numberOfTransaction: json['numberOfTransaction'],
     );
   }
@@ -107,6 +112,7 @@ class ChannelDetails {
     return {
       'amount': amount,
       'campaign': campaign,
+      'currencySymbol': currencySymbol,
       'numberOfTransaction': numberOfTransaction,
     };
   }

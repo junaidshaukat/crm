@@ -14,6 +14,7 @@ class EnvConfig {
   String get version => env.get('version', defaultValue: '');
   int? get organizationTag => env.get('organizationTag');
   int get gatewayNodeTag => env.get('gatewayNodeTag', defaultValue: 0);
+  String get currencySymbol => env.get('currencySymbol', defaultValue: '');
 
   initHive() {
     env = Hive.box(HiveBox.environment);

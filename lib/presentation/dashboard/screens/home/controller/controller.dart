@@ -132,6 +132,7 @@ class HomeController extends GetxController {
           if (org.tagNumber == profile.value.organizationTag) {
             await env.putAll({
               'gatewayNodeTag': org.gatewayNodeTag,
+              'currencySymbol': org.currencySymbol,
             });
           }
         }

@@ -1,42 +1,42 @@
 import '/core/app_export.dart';
 
 class DonorCreateReq {
-  String? accountType;
-  String? businessName;
-  String? firstName;
-  String? middleInitials;
-  String? lastName;
-  String? streetAddress;
-  String? unitNumber;
   String? city;
-  String? postalZipCode;
-  String? provinceState;
-  String? country;
-  String? email;
-  String? accountPassword;
-  String? phone;
-  String? status;
-  String? allowContact;
-  String? notifyNewCampaign;
+String? email;
+String? phone;
+String? status;
+String? country;
+String? lastName;
+String? firstName;
+String? unitNumber;
+String? accountType;
+String? businessName;
+String? allowContact;
+String? streetAddress;
+String? postalZipCode;
+String? provinceState;
+String? middleInitials;
+String? accountPassword;
+String? notifyNewCampaign;
 
   DonorCreateReq({
-    this.accountType,
-    this.businessName,
-    this.firstName,
-    this.middleInitials,
-    this.lastName,
-    this.streetAddress,
-    this.unitNumber,
     this.city,
-    this.postalZipCode,
-    this.provinceState,
-    this.country,
-    this.email,
-    this.accountPassword,
-    this.phone,
-    this.status = '1',
-    this.allowContact = '1',
-    this.notifyNewCampaign = '1',
+this.email,
+this.phone,
+this.country,
+this.lastName,
+this.firstName,
+this.unitNumber,
+this.accountType,
+this.businessName,
+this.status = '1',
+this.streetAddress,
+this.postalZipCode,
+this.provinceState,
+this.middleInitials,
+this.accountPassword,
+this.allowContact = '1',
+this.notifyNewCampaign = '1',
   });
 
   factory DonorCreateReq.fromJson(Map<String, dynamic> json) {

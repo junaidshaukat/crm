@@ -338,6 +338,9 @@ class ChannelDetailsScreen extends StatelessWidget {
                                 },
                                 itemBuilder: (context, index) {
                                   if (index == channels.length) {
+                                    String currencySymbol =
+                                        channels.first.currencySymbol;
+
                                     num totalAmount = channels.fold(
                                         0.0,
                                         (sum, item) =>
@@ -405,6 +408,7 @@ class ChannelDetailsScreen extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   '$totalTransaction',
+                                                  textAlign: TextAlign.right,
                                                   style: TextStyle(
                                                     color: appTheme.gray80001,
                                                     fontSize: 12.fSize,
@@ -414,7 +418,7 @@ class ChannelDetailsScreen extends StatelessWidget {
                                                 ),
                                                 SizedBox(height: 4.v),
                                                 Text(
-                                                  '$totalAmount',
+                                                  '$currencySymbol$totalAmount',
                                                   style: TextStyle(
                                                     color: appTheme.gray80001,
                                                     fontSize: 12.fSize,
@@ -532,7 +536,7 @@ class ChannelDetailsScreen extends StatelessWidget {
                                               ),
                                               SizedBox(height: 4.v),
                                               Text(
-                                                channel.amount,
+                                                "${channel.currencySymbol}${channel.amount}",
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.center,
