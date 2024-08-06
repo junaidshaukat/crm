@@ -353,6 +353,7 @@ class DonorDetailsScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.h),
             child: Wrap(
+              spacing: 8.v,
               runSpacing: 8.v,
               children: transactions.transactions!.map((item) {
                 return CustomCard(
