@@ -263,6 +263,7 @@ final Map<String, String> enUs = {
   "organization": "Organization",
   "organizations": "Organizations",
   "password": "Password",
+  "distance":"Distance",
   "payment": "Payment",
   "longitude": "Longitude",
   "latitude": "Latitude",

@@ -350,17 +350,17 @@ class DonorDetailsScreen extends StatelessWidget {
           ),
           const Divider(),
           SizedBox(height: 4.v),
-
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.h),
             child: Wrap(
+              runSpacing: 8.v,
               children: transactions.transactions!.map((item) {
                 return CustomCard(
                   child: Column(
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 4.v),
-                        decoration: AppDecoration.fillLightGreen,
+                        decoration: AppDecoration.fillWhite,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
