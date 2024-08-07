@@ -68,7 +68,7 @@ class DonorDetailsScreen extends StatelessWidget {
       children: [
         if (icon != null) ...[
           Text(
-            value,
+            label,
             style: TextStyle(
               fontSize: 11.fSize,
               fontFamily: 'Poppins',
