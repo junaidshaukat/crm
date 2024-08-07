@@ -66,37 +66,32 @@ class DonorDetailsScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-            color: appTheme.gray80001,
-            fontSize: 11.fSize,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
-          ),
-        ),
         if (icon != null) ...[
-          Row(
-            children: [
-              CustomImageView(
-                width: 24.h,
-                imagePath: icon,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(width: 4.h),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 11.fSize,
-                  fontFamily: 'Poppins',
-                  color: appTheme.green900,
-                  fontWeight: FontWeight.w700,
-                ),
-              )
-            ],
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 11.fSize,
+              fontFamily: 'Poppins',
+              color: appTheme.green900,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          CustomImageView(
+            width: 24.h,
+            imagePath: icon,
+            fit: BoxFit.cover,
           ),
         ],
         if (icon == null) ...[
+          Text(
+            label,
+            style: TextStyle(
+              color: appTheme.gray80001,
+              fontSize: 11.fSize,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           Text(
             value,
             style: TextStyle(
@@ -380,9 +375,9 @@ class DonorDetailsScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             listTile(
-                              label: "campaign".tr,
-                              value: "${item.campaign}",
+                              value: "".tr,
                               icon: item.campaignLogo,
+                              label: "${item.campaign}",
                             ),
                             SizedBox(height: 4.v),
                             Divider(
