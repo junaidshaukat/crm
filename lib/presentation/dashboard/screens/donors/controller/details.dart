@@ -21,11 +21,13 @@ class DonorDetailsController extends GetxController {
   Rx<TotalDonationsAmount> totalDonationsAmount = Rx(TotalDonationsAmount());
 
   Rx<String?> email = Rx('');
+
   Rx<String> noOfYears = Rx('05');
   Rx<String> noOfMonths = Rx('20');
   Rx<String> noOfTransactions = Rx('05');
-  Rx<String> year = Rx(DateTime.now().year.toString());
-  Rx<String> byYears = Rx(DateTime.now().year.toString());
+
+  Rx<String> year1 = Rx(DateTime.now().year.toString());
+  Rx<String> year2 = Rx(DateTime.now().year.toString());
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -133,7 +135,7 @@ class DonorDetailsController extends GetxController {
 
       YearlyReq request = YearlyReq(
         email: email.value,
-        year: year.value,
+        year: year1.value,
       );
 
       YearlyRes response = await Get.find<Api>().highlights.yearly(
@@ -324,7 +326,7 @@ class DonorDetailsController extends GetxController {
 
       CampaignsDistributionReq request = CampaignsDistributionReq(
         email: email.value,
-        year: byYears.value,
+        year: year2.value,
       );
 
       CampaignsDistributionRes response =

@@ -741,7 +741,7 @@ class DonorDetailsScreen extends StatelessWidget {
                               ),
                             );
                           } else {
-                            String year = controller.year.value;
+                            String year = controller.year1.value;
                             YearlyData yearly = controller.yearly.value;
 
                             return card(
@@ -777,13 +777,13 @@ class DonorDetailsScreen extends StatelessWidget {
                                           const EdgeInsets.only(left: 0),
                                       content: FilterByYearsDialog(
                                         hintText: 'filter_by_year'.tr,
-                                        year: controller.year.value,
+                                        year: controller.year1.value,
                                         yearList: DateTime.now().yearList(),
                                         onChanged: (option) {
                                           year = option?.value;
                                         },
                                         onPressed: () {
-                                          controller.year.value = year;
+                                          controller.year1.value = year;
                                           controller.getYearly();
                                           Get.back();
                                         },
@@ -992,13 +992,13 @@ class DonorDetailsScreen extends StatelessWidget {
                               ),
                             );
                           } else {
-                            String byYears = controller.byYears.value;
+                            String year = controller.year2.value;
                             CampaignsDistribution distribution =
                                 controller.campaignsDistributions.value;
 
                             return campaignsDistribution(
                               title:
-                                  "${'campaigns_distribution'.tr} - ${distribution.currencySymbol}${distribution.total}- $byYears",
+                                  "${'campaigns_distribution'.tr} - ${distribution.currencySymbol}${distribution.total}- $year",
                               distribution: distribution,
                               more: InkWell(
                                 onTap: () {
@@ -1009,14 +1009,14 @@ class DonorDetailsScreen extends StatelessWidget {
                                       insetPadding:
                                           const EdgeInsets.only(left: 0),
                                       content: FilterByYearsDialog(
-                                        year: controller.year.value,
+                                        year: controller.year2.value,
                                         hintText: 'filter_by_year'.tr,
                                         yearList: DateTime.now().yearList(),
                                         onChanged: (option) {
-                                          byYears = option?.value;
+                                          year = option?.value;
                                         },
                                         onPressed: () {
-                                          controller.byYears.value = byYears;
+                                          controller.year2.value = year;
                                           controller
                                               .getCampaignsDistributions();
                                           Get.back();
