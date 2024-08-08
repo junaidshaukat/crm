@@ -33,7 +33,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true" android:label="Donor Choice Manager" android:name="${applicationName}" android:icon="@mipmap/launcher_icon">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBKZT7yyay-HmytyxkR8FaFxW5uhm4MbZs" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDsjszaHhMdhSt_t3n-bGHB1BKyD0HuaIo" />
 
         <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:taskAffinity="" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
