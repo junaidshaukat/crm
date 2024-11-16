@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
-export 'screens/export.dart';
 export 'controller/controller.dart';
+export 'screens/export.dart';
 
 class MoreScreen extends StatelessWidget {
   MoreScreen({super.key});
@@ -14,6 +15,7 @@ class MoreScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: Obx(() {
         String version = controller.version.value;
+
         return SizedBox(
           width: double.maxFinite,
           child: Row(
@@ -147,6 +149,15 @@ class MoreScreen extends StatelessWidget {
                       Get.to(() => TransactionsScreen());
                     },
                   ),
+                  if (controller.env.eCheckNodeTag > 0) ...[
+                    listTile(
+                      fundsLineImage: "echeck".icon.svg,
+                      languageText: "echeck".tr,
+                      onTap: () {
+                        Get.to(() => EcheckScreen());
+                      },
+                    ),
+                  ],
                   listTile(
                     fundsLineImage: "channels".icon.svg,
                     languageText: "channels".tr,

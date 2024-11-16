@@ -1,5 +1,7 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class Pickers {
@@ -96,7 +98,7 @@ class Pickers {
       MediaInfo? media = await VideoCompress.compressVideo(
         file.path,
         deleteOrigin: false,
-        quality: VideoQuality.DefaultQuality,
+        quality: VideoQuality.defaultQuality,
       );
       return media?.file;
     } catch (err) {

@@ -1,23 +1,23 @@
 import '/core/app_export.dart';
 
 class Api {
-  AnalyticsApis analytics = AnalyticsApis();
-  CampaignApis campaign = CampaignApis();
-  ChannelsApis channels = ChannelsApis();
-  DashboardApis dashboard = DashboardApis();
+  QrCodeApis qr = QrCodeApis();
   DonorApis donor = DonorApis();
   IconsApis icons = IconsApis();
   MediaApis media = MediaApis();
-  MessagesApis messages = MessagesApis();
   NodesApis nodes = NodesApis();
-  OrganizationApis organization = OrganizationApis();
-  PublicApis public = PublicApis();
-  QrCodeApis qr = QrCodeApis();
-  ReportApis report = ReportApis();
-  TransactionsApis transactions = TransactionsApis();
   UsersApis users = UsersApis();
+  PublicApis public = PublicApis();
+  ReportApis report = ReportApis();
+  EcheckApis echeck = EcheckApis();
+  CampaignApis campaign = CampaignApis();
+  ChannelsApis channels = ChannelsApis();
+  MessagesApis messages = MessagesApis();
+  AnalyticsApis analytics = AnalyticsApis();
+  DashboardApis dashboard = DashboardApis();
   RecognizedApis recognized = RecognizedApis();
   HighlightsApis highlights = HighlightsApis();
-
+  OrganizationApis organization = OrganizationApis();
+  TransactionsApis transactions = TransactionsApis();
   Api();
 }

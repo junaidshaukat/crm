@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 String? a = "shahzad.khan@mervice.ca";
@@ -9,8 +10,8 @@ class SigninController extends GetxController {
   EnvConfig env = EnvConfig();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: a);
+  TextEditingController passwordController = TextEditingController(text: b);
 
   Rx<bool> isShowPassword = true.obs;
 
@@ -40,6 +41,7 @@ class SigninController extends GetxController {
         for (var org in response.data!.organizations!) {
           if (org.tagNumber == response.data?.organizationTag) {
             await env.putAll({
+              'eCheckNodeTag': org.eCheckNodeTag,
               'gatewayNodeTag': org.gatewayNodeTag,
               'currencySymbol': org.currencySymbol,
             });
