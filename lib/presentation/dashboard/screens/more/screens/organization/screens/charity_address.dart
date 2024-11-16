@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class OrganizationCharityAddressScreen extends StatelessWidget {
@@ -35,14 +36,14 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
 
   Widget input({
     String? label,
-    int? height,
     String? hintText,
-    TextEditingController? conn,
+    double? maxHeight,
     bool dropDown = false,
     List<DropDown>? items,
     EdgeInsets? contentPadding,
-    String? Function(String?)? validator,
+    TextEditingController? conn,
     void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -76,7 +77,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
         if (dropDown)
           SimpleDropDown2(
             width: 342.h,
-            height: height,
+            maxHeight: maxHeight,
             hintText: hintText,
             items: items,
             onSelected: onChanged,
@@ -173,8 +174,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
                                   ),
                                 )
                                 .toList(),
-                            onChanged:
-                                null,
+                            onChanged: null,
                             validator: ValidatorOrganization.country,
                           ),
                         ),
@@ -182,7 +182,7 @@ class OrganizationCharityAddressScreen extends StatelessWidget {
                           if (controller.provinces.isNotEmpty) {
                             return input(
                               dropDown: true,
-                              height: 170,
+                              maxHeight: 170.v,
                               label: controller.country.value!.code
                                           ?.toLowerCase() ==
                                       'us'

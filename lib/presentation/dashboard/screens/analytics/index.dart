@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
-export 'widgets/export.dart';
 export 'controller/controller.dart';
+export 'widgets/export.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   AnalyticsScreen({super.key});
@@ -701,7 +702,7 @@ class AnalyticsScreen extends StatelessWidget {
                                                       ),
                                                       SimpleDropDown(
                                                         width: 228.h,
-                                                        height: 300,
+                                                        maxHeight: 300.v,
                                                         hintText: controller
                                                                 .month
                                                                 .value

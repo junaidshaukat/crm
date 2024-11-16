@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
-export 'widget/index.dart';
-export 'screens/export.dart';
 export 'controller/controller.dart';
+export 'screens/export.dart';
+export 'widget/index.dart';
 
 class TransactionsScreen extends StatelessWidget {
   TransactionsScreen({super.key});
@@ -255,7 +256,7 @@ class TransactionsScreen extends StatelessWidget {
               Obx(
                 () => SimpleDropDown2(
                   width: 353.h,
-                  height: 260,
+                  maxHeight: 260.v,
                   hintText: controller.getDropDownHint.isNotEmpty
                       ? controller.getDropDownHint.join(', ')
                       : "select_fields".tr,
@@ -325,7 +326,7 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               SimpleDropDown(
                 width: 353.h,
-                height: 280,
+                maxHeight: 280.v,
                 hintText: controller.pageSize.value.toString(),
                 items: pageSizeList2.map((e) {
                   return DropDown(
@@ -351,7 +352,7 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               SimpleDropDown(
                 width: 353.h,
-                height: 280,
+                maxHeight: 280.v,
                 hintText: controller.by.value?.label ?? "sort_by".tr,
                 items: controller.fields.map((field) {
                   return DropDown(
@@ -377,7 +378,7 @@ class TransactionsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               SimpleDropDown(
                 width: 353.h,
-                height: 280,
+                maxHeight: 280.v,
                 hintText: controller.order.value.tr,
                 items: [
                   DropDown(id: '1', title: 'ascending'.tr, value: 'Ascending'),

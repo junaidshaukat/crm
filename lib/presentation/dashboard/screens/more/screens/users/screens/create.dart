@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class CreateUsersScreen extends StatelessWidget {
@@ -62,7 +63,7 @@ class CreateUsersScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            height: 360,
+            maxHeight: 360.v,
             width: 340.h,
             enabled: enabled,
             hintText: hintText,

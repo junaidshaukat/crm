@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class DropDown {
@@ -147,33 +148,34 @@ class SimpleDropDown extends StatelessWidget {
     this.icon,
     this.items,
     this.height,
+    this.onSaved,
     this.hintText,
     this.overflow,
+    this.maxHeight,
+    this.validator,
     this.onSelected,
     this.borderRadius,
     this.enabled = true,
     this.circularRadius = 4,
     this.width = double.maxFinite,
     this.padding = EdgeInsets.zero,
-    this.validator,
-    this.onSaved,
     this.contentPadding = EdgeInsets.zero,
   });
 
   final bool enabled;
   final Widget? icon;
   final double width;
-  final int? height;
+  final double? height;
   final String? hintText;
+  final double? maxHeight;
+  final int circularRadius;
   final EdgeInsets? padding;
   final List<DropDown>? items;
-  final void Function(DropDown?)? onSelected;
-  final void Function(DropDown?)? onSaved;
-
-  final BorderRadius? borderRadius;
-  final int circularRadius;
   final TextOverflow? overflow;
+  final BorderRadius? borderRadius;
+  final void Function(DropDown?)? onSaved;
   final EdgeInsetsGeometry? contentPadding;
+  final void Function(DropDown?)? onSelected;
   final String? Function(DropDown?)? validator;
 
   @override
@@ -248,8 +250,7 @@ class SimpleDropDown extends StatelessWidget {
       onChanged: onSelected,
       onSaved: onSaved,
       buttonStyleData: ButtonStyleData(
-        height: 50.v,
-        padding: const EdgeInsets.symmetric(vertical: 2),
+        height: height,
       ),
       iconStyleData: IconStyleData(
         icon: Icon(
@@ -258,7 +259,7 @@ class SimpleDropDown extends StatelessWidget {
         ),
       ),
       dropdownStyleData: DropdownStyleData(
-        maxHeight: height?.toDouble() ?? double.maxFinite,
+        maxHeight: maxHeight?.toDouble() ?? double.maxFinite,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(1)),
       ),
     );
@@ -271,32 +272,33 @@ class SimpleDropDown2 extends StatelessWidget {
     this.icon,
     this.items,
     this.height,
+    this.onSaved,
     this.hintText,
     this.overflow,
+    this.maxHeight,
     this.onSelected,
     this.borderRadius,
     this.enabled = true,
     this.circularRadius = 4,
     this.width = double.maxFinite,
     this.padding = EdgeInsets.zero,
-    this.onSaved,
     this.contentPadding = EdgeInsets.zero,
   });
 
   final bool enabled;
   final Widget? icon;
   final double width;
-  final int? height;
+  final double? height;
   final String? hintText;
+  final double? maxHeight;
+  final int circularRadius;
   final EdgeInsets? padding;
   final List<DropDown>? items;
-  final void Function(DropDown?)? onSelected;
-  final void Function(DropDown?)? onSaved;
-
-  final BorderRadius? borderRadius;
-  final int circularRadius;
   final TextOverflow? overflow;
+  final BorderRadius? borderRadius;
+  final void Function(DropDown?)? onSaved;
   final EdgeInsetsGeometry? contentPadding;
+  final void Function(DropDown?)? onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -326,6 +328,7 @@ class SimpleDropDown2 extends StatelessWidget {
             .toList(),
         onChanged: onSelected,
         buttonStyleData: ButtonStyleData(
+          height: height,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1.0,
@@ -338,7 +341,7 @@ class SimpleDropDown2 extends StatelessWidget {
           ),
         ),
         dropdownStyleData: DropdownStyleData(
-          maxHeight: height?.toDouble() ?? double.maxFinite,
+          maxHeight: maxHeight?.toDouble() ?? double.maxFinite,
         ),
         menuItemStyleData: const MenuItemStyleData(),
         onMenuStateChange: (isOpen) {},

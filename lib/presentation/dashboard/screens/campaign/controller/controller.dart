@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 export './create.dart';
@@ -11,6 +12,7 @@ class CompaignController extends GetxController {
   EnvConfig env = EnvConfig();
   ScrollController scrollControlle = ScrollController();
   Props props = Props();
+  Props propsBanner = Props();
   Props propsListOfValues = Props();
 
   Rx<CampaignLink?> links = Rx(CampaignLink());
@@ -36,6 +38,41 @@ class CompaignController extends GetxController {
       getCampaigns(),
     ]);
     super.onReady();
+  }
+
+  Future<void> onBanner(num? tagNumber, File file) async {
+    try {
+      propsBanner.useState(UseState.updating);
+      FormData requestData = FormData.fromMap({
+        'campaignTag': tagNumber,
+        'banner': await MultipartFile.fromFile(
+          file.path,
+          filename: file.path.filename,
+        ),
+      });
+
+      BannerRes response =
+          await Get.find<Api>().campaign.upload(requestData: requestData);
+
+      if (response.result == true) {
+        propsBanner.useState(UseState.none);
+        await getCampaigns();
+      } else {
+        throw response;
+      }
+    } on UpdateProfileImageRes catch (e) {
+      propsBanner.useState(UseState.none);
+      Toasts.error(message: e.message.toString());
+    } on DioResponse catch (e) {
+      propsBanner.useState(UseState.none);
+      Toasts.error(message: e.message.toString());
+    } on NoInternetException catch (e) {
+      propsBanner.useState(UseState.none);
+      Toasts.error(message: e.toString());
+    } catch (e) {
+      propsBanner.useState(UseState.none);
+      Toasts.error(message: e.toString());
+    }
   }
 
   Future<void> getListOfValues() async {
@@ -109,15 +146,20 @@ class CompaignController extends GetxController {
         return response;
       }
     } on CampaignsRes catch (e) {
+      console.log(e);
       props.useState(UseState.error);
       props.error(UseError(message: e.message));
     } on DioResponse catch (e) {
+      console.log(e);
+
       props.useState(UseState.error);
       props.error(UseError(message: e.message));
     } on NoInternetException catch (e) {
       props.useState(UseState.error);
       props.error(UseError(message: e.toString()));
     } catch (e) {
+      console.log(e);
+
       props.useState(UseState.error);
       props.error(UseError(message: e.toString()));
     }

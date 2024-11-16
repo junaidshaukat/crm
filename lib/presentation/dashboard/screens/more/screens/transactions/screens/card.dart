@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class CardScreen extends StatelessWidget {
@@ -118,7 +119,7 @@ class CardScreen extends StatelessWidget {
               ),
             if (control == "dropdown")
               SimpleDropDown(
-                height: 260,
+                maxHeight: 260.v,
                 width: 164.h,
                 hintText: hintText,
                 items: items,
@@ -451,7 +452,7 @@ class CreditCarForm extends StatelessWidget {
               ),
             if (control == "dropdown")
               SimpleDropDown(
-                height: 260,
+                maxHeight: 260.v,
                 width: 164.h,
                 hintText: hintText,
                 items: items,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class OrganizationCharityProfileScreen extends StatelessWidget {
@@ -34,13 +35,15 @@ class OrganizationCharityProfileScreen extends StatelessWidget {
 
   Widget input({
     String? label,
+    double? height,
     String? hintText,
-    TextEditingController? conn,
+    double? maxHeight,
     bool dropDown = false,
     List<DropDown>? items,
     EdgeInsets? contentPadding,
-    String? Function(String?)? validator,
+    TextEditingController? conn,
     void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -73,15 +76,16 @@ class OrganizationCharityProfileScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            height: 40,
+            items: items,
+            height: height,
             hintText: hintText,
+            maxHeight: maxHeight,
+            onSelected: onChanged,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
               height: 23.v,
               width: 34.h,
             ),
-            items: items,
-            onSelected: onChanged,
           ),
         SizedBox(height: 4.adaptSize),
       ],

@@ -2,67 +2,76 @@ import '/core/app_export.dart';
 
 class CampaignCreateReq {
   String? name;
-  String? description;
-  String? startDate;
-  String? endDate;
-  String? targetAmount;
-  String? minimumAmount;
-  String? sortOrder;
   String? fees;
-  String? taxReceiptRatio;
-  bool? issueTaxReceipt;
   bool? status;
-  bool? donationCampaign;
   bool? hidden;
-  bool? allowRecurringModification;
-  bool? enableQuantity;
+  String? endDate;
   String? iconTag;
+  String? startDate;
+  String? sortOrder;
+  String? description;
+  String? recurringDay;
+  String? targetAmount;
+  bool? enableQuantity;
+  List<String>? amounts;
+  String? minimumAmount;
+  bool? issueTaxReceipt;
   List<NodeData>? nodes;
+  bool? donationCampaign;
+  String? taxReceiptRatio;
+  List<String>? frequency;
+  bool? allowRecurringModification;
 
   CampaignCreateReq({
     this.name,
-    this.description,
-    this.startDate,
-    this.endDate,
-    this.targetAmount,
-    this.minimumAmount,
-    this.sortOrder,
     this.fees,
-    this.issueTaxReceipt,
-    this.donationCampaign,
+    this.nodes,
     this.status,
     this.hidden,
+    this.endDate,
     this.iconTag,
-    this.nodes,
-    this.taxReceiptRatio,
-    this.allowRecurringModification,
+    this.amounts,
+    this.startDate,
+    this.sortOrder,
+    this.frequency,
+    this.description,
+    this.recurringDay,
+    this.targetAmount,
+    this.minimumAmount,
     this.enableQuantity,
+    this.issueTaxReceipt,
+    this.taxReceiptRatio,
+    this.donationCampaign,
+    this.allowRecurringModification,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'description': description,
-      'startDate': startDate,
-      'endDate': endDate,
-      'targetAmount': targetAmount ?? 0,
-      'minimumAmount': minimumAmount ?? 0,
-      'taxReceiptRatio': taxReceiptRatio ?? 0,
-      'sortOrder': sortOrder ?? 1,
-      'donationCampaign': donationCampaign == true ? 1 : 0,
       'fees': fees ?? 0,
-      'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
+      'endDate': endDate,
+      'amounts': amounts,
+      'iconTag': iconTag,
+      'startDate': startDate,
+      'frequency': frequency,
+      'description': description,
+      'sortOrder': sortOrder ?? 1,
+      'recurringDay': recurringDay?.day,
       'status': status == true ? 1 : 0,
       'hidden': hidden == true ? 1 : 0,
       'enableQuantity': enableQuantity,
+      'targetAmount': targetAmount ?? 0,
+      'minimumAmount': minimumAmount ?? 0,
+      'taxReceiptRatio': taxReceiptRatio ?? 0,
+      'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
+      'donationCampaign': donationCampaign == true ? 1 : 0,
       'allowRecurringModification': allowRecurringModification == true ? 1 : 0,
-      'iconTag': iconTag,
       'nodes': nodes?.map((node) {
         return {
-          "tagNumber": node.tagNumber,
-          "nodeTag": node.tagNumber,
           "status": node.status,
           "active": node.active,
+          "nodeTag": node.tagNumber,
+          "tagNumber": node.tagNumber,
         };
       }).toList(),
     };

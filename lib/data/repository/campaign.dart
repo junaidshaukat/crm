@@ -124,4 +124,33 @@ class CampaignApis extends Client {
       rethrow;
     }
   }
+
+  Future<BannerRes> upload({
+    Map<String, String> headers = const {
+      'Content-type': 'multipart/form-data',
+    },
+    FormData? requestData,
+    bool debug = true,
+  }) async {
+    try {
+      isNetworkConnected();
+
+      Response response = await dio.post(
+        '/api/admin/v1/campaignBanner?_method=PUT',
+        options: Options(headers: headers, extra: {'debug': debug}),
+        data: requestData,
+      );
+      if (isSuccessCall(response, debug: debug)) {
+        return BannerRes.fromJson(response.data);
+      } else {
+        throw response.data != null
+            ? BannerRes.fromJson(response.data)
+            : 'something_went_wrong'.tr;
+      }
+    } on DioException catch (e) {
+      throw dioException(e, debug: debug);
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

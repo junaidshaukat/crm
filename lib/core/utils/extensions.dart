@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 const String dateTimeFormatPattern = 'yyyy/MM/dd';
@@ -85,6 +86,18 @@ extension DateTimeExtension on DateTime {
       'Sunday'
     ];
     return '${dayOfWeekNames[weekday - 1]}, $formatDDMMYYYY';
+  }
+
+  List get dayOfWeekNames {
+    return [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
   }
 
   String get formatUnixTimestamp {
@@ -183,6 +196,27 @@ extension StringExtensions on String {
 
   String get appendSecond {
     return '$this:00';
+  }
+
+  String get day {
+    switch (this) {
+      case 'Monday':
+        return '1';
+      case 'Tuesday':
+        return '2';
+      case 'Wednesday':
+        return '3';
+      case 'Thursday':
+        return '4';
+      case 'Friday':
+        return '5';
+      case 'Saturday':
+        return '6';
+      case 'Sunday':
+        return '7';
+      default:
+        return '0';
+    }
   }
 
   String get monthName {
@@ -345,6 +379,27 @@ extension Int on int {
 }
 
 extension Num on num {
+  String get day {
+    switch (this) {
+      case 1:
+        return 'Monday';
+      case 2:
+        return 'Tuesday';
+      case 3:
+        return 'Wednesday';
+      case 4:
+        return 'Thursday';
+      case 5:
+        return 'Friday';
+      case 6:
+        return 'Saturday';
+      case 7:
+        return 'Sunday';
+      default:
+        return '0';
+    }
+  }
+
   String get toFixed {
     var split = toString().split('.');
     if (split.length > 1) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class HomeCompaignsScreen extends StatelessWidget {
@@ -332,7 +333,7 @@ class HomeCompaignsScreen extends StatelessWidget {
                                   SizedBox(height: 2.v),
                                   SimpleDropDown(
                                     width: 162.h,
-                                    height: 300,
+                                    maxHeight: 300.v,
                                     hintText: controller.month.value ??
                                         "select_month".tr,
                                     items:

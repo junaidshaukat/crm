@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class UpdateMediaScreen extends StatelessWidget {
@@ -29,10 +30,10 @@ class UpdateMediaScreen extends StatelessWidget {
   }
 
   Widget input({
-    int? height,
     String? label,
     Widget? suffix,
     String? hintText,
+    double? maxHeight,
     bool browse = false,
     bool dropDown = false,
     bool readOnly = false,
@@ -106,7 +107,7 @@ class UpdateMediaScreen extends StatelessWidget {
         if (dropDown)
           SimpleDropDown2(
             items: items,
-            height: height,
+            maxHeight: maxHeight,
             hintText: hintText,
             onSelected: onChanged,
             icon: CustomImageView(

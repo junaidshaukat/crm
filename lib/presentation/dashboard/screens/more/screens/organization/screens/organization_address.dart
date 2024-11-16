@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class OrganizationAddressScreen extends StatelessWidget {
@@ -35,15 +36,16 @@ class OrganizationAddressScreen extends StatelessWidget {
 
   Widget input({
     String? label,
-    int? height,
+    double? height,
     String? hintText,
-    TextEditingController? conn,
+    double? maxHeight,
     bool dropDown = false,
-    bool dropDown2 = false,
     List<DropDown>? items,
-    String? Function(String?)? validator,
-    void Function(DropDown?)? onChanged,
+    bool dropDown2 = false,
     EdgeInsets? contentPadding,
+    TextEditingController? conn,
+    void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -76,18 +78,20 @@ class OrganizationAddressScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            height: height,
             width: 342.h,
-            hintText: hintText,
             items: items,
+            height: height,
+            hintText: hintText,
+            maxHeight: maxHeight,
             onSelected: onChanged,
           ),
         if (dropDown2)
           SimpleDropDown2(
-            height: height,
             width: 342.h,
-            hintText: hintText,
             items: items,
+            height: height,
+            hintText: hintText,
+            maxHeight: maxHeight,
             onSelected: onChanged,
           ),
         SizedBox(height: 4.adaptSize),

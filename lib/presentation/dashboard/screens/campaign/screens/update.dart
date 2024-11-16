@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class UpdateCampaignScreen extends StatelessWidget {
@@ -13,24 +14,27 @@ class UpdateCampaignScreen extends StatelessWidget {
   Future<void> create() async {
     if (controller.formKey.currentState!.validate()) {
       CampaignUpdateReq request = CampaignUpdateReq(
+        amounts: controller.amounts,
+        nodes: controller.nodes.value,
+        frequency: controller.frequency,
         name: controller.nameController.text,
-        description: controller.descriptionController.text,
-        startDate: controller.startDateController.text,
-        endDate: controller.endDateController.text,
-        targetAmount: controller.targetAmountController.text,
-        minimumAmount: controller.minimumAmountController.text,
-        sortOrder: controller.sortOrderController.text,
-        taxReceiptRatio: controller.taxReceiptRatioController.text,
-        allowRecurringModification:
-            controller.allowRecurringModificationController.value,
         fees: controller.feesController.text,
-        issueTaxReceipt: controller.issueTaxReceiptController.value,
-        donationCampaign: controller.donationCampaignController.value,
         status: controller.statusController.value,
         hidden: controller.hiddenController.value,
-        enableQuantity: controller.enableQuantityController.value,
+        endDate: controller.endDateController.text,
+        recurringDay: controller.recurringDay.value,
+        startDate: controller.startDateController.text,
+        sortOrder: controller.sortOrderController.text,
+        description: controller.descriptionController.text,
         iconTag: controller.icon.value.tagNumber.toString(),
-        nodes: controller.nodes.value,
+        targetAmount: controller.targetAmountController.text,
+        minimumAmount: controller.minimumAmountController.text,
+        enableQuantity: controller.enableQuantityController.value,
+        taxReceiptRatio: controller.taxReceiptRatioController.text,
+        issueTaxReceipt: controller.issueTaxReceiptController.value,
+        donationCampaign: controller.donationCampaignController.value,
+        allowRecurringModification:
+            controller.allowRecurringModificationController.value,
       );
 
       await controller.updateCampaign(
@@ -109,8 +113,7 @@ class UpdateCampaignScreen extends StatelessWidget {
             ),
           ),
         if (dropDown)
-          SimpleDropDown(
-            height: 40,
+          SimpleDropDown2(
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
@@ -494,6 +497,187 @@ class UpdateCampaignScreen extends StatelessWidget {
                           },
                         ),
                       ),
+                      input(
+                        readOnly: true,
+                        label: "amounts".tr,
+                        hintText: 'configure_amounts'.tr,
+                        onTap: () {
+                          Rx<List<String>> temp =
+                              Rx<List<String>>(List.from(controller.amounts));
+                          final TextEditingController amount =
+                              TextEditingController();
+
+                          Get.bottomSheet(
+                            persistent: false,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            isScrollControlled: true,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.adaptSize),
+                                topRight: Radius.circular(20.adaptSize),
+                              ),
+                            ),
+                            Container(
+                              width: double.maxFinite,
+                              height: (fdh * 0.9).adaptSize,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.h, vertical: 5.v),
+                              decoration: AppDecoration.outlineBluegray100011,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 8.v),
+                                    // Header
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        CustomImageView(
+                                          svgColor: Colors.black,
+                                          imagePath: "back".icon.svg,
+                                          height: 24.adaptSize,
+                                          width: 24.adaptSize,
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                        SizedBox(width: 24.h),
+                                        Text(
+                                          "add_amounts".tr,
+                                          style: TextStyle(
+                                            color: appTheme.black900,
+                                            fontSize: 20.fSize,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 11.v),
+                                    // Input Row
+                                    Text(
+                                      "amount".tr,
+                                      style: TextStyle(
+                                        color: appTheme.black900,
+                                        fontSize: 15.fSize,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: SizedBox(
+                                            height: 48.v,
+                                            child: Input(
+                                              controller: amount,
+                                              hintText: "enter_amount".tr,
+                                              keyboardType: const TextInputType
+                                                  .numberWithOptions(
+                                                  decimal: true),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 8.h),
+                                        SizedBox(
+                                          height: 48.v,
+                                          child: InkWell(
+                                            onTap: () {
+                                              if (amount.text.isNotEmpty) {
+                                                temp.value = [
+                                                  ...temp.value,
+                                                  amount.text
+                                                ];
+                                                amount.clear();
+                                              } else {
+                                                Get.snackbar(
+                                                  "Error",
+                                                  "Amount cannot be empty",
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                );
+                                              }
+                                            },
+                                            child: CustomImageView(
+                                              height: 48.v,
+                                              imagePath: 'plus'.icon.svg,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 16.v),
+                                    // List of Amounts
+                                    Obx(() => temp.value.isNotEmpty
+                                        ? Column(
+                                            children: temp.value
+                                                .map(
+                                                  (amount) => ListTile(
+                                                    title: Text(amount),
+                                                    trailing: IconButton(
+                                                      icon: Icon(Icons.delete),
+                                                      onPressed: () {
+                                                        temp.value = List.from(
+                                                            temp.value)
+                                                          ..remove(amount);
+                                                      },
+                                                    ),
+                                                  ),
+                                                )
+                                                .toList(),
+                                          )
+                                        : Text("No amounts added yet")),
+                                    SizedBox(height: 16.v),
+                                    // Buttons
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 6.h),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: CustomElevatedButton(
+                                              text: "cancel".tr,
+                                              margin:
+                                                  EdgeInsets.only(right: 4.h),
+                                              buttonStyle:
+                                                  CustomButtonStyles.fillGray,
+                                              onPressed: () {
+                                                Get.back();
+                                                Get.snackbar(
+                                                  "Canceled",
+                                                  "Changes were not saved",
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: CustomElevatedButton(
+                                              text: "done".tr,
+                                              margin:
+                                                  EdgeInsets.only(left: 4.h),
+                                              onPressed: () {
+                                                controller.amounts.value =
+                                                    temp.value;
+                                                Get.back();
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -596,7 +780,34 @@ class UpdateCampaignScreen extends StatelessWidget {
                               ),
                               validator: ValidatorCampaign.taxReceiptRatio,
                             ),
-                          )
+                          ),
+                          Obx(() {
+                            bool isEnable =
+                                controller.frequency.contains('WEEKLY');
+                            return SizedBox(
+                              width: 175.h,
+                              child: input(
+                                dropDown: true,
+                                label: 'recurring_day'.tr,
+                                hintText: controller.recurringDay.value ??
+                                    'recurring_day'.tr,
+                                onChanged: isEnable
+                                    ? (option) {
+                                        controller.recurringDay.value =
+                                            option?.value;
+                                      }
+                                    : null,
+                                items: DateTime.now()
+                                    .dayOfWeekNames
+                                    .map((e) => DropDown(
+                                          id: e,
+                                          title: e,
+                                          value: e,
+                                        ))
+                                    .toList(),
+                              ),
+                            );
+                          }),
                         ],
                       ),
                       Wrap(
@@ -692,6 +903,56 @@ class UpdateCampaignScreen extends StatelessWidget {
                             ),
                           ),
                         ],
+                      ),
+                      SizedBox(height: 14.v),
+                      Text(
+                        'frequency'.tr,
+                        style: TextStyle(
+                          color: appTheme.gray80001,
+                          fontSize: 13.fSize,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 2.adaptSize),
+                      Wrap(
+                        alignment: WrapAlignment.start,
+                        children: List.generate(
+                          controller.frequencies.length,
+                          (index) {
+                            String frequency = controller.frequencies[index];
+                            return Obx(() {
+                              bool isSelected =
+                                  controller.frequency.contains(frequency);
+                              return InkWell(
+                                onTap: () {
+                                  if (isSelected) {
+                                    controller.frequency.remove(frequency);
+                                  } else {
+                                    controller.frequency.add(frequency);
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Checkbox(
+                                      value: isSelected,
+                                      onChanged: (checked) {
+                                        if (isSelected) {
+                                          controller.frequency
+                                              .remove(frequency);
+                                        } else {
+                                          controller.frequency.add(frequency);
+                                        }
+                                      },
+                                    ),
+                                    Text(frequency),
+                                  ],
+                                ),
+                              );
+                            });
+                          },
+                        ),
                       ),
                       SizedBox(height: 14.v),
                       Text(

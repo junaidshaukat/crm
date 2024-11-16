@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
@@ -83,7 +84,7 @@ class TransactionDetailsScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            height: 40,
+            maxHeight: 40.v,
             hintText: hintText,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
-export './screens/export.dart';
 export './controller/controller.dart';
+export './screens/export.dart';
 
 class CompaignScreen extends StatelessWidget {
   CompaignScreen({super.key});
@@ -679,10 +680,59 @@ class CompaignScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          ClipOval(
+                                            child: compaign.banner != null
+                                                ? CustomImageView(
+                                                    width: 38.adaptSize,
+                                                    height: 38.adaptSize,
+                                                    imagePath: compaign.banner,
+                                                    onTap: () {
+                                                      pickers
+                                                          .pickImage()
+                                                          .then((file) {
+                                                        if (file != null) {
+                                                          controller.onBanner(
+                                                            compaign.tagNumber,
+                                                            file,
+                                                          );
+                                                        }
+                                                      });
+                                                    },
+                                                  )
+                                                : InkWell(
+                                                    onTap: () {
+                                                      pickers
+                                                          .pickImage()
+                                                          .then((file) {
+                                                        if (file != null) {
+                                                          controller.onBanner(
+                                                            compaign.tagNumber,
+                                                            file,
+                                                          );
+                                                        }
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      width: 38.adaptSize,
+                                                      height: 38.adaptSize,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Colors
+                                                            .grey.shade300,
+                                                      ),
+                                                      child: Icon(
+                                                        Icons.upload,
+                                                        size: 18.adaptSize,
+                                                        color: appTheme.primary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                          ),
+                                          SizedBox(width: 12.h),
                                           CustomImageView(
+                                            width: 30.adaptSize,
+                                            height: 30.adaptSize,
                                             imagePath: compaign.icon?.filename,
-                                            height: 30.v,
-                                            width: 30.h,
                                           )
                                         ],
                                       ),

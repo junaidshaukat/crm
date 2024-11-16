@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class FilterByRangeDialog extends StatelessWidget {
@@ -65,7 +66,7 @@ class FilterByRangeDialog extends StatelessWidget {
           SizedBox(height: 5.v),
           SimpleDropDown(
             width: 148.h,
-            height: 250,
+            maxHeight: 250.v,
             hintText: month.isEmpty == true ? "select_month".tr : month,
             items: monthList.map((val) {
               return DropDown(
@@ -95,7 +96,7 @@ class FilterByRangeDialog extends StatelessWidget {
           SizedBox(height: 5.v),
           SimpleDropDown(
             width: 148.h,
-            height: 240,
+            maxHeight: 240.v,
             hintText: year.isEmpty == true ? "select_year".tr : year,
             items: yearList.map((val) {
               return DropDown(

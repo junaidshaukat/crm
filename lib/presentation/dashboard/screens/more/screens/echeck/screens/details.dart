@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class EcheckDetailsScreen extends StatelessWidget {
@@ -154,7 +155,7 @@ class EcheckDetailsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               SimpleDropDown(
                 width: 353.h,
-                height: 300,
+                maxHeight: 300.v,
                 hintText: controller.year.value ?? "year".tr,
                 items: DateTime.now().yearList().map((e) {
                   return DropDown(
@@ -180,7 +181,7 @@ class EcheckDetailsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               SimpleDropDown(
                 width: 352.h,
-                height: 300,
+                maxHeight: 300.v,
                 hintText: controller.month.value ?? "month".tr,
                 items: DateTime.now().monthsList(12).map((e) {
                   return DropDown(
@@ -206,7 +207,7 @@ class EcheckDetailsScreen extends StatelessWidget {
               SizedBox(height: 2.v),
               SimpleDropDown(
                 width: 352.h,
-                height: 300,
+                maxHeight: 300.v,
                 hintText: controller.day.value ?? "day".tr,
                 items: DateTime.now().monthsList(31).map((e) {
                   return DropDown(

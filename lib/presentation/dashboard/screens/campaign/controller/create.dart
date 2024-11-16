@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class CreateCampaignController extends GetxController {
@@ -30,14 +31,25 @@ class CreateCampaignController extends GetxController {
   Rx<bool> statusController = false.obs;
   Rx<bool> issueTaxReceiptController = false.obs;
   Rx<bool> donationCampaignController = false.obs;
-  Rx<bool> hiddenController = false.obs;  
+  Rx<bool> hiddenController = false.obs;
   Rx<bool> enableQuantityController = false.obs;
   Rx<bool> allowRecurringModificationController = false.obs;
 
-  Rx<String?> startDate = Rx(null);
-  Rx<String?> startTime = Rx(null);
   Rx<String?> endDate = Rx(null);
   Rx<String?> endTime = Rx(null);
+  Rx<String?> startDate = Rx(null);
+  Rx<String?> startTime = Rx(null);
+  Rx<String?> recurringDay = Rx(null);
+
+  RxList<String> amounts = <String>[].obs;
+  RxList<String> frequency = <String>[].obs;
+  List<String> frequencies = [
+    "ONETIME",
+    "DAILY",
+    "WEEKLY",
+    "BIWEEKLY",
+    "MONTHLY"
+  ];
 
   @override
   Future<void> onReady() async {
@@ -115,26 +127,29 @@ class CreateCampaignController extends GetxController {
 
   Future clear() async {
     props.useState(UseState.processing);
-    nameController.clear();
-    descriptionController.clear();
-    startDateController.clear();
-    iconController.clear();
-    endDateController.clear();
-    targetAmountController.text = '0';
-    minimumAmountController.text = '0';
-    feesController.text = '0';
-    sortOrderController.text = '1';
-    taxReceiptRatioController.text = '0';
     icon(IconsData());
-    statusController.value = false;
-    issueTaxReceiptController.value = false;
-    donationCampaignController.value = false;
-    hiddenController.value = false;
-    allowRecurringModificationController.value = false;
-    startDate = Rx(null);
-    startTime = Rx(null);
+    amounts.clear();
+    frequency.clear();
     endDate = Rx(null);
     endTime = Rx(null);
+    startDate = Rx(null);
+    startTime = Rx(null);
+    nameController.clear();
+    iconController.clear();
+    recurringDay = Rx(null);
+    endDateController.clear();
+    feesController.text = '0';
+    startDateController.clear();
+    descriptionController.clear();
+    sortOrderController.text = '1';
+    statusController.value = false;
+    hiddenController.value = false;
+    targetAmountController.text = '0';
+    minimumAmountController.text = '0';
+    taxReceiptRatioController.text = '0';
+    issueTaxReceiptController.value = false;
+    donationCampaignController.value = false;
+    allowRecurringModificationController.value = false;
     props.useState(UseState.done);
     update();
   }

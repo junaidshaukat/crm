@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class Input extends StatelessWidget {
   const Input({
     super.key,
-    this.controller,
-    this.hintText,
-    this.suffixIcon,
-    this.onChanged,
     this.onTap,
+    this.hintText,
+    this.onChanged,
+    this.controller,
+    this.suffixIcon,
     this.borderColor,
+    this.keyboardType,
     this.readOnly = false,
     this.overflow = TextOverflow.ellipsis,
   });
 
-  final TextEditingController? controller;
+  final bool readOnly;
   final String? hintText;
   final Widget? suffixIcon;
-  final void Function(String)? onChanged;
-  final void Function()? onTap;
-  final bool readOnly;
   final Color? borderColor;
+  final void Function()? onTap;
   final TextOverflow? overflow;
+  final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class Input extends StatelessWidget {
         onChanged: onChanged,
         readOnly: readOnly,
         onTap: onTap,
+        keyboardType: keyboardType,
         style: TextStyle(
           overflow: overflow,
           color: appTheme.gray80001,
@@ -74,26 +78,28 @@ class Input extends StatelessWidget {
 class InputForm extends StatelessWidget {
   const InputForm({
     super.key,
-    this.controller,
-    this.hintText,
-    this.suffixIcon,
-    this.onChanged,
     this.onTap,
+    this.hintText,
+    this.onChanged,
+    this.validator,
+    this.controller,
+    this.suffixIcon,
+    this.keyboardType,
     this.readOnly = false,
     this.overflow = TextOverflow.ellipsis,
-    this.validator,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
   });
 
-  final AutovalidateMode? autovalidateMode;
-  final String? Function(String?)? validator;
-  final TextEditingController? controller;
+  final bool readOnly;
   final String? hintText;
   final Widget? suffixIcon;
-  final void Function(String)? onChanged;
   final void Function()? onTap;
-  final bool readOnly;
   final TextOverflow? overflow;
+  final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
+  final TextEditingController? controller;
+  final AutovalidateMode? autovalidateMode;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +111,7 @@ class InputForm extends StatelessWidget {
         readOnly: readOnly,
         onTap: onTap,
         validator: validator,
+        keyboardType: keyboardType,
         autovalidateMode: autovalidateMode,
         style: TextStyle(
           overflow: overflow,

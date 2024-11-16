@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class UpdateCampaignController extends GetxController {
@@ -34,6 +35,17 @@ class UpdateCampaignController extends GetxController {
   Rx<String?> startTime = Rx(null);
   Rx<String?> endDate = Rx(null);
   Rx<String?> endTime = Rx(null);
+  Rx<String?> recurringDay = Rx(null);
+
+  RxList<String> amounts = <String>[].obs;
+  RxList<String> frequency = <String>[].obs;
+  List<String> frequencies = [
+    "ONETIME",
+    "DAILY",
+    "WEEKLY",
+    "BIWEEKLY",
+    "MONTHLY"
+  ];
 
   @override
   Future<void> onInit() async {
@@ -83,26 +95,29 @@ class UpdateCampaignController extends GetxController {
 
   Future clear() async {
     props.useState(UseState.processing);
-    nameController.clear();
-    descriptionController.clear();
-    iconController.clear();
-    startDateController.clear();
-    endDateController.clear();
-    targetAmountController.clear();
-    minimumAmountController.clear();
-    feesController.clear();
-    sortOrderController.clear();
-    taxReceiptRatioController.clear();
+    amounts.clear();
     icon(IconsData());
-    statusController.value = false;
-    issueTaxReceiptController.value = false;
-    hiddenController.value = false;
-    enableQuantityController.value = false;
-    allowRecurringModificationController.value = false;
-    startDate = Rx(null);
-    startTime = Rx(null);
+    frequency.clear();
     endDate = Rx(null);
     endTime = Rx(null);
+    startDate = Rx(null);
+    startTime = Rx(null);
+    nameController.clear();
+    iconController.clear();
+    feesController.clear();
+    recurringDay = Rx(null);
+    endDateController.clear();
+    startDateController.clear();
+    sortOrderController.clear();
+    descriptionController.clear();
+    targetAmountController.clear();
+    statusController.value = false;
+    hiddenController.value = false;
+    minimumAmountController.clear();
+    taxReceiptRatioController.clear();
+    enableQuantityController.value = false;
+    issueTaxReceiptController.value = false;
+    allowRecurringModificationController.value = false;
     props.useState(UseState.done);
     update();
   }
@@ -165,6 +180,7 @@ class UpdateCampaignController extends GetxController {
   }
 
   void setTextEditingController(CampaignData campaign) {
+    recurringDay.value = campaign.recurringDay?.day;
     nameController.text = campaign.name ?? '';
     descriptionController.text = campaign.description ?? '';
     iconController.text = campaign.icon?.tagNumber.toString() ?? '';
@@ -173,7 +189,10 @@ class UpdateCampaignController extends GetxController {
     targetAmountController.text = campaign.targetAmount.toString();
     minimumAmountController.text = campaign.minimumAmount.toString();
     feesController.text = campaign.fees.toString();
+    frequency.value = campaign.frequency;
     sortOrderController.text = campaign.sortOrder.toString();
+    amounts.value =
+        campaign.amounts.map((amount) => amount.toString()).toList();
 
     taxReceiptRatioController.text = campaign.taxReceiptRatio.toString();
     icon(IconsData(

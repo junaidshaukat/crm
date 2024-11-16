@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 export 'controller/controller.dart';
@@ -48,7 +49,7 @@ class ReportsScreen extends StatelessWidget {
                     SizedBox(height: 3.v),
                     Obx(
                       () => SimpleDropDown2(
-                        height: 342,
+                        maxHeight: 342.v,
                         hintText: controller.reportDataSelect.value?.name ??
                             'select'.tr,
                         items: controller.reportData.map((e) {

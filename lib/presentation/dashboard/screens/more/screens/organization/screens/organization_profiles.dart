@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class OrganizationProfileScreen extends StatelessWidget {
@@ -29,13 +30,15 @@ class OrganizationProfileScreen extends StatelessWidget {
 
   Widget input({
     String? label,
+    double? height,
     String? hintText,
-    TextEditingController? conn,
+    double? maxHeight,
     bool dropDown = false,
     List<DropDown>? items,
-    String? Function(String?)? validator,
-    void Function(DropDown?)? onChanged,
     EdgeInsets? contentPadding,
+    TextEditingController? conn,
+    void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -68,15 +71,16 @@ class OrganizationProfileScreen extends StatelessWidget {
           ),
         if (dropDown)
           SimpleDropDown(
-            height: 40,
+            items: items,
+            height: height,
             hintText: hintText,
+            maxHeight: maxHeight,
+            onSelected: onChanged,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
               height: 23.v,
               width: 34.h,
             ),
-            items: items,
-            onSelected: onChanged,
           ),
         SizedBox(height: 4.adaptSize),
       ],

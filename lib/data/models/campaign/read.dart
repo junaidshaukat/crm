@@ -123,74 +123,91 @@ class CampaignLink {
 }
 
 class CampaignData {
-  num? tagNumber;
-  String? name;
-  String? description;
-  String? startDate;
-  String? endDate;
-  num? targetAmount;
-  num? minimumAmount;
-  num? sortOrder;
-  num? taxReceiptRatio;
   num? fees;
+  String? name;
   bool? status;
   bool? hidden;
+  num? tagNumber;
+  num? sortOrder;
+  String? qrCode;
+  String? banner;
+  String? endDate;
+  String? startDate;
+  num? targetAmount;
+  num? raisedAmount;
+  List<num> amounts;
+  num? recurringDay;
+  num? minimumAmount;
+  CampaignIcon? icon;
+  String? description;
+  num? taxReceiptRatio;
   bool? enableQuantity;
   bool? issueTaxReceipt;
   bool? donationCampaign;
-  bool? allowRecurringModification;
-  num? raisedAmount;
   String? currencySymbol;
-  String? qrCode;
-  CampaignIcon? icon;
+  List<String> frequency;
   List<CampaignNode>? nodes;
+  bool? allowRecurringModification;
 
   CampaignData({
-    this.tagNumber,
     this.name,
-    this.description,
-    this.startDate,
-    this.endDate,
-    this.status,
-    this.hidden,
-    this.targetAmount,
-    this.minimumAmount,
-    this.sortOrder,
-    this.taxReceiptRatio,
     this.fees,
-    this.issueTaxReceipt,
-    this.donationCampaign,
-    this.allowRecurringModification,
-    this.raisedAmount,
-    this.currencySymbol,
-    this.qrCode,
     this.icon,
     this.nodes,
-    this.enableQuantity = false,
+    this.status,
+    this.hidden,
+    this.banner,
+    this.qrCode,
+    this.endDate,
+    this.tagNumber,
+    this.startDate,
+    this.sortOrder,
+    this.description,
+    this.targetAmount,
+    this.recurringDay,
+    this.raisedAmount,
+    this.minimumAmount,
+    this.enableQuantity,
+    this.currencySymbol,
+    this.issueTaxReceipt,
+    this.taxReceiptRatio,
+    this.donationCampaign,
+    this.amounts = const [],
+    this.frequency = const [],
+    this.allowRecurringModification,
   });
 
   factory CampaignData.fromJson(Map<String, dynamic> json) {
     return CampaignData(
-      tagNumber: json['tagNumber'],
       name: json['name'],
-      description: json['description'],
-      startDate: json['startDate'],
-      endDate: json['endDate'],
+      fees: json['fees'],
       status: json['status'],
       hidden: json['hidden'],
-      targetAmount: json['targetAmount'],
-      minimumAmount: json['minimumAmount'],
+      qrCode: json['qrCode'],
+      banner: json['banner'],
+      endDate: json['endDate'],
+      tagNumber: json['tagNumber'],
+      startDate: json['startDate'],
       sortOrder: json['sortOrder'],
+      description: json['description'],
+      targetAmount: json['targetAmount'],
+      raisedAmount: json['raisedAmount'],
+      recurringDay: json['recurringDay'],
+      minimumAmount: json['minimumAmount'],
+      enableQuantity: json['enableQuantity'],
+      currencySymbol: json['currencySymbol'],
       taxReceiptRatio: json['taxReceiptRatio'],
-      fees: json['fees'],
       issueTaxReceipt: json['issueTaxReceipt'],
       donationCampaign: json['donationCampaign'],
-      enableQuantity: json['enableQuantity'],
-      allowRecurringModification: json['allowRecurringModification'],
-      raisedAmount: json['raisedAmount'],
-      currencySymbol: json['currencySymbol'],
-      qrCode: json['qrCode'],
       icon: CampaignIcon.fromJson(json['icon'] ?? {}),
+      allowRecurringModification: json['allowRecurringModification'],
+      frequency: (json['frequency'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      amounts:
+          (json['amounts'] as List<dynamic>?)?.map((e) => e as num).toList() ??
+              [],
       nodes: List<CampaignNode>.from(
         (json['nodes'] as List<dynamic>?)?.map(
               (node) => CampaignNode.fromJson(node),

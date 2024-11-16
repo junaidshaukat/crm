@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class CreateDonorScreen extends StatelessWidget {
@@ -72,15 +73,15 @@ class CreateDonorScreen extends StatelessWidget {
           ),
         if (dropDown2)
           SimpleDropDown2(
-            height: 300,
             items: items,
+            maxHeight: 300.v,
             hintText: hintText,
             onSelected: onChanged,
           ),
         if (dropDown)
           SimpleDropDown(
-            height: 300,
             items: items,
+            maxHeight: 300.v,
             hintText: hintText,
             onSelected: onChanged,
           ),

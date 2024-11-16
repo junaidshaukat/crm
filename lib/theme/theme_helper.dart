@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 /// Helper class for managing themes and colors.
@@ -100,6 +101,10 @@ class ThemeHelper {
           }
           return PrimaryColors().gray100;
         }),
+        side: BorderSide(
+          color: PrimaryColors().gray200,
+          width: 1,
+        ),
       ),
       radioTheme: RadioThemeData(
         fillColor: WidgetStateColor.resolveWith((states) {

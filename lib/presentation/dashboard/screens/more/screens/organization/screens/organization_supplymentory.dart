@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/app_export.dart';
 
 class OrganizationSupplementaryDataScreen extends StatelessWidget {
@@ -30,16 +31,18 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
 
   Widget input({
     String? label,
+    double? height,
+    Widget? suffix,
     String? hintText,
-    TextEditingController? conn,
+    double? maxHeight,
+    bool readOnly = true,
     bool dropDown = false,
     List<DropDown>? items,
-    String? Function(String?)? validator,
-    void Function(DropDown?)? onChanged,
-    bool readOnly = true,
-    Widget? suffix,
-    BoxConstraints? suffixConstraints,
     EdgeInsets? contentPadding,
+    TextEditingController? conn,
+    BoxConstraints? suffixConstraints,
+    void Function(DropDown?)? onChanged,
+    String? Function(String?)? validator,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -104,15 +107,16 @@ class OrganizationSupplementaryDataScreen extends StatelessWidget {
             ),
         if (dropDown)
           SimpleDropDown(
-            height: 40,
+            items: items,
+            height: height,
             hintText: hintText,
+            maxHeight: maxHeight,
+            onSelected: onChanged,
             icon: CustomImageView(
               imagePath: "dropdown".icon.svg,
               height: 23.v,
               width: 34.h,
             ),
-            items: items,
-            onSelected: onChanged,
           ),
         SizedBox(height: 4.adaptSize),
       ],

@@ -2,61 +2,70 @@ import '/core/app_export.dart';
 
 class CampaignUpdateReq {
   String? name;
-  String? description;
-  String? startDate;
-  String? endDate;
-  String? targetAmount;
-  String? minimumAmount;
-  String? sortOrder;
   String? fees;
-  bool? issueTaxReceipt;
-  bool? donationCampaign;
   bool? status;
   bool? hidden;
-  bool? enableQuantity;
+  String? endDate;
   String? iconTag;
+  String? startDate;
+  String? sortOrder;
+  String? description;
+  String? targetAmount;
+  bool? enableQuantity;
+  String? recurringDay;
+  List<String>? amounts;
+  String? minimumAmount;
+  bool? issueTaxReceipt;
   List<NodeData>? nodes;
+  bool? donationCampaign;
   String? taxReceiptRatio;
+  List<String>? frequency;
   bool? allowRecurringModification;
 
   CampaignUpdateReq({
     this.name,
-    this.description,
-    this.startDate,
-    this.endDate,
-    this.targetAmount,
-    this.minimumAmount,
-    this.sortOrder,
     this.fees,
-    this.issueTaxReceipt,
-    this.donationCampaign,
+    this.nodes,
     this.status,
     this.hidden,
+    this.amounts,
+    this.endDate,
     this.iconTag,
-    this.nodes,
-    this.taxReceiptRatio,
-    this.allowRecurringModification,
+    this.startDate,
+    this.sortOrder,
+    this.frequency,
+    this.description,
+    this.recurringDay,
+    this.targetAmount,
+    this.minimumAmount,
     this.enableQuantity,
+    this.issueTaxReceipt,
+    this.taxReceiptRatio,
+    this.donationCampaign,
+    this.allowRecurringModification,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'description': description,
-      'startDate': startDate,
+      'fees': fees,
+      'amounts': amounts,
       'endDate': endDate,
+      'iconTag': iconTag,
+      'frequency': frequency,
+      'startDate': startDate,
+      'sortOrder': sortOrder,
+      'description': description,
       'targetAmount': targetAmount,
       'minimumAmount': minimumAmount,
-      'sortOrder': sortOrder,
-      'fees': fees,
-      'taxReceiptRatio': taxReceiptRatio,
-      'allowRecurringModification': allowRecurringModification == true ? 1 : 0,
-      'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
-      'donationCampaign': donationCampaign == true ? 1 : 0,
       'status': status == true ? 1 : 0,
       'hidden': hidden == true ? 1 : 0,
       'enableQuantity': enableQuantity,
-      'iconTag': iconTag,
+      'recurringDay': recurringDay?.day,
+      'taxReceiptRatio': taxReceiptRatio,
+      'issueTaxReceipt': issueTaxReceipt == true ? 1 : 0,
+      'donationCampaign': donationCampaign == true ? 1 : 0,
+      'allowRecurringModification': allowRecurringModification == true ? 1 : 0,
       'nodes': nodes?.map((node) {
         return {
           "tagNumber": node.tagNumber,
